@@ -16,9 +16,18 @@ public class Player : Entity, ISelectable, ITargetable
         }
     }
 
+    private void ViewMoveRange()
+    {
+        List<Cell> cells = SearchCells(_dataSO.normalMoveRange);
+        for (int i = 0; i < cells.Count; i++)
+        {
+            cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+    }
+
     private void ViewEnd()
     {
-        List<Cell> cells = SearchCells(_dataSO.normalAttackRange);
+        List<Cell> cells = SearchCells(_dataSO.normalMoveRange);
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
@@ -27,7 +36,7 @@ public class Player : Entity, ISelectable, ITargetable
 
     public void Selected()
     {
-        ViewAttackRange();
+        ViewMoveRange();
         _selected = true;
     }
 
@@ -35,19 +44,33 @@ public class Player : Entity, ISelectable, ITargetable
     {
         ViewEnd();
         _selected = false;
+        if(CheckCell(ClickManager.Instance.SelectCellIndex, _dataSO.normalMoveRange))
+        {
+            Move();
+        }
     }
 
     public override void Targeted() // MouseEnter
     {
-        if (_selected) return;
-        base.Targeted();
+        if (_selected || ClickManager.Instance.IsSelected) return;
         ViewAttackRange();
     }
 
     public override void TargetEnd() // MouseExit
     {
         if (_selected) return;
-        base.TargetEnd();
         ViewEnd();
+    }
+
+    protected override void Move()
+    {
+        Vector3 moveVec = ClickManager.Instance.SelectCellIndex;
+        _cellIndex = ClickManager.Instance.SelectCellIndex;
+        moveVec.y = transform.position.y;
+        _agent.SetDestination(moveVec);
+    }
+
+    protected override void Attack()
+    {
     }
 }

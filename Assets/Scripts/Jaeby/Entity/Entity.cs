@@ -6,52 +6,55 @@ using DG.Tweening;
 using static Define;
 using UnityEngine.AI;
 
-public class Entity : MonoBehaviour, ITargetable
+public abstract class Entity : MonoBehaviour, ITargetable
 {
     [SerializeField]
     private Animator _animator = null;
     [SerializeField]
     protected EntityDataSO _dataSO = null;
     public EntityDataSO DataSO => _dataSO;
-    [SerializeField]
-    private Vector3Int _cellIndex = Vector3Int.zero;
+    protected Vector3Int _cellIndex = Vector3Int.zero;
     public Vector3Int CellIndex => _cellIndex;
-    private Vector3Int _targetCellIndex = Vector3Int.zero;
-    public Vector3Int TargetCellIndex
-    {
-        get => _targetCellIndex;
-        set => _targetCellIndex = value;
-    }
 
     [SerializeField]
     private bool _skillable = true;
+    [SerializeField]
+    private bool _isTrans = false;
+
     private Sequence _seq = null;
-    private NavMeshAgent _agent = null;
 
-    public void Move()
+    protected NavMeshAgent _agent = null;
+
+    protected virtual void Start()
     {
-        
+        _agent = GetComponent<NavMeshAgent>();
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+            _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
     }
 
-    public void Attack()
-    {
+    protected abstract void Move();
 
+    protected abstract void Attack();
+
+    protected bool CheckCell(Vector3Int target, List<Vector3Int> indexes)
+    {
+        for(int i = 0; i <indexes.Count; i++)
+        {
+            if (target == _cellIndex + indexes[i])
+                return true;
+        }
+        return false;
     }
 
-
-    public List<Cell> SearchCells(List<Vector3Int> indexes)
+    protected List<Cell> SearchCells(List<Vector3Int> indexes)
     {
-        Vector3Int myIndex = Vector3Int.zero;
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
-            myIndex = hit.collider.GetComponent<Cell>().GetIndex();
 
         for (int i = 0; i < indexes.Count; i++)
         {
-            v = myIndex + indexes[i];
+            v = _cellIndex + indexes[i];
             Cell tryCell = CubeGrid.TryGetCellByIndex(ref v);
             if (tryCell != null) cells.Add(tryCell);
         }
@@ -68,12 +71,7 @@ public class Entity : MonoBehaviour, ITargetable
         TargetEnd();
     }
 
-    public virtual void Targeted()
-    {
+    public abstract void Targeted();
 
-    }
-
-    public virtual void TargetEnd()
-    {
-    }
+    public abstract void TargetEnd();
 }
