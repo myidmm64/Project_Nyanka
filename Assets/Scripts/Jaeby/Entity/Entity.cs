@@ -9,25 +9,23 @@ using UnityEngine.AI;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    private Animator _animator = null;
+    private Animator _animator = null; // 애니메이터
     [SerializeField]
-    protected EntityDataSO _dataSO = null;
+    protected EntityDataSO _dataSO = null; // SO
     public EntityDataSO DataSO => _dataSO;
-    protected Vector3Int _cellIndex = Vector3Int.zero;
+    protected Vector3Int _cellIndex = Vector3Int.zero; // 현재 서있는 셀의 인덱스
     public Vector3Int CellIndex => _cellIndex;
 
     [SerializeField]
-    private bool _skillable = true;
+    private bool _skillable = true; // 스킬 사용이 가능한가?
     [SerializeField]
-    private bool _isTrans = false;
+    private bool _isTrans = false; // 변신이 되었는가
 
-    private Sequence _seq = null;
+    protected NavMeshAgent _agent = null; // 네브메시
 
-    protected NavMeshAgent _agent = null;
+    protected int _hp = 0; // 현재 체력
 
-    protected int _hp = 0;
-
-    protected bool _isLived = true;
+    protected bool _isLived = true; // 살아있누?
     public bool IsLived => _hp > 0;
 
     protected virtual void Start()
@@ -43,6 +41,12 @@ public abstract class Entity : MonoBehaviour
 
     public abstract void Attack();
 
+    /// <summary>
+    /// indexes 배열을 돌며 target이 포함되면 true를 반환합니다.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="indexes"></param>
+    /// <returns></returns>
     protected bool CheckCell(Vector3Int target, List<Vector3Int> indexes)
     {
         for (int i = 0; i < indexes.Count; i++)
@@ -54,6 +58,11 @@ public abstract class Entity : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// indexes를 돌며 셀들을 강조합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
+    /// </summary>
+    /// <param name="indexes"></param>
+    /// <param name="ignore"></param>
     protected void ViewStart(List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = SearchCells(indexes, ignore);
@@ -63,6 +72,11 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// indexes를 돌며 셀 강조를 해제합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
+    /// </summary>
+    /// <param name="indexes"></param>
+    /// <param name="ignore"></param>
     protected void ViewEnd(List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = SearchCells(indexes, ignore);
@@ -72,6 +86,12 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// indexes를 돌며 선택 가능한 셀들을 찾아 반환합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
+    /// </summary>
+    /// <param name="indexes"></param>
+    /// <param name="ignore"></param>
+    /// <returns></returns>
     protected List<Cell> SearchCells(List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = new List<Cell>();

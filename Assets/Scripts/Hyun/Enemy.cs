@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    /// <summary>
+    /// Enemy가 실행할 행동입니다. EnemyAction 코루틴이 끝나면 다음 적이 EnemyAction을 실행합니다.
+    /// </summary>
+    /// <returns></returns>
     public virtual IEnumerator EnemyAction()
     {
         yield return StartCoroutine(Move(_cellIndex + Vector3Int.back));

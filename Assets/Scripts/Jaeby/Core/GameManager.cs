@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Define;
 
 public class GameManager : MonoSingleTon<GameManager>
 {
@@ -43,7 +44,7 @@ public class GameManager : MonoSingleTon<GameManager>
             EnemyPhase();
     }
 
-    private void EnemyPhase()
+    public void EnemyPhase()
     {
         StartCoroutine(EnemysTurn());
     }
@@ -58,7 +59,7 @@ public class GameManager : MonoSingleTon<GameManager>
         NextTurn();
     }
 
-    public void NextTurn()
+    private void NextTurn()
     {
         Debug.Log("¥Ÿ¿Ω ≈œ");
         _playerTurnCount = 0;
@@ -67,6 +68,8 @@ public class GameManager : MonoSingleTon<GameManager>
         for (int i = 0; i < _players.Count; i++)
             _players[i].Moveable = true;
     }
+
+
 
     private int GetLiveCount(List<Player> entitys)
     {
