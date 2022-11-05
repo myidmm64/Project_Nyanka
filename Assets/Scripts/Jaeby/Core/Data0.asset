@@ -13,14 +13,22 @@ MonoBehaviour:
   m_Name: Data0
   m_EditorClassIdentifier: 
   normalAttackRange:
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
+  - {x: 1, y: 0, z: 2}
   transAttackRange: []
   normalMoveRange:
   - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
   - {x: -1, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -2}
   transMoveRange: []
-  hp: 0
+  hp: 10
   def: 0

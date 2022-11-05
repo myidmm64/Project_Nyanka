@@ -21,7 +21,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         List<Player> players = GameManager.Instance.Players;
         for(int i = 0; i  < players.Count; i++)
         {
-            OnCellClicked += players[i].Move;
+            OnCellClicked += players[i].SetCell;
         }
     }
 

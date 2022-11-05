@@ -28,7 +28,7 @@ public abstract class Entity : MonoBehaviour
     protected int _hp = 0;
 
     protected bool _isLived = true;
-    public bool IsLived => _hp <= 0; 
+    public bool IsLived => _hp > 0; 
 
     protected virtual void Start()
     {
@@ -39,7 +39,7 @@ public abstract class Entity : MonoBehaviour
             _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
     }
 
-    public abstract void Move(Vector3Int v);
+    public abstract IEnumerator Move(Vector3Int v);
 
     public abstract void Attack();
 
@@ -51,6 +51,24 @@ public abstract class Entity : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    protected void ViewStart(List<Vector3Int> indexes)
+    {
+        List<Cell> cells = SearchCells(indexes);
+        for (int i = 0; i < cells.Count; i++)
+        {
+            cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
+        }
+    }
+
+    protected void ViewEnd(List<Vector3Int> indexes)
+    {
+        List<Cell> cells = SearchCells(indexes);
+        for (int i = 0; i < cells.Count; i++)
+        {
+            cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
+        }
     }
 
     protected List<Cell> SearchCells(List<Vector3Int> indexes)

@@ -15,6 +15,9 @@ public class GameManager : MonoSingleTon<GameManager>
     [SerializeField]
     private List<Player> _players = new List<Player>();
     public List<Player> Players => _players;
+    [SerializeField]
+    private List<Enemy> _enemys = new List<Enemy>();
+    public List<Enemy> Enemys => _enemys;
 
     [SerializeField]
     private int _turn = 1;
@@ -22,16 +25,51 @@ public class GameManager : MonoSingleTon<GameManager>
     public UnityEvent<int> OnStarted = null;
     public UnityEvent<int> OnNextTurn = null;
 
+    private int _playerTurnCount = 0;
+
     private void Start()
     {
         OnStarted?.Invoke(1);
     }
 
+    public void CostUp()
+    {
+        _playerTurnCount++;
+        if (_playerTurnCount >= GetLiveCount(_players))
+            EnemyPhase();
+    }
+
+    private void EnemyPhase()
+    {
+        StartCoroutine(EnemysTurn());
+    }
+
+    private IEnumerator EnemysTurn()
+    {
+        List<Enemy> liveEnemys = _enemys.FindAll(v => v.IsLived);
+        for (int i = 0; i < liveEnemys.Count; i++)
+        {
+            yield return StartCoroutine(liveEnemys[i].EnemyAction());
+        }
+        NextTurn();
+    }
+
     public void NextTurn()
     {
+        Debug.Log("´ÙÀ½ ÅÏ");
+        _playerTurnCount = 0;
         _turn++;
         OnNextTurn?.Invoke(_turn);
         for (int i = 0; i < _players.Count; i++)
             _players[i].Moveable = true;
+    }
+
+    private int GetLiveCount(List<Player> entitys)
+    {
+        return entitys.FindAll(x => x.IsLived).Count;
+    }
+    private int GetLiveCount(List<Enemy> entitys)
+    {
+        return entitys.FindAll(x => x.IsLived).Count;
     }
 }

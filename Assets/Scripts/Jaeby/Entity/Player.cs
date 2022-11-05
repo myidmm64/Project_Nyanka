@@ -10,37 +10,22 @@ public class Player : Entity, ISelectable
     private bool _moveable = true;
     public bool Moveable { get => _moveable; set => _moveable = value; }
 
-    private void ViewStart(List<Vector3Int> indexes)
-    {
-        List<Cell> cells = SearchCells(indexes);
-        for (int i = 0; i < cells.Count; i++)
-        {
-            cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-    }
-
-    private void ViewEnd(List<Vector3Int> indexes)
-    {
-        List<Cell> cells = SearchCells(indexes);
-        for (int i = 0; i < cells.Count; i++)
-        {
-            cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
-        }
-    }
-
     public void Selected()
     {
+        ViewEnd(_dataSO.normalAttackRange);
         ViewStart(_dataSO.normalMoveRange);
     }
 
     public void SelectEnd()
     {
         ViewEnd(_dataSO.normalMoveRange);
+        ViewEnd(_dataSO.normalAttackRange);
     }
 
     public override void Targeted() // MouseEnter
     {
-        if (_selected || ClickManager.Instance.IsSelected) return;
+        //if (_selected || ClickManager.Instance.IsSelected) return;
+        if (_selected) return;
         ViewStart(_dataSO.normalAttackRange);
     }
 
@@ -50,10 +35,15 @@ public class Player : Entity, ISelectable
         ViewEnd(_dataSO.normalAttackRange);
     }
 
-    public override void Move(Vector3Int v)
+    public void SetCell(Vector3Int v)
     {
         if (_selected == false || _moveable == false) return;
-        if (CheckCell(v, _dataSO.normalMoveRange) == false) return;
+        StartCoroutine(Move(v));
+    }
+
+    public override IEnumerator Move(Vector3Int v)
+    {
+        if (CheckCell(v, _dataSO.normalMoveRange) == false) yield break;
 
         ViewEnd(_dataSO.normalAttackRange);
         ViewEnd(_dataSO.normalMoveRange);
@@ -61,7 +51,9 @@ public class Player : Entity, ISelectable
         _cellIndex = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
+        yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
         _moveable = false;
+        GameManager.Instance.CostUp();
     }
 
     public override void Attack()
