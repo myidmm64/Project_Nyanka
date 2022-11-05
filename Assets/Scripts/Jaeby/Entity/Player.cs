@@ -12,27 +12,27 @@ public class Player : Entity, ISelectable
 
     public void Selected()
     {
-        ViewEnd(_dataSO.normalAttackRange);
-        ViewStart(_dataSO.normalMoveRange);
+        ViewEnd(_dataSO.normalAttackRange, true);
+        ViewStart(_dataSO.normalMoveRange, false);
     }
 
     public void SelectEnd()
     {
-        ViewEnd(_dataSO.normalMoveRange);
-        ViewEnd(_dataSO.normalAttackRange);
+        ViewEnd(_dataSO.normalMoveRange, false);
+        ViewEnd(_dataSO.normalAttackRange, true);
     }
 
     public override void Targeted() // MouseEnter
     {
         //if (_selected || ClickManager.Instance.IsSelected) return;
         if (_selected) return;
-        ViewStart(_dataSO.normalAttackRange);
+        ViewStart(_dataSO.normalAttackRange, true);
     }
 
     public override void TargetEnd() // MouseExit
     {
         if (_selected) return;
-        ViewEnd(_dataSO.normalAttackRange);
+        ViewEnd(_dataSO.normalAttackRange, true);
     }
 
     public void SetCell(Vector3Int v)
@@ -45,8 +45,8 @@ public class Player : Entity, ISelectable
     {
         if (CheckCell(v, _dataSO.normalMoveRange) == false) yield break;
 
-        ViewEnd(_dataSO.normalAttackRange);
-        ViewEnd(_dataSO.normalMoveRange);
+        ViewEnd(_dataSO.normalAttackRange, true);
+        ViewEnd(_dataSO.normalMoveRange, false);
         Vector3 moveVec = v;
         _cellIndex = v;
         moveVec.y = transform.position.y;

@@ -20,6 +20,19 @@ namespace MapTileGridCreator.Core
 		#endregion
 
 		private Grid3D _parent;
+		private GameObject _obj;
+		public GameObject GetObj
+        {
+			get
+            {
+				RaycastHit hit;
+				if(Physics.Raycast(transform.position, Vector3.up, out hit))
+                {
+					return hit.collider.gameObject;
+                }
+				return null;
+            }
+        }
 
 		/// <summary>
 		/// Init the cell position, rotation and the index of the cell.

@@ -17,7 +17,7 @@ public class Enemy : Entity
     {
         if (CheckCell(v, _dataSO.normalMoveRange) == false) yield break;
 
-        ViewEnd(_dataSO.normalAttackRange);
+        ViewEnd(_dataSO.normalAttackRange, true);
         Vector3 moveVec = v;
         _cellIndex = v;
         moveVec.y = transform.position.y;
@@ -27,11 +27,11 @@ public class Enemy : Entity
 
     public override void Targeted()
     {
-        ViewStart(_dataSO.normalAttackRange);
+        ViewStart(_dataSO.normalAttackRange, true);
     }
 
     public override void TargetEnd()
     {
-        ViewEnd(_dataSO.normalAttackRange);
+        ViewEnd(_dataSO.normalAttackRange, true);
     }
 }

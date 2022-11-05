@@ -10,13 +10,10 @@ public class GameManager : MonoSingleTon<GameManager>
     private float _timeScale = 1f;
     public float TimeScale { get => _timeScale; set { _timeScale = value; Time.timeScale = _timeScale; } }
 
-    [SerializeField]
-    private List<Entity> _entitys = new List<Entity>();
-    [SerializeField]
-    private List<Player> _players = new List<Player>();
+    private List<Entity> _entitys;
+    private List<Player> _players;
     public List<Player> Players => _players;
-    [SerializeField]
-    private List<Enemy> _enemys = new List<Enemy>();
+    private List<Enemy> _enemys;
     public List<Enemy> Enemys => _enemys;
 
     [SerializeField]
@@ -26,6 +23,13 @@ public class GameManager : MonoSingleTon<GameManager>
     public UnityEvent<int> OnNextTurn = null;
 
     private int _playerTurnCount = 0;
+
+    private void Awake()
+    {
+        _entitys = new List<Entity>(FindObjectsOfType<Entity>());
+        _players = new List<Player>(FindObjectsOfType<Player>());
+        _enemys = new List<Enemy>(FindObjectsOfType<Enemy>());
+    }
 
     private void Start()
     {

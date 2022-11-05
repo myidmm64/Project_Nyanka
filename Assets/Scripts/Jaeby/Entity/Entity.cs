@@ -28,7 +28,7 @@ public abstract class Entity : MonoBehaviour
     protected int _hp = 0;
 
     protected bool _isLived = true;
-    public bool IsLived => _hp > 0; 
+    public bool IsLived => _hp > 0;
 
     protected virtual void Start()
     {
@@ -45,33 +45,34 @@ public abstract class Entity : MonoBehaviour
 
     protected bool CheckCell(Vector3Int target, List<Vector3Int> indexes)
     {
-        for(int i = 0; i <indexes.Count; i++)
+        for (int i = 0; i < indexes.Count; i++)
         {
-            if (target == _cellIndex + indexes[i])
+            Vector3Int index = _cellIndex + indexes[i];
+            if (target == index && CubeGrid.GetCellByIndex(ref index).GetObj == null)
                 return true;
         }
         return false;
     }
 
-    protected void ViewStart(List<Vector3Int> indexes)
+    protected void ViewStart(List<Vector3Int> indexes, bool ignore)
     {
-        List<Cell> cells = SearchCells(indexes);
+        List<Cell> cells = SearchCells(indexes, ignore);
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
         }
     }
 
-    protected void ViewEnd(List<Vector3Int> indexes)
+    protected void ViewEnd(List<Vector3Int> indexes, bool ignore)
     {
-        List<Cell> cells = SearchCells(indexes);
+        List<Cell> cells = SearchCells(indexes, ignore);
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
 
-    protected List<Cell> SearchCells(List<Vector3Int> indexes)
+    protected List<Cell> SearchCells(List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
@@ -80,7 +81,12 @@ public abstract class Entity : MonoBehaviour
         {
             v = _cellIndex + indexes[i];
             Cell tryCell = CubeGrid.TryGetCellByIndex(ref v);
-            if (tryCell != null) cells.Add(tryCell);
+            if (tryCell != null)
+            {
+                if (ignore == false && tryCell.GetObj != null) continue;
+
+                cells.Add(tryCell);
+            }
         }
         return cells;
     }
