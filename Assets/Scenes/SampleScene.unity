@@ -28560,7 +28560,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 543030319}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Attack
+        m_MethodName: PlayerAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -79,7 +79,12 @@ public class Player : Entity, ISelectable
 
     public override IEnumerator Attack()
     {
-
+        List<IDmgable> damages = FindTarget<IDmgable>(_dataSO.normalAttackRange, true);
+        for (int i = 0; i < damages.Count; i++)
+        {
+            damages[i].ApplyDamage(1);
+        }
+        GameManager.Instance.CostUp();
         yield break;
     }
 }

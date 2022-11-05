@@ -12,7 +12,7 @@ public enum EntityType
     Enemy
 }
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IDmgable
 {
     [SerializeField]
     private Animator _animator = null; // 애니메이터
@@ -30,9 +30,7 @@ public abstract class Entity : MonoBehaviour
     protected NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
-
-    protected bool _isLived = true; // 살아있누?
-    public bool IsLived => _hp > 0;
+    public bool IsLived => _hp > 0; // 살아있누?
 
     protected virtual void Start()
     {
@@ -58,8 +56,13 @@ public abstract class Entity : MonoBehaviour
         for (int i = 0; i < indexes.Count; i++)
         {
             Vector3Int index = _cellIndex + indexes[i];
-            if (target == index && CubeGrid.GetCellByIndex(ref index).GetObj == null)
+            if (target == index)
+            {
+                Cell c = CubeGrid.TryGetCellByIndex(ref index);
+                if (c != null)
+                    if (c.GetObj != null) continue;
                 return true;
+            }
         }
         return false;
     }
@@ -121,12 +124,15 @@ public abstract class Entity : MonoBehaviour
     {
         List<Cell> cells = SearchCells(indexes, ignore);
         List<T> tList = new List<T>();
-        for(int i = 0; i < cells.Count; i++)
+        for (int i = 0; i < cells.Count; i++)
         {
-            T t = cells[i].GetComponent<T>();
-            if (t != null)
+            T t = default(T);
+            GameObject obj = cells[i].GetObj;
+            if (obj != null)
             {
-                tList.Add(t);
+                t = obj.GetComponent<T>();
+                if (t != null)
+                    tList.Add(t);
             }
         }
         return tList;
@@ -145,4 +151,20 @@ public abstract class Entity : MonoBehaviour
     public abstract void Targeted();
 
     public abstract void TargetEnd();
+
+    public void ApplyDamage(int dmg)
+    {
+        _hp -= dmg;
+        Debug.Log($"현재 HP : {_hp}");
+        if (IsLived == false)
+        {
+            Died();
+        }
+    }
+
+    public void Died()
+    {
+        Debug.Log("사망띠");
+        Destroy(gameObject);
+    }
 }
