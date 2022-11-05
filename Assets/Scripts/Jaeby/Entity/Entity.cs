@@ -6,7 +6,7 @@ using DG.Tweening;
 using static Define;
 using UnityEngine.AI;
 
-public abstract class Entity : MonoBehaviour, ITargetable
+public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
     private Animator _animator = null;
@@ -25,17 +25,23 @@ public abstract class Entity : MonoBehaviour, ITargetable
 
     protected NavMeshAgent _agent = null;
 
+    protected int _hp = 0;
+
+    protected bool _isLived = true;
+    public bool IsLived => _hp <= 0; 
+
     protected virtual void Start()
     {
+        _hp = _dataSO.hp;
         _agent = GetComponent<NavMeshAgent>();
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
             _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
     }
 
-    protected abstract void Move();
+    public abstract void Move(Vector3Int v);
 
-    protected abstract void Attack();
+    public abstract void Attack();
 
     protected bool CheckCell(Vector3Int target, List<Vector3Int> indexes)
     {

@@ -6,4 +6,5 @@ public interface ISelectable
 {
     public void Selected();
     public void SelectEnd();
+    public bool SelectedFlag { get; set; }
 }

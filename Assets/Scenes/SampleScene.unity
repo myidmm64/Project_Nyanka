@@ -3108,10 +3108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 0f7528f4847e7cd44a42aa22f6f07ae1, type: 2}
-  _cellIndex: {x: 0, y: 0, z: 0}
   _skillable: 1
   _isTrans: 0
-  _agent: {fileID: 224899428}
 --- !u!195 &224899428
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -4071,14 +4069,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 17.97, z: 0}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 17, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8322,10 +8320,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 3bb05c1c9e5356d4fbb21d2ecda91a90, type: 2}
-  _cellIndex: {x: 0, y: 0, z: 0}
   _skillable: 1
   _isTrans: 0
-  _agent: {fileID: 543030321}
 --- !u!4 &543030320
 Transform:
   m_ObjectHideFlags: 0
@@ -22248,13 +22244,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0063da5b06792c64e94074f831a3b522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridMap: {fileID: 1250078092}
-  _testPlayer: {fileID: 224899422}
-  _testIndexes:
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: -1}
-  - {x: -1, y: 0, z: 1}
-  - {x: 1, y: 0, z: 1}
+  _entitys: []
+  _players:
+  - {fileID: 543030319}
+  - {fileID: 224899427}
+  _turn: 1
+  OnStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNextTurn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1513508079
 PrefabInstance:
   m_ObjectHideFlags: 0

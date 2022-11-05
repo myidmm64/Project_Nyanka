@@ -14,6 +14,7 @@ public class GameManager : MonoSingleTon<GameManager>
     private List<Entity> _entitys = new List<Entity>();
     [SerializeField]
     private List<Player> _players = new List<Player>();
+    public List<Player> Players => _players;
 
     [SerializeField]
     private int _turn = 1;
@@ -30,5 +31,7 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         _turn++;
         OnNextTurn?.Invoke(_turn);
+        for (int i = 0; i < _players.Count; i++)
+            _players[i].Moveable = true;
     }
 }

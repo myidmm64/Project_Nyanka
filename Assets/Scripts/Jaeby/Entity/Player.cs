@@ -3,31 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity, ISelectable, ITargetable
+public class Player : Entity, ISelectable
 {
     private bool _selected = false;
+    public bool SelectedFlag { get => _selected; set => _selected = value; }
+    private bool _moveable = true;
+    public bool Moveable { get => _moveable; set => _moveable = value; }
 
-    private void ViewAttackRange()
+    private void ViewStart(List<Vector3Int> indexes)
     {
-        List<Cell> cells = SearchCells(_dataSO.normalAttackRange);
-        for (int i = 0; i < cells.Count; i++)
-        {
-            cells[i].GetComponent<MeshRenderer>().material.color = Color.red;
-        }
-    }
-
-    private void ViewMoveRange()
-    {
-        List<Cell> cells = SearchCells(_dataSO.normalMoveRange);
+        List<Cell> cells = SearchCells(indexes);
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
         }
     }
 
-    private void ViewEnd()
+    private void ViewEnd(List<Vector3Int> indexes)
     {
-        List<Cell> cells = SearchCells(_dataSO.normalMoveRange);
+        List<Cell> cells = SearchCells(indexes);
         for (int i = 0; i < cells.Count; i++)
         {
             cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
@@ -36,41 +30,41 @@ public class Player : Entity, ISelectable, ITargetable
 
     public void Selected()
     {
-        ViewMoveRange();
-        _selected = true;
+        ViewStart(_dataSO.normalMoveRange);
     }
 
     public void SelectEnd()
     {
-        ViewEnd();
-        _selected = false;
-        if(CheckCell(ClickManager.Instance.SelectCellIndex, _dataSO.normalMoveRange))
-        {
-            Move();
-        }
+        ViewEnd(_dataSO.normalMoveRange);
     }
 
     public override void Targeted() // MouseEnter
     {
         if (_selected || ClickManager.Instance.IsSelected) return;
-        ViewAttackRange();
+        ViewStart(_dataSO.normalAttackRange);
     }
 
     public override void TargetEnd() // MouseExit
     {
         if (_selected) return;
-        ViewEnd();
+        ViewEnd(_dataSO.normalAttackRange);
     }
 
-    protected override void Move()
+    public override void Move(Vector3Int v)
     {
-        Vector3 moveVec = ClickManager.Instance.SelectCellIndex;
-        _cellIndex = ClickManager.Instance.SelectCellIndex;
+        if (_selected == false || _moveable == false) return;
+        if (CheckCell(v, _dataSO.normalMoveRange) == false) return;
+
+        ViewEnd(_dataSO.normalAttackRange);
+        ViewEnd(_dataSO.normalMoveRange);
+        Vector3 moveVec = v;
+        _cellIndex = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
+        _moveable = false;
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
     }
 }
