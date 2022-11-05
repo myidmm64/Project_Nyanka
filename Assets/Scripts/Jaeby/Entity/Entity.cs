@@ -6,6 +6,12 @@ using DG.Tweening;
 using static Define;
 using UnityEngine.AI;
 
+public enum EntityType
+{
+    Player,
+    Enemy
+}
+
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
@@ -39,7 +45,7 @@ public abstract class Entity : MonoBehaviour
 
     public abstract IEnumerator Move(Vector3Int v);
 
-    public abstract void Attack();
+    public abstract IEnumerator Attack();
 
     /// <summary>
     /// indexes 배열을 돌며 target이 포함되면 true를 반환합니다.
@@ -109,6 +115,21 @@ public abstract class Entity : MonoBehaviour
             }
         }
         return cells;
+    }
+
+    protected List<T> FindTarget<T>(List<Vector3Int> indexes, bool ignore)
+    {
+        List<Cell> cells = SearchCells(indexes, ignore);
+        List<T> tList = new List<T>();
+        for(int i = 0; i < cells.Count; i++)
+        {
+            T t = cells[i].GetComponent<T>();
+            if (t != null)
+            {
+                tList.Add(t);
+            }
+        }
+        return tList;
     }
 
     private void OnMouseEnter()

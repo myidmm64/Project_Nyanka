@@ -59,4 +59,14 @@ public class ClickManager : MonoSingleTon<ClickManager>
         }
     }
 
+    public void ClickReset()
+    {
+        if(_selectedEntity != null)
+        {
+            _selectedEntity.SelectEnd();
+            _selectedEntity.SelectedFlag = false;
+            _selectedEntity = null;
+        }
+    }
+
 }

@@ -8,7 +8,21 @@ public class Player : Entity, ISelectable
     private bool _selected = false;
     public bool SelectedFlag { get => _selected; set => _selected = value; }
     private bool _moveable = true;
-    public bool Moveable { get => _moveable; set => _moveable = value; }
+    public bool Attackable
+    {
+        get
+        {
+            return FindTarget<Enemy>(_dataSO.normalAttackRange, true).Count > 0;
+        }
+    }
+
+    private bool _attackCheck = false; // 어택을 했는가요?
+
+    public void PhaseReset()
+    {
+        _moveable = true;
+        _attackCheck = false;
+    }
 
     public void Selected()
     {
@@ -53,10 +67,19 @@ public class Player : Entity, ISelectable
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
         _moveable = false;
-        GameManager.Instance.CostUp();
+
+        if(Attackable == false)
+            GameManager.Instance.CostUp();
     }
 
-    public override void Attack()
+    public void PlayerAttack()
     {
+        StartCoroutine(Attack());
+    }
+
+    public override IEnumerator Attack()
+    {
+
+        yield break;
     }
 }

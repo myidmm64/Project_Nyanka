@@ -21,6 +21,7 @@ public class GameManager : MonoSingleTon<GameManager>
     private int _turn = 1;
 
     public UnityEvent<int> OnStarted = null;
+    public UnityEvent OnNextPhase = null;
     public UnityEvent<int> OnNextTurn = null;
 
     private int _playerTurnCount = 0;
@@ -46,6 +47,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void EnemyPhase()
     {
+        OnNextPhase?.Invoke();
         StartCoroutine(EnemysTurn());
     }
 
@@ -66,7 +68,8 @@ public class GameManager : MonoSingleTon<GameManager>
         _turn++;
         OnNextTurn?.Invoke(_turn);
         for (int i = 0; i < _players.Count; i++)
-            _players[i].Moveable = true;
+            _players[i].PhaseReset();
+        OnNextPhase?.Invoke();
     }
 
 

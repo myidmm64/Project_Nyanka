@@ -13,8 +13,9 @@ public class Enemy : Entity
         yield return StartCoroutine(Move(_cellIndex + Vector3Int.back));
     }
 
-    public override void Attack()
+    public override IEnumerator Attack()
     {
+        yield break;
     }
 
     public override IEnumerator Move(Vector3Int v)
