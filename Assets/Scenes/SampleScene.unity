@@ -3244,7 +3244,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 0f7528f4847e7cd44a42aa22f6f07ae1, type: 2}
   _skillable: 1
-  _isTrans: 0
+  _isTransed: 0
 --- !u!195 &224899428
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8443,7 +8443,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 3bb05c1c9e5356d4fbb21d2ecda91a90, type: 2}
   _skillable: 1
-  _isTrans: 0
+  _isTransed: 0
 --- !u!4 &543030320
 Transform:
   m_ObjectHideFlags: 0
@@ -15942,7 +15942,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1063811430}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: TryAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1063811430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20629,7 +20641,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 6992ae73b1b470246871723f200d17bf, type: 2}
   _skillable: 0
-  _isTrans: 0
+  _isTransed: 0
 --- !u!1001 &1342794298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22798,6 +22810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turn: 1
+  _transTurn: 4
   OnStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -26742,7 +26755,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: 6992ae73b1b470246871723f200d17bf, type: 2}
   _skillable: 0
-  _isTrans: 0
+  _isTransed: 0
 --- !u!4 &1782357778
 Transform:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ using static Define;
 
 public class ClickManager : MonoSingleTon<ClickManager>
 {
+    private GameObject _selectObject = null;
+
     private ISelectable _selectedEntity = null;
     public bool IsSelected => _selectedEntity != null;
 
@@ -52,6 +54,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 ISelectable selectable = hit.collider.GetComponent<ISelectable>();
                 if (selectable == null) return;
 
+                _selectObject = hit.collider.gameObject;
                 _selectedEntity = selectable;
                 _selectedEntity.Selected();
                 _selectedEntity.SelectedFlag = true;
@@ -69,4 +72,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
         }
     }
 
+    public void TryAttack()
+    {
+        Player player = _selectObject.GetComponent<Player>();
+        if (player != null)
+            player.PlayerAttack();
+    }
 }

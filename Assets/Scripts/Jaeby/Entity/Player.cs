@@ -15,15 +15,12 @@ public class Player : Entity, ISelectable
             return FindTarget<Enemy>(_dataSO.normalAttackRange, true).Count > 0;
         }
     }
-    private GameObject _canvasObj = null;
 
     private bool _attackCheck = false; // 어택을 했는가요?
 
     protected override void Start()
     {
         base.Start();
-        _canvasObj = transform.Find("Canvas").gameObject;
-        _canvasObj?.SetActive(false);
     }
 
     public void PhaseReset()
@@ -34,14 +31,12 @@ public class Player : Entity, ISelectable
 
     public void Selected()
     {
-        _canvasObj?.SetActive(true);
         ViewEnd(_attackRange, true);
         ViewStart(_moveRange, false);
     }
 
     public void SelectEnd()
     {
-        _canvasObj?.SetActive(false);
         ViewEnd(_moveRange, false);
         ViewEnd(_attackRange, true);
     }
@@ -78,7 +73,9 @@ public class Player : Entity, ISelectable
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
         _moveable = false;
 
-        if(Attackable == false)
+        if(Attackable)
+            PlayerAttack();
+        else
             GameManager.Instance.CostUp();
     }
 
