@@ -132,7 +132,6 @@ public abstract class Entity : MonoBehaviour, IDmgable
             cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
-
     /// <summary>
     /// indexes를 돌며 선택 가능한 셀들을 찾아 반환합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
     /// </summary>
@@ -144,6 +143,7 @@ public abstract class Entity : MonoBehaviour, IDmgable
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
         List<Vector3Int> blockDir = new List<Vector3Int>();
+        Vector3Int norm = Vector3Int.zero;  
         bool blocked = false;
 
         for (int i = 0; i < indexes.Count; i++)
@@ -153,11 +153,12 @@ public abstract class Entity : MonoBehaviour, IDmgable
             if (tryCell != null)
             {
                 blocked = false;
+                norm = Norm(v - _cellIndex);
                 if (ignore == false && tryCell.GetObj != null)
-                    if (blockDir.Contains(Norm(v - _cellIndex)) == false)
-                        blockDir.Add(Norm(v - _cellIndex));
+                    if (blockDir.Contains(norm) == false)
+                        blockDir.Add(norm);
                 for (int j = 0; j < blockDir.Count; j++)
-                    if (Norm(v - _cellIndex) == blockDir[j])
+                    if (norm == blockDir[j])
                     {
                         blocked = true;
                         break;
@@ -189,15 +190,10 @@ public abstract class Entity : MonoBehaviour, IDmgable
 
     private Vector3Int Norm(Vector3Int v)
     {
-        int x = 0, y = 0, z = 0;
-        Vector3Int absV = new Vector3Int(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
-        if (v.x != 0)
-            x = v.x / absV.x;
-        if (v.y != 0)
-            y = v.y / absV.y;
-        if (v.z != 0)
-            z = v.z / absV.z;
-        return new Vector3Int(x, y, z);
+        Vector3 norm = v;
+        norm.Normalize();
+        Vector3Int result = Vector3Int.FloorToInt(norm);
+        return result;
     }
 
     private void OnMouseEnter()
