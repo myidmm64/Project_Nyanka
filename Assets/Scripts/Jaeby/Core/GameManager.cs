@@ -19,6 +19,9 @@ public class GameManager : MonoSingleTon<GameManager>
 
     [SerializeField]
     private int _turn = 1;
+    [SerializeField]
+    private int _transTurn = 4;
+    private bool _isTransed = false;
 
     public UnityEvent<int> OnStarted = null;
     public UnityEvent OnNextPhase = null;
@@ -65,10 +68,18 @@ public class GameManager : MonoSingleTon<GameManager>
     {
         Debug.Log("¥Ÿ¿Ω ≈œ");
         _playerTurnCount = 0;
-        _turn++;
+        _turn = (_turn % _transTurn) + 1;
         OnNextTurn?.Invoke(_turn);
         for (int i = 0; i < _players.Count; i++)
             _players[i].PhaseReset();
+
+        if (_turn == 1)
+        {
+            _isTransed = !_isTransed;
+            for (int i = 0; i < _entitys.Count; i++)
+                _entitys[i].Trans(_isTransed);
+        }
+
         OnNextPhase?.Invoke();
     }
 

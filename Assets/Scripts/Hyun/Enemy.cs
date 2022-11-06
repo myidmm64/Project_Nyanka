@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
+    public override void ChildTrans(bool isTrans)
+    {
+        if (isTrans)
+        {
+            GetComponent<MeshRenderer>().material.color = Color.yellow;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+    }
+
     /// <summary>
     /// Enemy가 실행할 행동입니다. EnemyAction 코루틴이 끝나면 다음 적이 EnemyAction을 실행합니다.
     /// </summary>
@@ -20,7 +32,7 @@ public class Enemy : Entity
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CheckCell(v, _dataSO.normalMoveRange) == false) yield break;
+        if (CheckCell(v, _moveRange) == false) yield break;
 
         ViewEnd(_dataSO.normalAttackRange, true);
         Vector3 moveVec = v;
@@ -32,11 +44,12 @@ public class Enemy : Entity
 
     public override void Targeted()
     {
-        ViewStart(_dataSO.normalAttackRange, true);
+        ViewStart(_attackRange, true);
     }
 
     public override void TargetEnd()
     {
-        ViewEnd(_dataSO.normalAttackRange, true);
+        ViewEnd(_attackRange, true);
     }
+
 }

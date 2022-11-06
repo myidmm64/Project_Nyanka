@@ -15,12 +15,15 @@ MonoBehaviour:
   normalAttackRange:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  transAttackRange: []
+  transAttackRange:
+  - {x: 0, y: 0, z: 3}
   normalMoveRange:
   - {x: 1, y: 0, z: 2}
   - {x: -1, y: 0, z: 2}
   - {x: 2, y: 0, z: 0}
   - {x: -2, y: 0, z: 0}
-  transMoveRange: []
+  transMoveRange:
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
   hp: 20
   def: 1

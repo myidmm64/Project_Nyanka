@@ -25,12 +25,32 @@ public abstract class Entity : MonoBehaviour, IDmgable
     [SerializeField]
     private bool _skillable = true; // 스킬 사용이 가능한가?
     [SerializeField]
-    private bool _isTrans = false; // 변신이 되었는가
+    private bool _isTransed = false; // 변신이 되었는가
 
     protected NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?
+
+    protected List<Vector3Int> _moveRange
+    {
+        get
+        {
+            if (_isTransed)
+                return _dataSO.transMoveRange;
+            return _dataSO.normalMoveRange;
+        }
+    }
+
+    protected List<Vector3Int> _attackRange
+    {
+        get
+        {
+            if (_isTransed)
+                return _dataSO.transAttackRange;
+            return _dataSO.normalAttackRange;
+        }
+    }
 
     protected virtual void Start()
     {
@@ -40,6 +60,13 @@ public abstract class Entity : MonoBehaviour, IDmgable
         if (Physics.Raycast(transform.position, Vector3.down, out hit))
             _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
     }
+
+    public void Trans(bool isTrans)
+    {
+        _isTransed = isTrans;
+        ChildTrans(_isTransed);
+    }
+    public abstract void ChildTrans(bool isTrans);
 
     public abstract IEnumerator Move(Vector3Int v);
 
