@@ -143,6 +143,8 @@ public abstract class Entity : MonoBehaviour, IDmgable
     {
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
+        List<Vector3Int> blockDir = new List<Vector3Int>();
+        bool blocked = false;
 
         for (int i = 0; i < indexes.Count; i++)
         {
@@ -150,8 +152,17 @@ public abstract class Entity : MonoBehaviour, IDmgable
             Cell tryCell = CubeGrid.TryGetCellByIndex(ref v);
             if (tryCell != null)
             {
-                if (ignore == false && tryCell.GetObj != null) continue;
-
+                blocked = false;
+                if (ignore == false && tryCell.GetObj != null)
+                    if (blockDir.Contains(Norm(v - _cellIndex)) == false)
+                        blockDir.Add(Norm(v - _cellIndex));
+                for (int j = 0; j < blockDir.Count; j++)
+                    if (Norm(v - _cellIndex) == blockDir[j])
+                    {
+                        blocked = true;
+                        break;
+                    }
+                if (blocked) continue;
                 cells.Add(tryCell);
             }
         }
@@ -174,6 +185,19 @@ public abstract class Entity : MonoBehaviour, IDmgable
             }
         }
         return tList;
+    }
+
+    private Vector3Int Norm(Vector3Int v)
+    {
+        int x = 0, y = 0, z = 0;
+        Vector3Int absV = new Vector3Int(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
+        if (v.x != 0)
+            x = v.x / absV.x;
+        if (v.y != 0)
+            y = v.y / absV.y;
+        if (v.z != 0)
+            z = v.z / absV.z;
+        return new Vector3Int(x, y, z);
     }
 
     private void OnMouseEnter()
