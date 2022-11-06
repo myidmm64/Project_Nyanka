@@ -153,12 +153,12 @@ public abstract class Entity : MonoBehaviour, IDmgable
             if (tryCell != null)
             {
                 blocked = false;
-                norm = Norm(v - _cellIndex);
+                Vector3Int aa = Norm(v - _cellIndex);
                 if (ignore == false && tryCell.GetObj != null)
-                    if (blockDir.Contains(norm) == false)
-                        blockDir.Add(norm);
+                    if (blockDir.Contains(aa) == false)
+                        blockDir.Add(aa);
                 for (int j = 0; j < blockDir.Count; j++)
-                    if (norm == blockDir[j])
+                    if (aa == blockDir[j])
                     {
                         blocked = true;
                         break;
@@ -190,10 +190,8 @@ public abstract class Entity : MonoBehaviour, IDmgable
 
     private Vector3Int Norm(Vector3Int v)
     {
-        Vector3 norm = v;
-        norm.Normalize();
-        Vector3Int result = Vector3Int.FloorToInt(norm);
-        return result;
+        v.Clamp(Vector3Int.one * -1, Vector3Int.one);
+        return v;
     }
 
     private void OnMouseEnter()
