@@ -12,6 +12,17 @@ public enum EntityType
     Enemy
 }
 
+[System.Serializable]
+public enum ElementType
+{
+    None,
+    Fire,
+    Water,
+    Wind,
+    Light,
+    Rock
+}
+
 public abstract class Entity : MonoBehaviour, IDmgable
 {
     [SerializeField]
