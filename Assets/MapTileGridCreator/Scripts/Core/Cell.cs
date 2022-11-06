@@ -32,7 +32,7 @@ namespace MapTileGridCreator.Core
                 }
 				return null;
             }
-        }
+		}
 
 		/// <summary>
 		/// Init the cell position, rotation and the index of the cell.
