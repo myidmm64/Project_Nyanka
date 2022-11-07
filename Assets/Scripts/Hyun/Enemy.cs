@@ -6,14 +6,6 @@ public class Enemy : Entity
 {
     public override void ChildTrans(bool isTrans)
     {
-        if (isTrans)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.yellow;
-        }
-        else
-        {
-            GetComponent<MeshRenderer>().material.color = Color.red;
-        }
     }
 
     protected override void Start()
@@ -58,4 +50,7 @@ public class Enemy : Entity
         ViewEnd(_attackRange, true);
     }
 
+    public override void PhaseChanged(bool val)
+    {
+    }
 }

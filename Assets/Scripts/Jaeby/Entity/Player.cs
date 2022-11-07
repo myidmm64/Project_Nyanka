@@ -7,7 +7,6 @@ public class Player : Entity, ISelectable
 {
     private bool _selected = false;
     public bool SelectedFlag { get => _selected; set => _selected = value; }
-    private bool _moveable = true;
     public bool Attackable
     {
         get
@@ -17,6 +16,18 @@ public class Player : Entity, ISelectable
     }
 
     private bool _attackCheck = false; // 어택을 했는가요?
+    private bool _moveable = true;
+    public bool Moveable
+    {
+        get => _moveable;
+        set => _moveable = value;
+    }
+    private bool _pressTurnChecked = false; // 프레스 턴을 사용했나요??
+    public bool PressTurnChecked
+    {
+        get => _pressTurnChecked;
+        set => _pressTurnChecked = value;
+    }
 
     protected override void Start()
     {
@@ -74,7 +85,6 @@ public class Player : Entity, ISelectable
         yield return new WaitUntil(() =>
             Vector3.Distance(transform.position, _agent.destination) <= _agent.stoppingDistance
             );
-        Debug.LogError("끝남??");
         CellIndex = v;
         _animator.SetBool("Walk", false);
         _moveable = false;
@@ -88,7 +98,7 @@ public class Player : Entity, ISelectable
     public override IEnumerator Attack()
     {
         yield return StartCoroutine(base.Attack());
-        TurnManager.Instance.UseTurn(1);
+        TurnManager.Instance.PressTurnCheck(this);
     }
 
     public override void ChildTrans(bool isTrans)
@@ -101,5 +111,10 @@ public class Player : Entity, ISelectable
         {
             GetComponent<MeshRenderer>().material.color = Color.white;
         }
+    }
+
+    public override void PhaseChanged(bool val)
+    {
+        _pressTurnChecked = false;
     }
 }

@@ -10,8 +10,9 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
-        ChangeBlock(_elementType);
+        //_elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
+        _elementType = ElementType.Water;
+        //ChangeBlock(_elementType);
     }
 
     public void Explosion(Vector3Int index)

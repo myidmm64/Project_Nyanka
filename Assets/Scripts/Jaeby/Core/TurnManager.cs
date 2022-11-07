@@ -35,6 +35,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
             _playerTurnText?.SetText($"useable Turn : {_playerTurnCount}");
         }
     }
+    private bool _plusTurn = false;
+    private bool _loseTurn = false;
 
     private void Awake()
     {
@@ -45,8 +47,16 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private void Start()
     {
+        for (int i = 0; i < _entitys.Count; i++)
+            OnNextPhase.AddListener(_entitys[i].PhaseChanged);
         PlayerTurnCount = GetLiveCount(_players);
         OnStarted?.Invoke(1);
+    }
+
+    private void NewTurnReset()
+    {
+        _plusTurn = false;
+        _loseTurn = false;
     }
 
     public void UseTurn(int count)
@@ -82,6 +92,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         for (int i = 0; i < livePlayers.Count; i++)
             livePlayers[i].PhaseReset();
         OnNextPhase?.Invoke(true);
+        NewTurnReset();
     }
 
     public void WhoseTurnTextChange(bool val)
@@ -99,5 +110,37 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private int GetLiveCount(List<Enemy> entitys)
     {
         return entitys.FindAll(x => x.IsLived).Count;
+    }
+
+    public void PressTurnCheck(Player player)
+    {
+        if (player.PressTurnChecked)
+        {
+            UseTurn(1);
+            return;
+        }
+        if(_plusTurn)
+        {
+            player.PressTurnChecked = true;
+            player.Moveable = true;
+            //PlayerTurnCount++;
+            return;
+        }
+        if(_loseTurn)
+        {
+            PlayerTurnCount = 0;
+            EnemyPhase();
+            return;
+        }
+        UseTurn(1);
+    }
+
+    public void LoseTurnCheck()
+    {
+        _loseTurn = true;
+    }
+    public void PlusTurnCheck()
+    {
+        _plusTurn = true;
     }
 }

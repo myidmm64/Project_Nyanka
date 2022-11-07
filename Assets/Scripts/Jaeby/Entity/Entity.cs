@@ -176,6 +176,12 @@ public abstract class Entity : MonoBehaviour
         TargetEnd();
     }
 
+    /// <summary>
+    /// 자신의 페이즈가 끝났을 때 실행, val이 true면 플레이어의 턴으로 변경
+    /// </summary>
+    /// <param name="val"></param>
+    public abstract void PhaseChanged(bool val);
+
     public abstract void Targeted();
 
     public abstract void TargetEnd();
@@ -192,11 +198,13 @@ public abstract class Entity : MonoBehaviour
         {
             Debug.Log("크리티컬 !!");
             _hp -= dmg * 2;
+            TurnManager.Instance.PlusTurnCheck();
         }
         else if (elementType == GetStrong)
         {
             Debug.Log("쓰레기 !!");
             _hp -= Mathf.RoundToInt(dmg * 0.5f);
+            TurnManager.Instance.LoseTurnCheck();
         }
         else
             _hp -= dmg;

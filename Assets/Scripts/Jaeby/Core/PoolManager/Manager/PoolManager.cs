@@ -37,7 +37,6 @@ public class PoolManager : MonoSingleTon<PoolManager>
     public void Push(PoolType type, GameObject obj)
     {
         localPoolDic[type].Push(obj.GetComponent<PoolAbleObject>());
-        Debug.Log($"{obj.name} ¿Ã∞° Pushµ ");
     }
 
 }
