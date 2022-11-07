@@ -47,13 +47,14 @@ namespace MapTileGridCreator.Core
 
         public void TryAttack(int dmg, ElementType elementType, EntityType freindEntity)
         {
-            block.JustEffect(GetIndex());
+            block.JustEffect(GetIndex(), false);
             GameObject obj = GetObj;
-            if (obj == null) return;
-            Entity entity = obj.GetComponent<Entity>();
+            Entity entity = obj?.GetComponent<Entity>();
+            if (entity == null) return;
             if (entity.entityType != freindEntity)
             {
-                block.Explosion(GetIndex(), entity);
+                if (elementType == block.elementType)
+                    block.Explosion(GetIndex(), entity);
                 entity?.ApplyDamage(dmg, elementType);
             }
         }

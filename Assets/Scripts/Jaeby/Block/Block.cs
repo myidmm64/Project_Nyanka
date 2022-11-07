@@ -12,19 +12,22 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        //_elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
-        _elementType = ElementType.Water;
+        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
+        //_elementType = ElementType.Water;
         ChangeBlock(_elementType);
     }
 
-    public void JustEffect(Vector3Int index)
+    public void JustEffect(Vector3Int index, bool change)
     {
         ParticlePool a = PoolManager.Instance.Pop(PoolType.Bullet) as ParticlePool;
         a.transform.position = index;
 
-        _elementType = ElementType.Water;
-        //_elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
-        ChangeBlock(_elementType);
+        if(change)
+        {
+            //_elementType = ElementType.Water;
+            _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
+            ChangeBlock(_elementType);
+        }
     }
 
     /// <summary>
@@ -43,7 +46,7 @@ public class Block : MonoBehaviour
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
         entity.ApplyDamage(_blockPlusDamage, entity.elementType);
-        JustEffect(index);
+        JustEffect(index, true);
     }
 
     public void ChangeBlock(ElementType type)
