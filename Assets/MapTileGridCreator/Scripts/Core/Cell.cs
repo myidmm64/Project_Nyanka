@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 namespace MapTileGridCreator.Core
 {
@@ -46,20 +47,15 @@ namespace MapTileGridCreator.Core
 
         public void TryAttack(int dmg, ElementType elementType, EntityType freindEntity)
         {
-            block.Explosion(GetIndex());
+            block.JustEffect(GetIndex());
             GameObject obj = GetObj;
             if (obj == null) return;
             Entity entity = obj.GetComponent<Entity>();
-            if(entity.entityType != freindEntity)
+            if (entity.entityType != freindEntity)
             {
+                block.Explosion(GetIndex(), entity);
                 entity?.ApplyDamage(dmg, elementType);
-                if (elementType == block.elementType)
-                {
-                    Debug.Log($"{elementType.ToString()}으로 같음");
-                    block.Explosion(GetIndex());
-                }
             }
-
         }
 
         /// <summary>

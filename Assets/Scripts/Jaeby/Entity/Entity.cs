@@ -88,6 +88,8 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
+    public ElementType elementType => _dataSO.elementType;
+
     public ElementType GetWeak // 약점 속성
     {
         get
