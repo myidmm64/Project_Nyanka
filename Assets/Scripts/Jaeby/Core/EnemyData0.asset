@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14f31488e0f20408b4369d87f3c6bc, type: 3}
   m_Name: EnemyData0
   m_EditorClassIdentifier: 
+  normalAtk: 1
+  transAtk: 2
+  normalDef: 0
+  transDef: 1
+  hp: 20
+  elementType: 1
   normalAttackRange:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
@@ -19,5 +25,3 @@ MonoBehaviour:
   normalMoveRange:
   - {x: 0, y: 0, z: -1}
   transMoveRange: []
-  hp: 20
-  def: 1

@@ -16,6 +16,12 @@ public class Enemy : Entity
         }
     }
 
+    protected override void Start()
+    {
+        _entityType = EntityType.Enemy;
+        base.Start();
+    }
+
     /// <summary>
     /// Enemy가 실행할 행동입니다. EnemyAction 코루틴이 끝나면 다음 적이 EnemyAction을 실행합니다.
     /// </summary>
@@ -32,7 +38,7 @@ public class Enemy : Entity
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CellUtility.CheckCell(CellIndex, v, _moveRange) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
 
         ViewEnd(_dataSO.normalAttackRange, true);
         Vector3 moveVec = v;

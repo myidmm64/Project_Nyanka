@@ -20,6 +20,7 @@ public class Player : Entity, ISelectable
 
     protected override void Start()
     {
+        _entityType = EntityType.Player;
         base.Start();
     }
 
@@ -61,8 +62,9 @@ public class Player : Entity, ISelectable
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CellUtility.CheckCell(CellIndex, v, _moveRange) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
 
+        _animator.SetBool("Walk", true);
         ViewEnd(_attackRange, true);
         ViewEnd(_moveRange, false);
         Vector3 moveVec = v;
@@ -70,6 +72,7 @@ public class Player : Entity, ISelectable
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
+        _animator.SetBool("Walk", false);
         _moveable = false;
 
         if(Attackable)
@@ -81,6 +84,7 @@ public class Player : Entity, ISelectable
     public override IEnumerator Attack()
     {
         yield return StartCoroutine(base.Attack());
+        TurnManager.Instance.UseTurn(1);
     }
 
     public override void ChildTrans(bool isTrans)

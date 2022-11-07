@@ -8,6 +8,7 @@ using UnityEngine.AI;
 
 public enum EntityType
 {
+    None,
     Player,
     Enemy
 }
@@ -18,16 +19,16 @@ public enum ElementType
     NONE,
     Fire,
     Water,
-    Wind,
+    Leaf,
     Light,
-    Rock,
     SIZE
 }
 
 public abstract class Entity : MonoBehaviour, IDmgable
 {
+    protected EntityType _entityType = EntityType.None;
     [SerializeField]
-    private Animator _animator = null; // 애니메이터
+    protected Animator _animator = null; // 애니메이터
     [SerializeField]
     protected EntityDataSO _dataSO = null; // SO
     public EntityDataSO DataSO => _dataSO;
@@ -75,6 +76,36 @@ public abstract class Entity : MonoBehaviour, IDmgable
         }
     }
 
+    private int _damage = 0;
+    protected int Damage
+    {
+        get
+        {
+            if (_isTransed)
+                return _dataSO.transAtk;
+            return _dataSO.normalAtk;
+        }
+    }
+
+    public ElementType GetWeak // 약점 속성
+    {
+        get
+        {
+            return (ElementType)(((int)_dataSO.elementType + 1) % (int)ElementType.SIZE);
+        }
+    }
+
+    public ElementType GetStrong // 강점 속성
+    {
+        get
+        {
+            int temp = (int)_dataSO.elementType - 1;
+            if (temp == 0)
+                return (ElementType)((int)ElementType.SIZE - 1);
+            return (ElementType)temp;
+        }
+    }
+
     protected virtual void Start()
     {
         _hp = _dataSO.hp;
@@ -92,14 +123,14 @@ public abstract class Entity : MonoBehaviour, IDmgable
 
     public virtual IEnumerator Attack()
     {
-        List<IDmgable> damages = CellUtility.FindTarget<IDmgable>(CellIndex, _attackRange, true);
-        if (damages.Count == 0) yield break;
+        List<Cell> cells = CellUtility.SearchCells(CellIndex, _attackRange, true);
+        if (cells.Count == 0) yield break;
         //셀들 받아오기
-        for (int i = 0; i < damages.Count; i++)
-        {
-            damages[i].ApplyDamage(1);
-        }
-        TurnManager.Instance.UseTurn(1);
+        _animator.Play("Attack");
+        _animator.Update(0);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
+        for(int i = 0; i <cells.Count; i++)
+            cells[i].TryAttack(Damage, _dataSO.elementType, _entityType);
         yield break;
     }
 
@@ -146,19 +177,31 @@ public abstract class Entity : MonoBehaviour, IDmgable
 
     public abstract void TargetEnd();
 
-    public void ApplyDamage(int dmg)
+    public void Died()
     {
-        _hp -= dmg;
+        Debug.Log("사망띠");
+        Destroy(gameObject);
+    }
+
+    public void ApplyDamage(int dmg, ElementType elementType)
+    {
+        if (elementType == GetWeak)
+        {
+            Debug.Log("크리티컬 !!");
+            _hp -= dmg * 2;
+        }
+        else if (elementType == GetStrong)
+        {
+            Debug.Log("쓰레기 !!");
+            _hp -= Mathf.RoundToInt(dmg * 0.5f);
+        }
+        else
+            _hp -= dmg;
+
         Debug.Log($"현재 HP : {_hp}");
         if (IsLived == false)
         {
             Died();
         }
-    }
-
-    public void Died()
-    {
-        Debug.Log("사망띠");
-        Destroy(gameObject);
     }
 }

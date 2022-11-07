@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IDmgable
 {
-    public void ApplyDamage(int dmg);
+    public void ApplyDamage(int dmg, ElementType elementType);
     public void Died();
 }

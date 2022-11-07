@@ -44,6 +44,14 @@ public class CellUtility
         return cells;
     }
 
+    /// <summary>
+    /// 셀의 오브젝트를 돌며 T 리스트를 반환합니다
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="cellIndex"></param>
+    /// <param name="indexes"></param>
+    /// <param name="ignore"></param>
+    /// <returns></returns>
     public static List<T> FindTarget<T>(Vector3Int cellIndex, List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = SearchCells(cellIndex, indexes, ignore);
@@ -68,18 +76,13 @@ public class CellUtility
     /// <param name="target"></param>
     /// <param name="indexes"></param>
     /// <returns></returns>
-    public static bool CheckCell(Vector3Int cellIndex, Vector3Int target, List<Vector3Int> indexes)
+    public static bool CheckCell(Vector3Int cellIndex, Vector3Int target, List<Vector3Int> indexes, bool ignore)
     {
-        for (int i = 0; i < indexes.Count; i++)
+        List<Cell> cells = SearchCells(cellIndex, indexes, ignore);
+        for(int i = 0; i < cells.Count; i++)
         {
-            Vector3Int index = cellIndex + indexes[i];
-            if (target == index)
-            {
-                Cell c = CubeGrid.TryGetCellByIndex(ref index);
-                if (c != null)
-                    if (c.GetObj != null) continue;
+            if (cells[i].GetIndex() == target)
                 return true;
-            }
         }
         return false;
     }

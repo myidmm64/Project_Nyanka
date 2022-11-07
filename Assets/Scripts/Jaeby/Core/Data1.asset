@@ -17,10 +17,12 @@ MonoBehaviour:
   normalDef: 0
   transDef: 1
   hp: 20
-  elementType: 0
+  elementType: 2
   normalAttackRange:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 3}
   transAttackRange:
   - {x: 0, y: 0, z: 3}
   normalMoveRange:

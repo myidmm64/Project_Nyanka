@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa14f31488e0f20408b4369d87f3c6bc, type: 3}
   m_Name: Data0
   m_EditorClassIdentifier: 
+  normalAtk: 1
+  transAtk: 2
+  normalDef: 0
+  transDef: 1
+  hp: 10
+  elementType: 2
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
@@ -32,5 +38,3 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -2}
   transMoveRange:
   - {x: 0, y: 0, z: 1}
-  hp: 10
-  def: 0
