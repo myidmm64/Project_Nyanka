@@ -65,13 +65,17 @@ public class Player : Entity, ISelectable
         if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
 
         _animator.SetBool("Walk", true);
+        _animator.Update(0);
         ViewEnd(_attackRange, true);
         ViewEnd(_moveRange, false);
         Vector3 moveVec = v;
-        CellIndex = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
-        yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
+        yield return new WaitUntil(() =>
+            Vector3.Distance(transform.position, _agent.destination) <= _agent.stoppingDistance
+            );
+        Debug.LogError("³¡³²??");
+        CellIndex = v;
         _animator.SetBool("Walk", false);
         _moveable = false;
 

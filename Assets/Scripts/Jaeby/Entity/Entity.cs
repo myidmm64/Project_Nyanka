@@ -24,9 +24,10 @@ public enum ElementType
     SIZE
 }
 
-public abstract class Entity : MonoBehaviour, IDmgable
+public abstract class Entity : MonoBehaviour
 {
     protected EntityType _entityType = EntityType.None;
+    public EntityType entityType => _entityType;
     [SerializeField]
     protected Animator _animator = null; // 애니메이터
     [SerializeField]
@@ -125,6 +126,8 @@ public abstract class Entity : MonoBehaviour, IDmgable
     {
         List<Cell> cells = CellUtility.SearchCells(CellIndex, _attackRange, true);
         if (cells.Count == 0) yield break;
+
+        yield return new WaitForSeconds(0.1f);
         //셀들 받아오기
         _animator.Play("Attack");
         _animator.Update(0);

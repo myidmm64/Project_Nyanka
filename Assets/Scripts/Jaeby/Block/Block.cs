@@ -10,7 +10,16 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        //ChangeBlock((ElementType)(Random.Range(1, (int)ElementType.SIZE)));
+        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
+        ChangeBlock(_elementType);
+    }
+
+    public void Explosion(Vector3Int index)
+    {
+        ParticlePool a = PoolManager.Instance.Pop(PoolType.Bullet) as ParticlePool;
+        a.transform.position = index;
+        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
+        ChangeBlock(_elementType);
     }
 
     public void ChangeBlock(ElementType type)

@@ -33,13 +33,33 @@ namespace MapTileGridCreator.Core
                 return null;
             }
         }
+        Block _block = null;
+        Block block
+        {
+            get
+            {
+                if (_block == null)
+                    _block = GetComponent<Block>();
+                return _block;
+            }
+        }
 
         public void TryAttack(int dmg, ElementType elementType, EntityType freindEntity)
         {
-            if (GetObj == null) return;
-            IDmgable dmgable = GetObj.GetComponent<IDmgable>();
+            block.Explosion(GetIndex());
+            GameObject obj = GetObj;
+            if (obj == null) return;
+            Entity entity = obj.GetComponent<Entity>();
+            if(entity.entityType != freindEntity)
+            {
+                entity?.ApplyDamage(dmg, elementType);
+                if (elementType == block.elementType)
+                {
+                    Debug.Log($"{elementType.ToString()}으로 같음");
+                    block.Explosion(GetIndex());
+                }
+            }
 
-            dmgable?.ApplyDamage(dmg, elementType);
         }
 
         /// <summary>
