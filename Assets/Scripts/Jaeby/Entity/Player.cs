@@ -43,7 +43,6 @@ public class Player : Entity, ISelectable
 
     public override void Targeted() // MouseEnter
     {
-        //if (_selected || ClickManager.Instance.IsSelected) return;
         if (_selected) return;
         ViewStart(_attackRange, true);
     }
@@ -74,27 +73,14 @@ public class Player : Entity, ISelectable
         _moveable = false;
 
         if(Attackable)
-            PlayerAttack();
+            StartCoroutine(Attack());
         else
-            GameManager.Instance.CostUp();
-    }
-
-    public void PlayerAttack()
-    {
-        if (_attackCheck) return;
-        _attackCheck = true;
-        StartCoroutine(Attack());
+            TurnManager.Instance.UseTurn(1);
     }
 
     public override IEnumerator Attack()
     {
-        List<IDmgable> damages = FindTarget<IDmgable>(_attackRange, true);
-        for (int i = 0; i < damages.Count; i++)
-        {
-            damages[i].ApplyDamage(1);
-        }
-        GameManager.Instance.CostUp();
-        yield break;
+        yield return StartCoroutine(base.Attack());
     }
 
     public override void ChildTrans(bool isTrans)

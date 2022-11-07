@@ -15,12 +15,13 @@ public enum EntityType
 [System.Serializable]
 public enum ElementType
 {
-    None,
+    NONE,
     Fire,
     Water,
     Wind,
     Light,
-    Rock
+    Rock,
+    SIZE
 }
 
 public abstract class Entity : MonoBehaviour, IDmgable
@@ -81,7 +82,18 @@ public abstract class Entity : MonoBehaviour, IDmgable
 
     public abstract IEnumerator Move(Vector3Int v);
 
-    public abstract IEnumerator Attack();
+    public virtual IEnumerator Attack()
+    {
+        List<IDmgable> damages = FindTarget<IDmgable>(_attackRange, true);
+        if (damages.Count == 0) yield break;
+        //셀들 받아오기
+        for (int i = 0; i < damages.Count; i++)
+        {
+            damages[i].ApplyDamage(1);
+        }
+        TurnManager.Instance.UseTurn(1);
+        yield break;
+    }
 
     /// <summary>
     /// indexes 배열을 돌며 target이 포함되면 true를 반환합니다.
@@ -143,7 +155,7 @@ public abstract class Entity : MonoBehaviour, IDmgable
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
         List<Vector3Int> blockDir = new List<Vector3Int>();
-        Vector3Int norm = Vector3Int.zero;  
+        Vector3Int norm = Vector3Int.zero;
         bool blocked = false;
 
         for (int i = 0; i < indexes.Count; i++)
@@ -163,8 +175,8 @@ public abstract class Entity : MonoBehaviour, IDmgable
                         blocked = true;
                         break;
                     }
-                if (blocked) continue;
-                cells.Add(tryCell);
+                if (blocked == false)
+                    cells.Add(tryCell);
             }
         }
         return cells;

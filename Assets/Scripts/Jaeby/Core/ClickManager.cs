@@ -20,7 +20,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Start()
     {
-        List<Player> players = GameManager.Instance.Players;
+        List<Player> players = TurnManager.Instance.Players;
         for(int i = 0; i  < players.Count; i++)
         {
             OnCellClicked += players[i].SetCell;
@@ -70,12 +70,5 @@ public class ClickManager : MonoSingleTon<ClickManager>
             _selectedEntity.SelectedFlag = false;
             _selectedEntity = null;
         }
-    }
-
-    public void TryAttack()
-    {
-        Player player = _selectObject.GetComponent<Player>();
-        if (player != null)
-            player.PlayerAttack();
     }
 }

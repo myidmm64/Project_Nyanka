@@ -10,7 +10,7 @@ public class EntityDataSO : ScriptableObject
     public int normalDef = 0;
     public int transDef = 1;
     public int hp = 0;
-    public ElementType elementType = ElementType.None;
+    public ElementType elementType = ElementType.NONE;
     public List<Vector3Int> normalAttackRange = new List<Vector3Int>();
     public List<Vector3Int> transAttackRange = new List<Vector3Int>();
     public List<Vector3Int> normalMoveRange = new List<Vector3Int>();
