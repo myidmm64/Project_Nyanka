@@ -12,7 +12,7 @@ public class Player : Entity, ISelectable
     {
         get
         {
-            return FindTarget<Enemy>(_dataSO.normalAttackRange, true).Count > 0;
+            return CellUtility.FindTarget<Enemy>(CellIndex, _dataSO.normalAttackRange, true).Count > 0;
         }
     }
 
@@ -61,12 +61,12 @@ public class Player : Entity, ISelectable
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CheckCell(v, _moveRange) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _moveRange) == false) yield break;
 
         ViewEnd(_attackRange, true);
         ViewEnd(_moveRange, false);
         Vector3 moveVec = v;
-        _cellIndex = v;
+        CellIndex = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);

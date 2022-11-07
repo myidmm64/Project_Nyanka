@@ -22,7 +22,7 @@ public class Enemy : Entity
     /// <returns></returns>
     public virtual IEnumerator EnemyAction()
     {
-        yield return StartCoroutine(Move(_cellIndex + Vector3Int.back));
+        yield return StartCoroutine(Move(CellIndex + Vector3Int.back));
     }
 
     public override IEnumerator Attack()
@@ -32,11 +32,11 @@ public class Enemy : Entity
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CheckCell(v, _moveRange) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _moveRange) == false) yield break;
 
         ViewEnd(_dataSO.normalAttackRange, true);
         Vector3 moveVec = v;
-        _cellIndex = v;
+        CellIndex = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
