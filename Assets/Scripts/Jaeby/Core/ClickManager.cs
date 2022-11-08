@@ -11,11 +11,11 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private Vector3Int _selectCellIndex = Vector3Int.zero;
     public Vector3Int SelectCellIndex => _selectCellIndex;
 
-    private ClickMode _clickMode = ClickMode.AllClick;
-    public ClickMode ClickMode
+    private LeftClickMode _leftClickMode = LeftClickMode.AllClick;
+    public LeftClickMode LeftClickMode
     {
-        get => _clickMode;
-        set => _clickMode = value;
+        get => _leftClickMode;
+        set => _leftClickMode = value;
     }
 
     private Action<Vector3Int> OnCellClicked = null;
@@ -23,11 +23,17 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private Player _prevPlayer = null;
     [SerializeField]
     private LayerMask _cellAndPlayerMask = 0;
+    private bool _rightClickLock = false;
+    public bool RightClickLock
+    {
+        get => _rightClickLock;
+        set => _rightClickLock = value;
+    }
 
     private void Start()
     {
         List<Player> players = TurnManager.Instance.Players;
-        for(int i = 0; i  < players.Count; i++)
+        for (int i = 0; i < players.Count; i++)
         {
             OnCellClicked += players[i].SetCell;
         }
@@ -35,23 +41,26 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Update()
     {
-        if (_clickMode == ClickMode.Nothing) return;
-
-        if(Input.GetMouseButtonDown(1))
+        if (_rightClickLock == false)
         {
-            if (_currentPlayer != null)
+            if (Input.GetMouseButtonDown(1))
             {
-                _currentPlayer.SelectEnd();
-                _prevPlayer = _currentPlayer;
-                _currentPlayer.SelectedFlag = false;
-                _currentPlayer = null;
+                if (_currentPlayer != null)
+                {
+                    _currentPlayer.SelectEnd();
+                    _prevPlayer = _currentPlayer;
+                    _currentPlayer.SelectedFlag = false;
+                    _currentPlayer = null;
+                }
             }
         }
 
+        if (_leftClickMode == LeftClickMode.Nothing) return;
+        
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            if(Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _cellAndPlayerMask))
+            if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _cellAndPlayerMask))
             {
                 Cell cell = hit.collider.GetComponent<Cell>();
                 if (cell != null)
@@ -60,10 +69,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
                     return;
                 }
 
-                if (_clickMode == ClickMode.JustCell) return;
+                if (_leftClickMode == LeftClickMode.JustCell) return;
 
                 Player player = hit.collider.GetComponent<Player>();
-                if(_currentPlayer != null)
+                if (_currentPlayer != null)
                 {
                     _currentPlayer.SelectEnd();
                     _prevPlayer = _currentPlayer;
@@ -74,7 +83,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 _currentPlayer.SelectedFlag = true;
                 _currentPlayer.Selected();
             }
-            
+
         }
     }
 
@@ -94,7 +103,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 }
 
 
-public enum ClickMode
+public enum LeftClickMode
 {
     NONE,
     AllClick,

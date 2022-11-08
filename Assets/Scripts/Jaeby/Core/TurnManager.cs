@@ -27,6 +27,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private int _battlePoint = 0;
     private bool _isTransed = false;
 
+    public UnityEvent OnPlusTurn = null;
+    public UnityEvent OnLoseTurn = null;
     public UnityEvent<int> OnStarted = null;
     public UnityEvent<bool> OnNextPhase = null;
     public UnityEvent<int> OnNextTurn = null;
@@ -149,12 +151,14 @@ public class TurnManager : MonoSingleTon<TurnManager>
         {
             player.PressTurnChecked = true;
             player.Moveable = true;
+            OnPlusTurn?.Invoke();
             ClickManager.Instance.ForceSelect(player);
             return;
         }
         if (_loseTurn)
         {
             PlayerTurnCount = 0;
+            OnLoseTurn?.Invoke();
             EnemyPhase();
             return;
         }
