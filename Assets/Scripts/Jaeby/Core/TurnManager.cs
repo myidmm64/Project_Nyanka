@@ -149,6 +149,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         {
             player.PressTurnChecked = true;
             player.Moveable = true;
+            ClickManager.Instance.ForceSelect(player);
             return;
         }
         if (_loseTurn)

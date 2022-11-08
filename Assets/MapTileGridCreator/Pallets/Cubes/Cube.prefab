@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4691606652349085813}
   - component: {fileID: 4691606652349085814}
   - component: {fileID: 4691606652349085815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e04770410e70441a7d5a0a1a01fb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blockPlusDamage: 1
   _elementType: 0
 --- !u!33 &4691606652349085813
 MeshFilter:

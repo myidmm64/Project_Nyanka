@@ -7997,6 +7997,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestEnemy (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5057028963277225482, guid: 1fd2db5beb5f859439c7210a01f7e483,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5577142581058364592, guid: 1fd2db5beb5f859439c7210a01f7e483,
         type: 3}
       propertyPath: m_RootOrder
@@ -23199,6 +23204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc17d0f12d2e9545b4396e781d534c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cellAndPlayerMask:
+    serializedVersion: 2
+    m_Bits: 320
 --- !u!1 &1505338377
 GameObject:
   m_ObjectHideFlags: 0
@@ -29154,6 +29162,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPlayer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4035086507702390197, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4374210612237096719, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
         type: 3}
       propertyPath: m_RootOrder
@@ -30157,6 +30170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestPlayer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035086507702390197, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4269104708810944738, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
         type: 3}
@@ -31987,6 +32005,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5057028963277225482, guid: 1fd2db5beb5f859439c7210a01f7e483,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5577142581058364592, guid: 1fd2db5beb5f859439c7210a01f7e483,
         type: 3}
       propertyPath: m_RootOrder
@@ -32055,6 +32078,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035086507702390197, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4374210612237096719, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
         type: 3}

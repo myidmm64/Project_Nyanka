@@ -8,6 +8,7 @@ public class Player : Entity, ISelectable
 {
     private bool _selected = false;
     public bool SelectedFlag { get => _selected; set => _selected = value; }
+
     public bool Attackable
     {
         get
