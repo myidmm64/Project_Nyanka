@@ -6,6 +6,15 @@ using UnityEngine.Events;
 
 public class TurnManager : MonoSingleTon<TurnManager>
 {
+    [SerializeField]
+    private TextMeshProUGUI _playerTurnText = null;
+    [SerializeField]
+    private TextMeshProUGUI _whoseTurnText = null;
+    [SerializeField]
+    private TextMeshProUGUI _currentTurnText = null;
+    [SerializeField]
+    private TextMeshProUGUI _battlePointText = null;
+
     private List<Entity> _entitys;
     private List<Player> _players;
     public List<Player> Players => _players;
@@ -14,16 +23,15 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     [SerializeField]
     private int _turn = 1;
+    [SerializeField]
+    private int _battlePoint = 0;
     private bool _isTransed = false;
 
     public UnityEvent<int> OnStarted = null;
     public UnityEvent<bool> OnNextPhase = null;
     public UnityEvent<int> OnNextTurn = null;
+    public UnityEvent<int> OnBattlePointUp = null;
 
-    [SerializeField]
-    private TextMeshProUGUI _playerTurnText = null;
-    [SerializeField]
-    private TextMeshProUGUI _whoseTurnText = null;
 
     private int _playerTurnCount = 0;
     private int PlayerTurnCount
@@ -50,6 +58,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         for (int i = 0; i < _entitys.Count; i++)
             OnNextPhase.AddListener(_entitys[i].PhaseChanged);
         PlayerTurnCount = GetLiveCount(_players);
+        OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
     }
 
@@ -95,6 +104,23 @@ public class TurnManager : MonoSingleTon<TurnManager>
         NewTurnReset();
     }
 
+    public void BattlePointUp()
+    {
+        _battlePoint++;
+        _battlePoint = Mathf.Clamp(_battlePoint, 0, 8);
+        OnBattlePointUp?.Invoke(_battlePoint);
+    }
+
+    public void CurrentTurnTextChange(int val)
+    {
+        _currentTurnText.SetText($"Current Turn : {val}");
+    }
+
+    public void BattlePointTextChange(int val)
+    {
+        _battlePointText.SetText($"Battle Point : {val}");
+    }
+
     public void WhoseTurnTextChange(bool val)
     {
         if (val)
@@ -119,14 +145,13 @@ public class TurnManager : MonoSingleTon<TurnManager>
             UseTurn(1);
             return;
         }
-        if(_plusTurn)
+        if (_plusTurn)
         {
             player.PressTurnChecked = true;
             player.Moveable = true;
-            //PlayerTurnCount++;
             return;
         }
-        if(_loseTurn)
+        if (_loseTurn)
         {
             PlayerTurnCount = 0;
             EnemyPhase();

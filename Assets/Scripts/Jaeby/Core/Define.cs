@@ -41,7 +41,7 @@ public class Define
         {
             if (_vCamOne == null)
             {
-                _vCamOne = GameObject.Find("Vcam_One").GetComponent<CinemachineVirtualCamera>();
+                _vCamOne = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
             }
             return _vCamOne;
         }
@@ -52,7 +52,7 @@ public class Define
         {
             if (_vCamTwo == null)
             {
-                _vCamTwo = GameObject.Find("Vcam_Two").GetComponent<CinemachineVirtualCamera>();
+                _vCamTwo = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(1).GetComponent<CinemachineVirtualCamera>();
             }
             return _vCamTwo;
         }

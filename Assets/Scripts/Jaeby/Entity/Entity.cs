@@ -136,6 +136,8 @@ public abstract class Entity : MonoBehaviour
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
         for(int i = 0; i <cells.Count; i++)
             cells[i].TryAttack(Damage, _dataSO.elementType, _entityType);
+        if (cells.Count > 0 && _entityType == EntityType.Player)
+            TurnManager.Instance.BattlePointUp();
         yield break;
     }
 
