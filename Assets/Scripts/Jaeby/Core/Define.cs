@@ -2,6 +2,7 @@ using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Define
 {
@@ -28,6 +29,32 @@ public class Define
                 _cam = Camera.main;
             }
             return _cam;
+        }
+    }
+
+    private static CinemachineVirtualCamera _vCamOne = null;
+    private static CinemachineVirtualCamera _vCamTwo = null;
+
+    public static CinemachineVirtualCamera VCamOne
+    {
+        get
+        {
+            if (_vCamOne == null)
+            {
+                _vCamOne = GameObject.Find("Vcam_One").GetComponent<CinemachineVirtualCamera>();
+            }
+            return _vCamOne;
+        }
+    }
+    public static CinemachineVirtualCamera VCamTwo
+    {
+        get
+        {
+            if (_vCamTwo == null)
+            {
+                _vCamTwo = GameObject.Find("Vcam_Two").GetComponent<CinemachineVirtualCamera>();
+            }
+            return _vCamTwo;
         }
     }
 }
