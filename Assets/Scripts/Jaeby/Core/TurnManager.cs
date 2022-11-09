@@ -80,10 +80,11 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public void EnemyPhase()
     {
         OnNextPhase?.Invoke(false);
-        StartCoroutine(EnemysTurn());
+
+        //StartCoroutine(EnemysTurn());
     }
 
-    private IEnumerator EnemysTurn()
+    /*private IEnumerator EnemysTurn()
     {
         List<Enemy> liveEnemys = _enemys.FindAll(v => v.IsLived);
         for (int i = 0; i < liveEnemys.Count; i++)
@@ -91,7 +92,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
             yield return StartCoroutine(liveEnemys[i].EnemyAction());
         }
         NextTurn();
-    }
+    }*/
 
     private void NextTurn()
     {

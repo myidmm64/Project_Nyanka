@@ -2,9 +2,33 @@ using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviorTree;
 
-public class Enemy : Entity
+public class Ang : BehaviorTree.Tree
 {
+    Entity entity = null;
+    private void Start()
+    {
+        entity = GetComponent<Entity>()
+    }
+    protected override Node SetupTree()
+    {
+        Node root = new gimoddi()
+    }
+}
+
+public class gimoddi : BehaviorTree.Node
+{
+    Entity enti;
+    public gimoddi(Entity entity)
+    {
+        enti = enti;
+    }
+}
+
+public class WarriorAIBT : Enemy
+{
+    /*
     private List<Cell> GetMoveList()
     {
         return CellUtility.SearchCells(CellIndex, _moveRange, false);
@@ -17,6 +41,7 @@ public class Enemy : Entity
 
     public override void ChildTrans(bool isTrans)
     {
+
     }
 
     protected override void Start()
@@ -31,10 +56,8 @@ public class Enemy : Entity
     /// <returns></returns>
     public virtual IEnumerator EnemyAction()
     {
-        //if()
-        //    yield return StartCoroutine(Attack());
-        //else
-            yield return StartCoroutine(Move(CellIndex + Vector3Int.back));
+        yield return StartCoroutine(Move(CellIndex + Vector3Int.back));
+
     }
 
     public override IEnumerator Attack()
@@ -52,10 +75,6 @@ public class Enemy : Entity
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() => _agent.remainingDistance <= _agent.stoppingDistance);
-        //if(플레이어가 공격 사거리이내에 있으면 공격하겠다)
-        //{
-        //    일드 리턴 스타트 어택 코루틴
-        //}
     }
 
     public override void Targeted()
@@ -70,5 +89,13 @@ public class Enemy : Entity
 
     public override void PhaseChanged(bool val)
     {
+    }*/
+
+    public override IEnumerator EnemyAction()
+    {
+        
+
+
+        yield return StartCoroutine(Move(CellIndex + Vector3Int.back));
     }
 }
