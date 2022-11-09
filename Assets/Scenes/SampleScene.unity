@@ -20783,6 +20783,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: ClickManagerReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnNextTurn:
     m_PersistentCalls:
       m_Calls:
@@ -22615,7 +22627,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1402197549}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: PlayerTryTransform
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1402197549
 MonoBehaviour:
   m_ObjectHideFlags: 0

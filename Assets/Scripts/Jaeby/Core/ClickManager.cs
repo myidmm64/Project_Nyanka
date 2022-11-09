@@ -114,9 +114,25 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _canvasObject.transform.position = pos;
     }
 
+    public void ClickManagerReset()
+    {
+        ClickModeSet(LeftClickMode.AllClick, false);
+        if (_currentPlayer != null)
+        {
+            _currentPlayer.SelectEnd();
+            _prevPlayer = _currentPlayer;
+            _currentPlayer.SelectedFlag = false;
+            _currentPlayer = null;
+        }
+        _canvasObject.SetActive(false);
+        VCamOne.gameObject.SetActive(false);
+        VCamTwo.gameObject.SetActive(true);
+    }
+
 
     public void PlayerAttack()
     {
+        if (_currentPlayer == null) return;
         if (_currentPlayer.Attackable == false || _currentPlayer.AttackCheck == true) return;
 
         _currentPlayer?.PlayerAttack();
@@ -124,6 +140,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     public void PlayerMove()
     {
+        if (_currentPlayer == null) return;
         if (_currentPlayer.Moveable == false) return;
         ClickModeSet(LeftClickMode.JustCell, true);
         _canvasObject.SetActive(false);
@@ -132,9 +149,17 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _moveMode = true;
     }
 
+    public void PlayerTryTransform()
+    {
+        if (_currentPlayer == null) return;
+        if (TurnManager.Instance.BattlePoint < 8) return;
+        TurnManager.Instance.BattlePointChange(0);
+        _currentPlayer.Trans(true);
+    }
+
     public void PlayerSkill()
     {
-
+        if (_currentPlayer == null) return;
     }
 
     public void CanvasObjectSetting()

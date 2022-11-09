@@ -51,6 +51,7 @@ public class Player : Entity, ISelectable
     public void Selected()
     {
         ClickManager.Instance.CanvasObjectSetting();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
         ViewEnd(_attackRange, true);
         ViewStart(_moveRange, false);
         VCamOne.gameObject.SetActive(true);
@@ -61,6 +62,7 @@ public class Player : Entity, ISelectable
 
     public void SelectEnd()
     {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ViewEnd(_moveRange, false);
         ViewEnd(_attackRange, true);
         VCamTwo.gameObject.SetActive(true);
@@ -128,6 +130,14 @@ public class Player : Entity, ISelectable
 
     public override void ChildTrans(bool isTrans)
     {
+        if(isTrans)
+        {
+            transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+        }
+        else
+        {
+
+        }
     }
 
     public override void PhaseChanged(bool val)

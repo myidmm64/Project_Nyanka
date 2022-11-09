@@ -118,7 +118,9 @@ public abstract class Entity : MonoBehaviour
     {
         _isTransed = isTrans;
         ChildTrans(_isTransed);
+        
     }
+
     public abstract void ChildTrans(bool isTrans);
 
     public abstract IEnumerator Move(Vector3Int v);
@@ -136,7 +138,7 @@ public abstract class Entity : MonoBehaviour
         for(int i = 0; i <cells.Count; i++)
             cells[i].TryAttack(Damage, _dataSO.elementType, _entityType);
         if (cells.Count > 0 && _entityType == EntityType.Player)
-            TurnManager.Instance.BattlePointUp();
+            TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;
     }
 
