@@ -106,17 +106,14 @@ public class Player : Entity, ISelectable
         _animator.SetBool("Walk", false);
         _moveable = false;
 
-        if(Attackable)
+        if (Attackable)
         {
             StartCoroutine(Attack());
         }
         else
         {
-            if(_pressTurnChecked && _attackCheck)
-            {
+            if (_pressTurnChecked && _attackCheck)
                 ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-                yield break;
-            }
             TurnManager.Instance.UseTurn(1);
         }
     }
@@ -131,14 +128,6 @@ public class Player : Entity, ISelectable
 
     public override void ChildTrans(bool isTrans)
     {
-        if(isTrans)
-        {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
-        }
-        else
-        {
-            GetComponent<MeshRenderer>().material.color = Color.white;
-        }
     }
 
     public override void PhaseChanged(bool val)
@@ -149,6 +138,8 @@ public class Player : Entity, ISelectable
     public void PlayerAttack()
     {
         _attackCheck = true;
+        if (PressTurnChecked)
+            Moveable = false;
         StartCoroutine(Attack());
     }
 }
