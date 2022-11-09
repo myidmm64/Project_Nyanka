@@ -9,15 +9,19 @@ public class Player : Entity, ISelectable
     private bool _selected = false;
     public bool SelectedFlag { get => _selected; set => _selected = value; }
 
+    private int _attackCount = 0;
+
     public bool Attackable
     {
         get
         {
-            return CellUtility.FindTarget<Enemy>(CellIndex, _dataSO.normalAttackRange, true).Count > 0;
+            return (CellUtility.FindTarget<Enemy>(CellIndex, _dataSO.normalAttackRange, true).Count > 0 && _attackCount < 2);
         }
     }
 
     private bool _attackCheck = false; // 어택을 했는가요?
+    public bool AttackCheck => _attackCheck;
+
     private bool _moveable = true;
     public bool Moveable
     {
@@ -41,10 +45,13 @@ public class Player : Entity, ISelectable
     {
         _moveable = true;
         _attackCheck = false;
+        _attackCount = 0;
     }
 
     public void Selected()
     {
+        ClickManager.Instance.CanvasObjectSetting();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
         ViewEnd(_attackRange, true);
         ViewStart(_moveRange, false);
         VCamOne.gameObject.SetActive(true);
@@ -55,6 +62,7 @@ public class Player : Entity, ISelectable
 
     public void SelectEnd()
     {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ViewEnd(_moveRange, false);
         ViewEnd(_attackRange, true);
         VCamTwo.gameObject.SetActive(true);
@@ -85,6 +93,7 @@ public class Player : Entity, ISelectable
     {
         if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
 
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         _animator.SetBool("Walk", true);
         _animator.Update(0);
         ViewEnd(_attackRange, true);
@@ -99,32 +108,48 @@ public class Player : Entity, ISelectable
         _animator.SetBool("Walk", false);
         _moveable = false;
 
-        if(Attackable)
+        if (Attackable)
+        {
             StartCoroutine(Attack());
+        }
         else
+        {
+            if (_pressTurnChecked && _attackCheck)
+                ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
             TurnManager.Instance.UseTurn(1);
+        }
     }
 
     public override IEnumerator Attack()
     {
         yield return StartCoroutine(base.Attack());
+        _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
+        ClickManager.Instance.CanvasObjectSetting();
     }
 
     public override void ChildTrans(bool isTrans)
     {
         if(isTrans)
         {
-            GetComponent<MeshRenderer>().material.color = Color.blue;
+            transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
         }
         else
         {
-            GetComponent<MeshRenderer>().material.color = Color.white;
+
         }
     }
 
     public override void PhaseChanged(bool val)
     {
         _pressTurnChecked = false;
+    }
+
+    public void PlayerAttack()
+    {
+        _attackCheck = true;
+        if (PressTurnChecked)
+            Moveable = false;
+        StartCoroutine(Attack());
     }
 }
