@@ -2607,8 +2607,8 @@ GameObject:
   - component: {fileID: 140849880}
   - component: {fileID: 140849879}
   - component: {fileID: 140849878}
-  m_Layer: 6
-  m_Name: Button (2)
+  m_Layer: 0
+  m_Name: SkillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2692,7 +2692,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 140849880}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: PlayerSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &140849880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,7 +4209,7 @@ GameObject:
   - component: {fileID: 320996596}
   - component: {fileID: 320996595}
   - component: {fileID: 320996594}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4211,7 +4223,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320996592}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4219,12 +4231,12 @@ RectTransform:
   - {fileID: 988651036}
   - {fileID: 1452287614}
   - {fileID: 140849877}
-  m_Father: {fileID: 1617470018}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320996594
@@ -8909,7 +8921,7 @@ GameObject:
   - component: {fileID: 558872776}
   - component: {fileID: 558872778}
   - component: {fileID: 558872777}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13470,7 +13482,7 @@ GameObject:
   - component: {fileID: 807241600}
   - component: {fileID: 807241602}
   - component: {fileID: 807241601}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15879,8 +15891,8 @@ GameObject:
   - component: {fileID: 988651038}
   - component: {fileID: 988651037}
   - component: {fileID: 988651040}
-  m_Layer: 6
-  m_Name: Button
+  m_Layer: 0
+  m_Name: MoveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15950,7 +15962,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 988651038}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: PlayerMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &988651038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21295,7 +21319,7 @@ GameObject:
   - component: {fileID: 1323911790}
   - component: {fileID: 1323911792}
   - component: {fileID: 1323911791}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23669,8 +23693,8 @@ GameObject:
   - component: {fileID: 1452287617}
   - component: {fileID: 1452287616}
   - component: {fileID: 1452287615}
-  m_Layer: 6
-  m_Name: Button (1)
+  m_Layer: 0
+  m_Name: AttackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23754,7 +23778,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1452287617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1505139386}
+        m_TargetAssemblyTypeName: ClickManager, Assembly-CSharp
+        m_MethodName: PlayerAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1452287617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24137,6 +24173,7 @@ MonoBehaviour:
   _cellAndPlayerMask:
     serializedVersion: 2
     m_Bits: 320
+  _canvasObject: {fileID: 320996592}
 --- !u!1 &1505338377
 GameObject:
   m_ObjectHideFlags: 0
@@ -26070,12 +26107,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid_index: {x: 8, y: 0, z: -1}
---- !u!4 &1617470018 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4374210612237096719, guid: 0bdec2db5e1e4824f8dc6ac0700ac475,
-    type: 3}
-  m_PrefabInstance: {fileID: 4269104709160099966}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1628711041
 PrefabInstance:
   m_ObjectHideFlags: 0
