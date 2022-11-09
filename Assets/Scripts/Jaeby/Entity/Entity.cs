@@ -19,8 +19,7 @@ public enum ElementType
     NONE,
     Fire,
     Water,
-    Leaf,
-    Light,
+    Wind,
     SIZE
 }
 
@@ -141,7 +140,9 @@ public abstract class Entity : MonoBehaviour
         yield break;
     }
 
-
+    List<GameObject> obj = new List<GameObject>();
+    [SerializeField]
+    private GameObject _testObj = null;
     /// <summary>
     /// indexes를 돌며 셀들을 강조합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
     /// </summary>
@@ -152,7 +153,12 @@ public abstract class Entity : MonoBehaviour
         List<Cell> cells = CellUtility.SearchCells(CellIndex, indexes, ignore);
         for (int i = 0; i < cells.Count; i++)
         {
-            cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
+            //cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
+            if (_testObj == null) return;
+            GameObject o = Instantiate(_testObj, cells[i].GetIndex() + Vector3.up * 0.5f, Quaternion.identity);
+            //o.transform.localScale = Vector3.one - Vector3.right * 0.5f - Vector3.forward * 0.5f;
+            o.transform.localScale = Vector3.one * 0.5f;
+            obj.Add(o);
         }
     }
 
@@ -164,9 +170,11 @@ public abstract class Entity : MonoBehaviour
     protected void ViewEnd(List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = CellUtility.SearchCells(CellIndex, indexes, ignore);
+        for (int i = 0; i < obj.Count; i++)
+            Destroy(obj[i]);
         for (int i = 0; i < cells.Count; i++)
         {
-            cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
+            //cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
 

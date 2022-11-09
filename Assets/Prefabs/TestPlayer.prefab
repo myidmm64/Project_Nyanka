@@ -1340,6 +1340,8 @@ MonoBehaviour:
   _dataSO: {fileID: 11400000, guid: 3bb05c1c9e5356d4fbb21d2ecda91a90, type: 2}
   _skillable: 1
   _isTransed: 0
+  _testObj: {fileID: 6740003727648837572, guid: 5ddb7bedc8af3674b957215d8af075ee,
+    type: 3}
 --- !u!195 &4269104708810944739
 NavMeshAgent:
   m_ObjectHideFlags: 0

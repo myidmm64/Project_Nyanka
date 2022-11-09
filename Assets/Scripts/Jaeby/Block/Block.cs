@@ -62,11 +62,8 @@ public class Block : MonoBehaviour
             case ElementType.Water:
                 c = Color.blue;
                 break;
-            case ElementType.Leaf:
-                c = Color.green;
-                break;
-            case ElementType.Light:
-                c = Color.yellow;
+            case ElementType.Wind:
+                c = Color.white;
                 break;
             case ElementType.SIZE:
                 break;

@@ -1949,6 +1949,8 @@ MonoBehaviour:
   _dataSO: {fileID: 11400000, guid: 6992ae73b1b470246871723f200d17bf, type: 2}
   _skillable: 1
   _isTransed: 0
+  _testObj: {fileID: 6740003727648837572, guid: 5ddb7bedc8af3674b957215d8af075ee,
+    type: 3}
 --- !u!1 &5087033641358979785
 GameObject:
   m_ObjectHideFlags: 0
