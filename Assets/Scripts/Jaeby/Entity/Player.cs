@@ -54,10 +54,10 @@ public class Player : Entity, ISelectable
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
         ViewEnd(_attackRange, true);
         ViewStart(_moveRange, false);
-        VCamOne.gameObject.SetActive(true);
+        /*VCamOne.gameObject.SetActive(true);
         VCamTwo.gameObject.SetActive(false);
         VCamOne.Follow = transform;
-        VCamOne.LookAt = transform;
+        VCamOne.LookAt = transform;*/
     }
 
     public void SelectEnd()
@@ -65,10 +65,10 @@ public class Player : Entity, ISelectable
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ViewEnd(_moveRange, false);
         ViewEnd(_attackRange, true);
-        VCamTwo.gameObject.SetActive(true);
+        /*VCamTwo.gameObject.SetActive(true);
         VCamOne.gameObject.SetActive(false);
         VCamOne.Follow = null;
-        VCamOne.LookAt = null;
+        VCamOne.LookAt = null;*/
     }
 
     public override void Targeted() // MouseEnter

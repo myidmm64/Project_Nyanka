@@ -144,8 +144,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer.Moveable == false) return;
         ClickModeSet(LeftClickMode.JustCell, true);
         _canvasObject.SetActive(false);
-        VCamTwo.gameObject.SetActive(true);
-        VCamOne.gameObject.SetActive(false);
+        /*VCamTwo.gameObject.SetActive(true);
+        VCamOne.gameObject.SetActive(false);*/
         _moveMode = true;
     }
 
