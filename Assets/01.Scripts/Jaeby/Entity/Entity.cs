@@ -6,6 +6,7 @@ using DG.Tweening;
 using static Define;
 using UnityEngine.AI;
 
+[System.Serializable]
 public enum EntityType
 {
     None,
@@ -46,48 +47,10 @@ public abstract class Entity : MonoBehaviour
         set => _cellIndex = value;
     }
 
-    [SerializeField]
-    private bool _skillable = true; // 스킬 사용이 가능한가?
-    [SerializeField]
-    private bool _isTransed = false; // 변신이 되었는가
-
     protected NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?
-
-    protected List<Vector3Int> _moveRange
-    {
-        get
-        {
-            if (_isTransed)
-                return _dataSO.transMoveRange;
-            return _dataSO.normalMoveRange;
-        }
-    }
-
-    protected List<Vector3Int> _attackRange
-    {
-        get
-        {
-            if (_isTransed)
-                return _dataSO.transAttackRange;
-            return _dataSO.normalAttackRange;
-        }
-    }
-
-    private int _damage = 0;
-    protected int Damage
-    {
-        get
-        {
-            if (_isTransed)
-                return _dataSO.transAtk;
-            return _dataSO.normalAtk;
-        }
-    }
-
-    public ElementType elementType => _dataSO.elementType;
 
     public ElementType GetWeak // 약점 속성
     {
@@ -114,20 +77,11 @@ public abstract class Entity : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    public void Trans(bool isTrans)
-    {
-        _isTransed = isTrans;
-        ChildTrans(_isTransed);
-        
-    }
-
-    public abstract void ChildTrans(bool isTrans);
-
     public abstract IEnumerator Move(Vector3Int v);
 
     public virtual IEnumerator Attack()
     {
-        List<Cell> cells = CellUtility.SearchCells(CellIndex, _attackRange, true);
+        List<Cell> cells = CellUtility.SearchCells(CellIndex, _dataSO.normalAttackRange, true);
         if (cells.Count == 0) yield break;
 
         yield return new WaitForSeconds(0.1f);
@@ -136,7 +90,7 @@ public abstract class Entity : MonoBehaviour
         _animator.Update(0);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
         for(int i = 0; i <cells.Count; i++)
-            cells[i].TryAttack(Damage, _dataSO.elementType, _entityType);
+            cells[i].TryAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
         if (cells.Count > 0 && _entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;
@@ -155,10 +109,8 @@ public abstract class Entity : MonoBehaviour
         List<Cell> cells = CellUtility.SearchCells(CellIndex, indexes, ignore);
         for (int i = 0; i < cells.Count; i++)
         {
-            //cells[i].GetComponent<MeshRenderer>().material.color = Color.blue;
             if (_testObj == null) return;
             GameObject o = Instantiate(_testObj, cells[i].GetIndex() + Vector3.up * 0.5f, Quaternion.identity);
-            //o.transform.localScale = Vector3.one - Vector3.right * 0.5f - Vector3.forward * 0.5f;
             o.transform.localScale = Vector3.one * 0.5f;
             obj.Add(o);
         }
@@ -169,15 +121,10 @@ public abstract class Entity : MonoBehaviour
     /// </summary>
     /// <param name="indexes"></param>
     /// <param name="ignore"></param>
-    protected void ViewEnd(List<Vector3Int> indexes, bool ignore)
+    protected void ViewEnd()
     {
-        List<Cell> cells = CellUtility.SearchCells(CellIndex, indexes, ignore);
         for (int i = 0; i < obj.Count; i++)
             Destroy(obj[i]);
-        for (int i = 0; i < cells.Count; i++)
-        {
-            //cells[i].GetComponent<MeshRenderer>().material.color = Color.white;
-        }
     }
 
     private void OnMouseEnter()

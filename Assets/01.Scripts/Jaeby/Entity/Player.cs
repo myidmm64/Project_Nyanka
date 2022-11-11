@@ -50,37 +50,24 @@ public class Player : Entity, ISelectable
 
     public void Selected()
     {
-        ClickManager.Instance.CanvasObjectSetting();
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
-        ViewEnd(_attackRange, true);
-        ViewStart(_moveRange, false);
-        /*VCamOne.gameObject.SetActive(true);
-        VCamTwo.gameObject.SetActive(false);
-        VCamOne.Follow = transform;
-        VCamOne.LookAt = transform;*/
+        ViewStart(_dataSO.normalMoveRange, false);
     }
 
     public void SelectEnd()
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-        ViewEnd(_moveRange, false);
-        ViewEnd(_attackRange, true);
-        /*VCamTwo.gameObject.SetActive(true);
-        VCamOne.gameObject.SetActive(false);
-        VCamOne.Follow = null;
-        VCamOne.LookAt = null;*/
+        ViewEnd();
     }
 
     public override void Targeted() // MouseEnter
     {
         if (_selected) return;
-        ViewStart(_attackRange, true);
     }
 
     public override void TargetEnd() // MouseExit
     {
         if (_selected) return;
-        ViewEnd(_attackRange, true);
     }
 
     public void SetCell(Vector3Int v)
@@ -91,13 +78,11 @@ public class Player : Entity, ISelectable
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) yield break;
 
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         _animator.SetBool("Walk", true);
         _animator.Update(0);
-        ViewEnd(_attackRange, true);
-        ViewEnd(_moveRange, false);
         Vector3 moveVec = v;
         moveVec.y = transform.position.y;
         _agent.SetDestination(moveVec);
@@ -125,19 +110,6 @@ public class Player : Entity, ISelectable
         yield return StartCoroutine(base.Attack());
         _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
-        ClickManager.Instance.CanvasObjectSetting();
-    }
-
-    public override void ChildTrans(bool isTrans)
-    {
-        if(isTrans)
-        {
-            transform.Find("Body").GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
-        }
-        else
-        {
-
-        }
     }
 
     public override void PhaseChanged(bool val)

@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public override void ChildTrans(bool isTrans)
-    {
-    }
-
     protected override void Start()
     {
         _entityType = EntityType.Enemy;
@@ -30,9 +26,9 @@ public class Enemy : Entity
 
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CellUtility.CheckCell(CellIndex, v, _moveRange, false) == false) yield break;
+        if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) yield break;
 
-        ViewEnd(_dataSO.normalAttackRange, true);
+        ViewEnd();
         Vector3 moveVec = v;
         CellIndex = v;
         moveVec.y = transform.position.y;
@@ -42,12 +38,10 @@ public class Enemy : Entity
 
     public override void Targeted()
     {
-        ViewStart(_attackRange, true);
     }
 
     public override void TargetEnd()
     {
-        ViewEnd(_attackRange, true);
     }
 
     public override void PhaseChanged(bool val)

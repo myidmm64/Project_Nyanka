@@ -30,21 +30,12 @@ public class ClickManager : MonoSingleTon<ClickManager>
         set => _rightClickLock = value;
     }
 
-    [SerializeField]
-    private GameObject _canvasObject = null;
-    private GameObject _attackButton = null;
-    private GameObject _moveButton = null;
-    private GameObject _skillButton = null;
 
     private bool _moveMode = false;
 
     private void Start()
     {
         GameManager.Instance.TimeScale = 1.5f;
-        _canvasObject.SetActive(false);
-        _attackButton = _canvasObject.transform.Find("AttackButton").gameObject;
-        _moveButton = _canvasObject.transform.Find("MoveButton").gameObject;
-        _skillButton = _canvasObject.transform.Find("SkillButton").gameObject;
     }
 
     private void Update()
@@ -55,7 +46,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
             {
                 if (_currentPlayer != null)
                 {
-                    _canvasObject.SetActive(false);
                     _currentPlayer.SelectEnd();
                     _prevPlayer = _currentPlayer;
                     _currentPlayer.SelectedFlag = false;
@@ -106,12 +96,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer.SelectedFlag = true;
         _currentPlayer.Selected();
 
-        _canvasObject.SetActive(true);
-        CanvasObjectSetting();
 
         Vector3 pos = player.transform.position;
         pos.y = 0.5f;
-        _canvasObject.transform.position = pos;
     }
 
     public void ClickManagerReset()
@@ -124,7 +111,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
             _currentPlayer.SelectedFlag = false;
             _currentPlayer = null;
         }
-        _canvasObject.SetActive(false);
         VCamOne.gameObject.SetActive(false);
         VCamTwo.gameObject.SetActive(true);
     }
@@ -143,7 +129,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer == null) return;
         if (_currentPlayer.Moveable == false) return;
         ClickModeSet(LeftClickMode.JustCell, true);
-        _canvasObject.SetActive(false);
         /*VCamTwo.gameObject.SetActive(true);
         VCamOne.gameObject.SetActive(false);*/
         _moveMode = true;
@@ -154,20 +139,12 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer == null) return;
         if (TurnManager.Instance.BattlePoint < 8) return;
         TurnManager.Instance.BattlePointChange(0);
-        _currentPlayer.Trans(true);
+        //_currentPlayer.Trans(true);
     }
 
     public void PlayerSkill()
     {
         if (_currentPlayer == null) return;
-    }
-
-    public void CanvasObjectSetting()
-    {
-        if (_currentPlayer == null) return;
-        _moveButton.SetActive(_currentPlayer.Moveable);
-        _attackButton.SetActive(!(_currentPlayer.Attackable == false || _currentPlayer.AttackCheck == true));
-        //_skillButton.SetActive(_currentPlayer.Skillable);
     }
 
     public void ClickModeSet(LeftClickMode left, bool right)
