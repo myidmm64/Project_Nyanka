@@ -24,7 +24,7 @@ public enum ElementType
     SIZE
 }
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, ISelectable
 {
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
@@ -70,6 +70,9 @@ public abstract class Entity : MonoBehaviour
             return (ElementType)temp;
         }
     }
+
+    private bool _selectedFlag = false;
+    public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
 
     protected virtual void Start()
     {
@@ -146,6 +149,25 @@ public abstract class Entity : MonoBehaviour
     public abstract void Targeted();
 
     public abstract void TargetEnd();
+
+    public void Selected()
+    {
+        VCamOne.gameObject.SetActive(true);
+        VCamTwo.gameObject.SetActive(false);
+        VCamOne.Follow = transform;
+        ChildSelected();
+    }
+
+    public void SelectEnd()
+    {
+        VCamTwo.gameObject.SetActive(true);
+        VCamOne.gameObject.SetActive(false);
+        VCamOne.Follow = null;
+        ChildSelectEnd();
+    }
+
+    protected abstract void ChildSelected();
+    protected abstract void ChildSelectEnd();
 
     public void Died()
     {

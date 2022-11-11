@@ -18,20 +18,12 @@ public class ClickManager : MonoSingleTon<ClickManager>
         set => _leftClickMode = value;
     }
 
-    private Action<Vector3Int> OnCellClicked = null;
+    private ISelectable _selectable = null;
     private Player _currentPlayer = null;
-    private Player _prevPlayer = null;
+
     [SerializeField]
-    private LayerMask _cellAndPlayerMask = 0;
+    private LayerMask _laycastMask = 0;
     private bool _rightClickLock = false;
-    public bool RightClickLock
-    {
-        get => _rightClickLock;
-        set => _rightClickLock = value;
-    }
-
-
-    private bool _moveMode = false;
 
     private void Start()
     {
@@ -40,46 +32,47 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Update()
     {
-        if (_rightClickLock == false)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (_currentPlayer != null)
-                {
-                    _currentPlayer.SelectEnd();
-                    _prevPlayer = _currentPlayer;
-                    _currentPlayer.SelectedFlag = false;
-                    _currentPlayer = null;
-                }
-            }
-        }
+        Select();
+        UnSelect();
+    }
 
+    private void Select()
+    {
         if (_leftClickMode == LeftClickMode.Nothing) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _cellAndPlayerMask))
+            if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask))
             {
-                Cell cell = hit.collider.GetComponent<Cell>();
-                if (cell != null)
-                {
-                    OnCellClicked?.Invoke(cell.GetIndex());
-                    if (_moveMode == true && _currentPlayer != null)
-                    {
-                        _currentPlayer.SetCell(cell.GetIndex());
-                        _moveMode = false;
-                        ClickModeSet(LeftClickMode.AllClick, false);
-                    }
+                Cell c = hit.collider.GetComponent<Cell>();
+                if (c != null)
+                    _selectCellIndex = c.GetIndex();
+                if (_leftClickMode == LeftClickMode.JustCell)
                     return;
+                ISelectable entity = hit.collider.GetComponent<ISelectable>();
+                if (entity != null && _selectable == null)
+                {
+                    _selectable = entity;
+                    _selectable.Selected();
                 }
-
-                if (_leftClickMode == LeftClickMode.JustCell) return;
-
                 Player player = hit.collider.GetComponent<Player>();
-                ForceSelect(player);
+                if (player != null)
+                    _currentPlayer = player;
             }
+        }
+    }
 
+    private void UnSelect()
+    {
+        if (_rightClickLock) return;
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (_selectable != null)
+            {
+                _selectable.SelectEnd();
+                _selectable = null;
+            }
         }
     }
 
@@ -88,7 +81,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer != null)
         {
             _currentPlayer.SelectEnd();
-            _prevPlayer = _currentPlayer;
             _currentPlayer.SelectedFlag = false;
             _currentPlayer = null;
         }
@@ -107,7 +99,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer != null)
         {
             _currentPlayer.SelectEnd();
-            _prevPlayer = _currentPlayer;
             _currentPlayer.SelectedFlag = false;
             _currentPlayer = null;
         }
@@ -129,9 +120,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer == null) return;
         if (_currentPlayer.Moveable == false) return;
         ClickModeSet(LeftClickMode.JustCell, true);
-        /*VCamTwo.gameObject.SetActive(true);
-        VCamOne.gameObject.SetActive(false);*/
-        _moveMode = true;
     }
 
     public void PlayerTryTransform()
@@ -139,7 +127,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer == null) return;
         if (TurnManager.Instance.BattlePoint < 8) return;
         TurnManager.Instance.BattlePointChange(0);
-        //_currentPlayer.Trans(true);
     }
 
     public void PlayerSkill()

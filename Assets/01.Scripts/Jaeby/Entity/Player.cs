@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class Player : Entity, ISelectable
+public class Player : Entity
 {
-    private bool _selected = false;
-    public bool SelectedFlag { get => _selected; set => _selected = value; }
-
     private int _attackCount = 0;
 
     public bool Attackable
@@ -48,32 +45,14 @@ public class Player : Entity, ISelectable
         _attackCount = 0;
     }
 
-    public void Selected()
-    {
-        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
-        ViewStart(_dataSO.normalMoveRange, false);
-    }
-
-    public void SelectEnd()
-    {
-        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-        ViewEnd();
-    }
-
     public override void Targeted() // MouseEnter
     {
-        if (_selected) return;
+        if (SelectedFlag) return;
     }
 
     public override void TargetEnd() // MouseExit
     {
-        if (_selected) return;
-    }
-
-    public void SetCell(Vector3Int v)
-    {
-        if (_selected == false || _moveable == false) return;
-        StartCoroutine(Move(v));
+        if (SelectedFlag) return;
     }
 
     public override IEnumerator Move(Vector3Int v)
@@ -123,5 +102,22 @@ public class Player : Entity, ISelectable
         if (PressTurnChecked)
             Moveable = false;
         StartCoroutine(Attack());
+    }
+
+    protected override void ChildSelected()
+    {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        ViewStart(_dataSO.normalMoveRange, false);
+    }
+
+    protected override void ChildSelectEnd()
+    {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        ViewEnd();
+    }
+
+    public void PreparationCellSelect(Vector3Int index)
+    {
+        if (SelectedFlag == false || _moveable == false) return;
     }
 }

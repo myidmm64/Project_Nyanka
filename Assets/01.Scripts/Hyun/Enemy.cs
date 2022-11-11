@@ -47,4 +47,14 @@ public class Enemy : Entity
     public override void PhaseChanged(bool val)
     {
     }
+
+    protected override void ChildSelected()
+    {
+        ViewStart(_dataSO.normalMoveRange, false);
+    }
+
+    protected override void ChildSelectEnd()
+    {
+        ViewEnd();
+    }
 }
