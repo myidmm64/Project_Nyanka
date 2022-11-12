@@ -120,6 +120,21 @@ public class Player : Entity
 
     public void PreparationCellSelect(Vector3Int index)
     {
-        if (SelectedFlag == false || _moveable == false) return;
+        if(CellUtility.CheckCell(CellIndex, index, _dataSO.normalMoveRange, false))
+        {
+            CubeGrid.ViewEnd();
+            ViewData(index);
+        }
+        else if (index == CellIndex)
+        {
+            ViewDataByCellIndex();
+        }
+    }
+
+    public void ViewDataByCellIndex()
+    {
+        CubeGrid.ViewEnd();
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
     }
 }

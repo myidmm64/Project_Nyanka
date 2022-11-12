@@ -107,7 +107,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public void ViewData(Vector3Int index)
     {
-        CubeGrid.ViewRange(GridType.Normal, index, _dataSO.normalMoveRange, false);
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, index, _dataSO.normalAttackRange, true);
     }
 
@@ -142,6 +142,8 @@ public abstract class Entity : MonoBehaviour, ISelectable
         VCamTwo.gameObject.SetActive(false);
         VCamOne.Follow = transform;
         ChildSelected();
+
+        ViewStart();
     }
 
     public void SelectEnd()
@@ -150,6 +152,8 @@ public abstract class Entity : MonoBehaviour, ISelectable
         VCamOne.gameObject.SetActive(false);
         VCamOne.Follow = null;
         ChildSelectEnd();
+
+        ViewEnd();
     }
 
     protected abstract void ChildSelected();

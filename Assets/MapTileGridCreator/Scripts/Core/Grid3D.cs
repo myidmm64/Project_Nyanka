@@ -76,7 +76,7 @@ namespace MapTileGridCreator.Core
 						break;
 				}
 				_objList.Add(obj);
-				obj.transform.position = c[i].GetIndex() + Vector3.up * 0.5f;
+				obj.transform.position = c[i].GetIndex() + Vector3.up * 0.6f;
             }
         }
 
@@ -92,7 +92,7 @@ namespace MapTileGridCreator.Core
         {
 			if (_clickedObj == null)
 				_clickedObj = Instantiate(_clickObj);
-			_clickedObj.transform.position = index;
+			_clickedObj.transform.position = index + Vector3.up * 0.5f;
 		}
 
 		public void ClcikViewEnd()

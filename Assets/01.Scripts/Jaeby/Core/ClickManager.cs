@@ -11,6 +11,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private Vector3Int _selectCellIndex = Vector3Int.zero;
     public Vector3Int SelectCellIndex => _selectCellIndex;
 
+    [SerializeField]
     private LeftClickMode _leftClickMode = LeftClickMode.AllClick;
     public LeftClickMode LeftClickMode
     {
@@ -19,6 +20,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     }
 
     private ISelectable _selectable = null;
+    [SerializeField]
     private Player _currentPlayer = null;
 
     [SerializeField]
@@ -51,6 +53,11 @@ public class ClickManager : MonoSingleTon<ClickManager>
                     _selectCellIndex = c.GetIndex();
                     SellSelect();
                 }
+                Player testPlayer = hit.collider.GetComponent<Player>();
+                if (testPlayer != null && _currentPlayer != null)
+                    if(testPlayer.CellIndex == _currentPlayer.CellIndex)
+                        _currentPlayer.ViewDataByCellIndex();
+
                 if (_leftClickMode == LeftClickMode.JustCell)
                     return;
                 ISelectable entity = hit.collider.GetComponent<ISelectable>();
@@ -61,7 +68,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 }
                 Player player = hit.collider.GetComponent<Player>();
                 if (player != null)
+                {
                     _currentPlayer = player;
+                    _currentPlayer.ViewDataByCellIndex();
+                }
             }
         }
     }
@@ -69,11 +79,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private void SellSelect()
     {
         CubeGrid.ClickView(_selectCellIndex);
-        if(_currentPlayer != null)
-        {
-            CubeGrid.ViewEnd();
-            _currentPlayer.ViewData(_selectCellIndex);
-        }
+        if (_currentPlayer != null)
+            _currentPlayer.PreparationCellSelect(_selectCellIndex);
     }
 
     private void UnSelect()
@@ -86,6 +93,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 _selectable.SelectEnd();
                 _selectable = null;
             }
+            _currentPlayer = null;
         }
     }
 
@@ -156,6 +164,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     }
 }
 
+[System.Serializable]
 public enum LeftClickMode
 {
     NONE,
