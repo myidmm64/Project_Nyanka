@@ -47,7 +47,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
             {
                 Cell c = hit.collider.GetComponent<Cell>();
                 if (c != null)
+                {
                     _selectCellIndex = c.GetIndex();
+                    SellSelect();
+                }
                 if (_leftClickMode == LeftClickMode.JustCell)
                     return;
                 ISelectable entity = hit.collider.GetComponent<ISelectable>();
@@ -60,6 +63,16 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 if (player != null)
                     _currentPlayer = player;
             }
+        }
+    }
+
+    private void SellSelect()
+    {
+        CubeGrid.ClickView(_selectCellIndex);
+        if(_currentPlayer != null)
+        {
+            CubeGrid.ViewEnd();
+            _currentPlayer.ViewData(_selectCellIndex);
         }
     }
 
@@ -104,6 +117,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         }
         VCamOne.gameObject.SetActive(false);
         VCamTwo.gameObject.SetActive(true);
+        UnSelect();
     }
 
 
@@ -119,7 +133,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
     {
         if (_currentPlayer == null) return;
         if (_currentPlayer.Moveable == false) return;
-        ClickModeSet(LeftClickMode.JustCell, true);
+        //ClickModeSet(LeftClickMode.JustCell, true);
+        _currentPlayer.TryMove(_selectCellIndex);
     }
 
     public void PlayerTryTransform()

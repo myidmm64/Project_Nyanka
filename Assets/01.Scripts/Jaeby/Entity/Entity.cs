@@ -92,42 +92,28 @@ public abstract class Entity : MonoBehaviour, ISelectable
         _animator.Play("Attack");
         _animator.Update(0);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
-        for(int i = 0; i <cells.Count; i++)
+        for (int i = 0; i < cells.Count; i++)
             cells[i].TryAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
         if (cells.Count > 0 && _entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;
     }
 
-    List<GameObject> obj = new List<GameObject>();
-    [SerializeField]
-    private GameObject _testObj = null;
-    /// <summary>
-    /// indexes를 돌며 셀들을 강조합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
-    /// </summary>
-    /// <param name="indexes"></param>
-    /// <param name="ignore"></param>
-    protected void ViewStart(List<Vector3Int> indexes, bool ignore)
+    protected void ViewStart()
     {
-        List<Cell> cells = CellUtility.SearchCells(CellIndex, indexes, ignore);
-        for (int i = 0; i < cells.Count; i++)
-        {
-            if (_testObj == null) return;
-            GameObject o = Instantiate(_testObj, cells[i].GetIndex() + Vector3.up * 0.5f, Quaternion.identity);
-            o.transform.localScale = Vector3.one * 0.5f;
-            obj.Add(o);
-        }
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
     }
 
-    /// <summary>
-    /// indexes를 돌며 셀 강조를 해제합니다. ignore가 false일 때, 셀 위에 오브젝트가 있으면 무시합니다.
-    /// </summary>
-    /// <param name="indexes"></param>
-    /// <param name="ignore"></param>
+    public void ViewData(Vector3Int index)
+    {
+        CubeGrid.ViewRange(GridType.Normal, index, _dataSO.normalMoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, index, _dataSO.normalAttackRange, true);
+    }
+
     protected void ViewEnd()
     {
-        for (int i = 0; i < obj.Count; i++)
-            Destroy(obj[i]);
+        CubeGrid.ViewEnd();
     }
 
     private void OnMouseEnter()

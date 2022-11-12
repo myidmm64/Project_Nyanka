@@ -55,10 +55,14 @@ public class Player : Entity
         if (SelectedFlag) return;
     }
 
+    public void TryMove(Vector3Int v)
+    {
+        if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) return;
+        StartCoroutine(Move(v));
+    }
+
     public override IEnumerator Move(Vector3Int v)
     {
-        if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) yield break;
-
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         _animator.SetBool("Walk", true);
         _animator.Update(0);
@@ -107,13 +111,11 @@ public class Player : Entity
     protected override void ChildSelected()
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
-        ViewStart(_dataSO.normalMoveRange, false);
     }
 
     protected override void ChildSelectEnd()
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-        ViewEnd();
     }
 
     public void PreparationCellSelect(Vector3Int index)

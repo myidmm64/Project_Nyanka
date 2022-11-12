@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+public enum GridType
+{
+	None,
+	Normal,
+	Attack,
+	Click,
+	Skill
+}
 namespace MapTileGridCreator.Core
 {
 	/// <summary>
@@ -36,6 +44,62 @@ namespace MapTileGridCreator.Core
 
 #pragma warning restore 0649
 		#endregion
+		[SerializeField]
+		private GameObject _normalObj = null;
+		[SerializeField]
+		private GameObject _attackObj = null;
+		[SerializeField]
+		private GameObject _skillObj = null;
+		[SerializeField]
+		private GameObject _clickObj = null;
+		private GameObject _clickedObj = null;
+		private List<GameObject> _objList = new List<GameObject>();
+
+		public void ViewRange(GridType type, Vector3Int startIndex, List<Vector3Int> indexes, bool ignore)
+        {
+			List<Cell>c = CellUtility.SearchCells(startIndex, indexes, ignore);
+			for(int i = 0; i < c.Count; i++)
+			{
+				GameObject obj = null;
+				switch (type)
+				{
+					case GridType.Normal:
+						obj = Instantiate(_normalObj);
+						break;
+					case GridType.Attack:
+						obj = Instantiate(_attackObj);
+						break;
+					case GridType.Skill:
+						obj = Instantiate(_skillObj);
+						break;
+					default:
+						break;
+				}
+				_objList.Add(obj);
+				obj.transform.position = c[i].GetIndex() + Vector3.up * 0.5f;
+            }
+        }
+
+        public void ViewEnd()
+        {
+			for(int i = 0; i < _objList.Count; i++)
+            {
+				Destroy(_objList[i]);
+            }
+        }
+
+		public void ClickView(Vector3Int index)
+        {
+			if (_clickedObj == null)
+				_clickedObj = Instantiate(_clickObj);
+			_clickedObj.transform.position = index;
+		}
+
+		public void ClcikViewEnd()
+        {
+			if (_clickedObj != null)
+				Destroy(_clickedObj);
+        }
 
 		/// <summary>
 		/// Awake for auto-initialization in runtime.
@@ -418,7 +482,7 @@ namespace MapTileGridCreator.Core
 		private List<Vector3Int> _connex_axes;
 		private Dictionary<Vector3Int, Cell> _map;
 
-		#endregion
-	}
+        #endregion
+    }
 }
 

@@ -50,11 +50,9 @@ public class Enemy : Entity
 
     protected override void ChildSelected()
     {
-        ViewStart(_dataSO.normalMoveRange, false);
     }
 
     protected override void ChildSelectEnd()
     {
-        ViewEnd();
     }
 }
