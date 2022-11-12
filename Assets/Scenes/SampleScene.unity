@@ -19951,6 +19951,8 @@ MonoBehaviour:
     type: 3}
   _clickObj: {fileID: 2159318923148146726, guid: ef7cca2e8f235e24a8cc272b110cb985,
     type: 3}
+  _moveModeObj: {fileID: 461931439410127880, guid: 5e8a5543987e74f40b5252876af6ddb0,
+    type: 3}
   _connexity: 0
 --- !u!4 &1250078093
 Transform:

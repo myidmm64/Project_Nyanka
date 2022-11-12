@@ -110,17 +110,17 @@ public class Player : Entity
 
     protected override void ChildSelected()
     {
-        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        CubeGrid.ClcikViewEnd(false);
     }
 
     protected override void ChildSelectEnd()
     {
-        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        CubeGrid.ClcikViewEnd(true);
     }
 
     public void PreparationCellSelect(Vector3Int index)
     {
-        if(CellUtility.CheckCell(CellIndex, index, _dataSO.normalMoveRange, false))
+        if(GetMoveableCheck(index))
         {
             CubeGrid.ViewEnd();
             ViewData(index);
@@ -131,9 +131,15 @@ public class Player : Entity
         }
     }
 
+    public bool GetMoveableCheck(Vector3Int index)
+    {
+        return CellUtility.CheckCell(CellIndex, index, _dataSO.normalMoveRange, false);
+    }
+
     public void ViewDataByCellIndex()
     {
         CubeGrid.ViewEnd();
+        CubeGrid.ClickView(CellIndex, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
     }

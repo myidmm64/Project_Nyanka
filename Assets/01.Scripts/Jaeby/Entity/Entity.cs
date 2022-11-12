@@ -138,9 +138,11 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public void Selected()
     {
+        Debug.Log("¼¿·ºÆ®");
+        VCamOne.Follow = transform;
         VCamOne.gameObject.SetActive(true);
         VCamTwo.gameObject.SetActive(false);
-        VCamOne.Follow = transform;
+        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         ChildSelected();
 
         ViewStart();
@@ -148,9 +150,11 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public void SelectEnd()
     {
+        Debug.Log("¼¿·ºÆ® ¿£µå");
+        VCamOne.Follow = null;
         VCamTwo.gameObject.SetActive(true);
         VCamOne.gameObject.SetActive(false);
-        VCamOne.Follow = null;
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ChildSelectEnd();
 
         ViewEnd();
