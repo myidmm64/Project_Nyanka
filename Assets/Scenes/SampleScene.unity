@@ -828,6 +828,7 @@ GameObject:
   - component: {fileID: 31080652}
   - component: {fileID: 31080651}
   - component: {fileID: 31080650}
+  - component: {fileID: 31080654}
   m_Layer: 5
   m_Name: RealCanvas
   m_TagString: Untagged
@@ -922,6 +923,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &31080654
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31080649}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &33456739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18616,6 +18629,7 @@ MonoBehaviour:
   _idleButton: {fileID: 2095131467}
   _playerImage: {fileID: 2126863668}
   _skillButton: {fileID: 711490899}
+  _canvasGroup: {fileID: 31080654}
 --- !u!4 &1140947870
 Transform:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Player : Entity
 
     [SerializeField]
     private AttackDirectionObject _attackDirectionObj = null;
-    private List<AttackDirectionObject> _attackDirections = new List<AttackDirectionObject>();
+    private List<GameObject> _attackDirections = new List<GameObject>();
 
     private bool _attackCheck = false; // 어택을 했는가요?
     public bool AttackCheck { get => _attackCheck; set => _attackCheck = value; }
@@ -104,9 +104,10 @@ public class Player : Entity
 
     public void PlayerAttack()
     {
-        for (int i = 0; i < _attackDirections.Count; i++)
-            Destroy(_attackDirections[i].gameObject);
         CubeGrid.ViewEnd();
+        for (int i = 0; i < _attackDirections.Count; i++)
+            Destroy(_attackDirections[i]);
+        _attackDirections.Clear();
         StartCoroutine(Attack());
     }
 
@@ -125,6 +126,7 @@ public class Player : Entity
 
     private void TryAttack()
     {
+        UIManager.Instance.UISetting(this);
         if (Attackable)
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
@@ -146,7 +148,7 @@ public class Player : Entity
             AttackDirectionObject ob = Instantiate(_attackDirectionObj);
             ob.Initailize((AttackDirection)i, this);
             ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
-            _attackDirections.Add(ob);
+            _attackDirections.Add(ob.gameObject);
         }
     }
 
@@ -160,13 +162,13 @@ public class Player : Entity
     protected override void ChildSelected()
     {
         CubeGrid.ClcikViewEnd(false);
-        //UIManager.Instance.UISetting(this);
+        UIManager.Instance.UIInit(this);
     }
 
     protected override void ChildSelectEnd()
     {
         CubeGrid.ClcikViewEnd(true);
-        //UIManager.Instance.UISetting(this);
+        UIManager.Instance.UIDisable();
     }
 
     public void PreparationCellSelect(Vector3Int index)

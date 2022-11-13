@@ -15,6 +15,17 @@ public class UIManager : MonoSingleTon<UIManager>
     private Image _playerImage = null;
     [SerializeField]
     private GameObject _skillButton = null;
+    [SerializeField]
+    private CanvasGroup _canvasGroup = null;
+    
+    public void UIInit(Player player)
+    {
+        UIReset();
+        //_playerImage.sprite = player.DataSO.sprite;
+        //스킬 체크
+        UIEnable();
+    }
+
     public void UISetting(Player player)
     {
         if(player.Attackable)
@@ -25,13 +36,31 @@ public class UIManager : MonoSingleTon<UIManager>
         }
         else
         {
-            _moveCheckButton.SetActive(true);
-            _idleButton.SetActive(true);
+
         }
+    }
+
+    private void UIEnable()
+    {
+        _canvasGroup.alpha = 1f;
+        _canvasGroup.interactable = true;
+        _canvasGroup.blocksRaycasts = true;
     }
 
     public void UIDisable()
     {
+        _canvasGroup.alpha = 0f;
+        _canvasGroup.interactable = false;
+        _canvasGroup.blocksRaycasts = false;
+        _playerImage.sprite = null;
+        UIReset();
+    }
 
+    private void UIReset()
+    {
+        _attackButton.SetActive(false);
+        _moveCheckButton.SetActive(true);
+        _idleButton.SetActive(true);
+        _skillButton.GetComponent<Button>().enabled = true;
     }
 }
