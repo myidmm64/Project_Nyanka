@@ -117,7 +117,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer = player;
         _currentPlayer.SelectedFlag = true;
         _currentPlayer.Selected();
-
+        ClickModeSet(LeftClickMode.JustCell, true);
 
         Vector3 pos = player.transform.position;
         pos.y = 0.5f;
@@ -139,12 +139,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
     }
 
 
-    public void PlayerAttack()
+    public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
-        if (_currentPlayer.Attackable == false || _currentPlayer.AttackCheck == true) return;
-
-        _currentPlayer?.PlayerAttack();
+        _currentPlayer.PlayerIdle();
     }
 
     public void PlayerMove()

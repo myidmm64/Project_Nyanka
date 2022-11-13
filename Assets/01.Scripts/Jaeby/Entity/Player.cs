@@ -64,6 +64,9 @@ public class Player : Entity
     public override IEnumerator Move(Vector3Int v)
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+        CubeGrid.ViewEnd();
+        CubeGrid.ClcikViewEnd(true);
+
         _animator.SetBool("Walk", true);
         _animator.Update(0);
         Vector3 moveVec = v;
@@ -100,12 +103,22 @@ public class Player : Entity
         _pressTurnChecked = false;
     }
 
-    public void PlayerAttack()
+    public void PlayerIdle()
     {
-        _attackCheck = true;
-        if (PressTurnChecked)
-            Moveable = false;
-        StartCoroutine(Attack());
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+        CubeGrid.ViewEnd();
+        CubeGrid.ClcikViewEnd(true);
+
+        if (Attackable)
+        {
+            StartCoroutine(Attack());
+        }
+        else
+        {
+            if (_pressTurnChecked && _attackCheck)
+                ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+            TurnManager.Instance.UseTurn(1);
+        }
     }
 
     protected override void ChildSelected()
