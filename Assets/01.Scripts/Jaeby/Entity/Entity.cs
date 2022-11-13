@@ -101,18 +101,14 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     protected void ViewStart()
     {
-        //CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        //CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, GetAttackVectorByDirections(AttackDirection.Down, _dataSO.normalAttackRange), true);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
     }
 
     public void ViewData(Vector3Int index)
     {
-        //CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        //CubeGrid.ViewRange(GridType.Attack, index, _dataSO.normalAttackRange, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Down, _dataSO.normalAttackRange), true);
+        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
     }
 
     protected void ViewEnd()

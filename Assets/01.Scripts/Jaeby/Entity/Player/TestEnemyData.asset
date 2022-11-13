@@ -10,31 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa14f31488e0f20408b4369d87f3c6bc, type: 3}
-  m_Name: Data0
+  m_Name: TestEnemyData
   m_EditorClassIdentifier: 
   normalAtk: 1
-  transAtk: 2
   normalDef: 0
-  transDef: 1
-  hp: 10
-  elementType: 2
+  hp: 20
+  elementType: 1
   normalAttackRange:
-  - {x: -1, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
-  - {x: 1, y: 0, z: 1}
-  - {x: -1, y: 0, z: 2}
-  - {x: 0, y: 0, z: 2}
-  - {x: 1, y: 0, z: 2}
-  transAttackRange:
-  - {x: 0, y: 0, z: 2}
-  normalMoveRange:
-  - {x: 1, y: 0, z: 0}
-  - {x: 2, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
-  - {x: -2, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -2}
-  transMoveRange:
+  normalMoveRange:
+  - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}

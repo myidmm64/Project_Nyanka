@@ -25,6 +25,10 @@ public class Player : Entity
         }
     }
 
+    [SerializeField]
+    private AttackDirectionObject _attackDirectionObj = null;
+    private List<AttackDirectionObject> _attackDirections = new List<AttackDirectionObject>();
+
     private bool _attackCheck = false; // 어택을 했는가요?
     public bool AttackCheck { get => _attackCheck; set => _attackCheck = value; }
 
@@ -98,6 +102,14 @@ public class Player : Entity
         TurnManager.Instance.PressTurnCheck(this);
     }
 
+    public void PlayerAttack()
+    {
+        for (int i = 0; i < _attackDirections.Count; i++)
+            Destroy(_attackDirections[i].gameObject);
+        CubeGrid.ViewEnd();
+        StartCoroutine(Attack());
+    }
+
     public override void PhaseChanged(bool val)
     {
         _pressTurnChecked = false;
@@ -117,6 +129,7 @@ public class Player : Entity
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
             UIManager.Instance.UISetting(this);
+            ViewAttackDirection();
         }
         else
         {
@@ -124,6 +137,24 @@ public class Player : Entity
                 ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
             TurnManager.Instance.UseTurn(1);
         }
+    }
+
+    private void ViewAttackDirection()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            AttackDirectionObject ob = Instantiate(_attackDirectionObj);
+            ob.Initailize((AttackDirection)i, this);
+            ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
+            _attackDirections.Add(ob);
+        }
+    }
+
+    public void ViewAttackRange(AttackDirection dir)
+    {
+        Vector3Int index = CellIndex;
+        CubeGrid.ViewEnd();
+        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, _dataSO.normalAttackRange), true);
     }
 
     protected override void ChildSelected()
@@ -140,9 +171,11 @@ public class Player : Entity
 
     public void PreparationCellSelect(Vector3Int index)
     {
-        if(_attackCheck)
+        if (_attackCheck)
         {
-            StartCoroutine(Attack());
+
+            //_attackCheck = false;
+            //StartCoroutine(Attack());
         }
         else
         {
@@ -170,4 +203,28 @@ public class Player : Entity
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
     }
+
+    private Vector3Int GetAttackDirection(AttackDirection dir)
+    {
+        Vector3Int v = Vector3Int.zero;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                v = new Vector3Int(0, 0, 1);
+                break;
+            case AttackDirection.Right:
+                v = new Vector3Int(1, 0, 0);
+                break;
+            case AttackDirection.Left:
+                v = new Vector3Int(-1, 0, 0);
+                break;
+            case AttackDirection.Down:
+                v = new Vector3Int(0, 0, -1);
+                break;
+            default:
+                break;
+        }
+        return v;
+    }
+
 }
