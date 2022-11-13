@@ -8,15 +8,21 @@ namespace BehaviorTree
     {
         private Node _root = null;
 
-        protected void Start()
+        public Vector3Int target;
+
+        protected virtual void Start()
         {
             _root = SetupTree();
         }
 
-        private void Update()
+        public IEnumerator StartAI()
         {
             if (_root != null)
-                _root.Evaluate();
+            {
+                NodeState nodeState = _root.Evaluate();
+                if (nodeState == NodeState.SUCCESS|| nodeState == NodeState.FAILURE)
+                    yield return new WaitForSeconds(2f);
+            }
         }
 
         protected abstract Node SetupTree();

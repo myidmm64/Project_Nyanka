@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    private List<Cell> GetMoveList()
+    public List<Cell> GetMoveList()
     {
         return CellUtility.SearchCells(CellIndex, _moveRange, false);
     }
 
-    private List<Cell> GetAttackList()
+    public List<Cell> GetAttackList()
     {
         return CellUtility.SearchCells(CellIndex, _attackRange, true);
     }
@@ -22,6 +22,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         _entityType = EntityType.Enemy;
+        PosManager.Instance.monsterInfo.Add(this);
         base.Start();
     }
 
@@ -36,6 +37,13 @@ public class Enemy : Entity
         //else
             yield return StartCoroutine(Move(CellIndex + Vector3Int.back));
     }
+
+    //임시 테스트용
+    public void Test()
+    {
+        StartCoroutine(EnemyAction());
+    }
+
 
     public override IEnumerator Attack()
     {

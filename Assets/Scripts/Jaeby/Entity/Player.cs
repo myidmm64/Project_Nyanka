@@ -38,6 +38,7 @@ public class Player : Entity, ISelectable
     protected override void Start()
     {
         _entityType = EntityType.Player;
+        PosManager.Instance.playerInfo.Add(this);
         base.Start();
     }
 

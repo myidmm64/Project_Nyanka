@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -87,22 +87,22 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         OnNextPhase?.Invoke(false);
 
-        //StartCoroutine(EnemysTurn());
+        StartCoroutine(EnemysTurn());
     }
 
-    /*private IEnumerator EnemysTurn()
+    private IEnumerator EnemysTurn()
     {
         List<Enemy> liveEnemys = _enemys.FindAll(v => v.IsLived);
+
         for (int i = 0; i < liveEnemys.Count; i++)
         {
-            yield return StartCoroutine(liveEnemys[i].EnemyAction());
+            yield return StartCoroutine(liveEnemys[i].GetComponent<WarriorAIBT>().StartAI());
         }
         NextTurn();
-    }*/
+    }
 
     private void NextTurn()
     {
-        Debug.Log("¥Ÿ¿Ω ≈œ");
         PlayerTurnCount = GetLiveCount(_players);
         _turn++;
         OnNextTurn?.Invoke(_turn);

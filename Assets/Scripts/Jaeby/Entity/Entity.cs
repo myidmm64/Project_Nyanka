@@ -51,7 +51,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     private bool _isTransed = false; // 변신이 되었는가
 
-    protected NavMeshAgent _agent = null; // 네브메시
+    public NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?
