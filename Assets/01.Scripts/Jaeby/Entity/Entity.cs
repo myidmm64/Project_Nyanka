@@ -101,14 +101,18 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     protected void ViewStart()
     {
+        //CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
+        //CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, _dataSO.normalAttackRange, true);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, GetAttackVectorByDirections(AttackDirection.Down, _dataSO.normalAttackRange), true);
     }
 
     public void ViewData(Vector3Int index)
     {
+        //CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
+        //CubeGrid.ViewRange(GridType.Attack, index, _dataSO.normalAttackRange, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, _dataSO.normalAttackRange, true);
+        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Down, _dataSO.normalAttackRange), true);
     }
 
     protected void ViewEnd()
@@ -193,10 +197,32 @@ public abstract class Entity : MonoBehaviour, ISelectable
         }
     }
 
-    public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir)
+    public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
     {
         List<Vector3Int> vecList = new List<Vector3Int>();
-        Vector3Int[] vecArr = null;
+        float rot = 0f;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                rot = 0f;
+                break;
+            case AttackDirection.Right:
+                rot = 90f;
+                break;
+            case AttackDirection.Left:
+                rot = 270f;
+                break;
+            case AttackDirection.Down:
+                rot = 180f;
+                break;
+            default:
+                break;
+        }
+        for (int i = 0; i < indexes.Count; i++)
+        {
+            Vector3 v = Quaternion.AngleAxis(rot, transform.up) * indexes[i];
+            vecList.Add(Vector3Int.RoundToInt(v));
+        }
         return vecList;
     }
 }

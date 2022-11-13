@@ -87,7 +87,7 @@ public class CellUtility
         return false;
     }
 
-    private static Vector3Int Norm(Vector3Int v)
+    public static Vector3Int Norm(Vector3Int v)
     {
         v.Clamp(Vector3Int.one * -1, Vector3Int.one);
         return v;
