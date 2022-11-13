@@ -145,11 +145,17 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer.PlayerIdle();
     }
 
+    public void PlayerAttack()
+    {
+        if (_currentPlayer == null) return;
+        _currentPlayer.AttackCheck = true;
+        ClickModeSet(LeftClickMode.JustCell, true);
+    }
+
     public void PlayerMove()
     {
         if (_currentPlayer == null) return;
         if (_currentPlayer.Moveable == false) return;
-        //ClickModeSet(LeftClickMode.JustCell, true);
         _currentPlayer.TryMove(_selectCellIndex);
     }
 

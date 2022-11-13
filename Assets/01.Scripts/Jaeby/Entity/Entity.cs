@@ -192,4 +192,11 @@ public abstract class Entity : MonoBehaviour, ISelectable
             Died();
         }
     }
+
+    public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir)
+    {
+        List<Vector3Int> vecList = new List<Vector3Int>();
+        Vector3Int[] vecArr = null;
+        return vecList;
+    }
 }

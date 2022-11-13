@@ -51,6 +51,9 @@ namespace MapTileGridCreator.Core
         [SerializeField]
         private GameObject _skillObj = null;
         [SerializeField]
+        private GameObject _attackAndSkillObj = null;
+
+        [SerializeField]
         private GameObject _clickObj = null;
         private GameObject _clickedObj = null;
         [SerializeField]
@@ -81,6 +84,11 @@ namespace MapTileGridCreator.Core
                 _objList.Add(obj);
                 obj.transform.position = c[i].GetIndex() + Vector3.up * 0.6f;
             }
+        }
+
+        public void ViewListAdd(GameObject obj)
+        {
+            _objList.Add(obj);
         }
 
         public void ViewEnd()

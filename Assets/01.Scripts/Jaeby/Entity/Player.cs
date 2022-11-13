@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
+[System.Serializable]
+public enum AttackDirection
+{
+    Up,
+    Right,
+    Left,
+    Down
+}
+
 public class Player : Entity
 {
     private int _attackCount = 0;
@@ -17,7 +26,7 @@ public class Player : Entity
     }
 
     private bool _attackCheck = false; // 어택을 했는가요?
-    public bool AttackCheck => _attackCheck;
+    public bool AttackCheck { get => _attackCheck; set => _attackCheck = value; }
 
     private bool _moveable = true;
     public bool Moveable
@@ -79,16 +88,7 @@ public class Player : Entity
         _animator.SetBool("Walk", false);
         _moveable = false;
 
-        if (Attackable)
-        {
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            if (_pressTurnChecked && _attackCheck)
-                ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-            TurnManager.Instance.UseTurn(1);
-        }
+        TryAttack();
     }
 
     public override IEnumerator Attack()
@@ -108,10 +108,15 @@ public class Player : Entity
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd(true);
+        TryAttack();
+    }
 
+    private void TryAttack()
+    {
         if (Attackable)
         {
-            StartCoroutine(Attack());
+            ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+            UIManager.Instance.UISetting(this);
         }
         else
         {
@@ -124,23 +129,32 @@ public class Player : Entity
     protected override void ChildSelected()
     {
         CubeGrid.ClcikViewEnd(false);
+        //UIManager.Instance.UISetting(this);
     }
 
     protected override void ChildSelectEnd()
     {
         CubeGrid.ClcikViewEnd(true);
+        //UIManager.Instance.UISetting(this);
     }
 
     public void PreparationCellSelect(Vector3Int index)
     {
-        if(GetMoveableCheck(index))
+        if(_attackCheck)
         {
-            CubeGrid.ViewEnd();
-            ViewData(index);
+            StartCoroutine(Attack());
         }
-        else if (index == CellIndex)
+        else
         {
-            ViewDataByCellIndex();
+            if (GetMoveableCheck(index))
+            {
+                CubeGrid.ViewEnd();
+                ViewData(index);
+            }
+            else if (index == CellIndex)
+            {
+                ViewDataByCellIndex();
+            }
         }
     }
 
