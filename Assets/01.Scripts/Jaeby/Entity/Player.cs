@@ -47,6 +47,9 @@ public class Player : Entity
     }
 
     private bool _myTurnEnded = false;
+
+    [SerializeField]
+    private Transform _modelController = null;
     #endregion
 
     protected override void Start()
@@ -114,6 +117,7 @@ public class Player : Entity
         _animator.Update(0);
         Vector3 moveVec = v;
         moveVec.y = transform.position.y;
+        _modelController.transform.LookAt(moveVec);
         _agent.SetDestination(moveVec);
         yield return new WaitUntil(() =>
             Vector3.Distance(transform.position, _agent.destination) <= _agent.stoppingDistance

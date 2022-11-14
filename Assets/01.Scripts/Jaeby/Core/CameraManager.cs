@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class CameraManager : MonoBehaviour
 {
@@ -35,6 +36,42 @@ public class CameraManager : MonoBehaviour
 
         _originLens = _cmVCam.m_Lens.FieldOfView;
     }
+
+    public void CameraSelect(CinemachineVirtualCamera cam)
+    {
+        CinemachineVirtualCamera[] cams = new CinemachineVirtualCamera[3];
+        cams[0] = VCamOne;
+        cams[1] = VCamTwo;
+        cams[2] = CartCam;
+        for(int i = 0; i < cams.Length; i++)
+            if (cam == cams[i])
+                cams[i].gameObject.SetActive(true);
+            else
+                cams[i].gameObject.SetActive(false);
+    }
+
+    public void CartCamSelect(CinemachineSmoothPath path,  Transform follow, float speed)
+    {
+        CameraSelect(CartCam);
+        CartCam.Follow = follow;
+        CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
+        cart.m_Path = path;
+        cart.m_Position = 0f;
+        cart.m_Speed = speed;
+        cart.enabled = true;
+    }
+
+    public void CartCamReset()
+    {
+        CartCam.Follow = null;
+        CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
+        cart.m_Path = null;
+        cart.m_Position = 0f;
+        cart.m_Speed = 0f;
+        cart.enabled = false;
+        CameraSelect(VCamTwo);
+    }
+
     public void CompletePrevFeedBack()
     {
         if (_shakeCoroutine != null)

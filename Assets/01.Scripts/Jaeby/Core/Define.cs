@@ -34,6 +34,7 @@ public class Define
 
     private static CinemachineVirtualCamera _vCamOne = null;
     private static CinemachineVirtualCamera _vCamTwo = null;
+    private static CinemachineVirtualCamera _cartCam = null;
 
     public static CinemachineVirtualCamera VCamOne
     {
@@ -55,6 +56,17 @@ public class Define
                 _vCamTwo = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(1).GetComponent<CinemachineVirtualCamera>();
             }
             return _vCamTwo;
+        }
+    }
+    public static CinemachineVirtualCamera CartCam
+    {
+        get
+        {
+            if (_cartCam == null)
+            {
+                _cartCam = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(2).GetComponent<CinemachineVirtualCamera>();
+            }
+            return _cartCam;
         }
     }
 }
