@@ -102,7 +102,7 @@ public class Player : Entity
         TurnManager.Instance.PressTurnCheck(this);
     }
 
-    public void PlayerAttack()
+    public void PlayerAttack(AttackDirection dir)
     {
         CubeGrid.ViewEnd();
         for (int i = 0; i < _attackDirections.Count; i++)

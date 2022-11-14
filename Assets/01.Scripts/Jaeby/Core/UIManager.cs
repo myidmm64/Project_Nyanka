@@ -17,11 +17,16 @@ public class UIManager : MonoSingleTon<UIManager>
     private GameObject _skillButton = null;
     [SerializeField]
     private CanvasGroup _canvasGroup = null;
-    
+
+    private void Start()
+    {
+        UIReset();
+    }
+
     public void UIInit(Player player)
     {
         UIReset();
-        //_playerImage.sprite = player.DataSO.sprite;
+        _playerImage.sprite = player.DataSO.sprite;
         //스킬 체크
         UIEnable();
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Entity/Data")]
 public class EntityDataSO : ScriptableObject
 {
+    public Sprite sprite = null;
     public int normalAtk = 1;
     public int normalDef = 0;
     public int hp = 0;

@@ -20,6 +20,6 @@ public class AttackDirectionObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _player.PlayerAttack();
+        _player.PlayerAttack(_dir);
     }
 }
