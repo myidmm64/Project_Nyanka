@@ -26,6 +26,7 @@ public enum ElementType
 
 public abstract class Entity : MonoBehaviour, ISelectable
 {
+    #region 변수
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
     [SerializeField]
@@ -73,14 +74,44 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     private bool _selectedFlag = false;
     public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
+    #endregion
 
     protected virtual void Start()
     {
         _hp = _dataSO.hp;
         _agent = GetComponent<NavMeshAgent>();
     }
-
+    /// <summary>
+    /// 자신의 페이즈가 끝났을 때 실행, val이 true면 플레이어의 턴으로 변경
+    /// </summary>
+    /// <param name="val"></param>
+    public abstract void PhaseChanged(bool val);
+    public abstract void Targeted();
+    public abstract void TargetEnd();
+    protected abstract void ChildSelected();
+    protected abstract void ChildSelectEnd();
     public abstract IEnumerator Move(Vector3Int v);
+
+
+    public void Selected()
+    {
+        Debug.Log("셀렉트");
+        VCamOne.Follow = transform;
+        VCamOne.gameObject.SetActive(true);
+        VCamTwo.gameObject.SetActive(false);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        ChildSelected();
+    }
+
+    public void SelectEnd()
+    {
+        Debug.Log("셀렉트 엔드");
+        VCamOne.Follow = null;
+        VCamTwo.gameObject.SetActive(true);
+        VCamOne.gameObject.SetActive(false);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        ChildSelectEnd();
+    }
 
     public virtual IEnumerator Attack()
     {
@@ -116,52 +147,6 @@ public abstract class Entity : MonoBehaviour, ISelectable
         CubeGrid.ViewEnd();
     }
 
-    private void OnMouseEnter()
-    {
-        Targeted();
-    }
-
-    private void OnMouseExit()
-    {
-        TargetEnd();
-    }
-
-    /// <summary>
-    /// 자신의 페이즈가 끝났을 때 실행, val이 true면 플레이어의 턴으로 변경
-    /// </summary>
-    /// <param name="val"></param>
-    public abstract void PhaseChanged(bool val);
-
-    public abstract void Targeted();
-
-    public abstract void TargetEnd();
-
-    public void Selected()
-    {
-        Debug.Log("셀렉트");
-        VCamOne.Follow = transform;
-        VCamOne.gameObject.SetActive(true);
-        VCamTwo.gameObject.SetActive(false);
-        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
-        ChildSelected();
-
-        ViewStart();
-    }
-
-    public void SelectEnd()
-    {
-        Debug.Log("셀렉트 엔드");
-        VCamOne.Follow = null;
-        VCamTwo.gameObject.SetActive(true);
-        VCamOne.gameObject.SetActive(false);
-        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-        ChildSelectEnd();
-
-        ViewEnd();
-    }
-
-    protected abstract void ChildSelected();
-    protected abstract void ChildSelectEnd();
 
     public void Died()
     {
@@ -220,5 +205,15 @@ public abstract class Entity : MonoBehaviour, ISelectable
             vecList.Add(Vector3Int.RoundToInt(v));
         }
         return vecList;
+    }
+
+    private void OnMouseEnter()
+    {
+        Targeted();
+    }
+
+    private void OnMouseExit()
+    {
+        TargetEnd();
     }
 }

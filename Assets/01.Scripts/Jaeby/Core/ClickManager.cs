@@ -135,7 +135,13 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _selectable = null;
         VCamOne.gameObject.SetActive(false);
         VCamTwo.gameObject.SetActive(true);
-        UnSelect();
+
+        if (_selectable != null)
+        {
+            _selectable.SelectEnd();
+            _selectable = null;
+        }
+        _currentPlayer = null;
     }
 
 

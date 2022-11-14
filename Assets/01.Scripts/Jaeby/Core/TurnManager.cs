@@ -65,9 +65,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         for (int i = 0; i < _entitys.Count; i++)
             OnNextPhase.AddListener(_entitys[i].PhaseChanged);
-        PlayerTurnCount = GetLiveCount(_players);
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
+        PlayerTurnCount = GetLiveCount(_players);
     }
 
     private void NewTurnReset()
@@ -76,11 +76,14 @@ public class TurnManager : MonoSingleTon<TurnManager>
         _loseTurn = false;
     }
 
-    public void UseTurn(int count)
+    public void UseTurn(int count, Player player)
     {
         PlayerTurnCount -= count;
         if (PlayerTurnCount <= 0)
             EnemyPhase();
+        player.MyTurnEnd();
+        UIManager.Instance.UIDisable();
+        ClickManager.Instance.ClickManagerReset();
     }
 
     public void EnemyPhase()
@@ -107,7 +110,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         OnNextTurn?.Invoke(_turn);
         List<Player> livePlayers = _players.FindAll(v => v.IsLived);
         for (int i = 0; i < livePlayers.Count; i++)
-            livePlayers[i].PhaseReset();
+            livePlayers[i].PlayerTurnStart();
         OnNextPhase?.Invoke(true);
         NewTurnReset();
     }
@@ -151,7 +154,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         if (player.PressTurnChecked)
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-            UseTurn(1);
+            UseTurn(1, player);
             return;
         }
         if (_plusTurn)
@@ -171,7 +174,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
             EnemyPhase();
             return;
         }
-        UseTurn(1);
+        UseTurn(1, player);
     }
 
     public void LoseTurnCheck()

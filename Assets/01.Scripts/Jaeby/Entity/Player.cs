@@ -15,6 +15,7 @@ public enum AttackDirection
 
 public class Player : Entity
 {
+    #region 변수
     private int _attackCount = 0;
 
     public bool Attackable
@@ -45,17 +46,33 @@ public class Player : Entity
         set => _pressTurnChecked = value;
     }
 
+    private bool _myTurnEnded = false;
+    #endregion
+
     protected override void Start()
     {
         _entityType = EntityType.Player;
         base.Start();
     }
 
-    public void PhaseReset()
+    public void PlayerTurnStart() // 플레이어 턴이 시작되었을 때
     {
         _moveable = true;
         _attackCheck = false;
         _attackCount = 0;
+        _myTurnEnded = false;
+        _pressTurnChecked = false;
+    }
+
+    public void MyTurnEnd() // 자신의 행동이 끝났을 때
+    {
+        GetComponent<Collider>().enabled = false;
+        _myTurnEnded = true;
+    }
+
+    public override void PhaseChanged(bool val) // 페이즈가 바뀌었을 때
+    {
+        GetComponent<Collider>().enabled = true;
     }
 
     public override void Targeted() // MouseEnter
@@ -68,13 +85,30 @@ public class Player : Entity
         if (SelectedFlag) return;
     }
 
-    public void TryMove(Vector3Int v)
+    protected override void ChildSelected()
+    {
+        CubeGrid.ClcikViewEnd(false);
+        UIManager.Instance.UIInit(this);
+        GetComponent<Collider>().enabled = false;
+    }
+
+    protected override void ChildSelectEnd()
+    {
+        CubeGrid.ClcikViewEnd(true);
+        UIManager.Instance.UIDisable();
+
+        if (_myTurnEnded == false)
+            GetComponent<Collider>().enabled = true;
+    }
+
+    public void TryMove(Vector3Int v) // 이동 시도
     {
         if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) return;
+        _moveable = false;
         StartCoroutine(Move(v));
     }
 
-    public override IEnumerator Move(Vector3Int v)
+    public override IEnumerator Move(Vector3Int v) // 이동
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
@@ -90,19 +124,18 @@ public class Player : Entity
             );
         CellIndex = v;
         _animator.SetBool("Walk", false);
-        _moveable = false;
 
         TryAttack();
     }
 
-    public override IEnumerator Attack()
+    public override IEnumerator Attack() // 절대 공격
     {
         yield return StartCoroutine(base.Attack());
         _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
     }
 
-    public void PlayerAttack(AttackDirection dir)
+    public void PlayerAttack(AttackDirection dir) // 플레이어 공격으로
     {
         CubeGrid.ViewEnd();
         for (int i = 0; i < _attackDirections.Count; i++)
@@ -111,20 +144,7 @@ public class Player : Entity
         StartCoroutine(Attack());
     }
 
-    public override void PhaseChanged(bool val)
-    {
-        _pressTurnChecked = false;
-    }
-
-    public void PlayerIdle()
-    {
-        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-        CubeGrid.ViewEnd();
-        CubeGrid.ClcikViewEnd(true);
-        TryAttack();
-    }
-
-    private void TryAttack()
+    private void TryAttack() // 행동 후 공격, 행동 종료 선택
     {
         UIManager.Instance.UISetting(this);
         if (Attackable)
@@ -137,11 +157,11 @@ public class Player : Entity
         {
             if (_pressTurnChecked && _attackCheck)
                 ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-            TurnManager.Instance.UseTurn(1);
+            TurnManager.Instance.UseTurn(1, this);
         }
     }
 
-    private void ViewAttackDirection()
+    private void ViewAttackDirection() // 방향 오브젝트 
     {
         for (int i = 0; i < 4; i++)
         {
@@ -152,24 +172,21 @@ public class Player : Entity
         }
     }
 
-    public void ViewAttackRange(AttackDirection dir)
+    public void ViewAttackRange(AttackDirection dir) // 공격범위 보여주기
     {
         Vector3Int index = CellIndex;
         CubeGrid.ViewEnd();
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, _dataSO.normalAttackRange), true);
     }
 
-    protected override void ChildSelected()
+    public void PlayerIdle() // 대기
     {
-        CubeGrid.ClcikViewEnd(false);
-        UIManager.Instance.UIInit(this);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+        CubeGrid.ViewEnd();
+        CubeGrid.ClcikViewEnd(true);
+        TryAttack();
     }
 
-    protected override void ChildSelectEnd()
-    {
-        CubeGrid.ClcikViewEnd(true);
-        UIManager.Instance.UIDisable();
-    }
 
     public void PreparationCellSelect(Vector3Int index)
     {
