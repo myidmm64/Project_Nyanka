@@ -161,7 +161,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void PlayerMove()
     {
         if (_currentPlayer == null) return;
-        if (_currentPlayer.Moveable == false) return;
         _currentPlayer.TryMove(_selectCellIndex);
     }
 

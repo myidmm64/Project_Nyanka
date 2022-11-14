@@ -12050,6 +12050,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grid_index: {x: -2, y: 0, z: -1}
+--- !u!195 &656898278 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 5399610196820296540, guid: 1fd2db5beb5f859439c7210a01f7e483,
+    type: 3}
+  m_PrefabInstance: {fileID: 1654607198178636112}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &659490274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33791,7 +33797,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 1986203768}
-  _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
+  _dataSO: {fileID: 11400000, guid: 1b8d674ab1731e94d827ab4f5f91ac3b, type: 2}
+  _agent: {fileID: 1986203766}
   _attackDirectionObj: {fileID: -6348480140593270851, guid: b2fd24a4f2e230f4cbaa018a1e519efc,
     type: 3}
 --- !u!95 &1986203768
@@ -37105,6 +37112,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5399610196820296512, guid: 1fd2db5beb5f859439c7210a01f7e483,
+        type: 3}
+      propertyPath: _agent
+      value: 
+      objectReference: {fileID: 656898278}
     - target: {fileID: 5577142581058364592, guid: 1fd2db5beb5f859439c7210a01f7e483,
         type: 3}
       propertyPath: m_RootOrder
@@ -38207,6 +38219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5866666020171705611}
   _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
+  _agent: {fileID: 1878053021}
   _attackDirectionObj: {fileID: -6348480140593270851, guid: b2fd24a4f2e230f4cbaa018a1e519efc,
     type: 3}
 --- !u!4 &6002505820139546085

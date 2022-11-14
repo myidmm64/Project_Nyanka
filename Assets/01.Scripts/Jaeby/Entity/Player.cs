@@ -52,6 +52,7 @@ public class Player : Entity
     protected override void Start()
     {
         _entityType = EntityType.Player;
+        _agent.updateRotation = false;
         base.Start();
     }
 
@@ -66,13 +67,11 @@ public class Player : Entity
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
     {
-        GetComponent<Collider>().enabled = false;
         _myTurnEnded = true;
     }
 
     public override void PhaseChanged(bool val) // 페이즈가 바뀌었을 때
     {
-        GetComponent<Collider>().enabled = true;
     }
 
     public override void Targeted() // MouseEnter
@@ -89,20 +88,17 @@ public class Player : Entity
     {
         CubeGrid.ClcikViewEnd(false);
         UIManager.Instance.UIInit(this);
-        GetComponent<Collider>().enabled = false;
     }
 
     protected override void ChildSelectEnd()
     {
         CubeGrid.ClcikViewEnd(true);
         UIManager.Instance.UIDisable();
-
-        if (_myTurnEnded == false)
-            GetComponent<Collider>().enabled = true;
     }
 
     public void TryMove(Vector3Int v) // 이동 시도
     {
+        if (Moveable == false) return;
         if (CellUtility.CheckCell(CellIndex, v, _dataSO.normalMoveRange, false) == false) return;
         _moveable = false;
         StartCoroutine(Move(v));
@@ -181,6 +177,9 @@ public class Player : Entity
 
     public void PlayerIdle() // 대기
     {
+        if (_myTurnEnded) return;
+
+
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd(true);

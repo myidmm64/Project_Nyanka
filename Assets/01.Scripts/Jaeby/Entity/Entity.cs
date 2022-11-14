@@ -48,6 +48,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         set => _cellIndex = value;
     }
 
+    [SerializeField]
     protected NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
@@ -79,7 +80,6 @@ public abstract class Entity : MonoBehaviour, ISelectable
     protected virtual void Start()
     {
         _hp = _dataSO.hp;
-        _agent = GetComponent<NavMeshAgent>();
     }
     /// <summary>
     /// 자신의 페이즈가 끝났을 때 실행, val이 true면 플레이어의 턴으로 변경
@@ -101,6 +101,8 @@ public abstract class Entity : MonoBehaviour, ISelectable
         VCamTwo.gameObject.SetActive(false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         ChildSelected();
+
+        ViewStart();
     }
 
     public void SelectEnd()
@@ -111,6 +113,8 @@ public abstract class Entity : MonoBehaviour, ISelectable
         VCamOne.gameObject.SetActive(false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ChildSelectEnd();
+
+        ViewEnd();
     }
 
     public virtual IEnumerator Attack()

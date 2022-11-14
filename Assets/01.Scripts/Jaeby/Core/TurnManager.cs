@@ -153,7 +153,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         if (player.PressTurnChecked)
         {
-            ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
             UseTurn(1, player);
             return;
         }
@@ -168,7 +167,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         }
         if (_loseTurn)
         {
-            ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
             PlayerTurnCount = 0;
             OnLoseTurn?.Invoke();
             EnemyPhase();
