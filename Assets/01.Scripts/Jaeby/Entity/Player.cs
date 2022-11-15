@@ -107,6 +107,32 @@ public class Player : Entity
         StartCoroutine(Move(v));
     }
 
+    public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
+    {
+        CubeGrid.ViewEnd();
+        for (int i = 0; i < _attackDirections.Count; i++)
+            Destroy(_attackDirections[i]);
+        _attackDirections.Clear();
+        StartCoroutine(Attack());
+    }
+
+    private void TryAttack() // 공격 모드 돌입 시도
+    {
+        UIManager.Instance.UISetting(this);
+        if (Attackable)
+        {
+            ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+            UIManager.Instance.UISetting(this);
+            ViewAttackDirection();
+        }
+        else
+        {
+            if (_pressTurnChecked && _attackCheck)
+                ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+            TurnManager.Instance.UseTurn(1, this);
+        }
+    }
+
     public override IEnumerator Move(Vector3Int v) // 이동
     {
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
@@ -128,40 +154,14 @@ public class Player : Entity
         TryAttack();
     }
 
-    public override IEnumerator Attack() // 절대 공격
+    public override IEnumerator Attack() // 공격
     {
         yield return StartCoroutine(base.Attack());
         _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
     }
 
-    public void PlayerAttack(AttackDirection dir) // 플레이어 공격으로
-    {
-        CubeGrid.ViewEnd();
-        for (int i = 0; i < _attackDirections.Count; i++)
-            Destroy(_attackDirections[i]);
-        _attackDirections.Clear();
-        StartCoroutine(Attack());
-    }
-
-    private void TryAttack() // 행동 후 공격, 행동 종료 선택
-    {
-        UIManager.Instance.UISetting(this);
-        if (Attackable)
-        {
-            ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            UIManager.Instance.UISetting(this);
-            ViewAttackDirection();
-        }
-        else
-        {
-            if (_pressTurnChecked && _attackCheck)
-                ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-            TurnManager.Instance.UseTurn(1, this);
-        }
-    }
-
-    private void ViewAttackDirection() // 방향 오브젝트 
+    private void ViewAttackDirection() // 4방향으로 화살표 생성
     {
         for (int i = 0; i < 4; i++)
         {
@@ -175,15 +175,12 @@ public class Player : Entity
     public void ViewAttackRange(AttackDirection dir) // 공격범위 보여주기
     {
         Vector3Int index = CellIndex;
-        //CubeGrid.ViewEnd();
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, _dataSO.normalAttackRange), true);
     }
 
     public void PlayerIdle() // 대기
     {
         if (_myTurnEnded) return;
-
-
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd(true);
@@ -191,11 +188,10 @@ public class Player : Entity
     }
 
 
-    public void PreparationCellSelect(Vector3Int index)
+    public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
     {
         if (_attackCheck)
         {
-
             //_attackCheck = false;
             //StartCoroutine(Attack());
         }
@@ -213,12 +209,12 @@ public class Player : Entity
         }
     }
 
-    public bool GetMoveableCheck(Vector3Int index)
+    public bool GetMoveableCheck(Vector3Int index) // index가 무브 가능한지
     {
         return CellUtility.CheckCell(CellIndex, index, _dataSO.normalMoveRange, false);
     }
 
-    public void ViewDataByCellIndex()
+    public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
     {
         CubeGrid.ViewEnd();
         CubeGrid.ClickView(CellIndex, true);

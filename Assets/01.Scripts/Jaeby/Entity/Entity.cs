@@ -81,16 +81,13 @@ public abstract class Entity : MonoBehaviour, ISelectable
     {
         _hp = _dataSO.hp;
     }
-    /// <summary>
-    /// 자신의 페이즈가 끝났을 때 실행, val이 true면 플레이어의 턴으로 변경
-    /// </summary>
-    /// <param name="val"></param>
-    public abstract void PhaseChanged(bool val);
-    public abstract void Targeted();
-    public abstract void TargetEnd();
-    protected abstract void ChildSelected();
-    protected abstract void ChildSelectEnd();
-    public abstract IEnumerator Move(Vector3Int v);
+
+    public abstract void PhaseChanged(bool val); // 페이즈 종료되었을 때 실행
+    public abstract void Targeted(); // OnMouseEnter
+    public abstract void TargetEnd(); // OnMouseExit
+    protected abstract void ChildSelected(); // 인터페이스 구현
+    protected abstract void ChildSelectEnd(); // 인터페이스 구현
+    public abstract IEnumerator Move(Vector3Int v); // 이동 함수
 
 
     public void Selected()
@@ -136,8 +133,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     protected void ViewStart()
     {
-        CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
+        ViewData(CellIndex);
     }
 
     public void ViewData(Vector3Int index)

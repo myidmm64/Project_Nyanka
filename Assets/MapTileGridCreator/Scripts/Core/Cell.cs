@@ -59,16 +59,6 @@ namespace MapTileGridCreator.Core
             }
         }
 
-        public void Select()
-        {
-
-        }
-
-        public void UnSelect()
-        {
-
-        }
-
         /// <summary>
         /// Init the cell position, rotation and the index of the cell.
         /// Use only in inspector or grid, otherwise it can cause undesirable behaviour.
