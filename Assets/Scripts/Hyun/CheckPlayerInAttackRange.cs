@@ -19,8 +19,8 @@ public class CheckPlayerInAttackRange : Node
     {
         Debug.Log("CheckPlayerInAttackRange");
         List<Cell> attackRange = _enemy.GetAttackList();
+        
         List<Entity> players = PosManager.Instance.playerInfo;
-        //나중엔 contains로 바꾸기
         foreach(var player in players)
         {
             Vector3Int playerPos = player.CellIndex;

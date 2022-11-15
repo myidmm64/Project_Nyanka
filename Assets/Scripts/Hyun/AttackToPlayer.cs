@@ -16,6 +16,13 @@ public class AttackToPlayer : Node
     public override NodeState Evaluate()
     {
         Debug.Log("AttackToPlayer");
+        _enemy._animator.Play("Attack");
+        _enemy._animator.Update(0);
+        if (_enemy._animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            state = NodeState.RUNNING;
+            return state;
+        }
         state = NodeState.SUCCESS;
         return state;
     }

@@ -19,17 +19,19 @@ public class FindPlayer : Node
         List<Entity> players = PosManager.Instance.playerInfo;
         //나중엔 contains로 바꾸기
         float shortDis = 10000f;
+        Vector3Int shortPos = Vector3Int.zero;
         foreach (var player in players)
         {
             Vector3Int playerPos = player.CellIndex;
+            //Debug.Log(playerPos);
             float dis = Vector3Int.Distance(new Vector3Int(_enemy.CellIndex.x, 0, _enemy.CellIndex.z), playerPos);
             if (dis < shortDis)
             {
                 shortDis = dis;
-                parent.parent.SetData("target", playerPos);
+                shortPos = playerPos;
             }
         }
-        //Debug.Log((Vector3Int)GetData("target"));
+        parent.parent._target.Add(shortPos);
         state = NodeState.SUCCESS;
         return state;
     }

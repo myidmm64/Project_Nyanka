@@ -28,7 +28,7 @@ public abstract class Entity : MonoBehaviour
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
     [SerializeField]
-    protected Animator _animator = null; // 애니메이터
+    public Animator _animator = null; // 애니메이터
     [SerializeField]
     protected EntityDataSO _dataSO = null; // SO
     public EntityDataSO DataSO => _dataSO;
