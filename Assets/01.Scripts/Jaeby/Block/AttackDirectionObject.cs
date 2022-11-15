@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class AttackDirectionObject : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class AttackDirectionObject : MonoBehaviour
     private void OnMouseEnter()
     {
         _player.ViewAttackRange(_dir);
+    }
+
+    private void OnMouseExit()
+    {
+        CubeGrid.ViewEnd();
     }
 
     private void OnMouseDown()

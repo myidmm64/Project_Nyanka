@@ -175,7 +175,7 @@ public class Player : Entity
     public void ViewAttackRange(AttackDirection dir) // 공격범위 보여주기
     {
         Vector3Int index = CellIndex;
-        CubeGrid.ViewEnd();
+        //CubeGrid.ViewEnd();
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, _dataSO.normalAttackRange), true);
     }
 
