@@ -29,8 +29,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
     #region 변수
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
-    [SerializeField]
-    protected Animator _animator = null; // 애니메이터
+    public Animator _animator = null; // 애니메이터
     [SerializeField]
     protected EntityDataSO _dataSO = null; // SO
     public EntityDataSO DataSO => _dataSO;
@@ -48,8 +47,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         set => _cellIndex = value;
     }
 
-    [SerializeField]
-    protected NavMeshAgent _agent = null; // 네브메시
+    public NavMeshAgent _agent = null; // 네브메시
 
     protected int _hp = 0; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?

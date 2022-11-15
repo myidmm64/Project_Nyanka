@@ -55,6 +55,7 @@ public class Player : Entity
     protected override void Start()
     {
         _entityType = EntityType.Player;
+        PosManager.Instance.playerInfo.Add(this);
         _agent.updateRotation = false;
         base.Start();
     }
