@@ -92,7 +92,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         CubeGrid.ClickView(_selectCellIndex, false);
     }
 
-    private void UnSelect()
+    public void UnSelect()
     {
         if (_rightClickLock) return;
         if (Input.GetMouseButtonDown(1))
@@ -125,7 +125,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     public void ClickManagerReset()
     {
-        ClickModeSet(LeftClickMode.AllClick, false);
+        //ClickModeSet(LeftClickMode.AllClick, false);
         if (_currentPlayer != null)
         {
             _currentPlayer.SelectEnd();

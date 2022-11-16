@@ -52,6 +52,8 @@ public class Player : Entity
     private Transform _modelController = null;
     #endregion
 
+    private AttackDirection _currentDirection = AttackDirection.Up;
+
     protected override void Start()
     {
         _entityType = EntityType.Player;
@@ -71,6 +73,7 @@ public class Player : Entity
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
     {
+        _currentDirection = AttackDirection.Up;
         _myTurnEnded = true;
     }
 
@@ -114,6 +117,8 @@ public class Player : Entity
         for (int i = 0; i < _attackDirections.Count; i++)
             Destroy(_attackDirections[i]);
         _attackDirections.Clear();
+        _modelController.LookAt(CellIndex + GetAttackDirection(dir));
+        _currentDirection = dir;
         StartCoroutine(Attack());
     }
 
@@ -157,7 +162,13 @@ public class Player : Entity
 
     public override IEnumerator Attack() // 공격
     {
-        yield return StartCoroutine(base.Attack());
+        List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections(_currentDirection, _dataSO.normalAttackRange), true);
+        if (cells.Count == 0) yield break;
+        _animator.Play("Attack");
+        _animator.Update(0);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
+        if (cells.Count > 0 && _entityType == EntityType.Player)
+            TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1); // 공격 성공
         _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
     }
@@ -166,9 +177,37 @@ public class Player : Entity
     {
         for (int i = 0; i < 4; i++)
         {
+            List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, _dataSO.normalAttackRange), true);
+            bool enemyCheck = false;
+            for (int j = 0; j < cells.Count; j++)
+                if(cells[j].GetObj?.GetComponent<Enemy>() != null)
+                {
+                    enemyCheck = true;
+                    break;
+                }
+            if (enemyCheck == false) 
+                continue;
             AttackDirectionObject ob = Instantiate(_attackDirectionObj);
             ob.Initailize((AttackDirection)i, this);
             ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
+            float angle = 0f;
+            switch ((AttackDirection)i)
+            {
+                case AttackDirection.Up:
+                    break;
+                case AttackDirection.Right:
+                    angle = 270f;
+                    break;
+                case AttackDirection.Left:
+                    angle = 90f;
+                    break;
+                case AttackDirection.Down:
+                    angle = 180f;
+                    break;
+                default:
+                    break;
+            }
+            ob.transform.rotation = ob.transform.rotation * Quaternion.AngleAxis(angle, Vector3.forward);
             _attackDirections.Add(ob.gameObject);
         }
     }
@@ -246,4 +285,8 @@ public class Player : Entity
         return v;
     }
 
+    public virtual void AttackAnimationEvent()
+    {
+
+    }
 }

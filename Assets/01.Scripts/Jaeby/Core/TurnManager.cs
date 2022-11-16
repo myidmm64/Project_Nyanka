@@ -95,6 +95,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private IEnumerator EnemysTurn()
     {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         List<Enemy> liveEnemys = _enemys.FindAll(v => v.IsLived);
 
         for (int i = 0; i < liveEnemys.Count; i++)
@@ -102,6 +103,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
             yield return StartCoroutine(liveEnemys[i].GetComponent<WarriorAIBT>().StartAI());
         }
         NextTurn();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }
 
     private void NextTurn()
