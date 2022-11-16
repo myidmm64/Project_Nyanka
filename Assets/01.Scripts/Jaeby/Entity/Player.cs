@@ -49,10 +49,10 @@ public class Player : Entity
     private bool _myTurnEnded = false;
 
     [SerializeField]
-    private Transform _modelController = null;
+    protected Transform _modelController = null;
     #endregion
 
-    private AttackDirection _currentDirection = AttackDirection.Up;
+    protected AttackDirection _currentDirection = AttackDirection.Up;
 
     protected override void Start()
     {
@@ -117,7 +117,10 @@ public class Player : Entity
         for (int i = 0; i < _attackDirections.Count; i++)
             Destroy(_attackDirections[i]);
         _attackDirections.Clear();
-        _modelController.LookAt(CellIndex + GetAttackDirection(dir));
+
+        Vector3 look = CellIndex + GetAttackDirection(dir);
+        look.y = transform.position.y;
+        _modelController.LookAt(look);
         _currentDirection = dir;
         StartCoroutine(Attack());
     }
@@ -162,13 +165,16 @@ public class Player : Entity
 
     public override IEnumerator Attack() // 공격
     {
-        List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections(_currentDirection, _dataSO.normalAttackRange), true);
-        if (cells.Count == 0) yield break;
+        AttackStarted();
         _animator.Play("Attack");
         _animator.Update(0);
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
-        if (cells.Count > 0 && _entityType == EntityType.Player)
-            TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1); // 공격 성공
+        yield break;
+    }
+
+    public virtual void AttackEnd()
+    {
+        Debug.Log("Attack End !!");
+        TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1); // 공격 성공
         _attackCount++;
         TurnManager.Instance.PressTurnCheck(this);
     }
@@ -285,7 +291,12 @@ public class Player : Entity
         return v;
     }
 
-    public virtual void AttackAnimationEvent()
+    public virtual void AttackStarted()
+    {
+
+    }
+
+    public virtual void AttackAnimation(int id)
     {
 
     }

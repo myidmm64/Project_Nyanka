@@ -20,7 +20,7 @@ public class UIManager : MonoSingleTon<UIManager>
 
     private void Start()
     {
-        UIReset();
+        UIDisable();
     }
 
     public void UIInit(Player player)

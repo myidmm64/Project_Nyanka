@@ -4,15 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoSingleTon<CameraManager>
 {
-    [SerializeField]
-    private static CinemachineVirtualCamera _cmVCam = null;
-
-    private CinemachineBasicMultiChannelPerlin _noise = null;
-
-    public static CameraManager instance = null;
-
     private float _originLens = 0f;
 
     private Coroutine _zoomCoroutine = null;
@@ -20,40 +13,36 @@ public class CameraManager : MonoBehaviour
 
     private float _currentShakeAmount = 0f;
 
-    private void OnEnable()
+    private CinemachineVirtualCamera _currentCam = null;
+    private CinemachineBasicMultiChannelPerlin _currentNoise = null;
+
+    private List<CinemachineVirtualCamera> cams = new List<CinemachineVirtualCamera>();
+
+    private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
-        if (_cmVCam == null)
-        {
-            _cmVCam = FindObjectOfType<CinemachineVirtualCamera>();
-        }
-
-        _noise = _cmVCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
-        _originLens = _cmVCam.m_Lens.FieldOfView;
+        cams.AddRange(GetComponentsInChildren<CinemachineVirtualCamera>());
+        _originLens = FindObjectOfType<CinemachineVirtualCamera>().m_Lens.FieldOfView;
+        CameraSelect(VCamTwo);
     }
 
     public void CameraSelect(CinemachineVirtualCamera cam)
     {
-        CinemachineVirtualCamera[] cams = new CinemachineVirtualCamera[3];
-        cams[0] = VCamOne;
-        cams[1] = VCamTwo;
-        cams[2] = CartCam;
-        for(int i = 0; i < cams.Length; i++)
+        CartCamReset();
+        for(int i = 0; i < cams.Count; i++)
             if (cam == cams[i])
+            {
                 cams[i].gameObject.SetActive(true);
+                _currentCam = cams[i];
+                _currentNoise = cams[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            }
             else
                 cams[i].gameObject.SetActive(false);
     }
 
-    public void CartCamSelect(CinemachineSmoothPath path,  Transform follow, float speed)
+    public void CartCamSelect(CinemachineSmoothPath path,  Transform look, float speed)
     {
         CameraSelect(CartCam);
-        CartCam.Follow = follow;
+        CartCam.LookAt = look;
         CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
         cart.m_Path = path;
         cart.m_Position = 0f;
@@ -69,7 +58,6 @@ public class CameraManager : MonoBehaviour
         cart.m_Position = 0f;
         cart.m_Speed = 0f;
         cart.enabled = false;
-        CameraSelect(VCamTwo);
     }
 
     public void CompletePrevFeedBack()
@@ -79,8 +67,8 @@ public class CameraManager : MonoBehaviour
             StopCoroutine(_shakeCoroutine);
         }
 
-        _noise.m_FrequencyGain = 0; // Èçµå´Â ºóµµ Á¤µµ
-        _noise.m_AmplitudeGain = 0;
+        _currentNoise.m_FrequencyGain = 0; // Èçµå´Â ºóµµ Á¤µµ
+        _currentNoise.m_AmplitudeGain = 0;
         _currentShakeAmount = 0f;
     }
 
@@ -98,10 +86,10 @@ public class CameraManager : MonoBehaviour
         }
         CompletePrevFeedBack();
 
-        _noise.m_AmplitudeGain = amplitude; // Èçµé¸®´Â Á¤µµ
-        _noise.m_FrequencyGain = intensity; // Èçµå´Â ºóµµ Á¤µµ
+        _currentNoise.m_AmplitudeGain = amplitude; // Èçµé¸®´Â Á¤µµ
+        _currentNoise.m_FrequencyGain = intensity; // Èçµå´Â ºóµµ Á¤µµ
 
-        _currentShakeAmount = _noise.m_AmplitudeGain;
+        _currentShakeAmount = _currentNoise.m_AmplitudeGain;
 
         _shakeCoroutine = StartCoroutine(ShakeCorutine(amplitude, duration, conti));
     }
@@ -112,9 +100,9 @@ public class CameraManager : MonoBehaviour
         while (time >= 0)
         {
             if (conti)
-                _noise.m_AmplitudeGain = amplitude;
+                _currentNoise.m_AmplitudeGain = amplitude;
             else
-                _noise.m_AmplitudeGain = Mathf.Lerp(0, amplitude, time / duration);
+                _currentNoise.m_AmplitudeGain = Mathf.Lerp(0, amplitude, time / duration);
 
             yield return null;
             time -= Time.deltaTime;
@@ -133,13 +121,13 @@ public class CameraManager : MonoBehaviour
     {
         float time = 0f;
         float nextLens = 0f;
-        float currentLens = _cmVCam.m_Lens.FieldOfView;
+        float currentLens = _currentCam.m_Lens.FieldOfView;
 
         while (time <= duration)
         {
             nextLens = Mathf.Lerp(currentLens, maxValue, time / duration);
             Debug.Log(time / duration);
-            _cmVCam.m_Lens.FieldOfView = nextLens;
+            _currentCam.m_Lens.FieldOfView = nextLens;
             yield return null;
             time += Time.deltaTime;
         }

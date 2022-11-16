@@ -93,7 +93,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         Debug.Log("¼¿·ºÆ®");
         VCamOne.Follow = transform;
         VCamOne.gameObject.SetActive(true);
-        CameraManager.instance.CameraSelect(VCamOne);
+        CameraManager.Instance.CameraSelect(VCamOne);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         ChildSelected();
 
@@ -105,7 +105,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         Debug.Log("¼¿·ºÆ® ¿£µå");
         VCamOne.Follow = null;
         VCamTwo.gameObject.SetActive(true);
-        CameraManager.instance.CameraSelect(VCamTwo);
+        CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ChildSelectEnd();
 
@@ -169,6 +169,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         else
             _hp -= dmg;
 
+        DamagePopup.PopupDamage(transform.position, dmg, true);
         Debug.Log($"ÇöÀç HP : {_hp}");
         if (IsLived == false)
         {

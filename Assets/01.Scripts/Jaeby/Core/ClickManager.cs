@@ -133,7 +133,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
             _currentPlayer = null;
         }
         _selectable = null;
-        CameraManager.instance.CameraSelect(VCamTwo);
+        CameraManager.Instance.CameraSelect(VCamTwo);
 
         if (_selectable != null)
         {
