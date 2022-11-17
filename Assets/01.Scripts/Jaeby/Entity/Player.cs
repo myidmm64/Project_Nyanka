@@ -22,7 +22,12 @@ public class Player : Entity
     {
         get
         {
-            return (CellUtility.FindTarget<Enemy>(CellIndex, _dataSO.normalAttackRange, true).Count > 0 && _attackCount < 2);
+            bool check = false;
+            for (int i = 0; i < 4; i++)
+                if (CellUtility.FindTarget<Enemy>(CellIndex, GetAttackVectorByDirections((AttackDirection)i, _dataSO.normalAttackRange), true).Count > 0)
+                    check = true;
+
+            return check;
         }
     }
 
