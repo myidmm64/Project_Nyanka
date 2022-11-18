@@ -179,7 +179,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
 
-        DamagePopup.PopupDamage(transform.position, realDmg, critical);
+        PopupUtility.PopupDamage(transform.position, realDmg, critical);
         Debug.Log($"ÇöÀç HP : {_hp}");
         if (IsLived == false)
         {

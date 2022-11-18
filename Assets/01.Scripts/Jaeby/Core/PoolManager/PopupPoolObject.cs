@@ -24,7 +24,7 @@ public class PopupPoolObject : PoolAbleObject
 
     public override void Init_Pop()
     {
-        if(_meshRenderer == null)
+        if (_meshRenderer == null)
             _meshRenderer = GetComponent<MeshRenderer>();
     }
 
@@ -32,7 +32,7 @@ public class PopupPoolObject : PoolAbleObject
     {
         StopAllCoroutines();
 
-        if(_seq != null)
+        if (_seq != null)
             _seq.Kill();
         _text.transform.position = Vector3.zero;
         _text.transform.localScale = Vector3.one;
@@ -108,6 +108,39 @@ public class PopupPoolObject : PoolAbleObject
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.one * 2.2f;
         _meshRenderer.material = critical ? _criticalMat : _normalMat;
+        _text.SetText(text);
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(_text.DOFade(1f, 0.2f));
+        seq.Join(transform.DOScale(1f, 0.4f));
+        seq.AppendCallback(() =>
+        {
+            _text.transform.DOLocalMoveY(transform.localPosition.y + 35f, 1.2f);
+        });
+        seq.Append(_text.DOFade(0f, 1.2f));
+
+        seq.AppendCallback(() =>
+        {
+            PoolManager.Instance.Push(PoolType, gameObject);
+        });
+    }
+
+    public void PopupText(Vector3 startPos, string text, Color color, Material mat = null)
+    {
+        transform.SetParent(CameraCanvas.transform);
+        startPos.z = 0f;
+        startPos.x -= Mathf.RoundToInt(Screen.currentResolution.width * 0.5f);
+        startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
+        _text.color = color;
+
+        Vector3 randomPos = Random.insideUnitSphere * 15f;
+        randomPos.y = Mathf.Abs(randomPos.y);
+        randomPos.z = 0f;
+        transform.localPosition = startPos + randomPos;
+        transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one * 2.2f;
+        if (mat != null)
+            _meshRenderer.material = mat;
         _text.SetText(text);
 
         Sequence seq = DOTween.Sequence();
