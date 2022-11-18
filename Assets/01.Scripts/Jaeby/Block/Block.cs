@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
-        entity.ApplyDamage(dmg, entity.DataSO.elementType);
+        entity.ApplyDamage(dmg, entity.DataSO.elementType, false);
         JustEffect(index, true);
     }
 

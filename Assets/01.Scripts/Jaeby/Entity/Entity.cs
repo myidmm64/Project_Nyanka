@@ -162,7 +162,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         Destroy(gameObject);
     }
 
-    public void ApplyDamage(int dmg, ElementType elementType)
+    public void ApplyDamage(int dmg, ElementType elementType, bool critical)
     {
         int realDmg = dmg;
         if (elementType == GetWeak)
@@ -179,7 +179,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
 
-        DamagePopup.PopupDamage(transform.position, realDmg, true);
+        DamagePopup.PopupDamage(transform.position, realDmg, critical);
         Debug.Log($"ÇöÀç HP : {_hp}");
         if (IsLived == false)
         {

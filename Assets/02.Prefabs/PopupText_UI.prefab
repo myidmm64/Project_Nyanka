@@ -95,11 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 5442255670355020396}
-  _normalMat: {fileID: 207921461392875109, guid: 3683b922c7185d94b9678c1e22d037ad,
-    type: 2}
+  _normalMat: {fileID: 2100000, guid: 9081d6adc0284544e92a69ab0268be2b, type: 2}
   _criticalMat: {fileID: 2100000, guid: 9081d6adc0284544e92a69ab0268be2b, type: 2}
   _normalColor: {r: 1, g: 1, b: 1, a: 1}
-  _criticalColor: {r: 1, g: 1, b: 1, a: 1}
+  _criticalColor: {r: 1, g: 0.5176471, b: 0.078431375, a: 1}
 --- !u!222 &5442255670355020397
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -131,15 +130,14 @@ MonoBehaviour:
   m_text: 123
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3683b922c7185d94b9678c1e22d037ad, type: 2}
-  m_sharedMaterial: {fileID: 207921461392875109, guid: 3683b922c7185d94b9678c1e22d037ad,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 9081d6adc0284544e92a69ab0268be2b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4279534847
+  m_fontColor: {r: 1, g: 0.5176471, b: 0.078431375, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -156,13 +154,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
