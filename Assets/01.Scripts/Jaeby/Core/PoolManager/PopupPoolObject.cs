@@ -7,7 +7,7 @@ using DG.Tweening;
 public class PopupPoolObject : PoolAbleObject
 {
     [SerializeField]
-    private TextMeshPro _text = null;
+    private TextMeshProUGUI _text = null;
     [SerializeField]
     private Material _normalMat = null;
     [SerializeField]
@@ -91,7 +91,12 @@ public class PopupPoolObject : PoolAbleObject
     }
     public void PopupTextCritical(Vector3 startPos, string text)
     {
-        startPos.y += 1f;
+        Debug.Log(startPos);
+        startPos.z = 0f;
+        transform.localPosition = startPos;
+        transform.rotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
+        /*startPos.y += 1f;
         _text.fontSize = 5f;
         _text.color = Color.white;
 
@@ -102,7 +107,6 @@ public class PopupPoolObject : PoolAbleObject
         _meshRenderer.material = _criticalMat;
         _text.SetText(text);
 
-        //CameraManager.instance.CameraShake(2f,2f,0.1f);
         StartCoroutine(FadeCoroutine());
 
         Sequence seq = DOTween.Sequence();
@@ -114,7 +118,7 @@ public class PopupPoolObject : PoolAbleObject
         seq.AppendCallback(() =>
         {
             PoolManager.Instance.Push(PoolType, gameObject);
-        });
+        });*/
     }
 
     private IEnumerator FadeCoroutine()

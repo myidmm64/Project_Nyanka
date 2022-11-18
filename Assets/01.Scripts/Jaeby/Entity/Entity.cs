@@ -89,6 +89,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         _hpSlider.minValue = 0;
         _hpSlider.maxValue = _hp;
         _hpSlider.value = _hp;
+        _hpText.SetText($"{_hp} / {_dataSO.hp}");
     }
 
     public abstract void PhaseChanged(bool val); // 페이즈 종료되었을 때 실행

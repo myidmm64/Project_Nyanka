@@ -15,7 +15,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   normalAtk: 1
   normalDef: 0
-  hp: 10000
+  hp: 4000
   elementType: 1
   normalAttackRange:
   - {x: 0, y: 0, z: 1}

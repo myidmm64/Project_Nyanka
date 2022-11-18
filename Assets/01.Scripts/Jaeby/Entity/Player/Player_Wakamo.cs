@@ -20,7 +20,7 @@ public class Player_Wakamo : Player
     public override void AttackStarted()
     {
         base.AttackStarted();
-        CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
+        //CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
     }
 
     public override void AttackEnd()

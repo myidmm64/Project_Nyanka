@@ -12,9 +12,7 @@ public class Define
         get
         {
             if(_grid == null)
-            {
                 _grid = GameObject.FindObjectOfType<Grid3D>();
-            }
             return _grid;
         }
     }
@@ -25,9 +23,7 @@ public class Define
         get
         {
             if(_cam == null)
-            {
                 _cam = Camera.main;
-            }
             return _cam;
         }
     }
@@ -41,9 +37,7 @@ public class Define
         get
         {
             if (_vCamOne == null)
-            {
                 _vCamOne = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(0).GetComponent<CinemachineVirtualCamera>();
-            }
             return _vCamOne;
         }
     }
@@ -52,9 +46,7 @@ public class Define
         get
         {
             if (_vCamTwo == null)
-            {
                 _vCamTwo = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(1).GetComponent<CinemachineVirtualCamera>();
-            }
             return _vCamTwo;
         }
     }
@@ -63,10 +55,19 @@ public class Define
         get
         {
             if (_cartCam == null)
-            {
                 _cartCam = GameObject.FindObjectOfType<CameraManager>().transform.GetChild(2).GetComponent<CinemachineVirtualCamera>();
-            }
             return _cartCam;
+        }
+    }
+
+    private static  Canvas _cameraCanvas = null;
+    public static Canvas CameraCanvas
+    {
+        get
+        {
+            if(_cameraCanvas == null)
+                _cameraCanvas = GameObject.Find("CameraCanvas").GetComponent<Canvas>();
+            return _cameraCanvas;
         }
     }
 }
