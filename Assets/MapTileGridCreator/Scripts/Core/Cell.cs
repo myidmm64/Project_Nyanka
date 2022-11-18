@@ -27,7 +27,7 @@ namespace MapTileGridCreator.Core
             get
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.up, out hit))
+                if (Physics.Raycast(transform.position, Vector3.up, out hit, 10f, block.Mask))
                 {
                     return hit.collider.gameObject;
                 }
@@ -45,17 +45,20 @@ namespace MapTileGridCreator.Core
             }
         }
 
-        public void TryAttack(int dmg, ElementType elementType, EntityType freindEntity)
+        public void CellAttack(int dmg, ElementType elementType, EntityType freindEntity)
         {
-            block.JustEffect(GetIndex(), false);
-            GameObject obj = GetObj;
-            Entity entity = obj?.GetComponent<Entity>();
-            if (entity == null) return;
-            if (entity.entityType != freindEntity)
+            Entity entity = GetObj?.GetComponent<Entity>();
+            if (entity != null)
             {
-                if (elementType == block.elementType)
-                    block.Explosion(GetIndex(), entity);
-                entity?.ApplyDamage(dmg, elementType);
+                if (entity.entityType != freindEntity)
+                    if (elementType == block.elementType)
+                        block.Explosion(dmg, GetIndex(), entity);
+                    else
+                        block.JustEffect(GetIndex(), true);
+            }
+            else
+            {
+                block.JustEffect(GetIndex(), true);
             }
         }
 

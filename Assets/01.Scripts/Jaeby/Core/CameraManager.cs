@@ -13,7 +13,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     private float _currentShakeAmount = 0f;
 
+    [SerializeField]
     private CinemachineVirtualCamera _currentCam = null;
+    [SerializeField]
     private CinemachineBasicMultiChannelPerlin _currentNoise = null;
 
     private List<CinemachineVirtualCamera> cams = new List<CinemachineVirtualCamera>();

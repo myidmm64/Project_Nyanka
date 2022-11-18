@@ -5,6 +5,8 @@ using UnityEngine;
 using DG.Tweening;
 using static Define;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public enum EntityType
@@ -27,6 +29,12 @@ public enum ElementType
 public abstract class Entity : MonoBehaviour, ISelectable
 {
     #region 변수
+    [SerializeField]
+    private Slider _hpSlider = null;
+    private Coroutine _hpCoroutine = null;
+    [SerializeField]
+    private TextMeshProUGUI _hpText = null;
+
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
     public Animator _animator = null; // 애니메이터
@@ -78,6 +86,9 @@ public abstract class Entity : MonoBehaviour, ISelectable
     protected virtual void Start()
     {
         _hp = _dataSO.hp;
+        _hpSlider.minValue = 0;
+        _hpSlider.maxValue = _hp;
+        _hpSlider.value = _hp;
     }
 
     public abstract void PhaseChanged(bool val); // 페이즈 종료되었을 때 실행
@@ -92,7 +103,6 @@ public abstract class Entity : MonoBehaviour, ISelectable
     {
         Debug.Log("셀렉트");
         VCamOne.Follow = transform;
-        VCamOne.gameObject.SetActive(true);
         CameraManager.Instance.CameraSelect(VCamOne);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         ChildSelected();
@@ -104,7 +114,6 @@ public abstract class Entity : MonoBehaviour, ISelectable
     {
         Debug.Log("셀렉트 엔드");
         VCamOne.Follow = null;
-        VCamTwo.gameObject.SetActive(true);
         CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         ChildSelectEnd();
@@ -123,7 +132,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
         _animator.Update(0);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
         for (int i = 0; i < cells.Count; i++)
-            cells[i].TryAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
+            cells[i].CellAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
         if (cells.Count > 0 && _entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;
@@ -154,27 +163,43 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public void ApplyDamage(int dmg, ElementType elementType)
     {
+        int realDmg = dmg;
         if (elementType == GetWeak)
         {
-            Debug.Log("크리티컬 !!");
-            _hp -= dmg * 2;
+            realDmg = dmg * 2;
             TurnManager.Instance.PlusTurnCheck();
         }
         else if (elementType == GetStrong)
         {
-            Debug.Log("쓰레기 !!");
-            _hp -= Mathf.RoundToInt(dmg * 0.5f);
+            realDmg = Mathf.RoundToInt(dmg * 0.5f);
             TurnManager.Instance.LoseTurnCheck();
         }
-        else
-            _hp -= dmg;
+        if (_hpCoroutine != null)
+            StopCoroutine(_hpCoroutine);
+        _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
 
-        DamagePopup.PopupDamage(transform.position, dmg, true);
+        DamagePopup.PopupDamage(transform.position, realDmg, true);
         Debug.Log($"현재 HP : {_hp}");
         if (IsLived == false)
         {
+            StopAllCoroutines();
             Died();
         }
+    }
+
+    private IEnumerator HpDownCoroutine(int dmg)
+    {
+        float delta = 0f;
+        float start = _hp;
+        _hp -= dmg;
+        _hpText.SetText($"{_hp} / {_dataSO.hp}");
+        while (delta <= 1f)
+        {
+            delta += Time.deltaTime * 2f;
+            _hpSlider.value = start - (dmg * delta);
+            yield return null;   
+        }
+        _hpSlider.value = start - dmg;
     }
 
     public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)

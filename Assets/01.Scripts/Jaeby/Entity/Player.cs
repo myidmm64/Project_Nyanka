@@ -253,7 +253,7 @@ public class Player : Entity
                 CubeGrid.ViewEnd();
                 ViewData(index);
             }
-            else if (index == CellIndex)
+            else
             {
                 ViewDataByCellIndex();
             }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     [SerializeField]
-    private int _blockPlusDamage = 1;
+    private LayerMask _mask = 0;
+    public LayerMask Mask => _mask;
     [SerializeField]
     private ElementType _elementType = ElementType.NONE;
     public ElementType elementType => _elementType;
@@ -36,16 +37,16 @@ public class Block : MonoBehaviour
     /// <param name="index"></param>
     /// <param name="type"></param>
     /// <param name="entity"></param>
-    public void Explosion(Vector3Int index, Entity entity)
+    public void Explosion(int dmg, Vector3Int index, Entity entity)
     {
-        StartCoroutine(ExplosionWait(index, entity, 1f));
+        StartCoroutine(ExplosionWait(dmg, index, entity, 0.5f));
     }
 
-    private IEnumerator ExplosionWait(Vector3Int index, Entity entity, float duration)
+    private IEnumerator ExplosionWait(int dmg, Vector3Int index, Entity entity, float duration)
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
-        entity.ApplyDamage(_blockPlusDamage, entity.DataSO.elementType);
+        entity.ApplyDamage(dmg, entity.DataSO.elementType);
         JustEffect(index, true);
     }
 

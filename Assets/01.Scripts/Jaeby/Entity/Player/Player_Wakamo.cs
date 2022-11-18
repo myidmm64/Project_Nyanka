@@ -14,11 +14,13 @@ public class Player_Wakamo : Player
     private GameObject _attackPrefab0 = null;
     [SerializeField]
     private GameObject _attackPrefab1 = null;
+    [SerializeField]
+    private GameObject _attackPrefab2 = null;
 
     public override void AttackStarted()
     {
         base.AttackStarted();
-        //CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
+        CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
     }
 
     public override void AttackEnd()
@@ -31,7 +33,7 @@ public class Player_Wakamo : Player
 
     private IEnumerator CameraSelectTurm(Action a)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         a?.Invoke();
     }
 
@@ -39,6 +41,9 @@ public class Player_Wakamo : Player
     {
         List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections(_currentDirection, _dataSO.normalAttackRange), true);
         if (cells.Count == 0) return;
+
+        for (int i = 0; i < cells.Count; i++)
+            cells[i].CellAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
 
         List<Enemy> enemys = new List<Enemy>();
         for (int i = 0; i < cells.Count; i++)
@@ -49,15 +54,17 @@ public class Player_Wakamo : Player
         switch(id)
         {
             case 0:
-                obj = Instantiate(_attackPrefab0);
+                obj = Instantiate(_attackPrefab0, _modelController);
                 break;
             case 1:
-                obj = Instantiate(_attackPrefab1);
+                obj = Instantiate(_attackPrefab1, _modelController);
+                break;
+            case 2:
+                obj = Instantiate(_attackPrefab2, _modelController);
                 break;
             default:
                 break;
         }
-        obj.transform.position = transform.position;
         Destroy(obj, 1.5f);
         CameraManager.Instance.CameraShake(8f, 10f, 0.24f);
 
