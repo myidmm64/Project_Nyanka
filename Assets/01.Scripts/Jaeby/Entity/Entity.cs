@@ -57,7 +57,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public NavMeshAgent _agent = null; // 네브메시
 
-    protected int _hp = 0; // 현재 체력
+    protected int _hp = 1; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?
 
     public ElementType GetWeak // 약점 속성

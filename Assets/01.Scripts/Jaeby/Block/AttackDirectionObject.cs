@@ -12,20 +12,24 @@ public class AttackDirectionObject : MonoBehaviour
     {
         _dir = dir;
         _player = player;
+        Debug.Log($"{dir} {player.name},");
     }
 
     private void OnMouseEnter()
     {
         _player.ViewAttackRange(_dir);
+        Debug.Log($"entr");
     }
 
     private void OnMouseExit()
     {
         CubeGrid.ViewEnd();
+        Debug.Log($"ex");
     }
 
     private void OnMouseDown()
     {
         _player.PlayerAttack(_dir);
+        Debug.Log($"d");
     }
 }

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using static Define;
 
 public class ClickManager : MonoSingleTon<ClickManager>
@@ -29,11 +30,13 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Start()
     {
-        GameManager.Instance.TimeScale = 2f;
+        GameManager.Instance.TimeScale = 1.5f;
     }
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         Select();
         UnSelect();
     }
@@ -42,7 +45,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     {
         if (_leftClickMode == LeftClickMode.Nothing) return;
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask))
@@ -55,7 +58,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 }
                 Player testPlayer = hit.collider.GetComponent<Player>();
                 if (testPlayer != null && _currentPlayer != null)
-                    if(testPlayer.CellIndex == _currentPlayer.CellIndex)
+                    if (testPlayer.CellIndex == _currentPlayer.CellIndex)
                     {
                         CubeGrid.ClickView(_currentPlayer.CellIndex, true);
                         _selectCellIndex = _currentPlayer.CellIndex;
@@ -85,7 +88,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer != null)
         {
             _currentPlayer.PreparationCellSelect(_selectCellIndex);
-            if(_currentPlayer.GetMoveableCheck(_selectCellIndex))
+            if (_currentPlayer.GetMoveableCheck(_selectCellIndex))
                 CubeGrid.ClickView(_selectCellIndex, true);
             return;
         }
