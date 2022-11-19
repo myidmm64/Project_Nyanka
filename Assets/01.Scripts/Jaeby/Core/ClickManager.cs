@@ -29,7 +29,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Start()
     {
-        GameManager.Instance.TimeScale = 1.5f;
+        GameManager.Instance.TimeScale = 2f;
     }
 
     private void Update()
