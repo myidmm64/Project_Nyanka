@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 15825
+  controlID: 17070
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 15802
+  controlID: 17009
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -163,8 +163,8 @@ MonoBehaviour:
     y: 0
     width: 922
     height: 432
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -398,9 +398,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1282.1506, y: 50.356827, z: 3.1018562}
+    m_Target: {x: 2.8952339, y: -0.10609211, z: 3.1440747}
     speed: 2
-    m_Value: {x: 1282.1506, y: 50.356827, z: 3.1018562}
+    m_Value: {x: 2.8952339, y: -0.10609211, z: 3.1440747}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -447,13 +447,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.29076397, y: 0.32252324, z: -0.10502114, w: -0.89471966}
+    m_Target: {x: -0.23161036, y: -0.09226805, z: 0.021881852, w: -0.9682365}
     speed: 2
-    m_Value: {x: -0.2907469, y: 0.32250428, z: -0.10501497, w: -0.8946671}
+    m_Value: {x: -0.23159675, y: -0.092262626, z: 0.021880567, w: -0.9681796}
   m_Size:
-    m_Target: 76.44177
+    m_Target: 2.7413988
     speed: 2
-    m_Value: 76.44177
+    m_Value: 2.7413988
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -898,7 +898,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 15739
+  controlID: 17071
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1081,22 +1081,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - "Assets/08.Fonts/\uBE5B\uC758 \uACC4\uC2B9\uC790 Bold/TTF(Window\uC6A9)"
+    - Assets/01.Scripts/Jaeby/Entity/Player
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - "Assets/08.Fonts/\uBE5B\uC758 \uACC4\uC2B9\uC790 Bold/TTF(Window\uC6A9)"
+  - Assets/01.Scripts/Jaeby/Entity/Player
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\after20220210\New_Nyan
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 123}
-    m_SelectedIDs: ea860100
-    m_LastClickedID: 100074
-    m_ExpandedIDs: 00000000128f0000148f0000168f0000188f00001a8f00001c8f00001e8f0000208f0000228f0000248f0000268f0000288f00002a8f00002c8f00002e8f0000308f0000328f0000348f0000368f0000388f00003a8f00003c8f00003e8f0000408f0000428f0000448f0000468f0000488f00004a8f00004c8f00004e8f0000508f0000528f0000548f0000568f0000588f00005a8f00005c8f00005e8f0000608f0000628f0000648f00008a8f000000ca9a3bffffff7f
+    m_SelectedIDs: be6d0300
+    m_LastClickedID: 224702
+    m_ExpandedIDs: 00000000128f0000148f0000168f0000188f00001a8f00001c8f00001e8f0000208f0000228f0000248f0000268f0000288f00002a8f00002c8f00002e8f0000308f0000328f0000348f0000368f0000388f00003a8f00003c8f00003e8f0000408f0000428f0000448f0000468f0000488f00004a8f00004c8f00004e8f0000508f0000528f0000548f0000568f0000588f00005a8f00005c8f00005e8f0000608f0000628f0000648f00006e8f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1151,22 +1151,22 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: de78000030790000e21f0100ee1f01004433040042330400c63404002437040012350400da36040044370400703504001e35040000000000f2860000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: TestWakamoData
+      m_OriginalName: TestWakamoData
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 33104
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 12}
     m_CreateAssetUtility:
