@@ -5,20 +5,20 @@ using UnityEngine;
 using DG.Tweening;
 
 using static Define;
+using UnityEngine.UI;
+
 public class PopupPoolObject : PoolAbleObject
 {
     [SerializeField]
     private TextMeshProUGUI _text = null;
     [SerializeField]
+    private Image _criticalImage = null;
+
+    [SerializeField]
     private Material _normalMat = null;
     [SerializeField]
     private Material _criticalMat = null;
     private MeshRenderer _meshRenderer = null;
-
-    [SerializeField]
-    private Color _normalColor = Color.white;
-    [SerializeField]
-    private Color _criticalColor = Color.white;
 
     [SerializeField]
     List<Color> _elementColors = new List<Color>();
@@ -28,7 +28,10 @@ public class PopupPoolObject : PoolAbleObject
     public override void Init_Pop()
     {
         if (_meshRenderer == null)
+        {
             _meshRenderer = GetComponent<MeshRenderer>();
+            _criticalImage = transform.Find("CriticalImage").GetComponent<Image>();
+        }
     }
 
     public override void Init_Push()
@@ -50,26 +53,30 @@ public class PopupPoolObject : PoolAbleObject
         startPos.z = 0f;
         startPos.x -= Mathf.RoundToInt(Screen.currentResolution.width * 0.5f);
         startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
-        //_text.color = critical ? _criticalColor : _normalColor;
         _text.color = _elementColors[(int)elementType - 1];
+        _criticalImage.color = _elementColors[(int)elementType - 1];
+        _criticalImage.gameObject.SetActive(critical);
 
         Vector3 randomPos = Random.insideUnitSphere * 15f;
         randomPos.y = Mathf.Abs(randomPos.y);
         randomPos.z = 0f;
         transform.localPosition = startPos + randomPos;
         transform.localRotation = Quaternion.identity;
-        transform.localScale = critical ? Vector3.one * 3.5f : Vector3.one * 2.2f;
+        transform.localScale = critical ? Vector3.one * 6f : Vector3.one * 2.2f;
         _meshRenderer.material = critical ? _criticalMat : _normalMat;
         _text.SetText(text);
 
         Sequence seq = DOTween.Sequence();
         seq.Append(_text.DOFade(1f, 0.2f));
         seq.Join(transform.DOScale(1f, 0.4f));
+        seq.Join(_criticalImage.DOFade(1f, 0.2f));
+
         seq.AppendCallback(() =>
         {
             _text.transform.DOLocalMoveY(transform.localPosition.y + 35f, 1.2f);
         });
         seq.Append(_text.DOFade(0f, 1.2f));
+        seq.Join(_criticalImage.DOFade(0f, 1.2f));
 
         seq.AppendCallback(() =>
         {

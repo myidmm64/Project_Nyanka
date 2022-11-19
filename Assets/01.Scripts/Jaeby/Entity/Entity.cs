@@ -22,7 +22,6 @@ public enum ElementType
     NONE,
     Fire,
     Water,
-    Leaf,
     Thunder,
     SIZE
 }

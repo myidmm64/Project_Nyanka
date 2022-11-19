@@ -13,7 +13,7 @@ public class Block : MonoBehaviour
 
     private void Start()
     {
-        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE - 1));
+        _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
         //_elementType = ElementType.Water;
         ChangeBlock(_elementType);
     }
@@ -26,7 +26,7 @@ public class Block : MonoBehaviour
         if(change)
         {
             //_elementType = ElementType.Water;
-            _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE - 1));
+            _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
             ChangeBlock(_elementType);
         }
     }
@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
-        entity?.ApplyDamage(Random.Range(Mathf.RoundToInt(dmg * 0.8f), Mathf.RoundToInt(dmg * 1.2f)), _elementType, false);
+        entity?.ApplyDamage(Random.Range(Mathf.RoundToInt(dmg * 0.9f), Mathf.RoundToInt(dmg * 1.1f)), _elementType, false);
         JustEffect(index, true);
     }
 
@@ -62,9 +62,6 @@ public class Block : MonoBehaviour
                 break;
             case ElementType.Water:
                 c = Color.blue;
-                break;
-            case ElementType.Leaf:
-                c = Color.green;
                 break;
             case ElementType.Thunder:
                 c = new Color(1,0,1);
