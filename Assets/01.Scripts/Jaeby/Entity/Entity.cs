@@ -22,7 +22,8 @@ public enum ElementType
     NONE,
     Fire,
     Water,
-    Wind,
+    Leaf,
+    Thunder,
     SIZE
 }
 
@@ -179,7 +180,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
 
-        PopupUtility.PopupDamage(transform.position, realDmg, critical);
+        PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
         Debug.Log($"ÇöÀç HP : {_hp}");
         if (IsLived == false)
         {

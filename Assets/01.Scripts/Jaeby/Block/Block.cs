@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
-        entity?.ApplyDamage(dmg, entity.DataSO.elementType, false);
+        entity?.ApplyDamage(dmg, _elementType, false);
         JustEffect(index, true);
     }
 
@@ -63,8 +63,11 @@ public class Block : MonoBehaviour
             case ElementType.Water:
                 c = Color.blue;
                 break;
-            case ElementType.Wind:
-                c = Color.white;
+            case ElementType.Leaf:
+                c = Color.green;
+                break;
+            case ElementType.Thunder:
+                c = new Color(1,0,1);
                 break;
             case ElementType.SIZE:
                 break;

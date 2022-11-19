@@ -20,6 +20,9 @@ public class PopupPoolObject : PoolAbleObject
     [SerializeField]
     private Color _criticalColor = Color.white;
 
+    [SerializeField]
+    List<Color> _elementColors = new List<Color>();
+
     private Sequence _seq = null;
 
     public override void Init_Pop()
@@ -38,75 +41,24 @@ public class PopupPoolObject : PoolAbleObject
         _text.transform.localScale = Vector3.one;
 
         _text.color = Color.white;
+        _text.material = _normalMat;
     }
 
-    public void PopupTextNormal(Vector3 startPos, string text)
+    public void PopupText(Vector3 startPos, string text, bool critical, ElementType elementType)
     {
         transform.SetParent(CameraCanvas.transform);
         startPos.z = 0f;
         startPos.x -= Mathf.RoundToInt(Screen.currentResolution.width * 0.5f);
         startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
-        _text.color = _normalColor;
-
-        Vector3 randomPos = Random.insideUnitSphere * 15f;
-        randomPos.z = 0f;
-        transform.localPosition = startPos + randomPos;
-        transform.localRotation = Quaternion.identity;
-        transform.localScale = Vector3.one * 2f;
-        _meshRenderer.material = _normalMat;
-        _text.SetText(text);
-
-        Sequence seq = DOTween.Sequence();
-        seq.Append(_text.DOFade(1f, 0.3f));
-        seq.Join(transform.DOScale(1f, 0.2f));
-        seq.Append(_text.DOFade(0f, 0.7f));
-
-        seq.AppendCallback(() =>
-        {
-            PoolManager.Instance.Push(PoolType, gameObject);
-        });
-    }
-    public void PopupTextCritical(Vector3 startPos, string text)
-    {
-        transform.SetParent(CameraCanvas.transform);
-        startPos.z = 0f;
-        startPos.x -= Mathf.RoundToInt(Screen.currentResolution.width * 0.5f);
-        startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
-        _text.color = _criticalColor;
-
-        Vector3 randomPos = Random.insideUnitSphere * 15f;
-        randomPos.z = 0f;
-        transform.localPosition = startPos + randomPos;
-        transform.localRotation = Quaternion.identity;
-        transform.localScale = Vector3.one * 2f;
-        _meshRenderer.material = _criticalMat;
-        _text.SetText(text);
-
-        Sequence seq = DOTween.Sequence();
-        seq.Append(_text.DOFade(1f, 0.3f));
-        seq.Join(transform.DOScale(1f, 0.2f));
-        seq.Append(_text.DOFade(0f, 0.7f));
-
-        seq.AppendCallback(() =>
-        {
-            PoolManager.Instance.Push(PoolType, gameObject);
-        });
-    }
-
-    public void PopupText(Vector3 startPos, string text, bool critical)
-    {
-        transform.SetParent(CameraCanvas.transform);
-        startPos.z = 0f;
-        startPos.x -= Mathf.RoundToInt(Screen.currentResolution.width * 0.5f);
-        startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
-        _text.color = critical ? _criticalColor : _normalColor;
+        //_text.color = critical ? _criticalColor : _normalColor;
+        _text.color = _elementColors[(int)elementType - 1];
 
         Vector3 randomPos = Random.insideUnitSphere * 15f;
         randomPos.y = Mathf.Abs(randomPos.y);
         randomPos.z = 0f;
         transform.localPosition = startPos + randomPos;
         transform.localRotation = Quaternion.identity;
-        transform.localScale = Vector3.one * 2.2f;
+        transform.localScale = critical ? Vector3.one * 3.5f : Vector3.one * 2.2f;
         _meshRenderer.material = critical ? _criticalMat : _normalMat;
         _text.SetText(text);
 
