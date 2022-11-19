@@ -37326,6 +37326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8497438778769293692}
+  - component: {fileID: 8497438778769293693}
   m_Layer: 0
   m_Name: HairJoint_80912c8b_76c3_4ccb_900b_c5c3da6ff406
   m_TagString: Untagged
@@ -45045,6 +45046,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5795480941151386352}
+  - component: {fileID: 5795480941151386353}
   m_Layer: 0
   m_Name: J_Sec_R_SkirtFront
   m_TagString: Untagged
@@ -45790,6 +45792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6249467836102238843}
+  - component: {fileID: 6249467836102238844}
   m_Layer: 0
   m_Name: HairJoint_ef96ab0c_6631_4731_ac3b_6871cef831e3
   m_TagString: Untagged
@@ -46234,6 +46237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005174717845479939}
+  - component: {fileID: 2304280100411006836}
   m_Layer: 0
   m_Name: J_Sec_L_SkirtSide
   m_TagString: Untagged
@@ -46241,6 +46245,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2304280100411006836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304280100411006835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &2346445876670505704
 GameObject:
   m_ObjectHideFlags: 0
@@ -47499,6 +47534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581766930396194700}
+  - component: {fileID: 8581766930396194701}
   m_Layer: 0
   m_Name: HairJoint_eb805545_f2fb_4f77_bb23_8d4e88ffc9c3
   m_TagString: Untagged
@@ -47957,6 +47993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2664244041557767954}
+  - component: {fileID: 3108693542556865213}
   m_Layer: 0
   m_Name: HairJoint_f000dd91_baba_4862_9308_8b5652d8ddfd
   m_TagString: Untagged
@@ -47964,6 +48001,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3108693542556865213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108693542556865212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &3117763370265175347
 GameObject:
   m_ObjectHideFlags: 0
@@ -48295,6 +48363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1060595754058516150}
+  - component: {fileID: 3562565553702535005}
   m_Layer: 0
   m_Name: HairJoint_f3405174_d75f_4265_8bcd_60894d0f60ec
   m_TagString: Untagged
@@ -48302,6 +48371,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3562565553702535005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562565553702535004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &3565302184716850016
 GameObject:
   m_ObjectHideFlags: 0
@@ -49235,6 +49335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3873773904332727262}
+  - component: {fileID: 4094426336683441273}
   m_Layer: 0
   m_Name: J_Sec_R_SkirtBack
   m_TagString: Untagged
@@ -49242,6 +49343,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4094426336683441273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094426336683441272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &4098719598228292192
 GameObject:
   m_ObjectHideFlags: 0
@@ -49641,6 +49773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8930699191245859203}
+  - component: {fileID: 8930699191245859204}
   m_Layer: 0
   m_Name: HairJoint_d844a34c_f0a7_41f0_9dbf_95cff742c9b3
   m_TagString: Untagged
@@ -50623,6 +50756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6157123592976012400}
+  - component: {fileID: 6157123592976012401}
   m_Layer: 0
   m_Name: HairJoint_bf888760_d05b_4e59_ba36_4b0d6dca895b
   m_TagString: Untagged
@@ -50703,6 +50837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169811763209233571}
+  - component: {fileID: 4871596862626207096}
   m_Layer: 0
   m_Name: J_Sec_R_SkirtSide
   m_TagString: Untagged
@@ -50710,6 +50845,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4871596862626207096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4871596862626207095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &4874803014591532113
 GameObject:
   m_ObjectHideFlags: 0
@@ -51773,6 +51939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5264508654227593691}
+  - component: {fileID: 5484204506554603263}
   m_Layer: 0
   m_Name: HairJoint_644f29f8_baed_4f17_bbbd_890c06d7d8ca
   m_TagString: Untagged
@@ -51780,6 +51947,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5484204506554603263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5484204506554603262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &5485643205535293739
 GameObject:
   m_ObjectHideFlags: 0
@@ -52080,6 +52278,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114769298432302435}
+  - component: {fileID: 5746951261158148677}
   m_Layer: 0
   m_Name: J_Sec_L_SkirtBack
   m_TagString: Untagged
@@ -52087,6 +52286,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5746951261158148677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746951261158148676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &5751821445466052402
 GameObject:
   m_ObjectHideFlags: 0
@@ -52150,6 +52380,37 @@ Transform:
   m_Father: {fileID: 1317669486901626266}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5795480941151386353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574370613647777429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &5815947580371852008
 GameObject:
   m_ObjectHideFlags: 0
@@ -52159,6 +52420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3329579003356144485}
+  - component: {fileID: 5815947580371852009}
   m_Layer: 0
   m_Name: J_Sec_L_SkirtFront
   m_TagString: Untagged
@@ -52166,6 +52428,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5815947580371852009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5815947580371852008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 350
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &5832883162457574034
 Transform:
   m_ObjectHideFlags: 0
@@ -52738,6 +53031,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6157123592976012401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757470888633447048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &6169711653597334617
 GameObject:
   m_ObjectHideFlags: 0
@@ -52747,6 +53071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2058443004207315218}
+  - component: {fileID: 6169711653597334618}
   m_Layer: 0
   m_Name: HairJoint_9554c00a_cdc1_4628_8172_a0112c939675
   m_TagString: Untagged
@@ -52754,6 +53079,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6169711653597334618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169711653597334617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &6173765798276976216
 GameObject:
   m_ObjectHideFlags: 0
@@ -52870,6 +53226,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6249467836102238844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012321942692194861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &6270520279475328049
 Transform:
   m_ObjectHideFlags: 0
@@ -52895,6 +53282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4820153166791660751}
+  - component: {fileID: 6270781904238748521}
   m_Layer: 0
   m_Name: HairJoint_19009c59_172e_4b59_abe0_773a363b904d
   m_TagString: Untagged
@@ -52902,6 +53290,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6270781904238748521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6270781904238748520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &6306630147297289846
 Transform:
   m_ObjectHideFlags: 0
@@ -54234,6 +54653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 299191716531648376}
+  - component: {fileID: 6723362412760318887}
   m_Layer: 0
   m_Name: HairJoint_e17dce3f_4249_4ac2_abc6_05b550f1cbb7
   m_TagString: Untagged
@@ -54241,6 +54661,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6723362412760318887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6723362412760318886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &6732609942448428249
 GameObject:
   m_ObjectHideFlags: 0
@@ -55985,6 +56436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8464257342860589171}
+  - component: {fileID: 8464257342860589172}
   m_Layer: 0
   m_Name: HairJoint_51efaed8_3c42_4467_8dba_08e2fbd5952c
   m_TagString: Untagged
@@ -56145,6 +56597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4995136946003744989}
+  - component: {fileID: 7842344812536407883}
   m_Layer: 0
   m_Name: HairJoint_2929a92a_49a4_4d81_ba6a_b0a9f00ed79a
   m_TagString: Untagged
@@ -56152,6 +56605,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7842344812536407883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842344812536407882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &7852870570821166893
 Transform:
   m_ObjectHideFlags: 0
@@ -56987,6 +57471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8796141298127504383}
+  - component: {fileID: 8796141298127504384}
   m_Layer: 0
   m_Name: HairJoint_01f63079_da4e_47d5_b2c6_268e15b3320d
   m_TagString: Untagged
@@ -57089,6 +57574,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8464257342860589172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7723229055140626758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &8478335674961329262
 Transform:
   m_ObjectHideFlags: 0
@@ -57136,6 +57652,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8497438778769293693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319112149362677343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &8503809341595818444
 GameObject:
   m_ObjectHideFlags: 0
@@ -57552,6 +58099,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8581766930396194701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2784989224666297337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!1 &8615388623463325678
 GameObject:
   m_ObjectHideFlags: 0
@@ -57891,6 +58469,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8796141298127504384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8332509190901440683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &8797145206193411459
 Transform:
   m_ObjectHideFlags: 0
@@ -58030,6 +58639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3720016187627862986}
+  - component: {fileID: 8917519337589552901}
   m_Layer: 0
   m_Name: HairJoint_29ee833a_ea1a_4fcb_8c9b_3533fa46aeea
   m_TagString: Untagged
@@ -58037,6 +58647,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8917519337589552901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917519337589552900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &8922426722519206444
 Transform:
   m_ObjectHideFlags: 0
@@ -58101,6 +58742,37 @@ Transform:
   m_Father: {fileID: 747969232230459947}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8930699191245859204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4375487407719618866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03118221f4bfcd74ba0ad8075da02411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stiffnessForce: 500
+  dragForce: 0.4
+  springForce: {x: 0, y: -0.0001, z: 0}
+  windInfluence: 1
+  pivotNode: {fileID: 0}
+  angularStiffness: 100
+  yAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  zAngleLimits:
+    active: 0
+    min: 0
+    max: 0
+  lengthLimitTargets: []
+  radius: 0.05
+  sphereColliders: []
+  capsuleColliders: []
+  panelColliders: []
 --- !u!4 &8939084185634569944
 Transform:
   m_ObjectHideFlags: 0
