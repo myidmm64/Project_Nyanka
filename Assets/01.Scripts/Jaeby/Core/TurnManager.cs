@@ -186,4 +186,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         _plusTurn = true;
     }
+
+    public void TurnCheckReset()
+    {
+        _loseTurn = false;
+        _plusTurn = false;
+    }
 }

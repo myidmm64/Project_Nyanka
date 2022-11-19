@@ -74,7 +74,7 @@ public class Player_Wakamo : Player
             bool critical = UnityEngine.Random.Range(0, 100) < 50;
             if (critical)
                 dmg = Mathf.RoundToInt(dmg * 1.5f);
-            enemys[i].ApplyDamage(dmg, _dataSO.elementType, critical);
+            enemys[i].ApplyDamage(dmg, _dataSO.elementType, critical, true);
         }
     }
 }

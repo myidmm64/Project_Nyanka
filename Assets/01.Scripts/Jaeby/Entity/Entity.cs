@@ -159,33 +159,34 @@ public abstract class Entity : MonoBehaviour, ISelectable
     public void Died()
     {
         Debug.Log("»ç¸Á¶ì");
+        StopAllCoroutines();
         Destroy(gameObject);
     }
 
-    public void ApplyDamage(int dmg, ElementType elementType, bool critical)
+    public void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
     {
+        if (IsLived == false)
+            return;
+
         int realDmg = dmg;
         if (elementType == GetWeak)
         {
-            realDmg = dmg * 2;
-            TurnManager.Instance.PlusTurnCheck();
+            realDmg = Mathf.RoundToInt(dmg * 1.5f);
+            if(isPlayer)
+                TurnManager.Instance.PlusTurnCheck();
         }
         else if (elementType == GetStrong)
         {
             realDmg = Mathf.RoundToInt(dmg * 0.5f);
-            TurnManager.Instance.LoseTurnCheck();
+            if (isPlayer)
+                TurnManager.Instance.LoseTurnCheck();
         }
+
+        PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
         if (_hpCoroutine != null)
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
 
-        PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
-        Debug.Log($"ÇöÀç HP : {_hp}");
-        if (IsLived == false)
-        {
-            StopAllCoroutines();
-            Died();
-        }
     }
 
     private IEnumerator HpDownCoroutine(int dmg)
@@ -193,7 +194,14 @@ public abstract class Entity : MonoBehaviour, ISelectable
         float delta = 0f;
         float start = _hp;
         _hp -= dmg;
+        if (_hp <= 0)
+            _hp = 0;
         _hpText.SetText($"{_hp} / {_dataSO.hp}");
+        if (IsLived == false)
+        {
+            Died();
+            yield break;
+        }
         while (delta <= 1f)
         {
             delta += Time.deltaTime * 2f;

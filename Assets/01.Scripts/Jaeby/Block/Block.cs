@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);
-        entity?.ApplyDamage(Random.Range(Mathf.RoundToInt(dmg * 0.9f), Mathf.RoundToInt(dmg * 1.1f)), _elementType, false);
+        entity?.ApplyDamage(Random.Range(Mathf.RoundToInt(dmg * 0.9f), Mathf.RoundToInt(dmg * 1.1f)), _elementType, false, false);
         JustEffect(index, true);
     }
 

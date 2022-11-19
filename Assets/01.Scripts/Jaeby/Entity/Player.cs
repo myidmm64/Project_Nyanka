@@ -80,6 +80,7 @@ public class Player : Entity
     {
         _currentDirection = AttackDirection.Up;
         _myTurnEnded = true;
+        TurnManager.Instance.TurnCheckReset();
     }
 
     public override void PhaseChanged(bool val) // 페이즈가 바뀌었을 때
