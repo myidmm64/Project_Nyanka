@@ -27990,7 +27990,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29235,7 +29235,7 @@ GameObject:
   - component: {fileID: 1625846044}
   - component: {fileID: 1625846049}
   m_Layer: 6
-  m_Name: Wakamo (1)
+  m_Name: Player_Assassin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33614,7 +33614,7 @@ GameObject:
   - component: {fileID: 1915851359}
   - component: {fileID: 1915851363}
   m_Layer: 6
-  m_Name: Wakamo (3)
+  m_Name: Player_Wakamo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33697,7 +33697,7 @@ Transform:
   - {fileID: 841910673}
   - {fileID: 1414827197}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1915851363
 Animator:
@@ -34339,7 +34339,7 @@ GameObject:
   - component: {fileID: 1948388315}
   - component: {fileID: 1948388314}
   m_Layer: 6
-  m_Name: Wakamo (2)
+  m_Name: Player_archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55241,7 +55241,7 @@ GameObject:
   - component: {fileID: 1878053021}
   - component: {fileID: 5866666020171705612}
   m_Layer: 6
-  m_Name: Wakamo
+  m_Name: Player_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

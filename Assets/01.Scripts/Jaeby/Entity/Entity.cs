@@ -83,6 +83,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
     public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
 
     protected bool _selectable = true;
+    public bool Selectable => _selectable;
     #endregion
 
     protected virtual void Start()

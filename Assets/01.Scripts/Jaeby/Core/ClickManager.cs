@@ -78,6 +78,13 @@ public class ClickManager : MonoSingleTon<ClickManager>
                 {
                     _currentPlayer = player;
                     _currentPlayer.ViewDataByCellIndex();
+                    if (_currentPlayer.Selectable == false)
+                    {
+                        _selectable.SelectEnd();
+                        _selectable = null;
+                        _currentPlayer.ViewDataByCellIndex();
+                        _currentPlayer = null;
+                    }
                 }
             }
         }
