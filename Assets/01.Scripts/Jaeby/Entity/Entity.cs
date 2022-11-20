@@ -81,6 +81,8 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     private bool _selectedFlag = false;
     public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
+
+    protected bool _selectable = true;
     #endregion
 
     protected virtual void Start()
@@ -102,6 +104,7 @@ public abstract class Entity : MonoBehaviour, ISelectable
 
     public void Selected()
     {
+        if (_selectable == false) return;
         Debug.Log("¼¿·ºÆ®");
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);

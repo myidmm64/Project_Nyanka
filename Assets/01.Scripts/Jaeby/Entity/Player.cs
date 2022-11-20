@@ -74,6 +74,7 @@ public class Player : Entity
         _attackCount = 0;
         _myTurnEnded = false;
         _pressTurnChecked = false;
+        _selectable = true;
     }
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
@@ -81,6 +82,8 @@ public class Player : Entity
         _currentDirection = AttackDirection.Up;
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
+        _selectable = false;
+
     }
 
     public override void PhaseChanged(bool val) // 페이즈가 바뀌었을 때
