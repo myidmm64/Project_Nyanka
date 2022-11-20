@@ -83,7 +83,6 @@ public class Player : Entity
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
         _selectable = false;
-
     }
 
     public override void PhaseChanged(bool val) // 페이즈가 바뀌었을 때
