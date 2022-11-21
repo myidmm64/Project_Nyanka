@@ -6,9 +6,14 @@ using static Define;
 
 public class PlayerAttackModule : BaseAttackModule
 {
+    // 애니메이션 이벤트들
     [SerializeField]
     private PlayerAnimationEvent _playerAnimationEvent = null;
 
+
+    private PlayerAnimationEvent _currentEvent = null;
+
+    // 체크 관련
     public bool Attackable
     {
         get
@@ -20,36 +25,43 @@ public class PlayerAttackModule : BaseAttackModule
 
             return check;
         }
-    }
+    } // 어택이 가능한지
     private bool _attackCheck = false; // 어택을 했는가요?
     public bool AttackCheck { get => _attackCheck; set => _attackCheck = value; }
 
+    // 현재 공격을 하고있는 방향
     protected AttackDirection _currentDirection = AttackDirection.Up;
     public AttackDirection CurrentDirection { get => _currentDirection; set => _currentDirection = value; }
 
-    public void PlayerAttackStarted()
+    public void EventSet()
     {
+
+    }
+
+    public void PlayerAttackStarted() // 시작
+    {
+        CubeGrid.ViewEnd();
         _playerAnimationEvent.AttackStarted();
     }
 
-    public void PlayerAttackAnimation(int id)
+    public void PlayerAttackAnimation(int id) // 중간 애니메이션
     {
         _playerAnimationEvent.AttackAnimation(id);
     }
 
-    public void PlayerAttackEnd()
+    public void PlayerAttackEnd() // 끝
     {
         _playerAnimationEvent.AttackEnd();
     }
 
-    public void TryAttack()
+    public void TryAttack() // 플레이어 어택 시도
     {
         PlayerMainModule module = _mainModule as PlayerMainModule;
-        UIManager.Instance.UISetting(module);
+        module.UISet();
         if (Attackable)
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            UIManager.Instance.UISetting(module);
+            module.UISet();
             module.ViewAttackDirection(false);
         }
         else
@@ -63,10 +75,9 @@ public class PlayerAttackModule : BaseAttackModule
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
     {
         AttackReady(dir);
-        StartCoroutine(Attack());
     }
 
-    private void AttackReady(AttackDirection dir)
+    private void AttackReady(AttackDirection dir) // 어택 수행 전 준비작업
     {
         PlayerMainModule module = _mainModule as PlayerMainModule;
         CubeGrid.ViewEnd();
@@ -78,6 +89,8 @@ public class PlayerAttackModule : BaseAttackModule
         look.y = transform.position.y;
         module.ModelController.LookAt(look);
         _currentDirection = dir;
+
+        StartCoroutine(Attack());
     }
 
     public override IEnumerator Attack() // 공격

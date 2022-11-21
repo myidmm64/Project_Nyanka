@@ -8,12 +8,14 @@ public abstract class BaseHPModule : MonoBehaviour
 {
     private BaseMainModule _mainModule = null;
 
+    // 필요한 데이터들
     [SerializeField]
     private Slider _hpSlider = null;
     private Coroutine _hpCoroutine = null;
     [SerializeField]
     private TextMeshProUGUI _hpText = null;
 
+    // 수치 데이터
     protected int _hp = 1; // 현재 체력
     public bool IsLived => _hp > 0; // 살아있누?
 
@@ -27,14 +29,14 @@ public abstract class BaseHPModule : MonoBehaviour
         _hpText.SetText($"{_hp} / {_mainModule.DataSO.hp}");
     }
 
-    public void Died()
+    public virtual void Died()
     {
         Debug.Log("사망띠");
         StopAllCoroutines();
         Destroy(gameObject);
     }
 
-    public virtual void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
+    public virtual void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer) // 기본적 피격 수행
     {
         if (IsLived == false)
             return;
@@ -60,7 +62,7 @@ public abstract class BaseHPModule : MonoBehaviour
 
     }
 
-    private IEnumerator HpDownCoroutine(int dmg)
+    private IEnumerator HpDownCoroutine(int dmg) // 슬라이더 소모 애니메이션
     {
         float delta = 0f;
         float start = _hp;

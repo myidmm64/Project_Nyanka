@@ -7,45 +7,41 @@ using static Define;
 
 public class PlayerMainModule : BaseMainModule
 {
+    //턴 관련
     private bool _pressTurnChecked = false; // 프레스 턴을 사용했나요??
     public bool PressTurnChecked
     {
         get => _pressTurnChecked;
         set => _pressTurnChecked = value;
     }
-
-    private bool _myTurnEnded = false;
+    private bool _myTurnEnded = false; // 자신의 턴 종료
     [field: SerializeField]
     private UnityEvent OnMyTurnEnded = null;
     [field: SerializeField]
     private UnityEvent OnPlayerTurnStart = null;
 
+    // 모델 관련
     [SerializeField]
     protected Transform _modelController = null;
     public Transform ModelController => _modelController;
 
-    [SerializeField]
-    private BaseSkillModule _baseSkillModule = null;
-
+    // 어택 방향 관련
     [SerializeField]
     private AttackDirectionObject _attackDirectionObj = null;
     private List<GameObject> _attackDirections = new List<GameObject>();
     public List<GameObject> AttackDirections => _attackDirections;
 
+    //모듈 변형
     public PlayerAttackModule AttackModule => _attackModule as PlayerAttackModule;
     public PlayerMoveModule MoveModule => _moveModule as PlayerMoveModule;
+    public PlayerHPModule HPModule => _hpModule as PlayerHPModule;
+    public PlayerSkillModule SkillModule => _skillModule as PlayerSkillModule;
 
-
+    // 간단 매크로
     public bool IsLived => _hpModule.IsLived;
-    public bool Attackable
-    {
-        get
-        {
-            PlayerAttackModule module = _attackModule as PlayerAttackModule;
-            return  module.Attackable;
-        }
-    }
+    public bool Attackable => AttackModule.Attackable;
 
+    // 변신 관련
     private bool _transed = false;
     public bool Transed => _transed;
 
@@ -57,6 +53,7 @@ public class PlayerMainModule : BaseMainModule
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
     {
+        CubeGrid.ViewEnd();
         AttackModule.CurrentDirection = AttackDirection.Up;
         OnMyTurnEnded?.Invoke();
         _myTurnEnded = true;
@@ -64,7 +61,7 @@ public class PlayerMainModule : BaseMainModule
         _selectable = false;
     }
 
-    public override void PhaseChange(PhaseType type)
+    public override void PhaseChange(PhaseType type) // 페이즈가 바뀔 때
     {
         if (type == PhaseType.Player)
             OnPlayerTurnStart?.Invoke();
@@ -76,7 +73,7 @@ public class PlayerMainModule : BaseMainModule
         _selectable = true;
     }
 
-    public override void Selected()
+    public override void Selected() // 선택되었을 때
     {
         if (_selectable == false) return;
         Debug.Log("셀렉트");
@@ -88,7 +85,7 @@ public class PlayerMainModule : BaseMainModule
         ViewDataByCellIndex();
     }
 
-    public override void SelectEnd()
+    public override void SelectEnd() // 선택 해제
     {
         Debug.Log("셀렉트 엔드");
         VCamOne.Follow = null;
@@ -118,22 +115,19 @@ public class PlayerMainModule : BaseMainModule
         }
     }
 
-    public void PlayerMove(Vector3Int v)
+    public void PlayerMove(Vector3Int v) // 이동 시도
     {
-        PlayerMoveModule module = _moveModule as PlayerMoveModule;
-        module.TryMove(v);
+        MoveModule.TryMove(v);
     }
 
-    public void TryAttack()
+    public void TryAttack() // 공격 시도
     {
-        PlayerAttackModule module = _attackModule as PlayerAttackModule;
-        module.TryAttack();
+        AttackModule.TryAttack();
     }
 
-    public void Attack(AttackDirection dir)
+    public void Attack(AttackDirection dir) // 실질적 공격
     {
-        PlayerAttackModule module = _attackModule as PlayerAttackModule;
-        module.PlayerAttack(dir);
+        AttackModule.PlayerAttack(dir);
     }
 
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
@@ -226,5 +220,10 @@ public class PlayerMainModule : BaseMainModule
                 break;
         }
         return v;
+    }
+
+    public void UISet()
+    {
+        UIManager.Instance.UISetting(this);
     }
 }
