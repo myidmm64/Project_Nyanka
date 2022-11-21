@@ -8,8 +8,12 @@ using static Define;
 
 public abstract class PlayerAnimationEvent : MonoBehaviour
 {
-    [SerializeField]
     protected PlayerMainModule _mainModule = null;
+
+    private void Start()
+    {
+        _mainModule = GetComponent<PlayerMainModule>();
+    }
 
     public abstract void AttackStarted();
 

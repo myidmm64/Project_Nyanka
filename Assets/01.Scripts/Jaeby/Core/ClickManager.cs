@@ -156,7 +156,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
-        //_currentPlayer.PlayerIdle();
+        _currentPlayer.PlayerIdle();
     }
 
     public void PlayerMove()

@@ -46,6 +46,9 @@ public class PlayerMainModule : BaseMainModule
         }
     }
 
+    private bool _transed = false;
+    public bool Transed => _transed;
+
     private void Start()
     {
         //PosManager.Instance.playerInfo.Add(this);
@@ -82,7 +85,7 @@ public class PlayerMainModule : BaseMainModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CubeGrid.ClcikViewEnd(false);
         UIManager.Instance.UIInit(this);
-        //ViewStart();
+        ViewDataByCellIndex();
     }
 
     public override void SelectEnd()
@@ -139,6 +142,15 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ClickView(CellIndex, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, DataSO.normalMoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, CellIndex, DataSO.normalAttackRange, true);
+    }
+
+    public void PlayerIdle() // 대기
+    {
+        if (_myTurnEnded) return;
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+        CubeGrid.ViewEnd();
+        CubeGrid.ClcikViewEnd(true);
+        TryAttack();
     }
 
     public bool GetMoveableCheck(Vector3Int index) // index가 무브 가능한지
