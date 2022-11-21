@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class BaseAttackModule : MonoBehaviour
 {
-    private BaseMainModule _mainModule = null;
+    protected BaseMainModule _mainModule = null;
 
     private void Start()
     {

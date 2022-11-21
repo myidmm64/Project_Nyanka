@@ -16,21 +16,27 @@ public enum PhaseType
     Enemy
 }
 
-public abstract class BaseMainModule : MonoBehaviour
+public abstract class BaseMainModule : MonoBehaviour, ISelectable
 {
+    // 모듈 관련
     [SerializeField]
     protected BaseAttackModule _attackModule = null;
     [SerializeField]
     protected BaseMoveModule _moveModule = null;
     [SerializeField]
     protected BaseHPModule _hpModule = null;
+
+    // 데이터
     [SerializeField]
     private EntityDataSO _dataSO = null;
     public EntityDataSO DataSO => _dataSO;
 
+    // 엔티티 타입
+    [SerializeField]
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
 
+    // 현재 엔티티가 서있는 인덱스
     protected Vector3Int _cellIndex = Vector3Int.zero; // 현재 서있는 셀의 인덱스
     public Vector3Int CellIndex
     {
@@ -44,11 +50,13 @@ public abstract class BaseMainModule : MonoBehaviour
         }
         set => _cellIndex = value;
     }
-
+    
+    // 애니메이터
     [SerializeField]
     protected Animator _animator = null;
     public Animator animator => _animator;
 
+    // 속성 관련
     public ElementType GetWeak // 약점 속성
     {
         get
@@ -67,18 +75,26 @@ public abstract class BaseMainModule : MonoBehaviour
         }
     }
 
+    // Selectable 인터페이스 구현
     private bool _selectedFlag = false;
     public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
 
+    // 선택 가능 여부
     protected bool _selectable = true;
     public bool Selectable => _selectable;
 
-    public abstract void PhaseChange(PhaseType type);
-    public abstract void Selected();
-    public abstract void UnSelected();
-    protected virtual void ViewData(Vector3Int index)
-    {
+    [SerializeField]
+    private NavMeshAgent _agent = null;
+    public NavMeshAgent Agent => _agent;
 
+    // 추상함수
+    public abstract void PhaseChange(PhaseType type); // 페이즈 교체
+    public abstract void Selected(); // 선택 
+    public abstract void SelectEnd(); // 선택 종료
+    protected virtual void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
+    {
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
     }
     public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
     {

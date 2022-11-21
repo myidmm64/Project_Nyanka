@@ -11,7 +11,7 @@ public abstract class BaseMoveModule : MonoBehaviour
         get => _moveable;
         set => _moveable = value;
     }
-    private BaseMainModule _mainModule = null;
+    protected BaseMainModule _mainModule = null;
 
     private void Start()
     {
