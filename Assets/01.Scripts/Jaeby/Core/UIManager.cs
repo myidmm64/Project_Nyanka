@@ -23,7 +23,7 @@ public class UIManager : MonoSingleTon<UIManager>
         UIDisable();
     }
 
-    public void UIInit(Player player)
+    public void UIInit(PlayerMainModule player)
     {
         UIReset();
         _playerImage.sprite = player.DataSO.sprite;
@@ -31,7 +31,7 @@ public class UIManager : MonoSingleTon<UIManager>
         UIEnable();
     }
 
-    public void UISetting(Player player)
+    public void UISetting(PlayerMainModule player)
     {
         if(player.Attackable)
         {

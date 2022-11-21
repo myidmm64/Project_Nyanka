@@ -22,7 +22,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private ISelectable _selectable = null;
     [SerializeField]
-    private Player _currentPlayer = null;
+    private PlayerMainModule _currentPlayer = null;
 
     [SerializeField]
     private LayerMask _laycastMask = 0;
@@ -56,7 +56,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                     _selectCellIndex = c.GetIndex();
                     SellSelect();
                 }
-                Player testPlayer = hit.collider.GetComponent<Player>();
+                PlayerMainModule testPlayer = hit.collider.GetComponent<PlayerMainModule>();
                 if (testPlayer != null && _currentPlayer != null)
                     if (testPlayer.CellIndex == _currentPlayer.CellIndex)
                     {
@@ -73,7 +73,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
                     _selectable = entity;
                     _selectable.Selected();
                 }
-                Player player = hit.collider.GetComponent<Player>();
+                PlayerMainModule player = hit.collider.GetComponent<PlayerMainModule>();
                 if (player != null)
                 {
                     _currentPlayer = player;
@@ -116,7 +116,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         }
     }
 
-    public void ForceSelect(Player player)
+    public void ForceSelect(PlayerMainModule player)
     {
         if (_currentPlayer != null)
         {
@@ -156,13 +156,13 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
-        _currentPlayer.PlayerIdle();
+        //_currentPlayer.PlayerIdle();
     }
 
     public void PlayerMove()
     {
         if (_currentPlayer == null) return;
-        _currentPlayer.TryMove(_selectCellIndex);
+        _currentPlayer.PlayerMove(_selectCellIndex);
     }
 
     public void PlayerTryTransform()
@@ -175,9 +175,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     public void PlayerSkill()
     {
-        if (_currentPlayer == null) return;
-        if (_currentPlayer.Skillable)
-            _currentPlayer.SkillMode();
+        //if (_currentPlayer == null) return;
+        //if (_currentPlayer.Skillable)
+        //    _currentPlayer.SkillMode();
     }
 
     public void ClickModeSet(LeftClickMode left, bool right)

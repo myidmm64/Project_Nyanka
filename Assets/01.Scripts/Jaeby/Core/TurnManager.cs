@@ -16,8 +16,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private TextMeshProUGUI _battlePointText = null;
 
     private List<Entity> _entitys;
-    private List<Player> _players;
-    public List<Player> Players => _players;
+    private List<PlayerMainModule> _players;
+    public List<PlayerMainModule> Players => _players;
     private List<Enemy> _enemys;
     public List<Enemy> Enemys => _enemys;
 
@@ -57,7 +57,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private void Awake()
     {
         _entitys = new List<Entity>(FindObjectsOfType<Entity>());
-        _players = new List<Player>(FindObjectsOfType<Player>());
+        _players = new List<PlayerMainModule>(FindObjectsOfType<PlayerMainModule>());
         _enemys = new List<Enemy>(FindObjectsOfType<Enemy>());
     }
 
@@ -76,7 +76,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         _loseTurn = false;
     }
 
-    public void UseTurn(int count, Player player)
+    public void UseTurn(int count, PlayerMainModule player)
     {
         PlayerTurnCount -= count;
         if (PlayerTurnCount <= 0)
@@ -111,9 +111,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
         PlayerTurnCount = GetLiveCount(_players);
         _turn++;
         OnNextTurn?.Invoke(_turn);
-        List<Player> livePlayers = _players.FindAll(v => v.IsLived);
+        List<PlayerMainModule> livePlayers = _players.FindAll(v => v.IsLived);
         for (int i = 0; i < livePlayers.Count; i++)
-            livePlayers[i].PlayerTurnStart();
+            livePlayers[i].PhaseChange(PhaseType.Player);
         OnNextPhase?.Invoke(true);
         NewTurnReset();
     }
@@ -143,7 +143,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
             _whoseTurnText.SetText("enemy's Turn");
     }
 
-    private int GetLiveCount(List<Player> entitys)
+    private int GetLiveCount(List<PlayerMainModule> entitys)
     {
         return entitys.FindAll(x => x.IsLived).Count;
     }
@@ -152,7 +152,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         return entitys.FindAll(x => x.IsLived).Count;
     }
 
-    public void PressTurnCheck(Player player)
+    public void PressTurnCheck(PlayerMainModule player)
     {
         if (player.PressTurnChecked)
         {
@@ -162,7 +162,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         if (_plusTurn)
         {
             player.PressTurnChecked = true;
-            player.Moveable = true;
+            player.MoveModule.Moveable = true;
             OnPlusTurn?.Invoke();
             ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, true);
             ClickManager.Instance.ForceSelect(player);

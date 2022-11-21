@@ -113,7 +113,7 @@ public class Player : Entity
     protected override void ChildSelected()
     {
         CubeGrid.ClcikViewEnd(false);
-        UIManager.Instance.UIInit(this);
+        //UIManager.Instance.UIInit(this);
     }
 
     protected override void ChildSelectEnd()
@@ -158,18 +158,18 @@ public class Player : Entity
 
     private void TryAttack() // 공격 모드 돌입 시도
     {
-        UIManager.Instance.UISetting(this);
+        //UIManager.Instance.UISetting(this);
         if (Attackable)
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            UIManager.Instance.UISetting(this);
+            //UIManager.Instance.UISetting(this);
             ViewAttackDirection(false);
         }
         else
         {
             if (_pressTurnChecked && _attackCheck)
                 ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-            TurnManager.Instance.UseTurn(1, this);
+            //TurnManager.Instance.UseTurn(1, this);
         }
     }
 
@@ -180,7 +180,7 @@ public class Player : Entity
             Destroy(_attackDirections[i]);
         _attackDirections.Clear();
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-        UIManager.Instance.UISetting(this);
+        //UIManager.Instance.UISetting(this);
         ViewAttackDirection(true);
     }
 
@@ -226,7 +226,7 @@ public class Player : Entity
         Debug.Log("Attack End !!");
         TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1); // 공격 성공
         _attackCount++;
-        TurnManager.Instance.PressTurnCheck(this);
+        //TurnManager.Instance.PressTurnCheck(this);
     }
 
     private void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
@@ -244,7 +244,7 @@ public class Player : Entity
             if (enemyCheck == false) 
                 continue;
             AttackDirectionObject ob = Instantiate(_attackDirectionObj);
-            ob.Initailize((AttackDirection)i, this, isSkill);
+            //ob.Initailize((AttackDirection)i, this, isSkill);
             ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
             float angle = 0f;
             switch ((AttackDirection)i)

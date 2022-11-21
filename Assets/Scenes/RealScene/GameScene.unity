@@ -35586,10 +35586,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915851362}
-  - component: {fileID: 1915851361}
   - component: {fileID: 1915851360}
   - component: {fileID: 1915851359}
   - component: {fileID: 1915851363}
+  - component: {fileID: 1915851368}
+  - component: {fileID: 1915851367}
+  - component: {fileID: 1915851366}
+  - component: {fileID: 1915851365}
+  - component: {fileID: 1915851364}
+  - component: {fileID: 1915851369}
   m_Layer: 6
   m_Name: Player_Wakamo
   m_TagString: Untagged
@@ -35632,35 +35637,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1915851361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915851357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db14de52e2c1cbb42b64f663a388b689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hpSlider: {fileID: 1414827198}
-  _hpText: {fileID: 1414827196}
-  _animator: {fileID: 1915851363}
-  _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
-  _agent: {fileID: 1915851360}
-  _attackDirectionObj: {fileID: -6348480140593270851, guid: b2fd24a4f2e230f4cbaa018a1e519efc,
-    type: 3}
-  _modelController: {fileID: 841910673}
-  _path: {fileID: 300429781}
-  _attackPrefab0: {fileID: 5858405331767567224, guid: 33b9179d25ad65a47b1b360d9b4a070b,
-    type: 3}
-  _attackPrefab1: {fileID: 412683866871014472, guid: 3586f6122e99f434ca117755ed5606a7,
-    type: 3}
-  _attackPrefab2: {fileID: 5858405331767567224, guid: 33b9179d25ad65a47b1b360d9b4a070b,
-    type: 3}
-  _normalSkillPrefab: {fileID: 7840615393823145977, guid: 001feffed90b8804ab018239ebe5b93d,
-    type: 3}
 --- !u!4 &1915851362
 Transform:
   m_ObjectHideFlags: 0
@@ -35698,6 +35674,106 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1915851364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e5d498ea469cf439f48584fc62f4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpSlider: {fileID: 1414827198}
+  _hpText: {fileID: 1414827196}
+--- !u!114 &1915851365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46a9cc5339f078459a9238e2b51911d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1915851366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c9b52dccb89ca4fae52ba216fcabd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAnimationEvent: {fileID: 1915851369}
+--- !u!114 &1915851367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c335f2b4aba8d8c4ebffe16c9ada19e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1915851368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9f01d1841e4754f8636c4a5c8ce68d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackModule: {fileID: 1915851366}
+  _moveModule: {fileID: 1915851367}
+  _hpModule: {fileID: 1915851364}
+  _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
+  _entityType: 1
+  _animator: {fileID: 1915851363}
+  _agent: {fileID: 1915851360}
+  OnMyTurnEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerTurnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  _modelController: {fileID: 841910673}
+  _baseSkillModule: {fileID: 1915851365}
+  _attackDirectionObj: {fileID: -6348480140593270851, guid: b2fd24a4f2e230f4cbaa018a1e519efc,
+    type: 3}
+--- !u!114 &1915851369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915851357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcbd478f542117479185513575b1d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainModule: {fileID: 1915851368}
+  _path: {fileID: 300429781}
+  _attackPrefab0: {fileID: 5858405331767567224, guid: 33b9179d25ad65a47b1b360d9b4a070b,
+    type: 3}
+  _attackPrefab1: {fileID: 412683866871014472, guid: 3586f6122e99f434ca117755ed5606a7,
+    type: 3}
+  _attackPrefab2: {fileID: 5858405331767567224, guid: 33b9179d25ad65a47b1b360d9b4a070b,
+    type: 3}
 --- !u!1001 &1917584134
 PrefabInstance:
   m_ObjectHideFlags: 0

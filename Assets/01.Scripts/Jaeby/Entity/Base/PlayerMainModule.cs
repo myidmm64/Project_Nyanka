@@ -17,6 +17,8 @@ public class PlayerMainModule : BaseMainModule
     private bool _myTurnEnded = false;
     [field: SerializeField]
     private UnityEvent OnMyTurnEnded = null;
+    [field: SerializeField]
+    private UnityEvent OnPlayerTurnStart = null;
 
     [SerializeField]
     protected Transform _modelController = null;
@@ -28,10 +30,31 @@ public class PlayerMainModule : BaseMainModule
     [SerializeField]
     private AttackDirectionObject _attackDirectionObj = null;
     private List<GameObject> _attackDirections = new List<GameObject>();
+    public List<GameObject> AttackDirections => _attackDirections;
+
+    public PlayerAttackModule AttackModule => _attackModule as PlayerAttackModule;
+    public PlayerMoveModule MoveModule => _moveModule as PlayerMoveModule;
+
+
+    public bool IsLived => _hpModule.IsLived;
+    public bool Attackable
+    {
+        get
+        {
+            PlayerAttackModule module = _attackModule as PlayerAttackModule;
+            return  module.Attackable;
+        }
+    }
+
+    private void Start()
+    {
+        //PosManager.Instance.playerInfo.Add(this);
+        Agent.updateRotation = false;
+    }
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
     {
-        //_currentDirection = AttackDirection.Up;
+        AttackModule.CurrentDirection = AttackDirection.Up;
         OnMyTurnEnded?.Invoke();
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
@@ -40,19 +63,42 @@ public class PlayerMainModule : BaseMainModule
 
     public override void PhaseChange(PhaseType type)
     {
+        if (type == PhaseType.Player)
+            OnPlayerTurnStart?.Invoke();
+
+        MoveModule.Moveable = true;
+        AttackModule.AttackCheck = false;
+        _myTurnEnded = false;
+        _pressTurnChecked = false;
+        _selectable = true;
     }
 
     public override void Selected()
     {
+        if (_selectable == false) return;
+        Debug.Log("셀렉트");
+        VCamOne.Follow = transform;
+        CameraManager.Instance.CameraSelect(VCamOne);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        CubeGrid.ClcikViewEnd(false);
+        UIManager.Instance.UIInit(this);
+        //ViewStart();
     }
 
     public override void SelectEnd()
     {
+        Debug.Log("셀렉트 엔드");
+        VCamOne.Follow = null;
+        CameraManager.Instance.CameraSelect(VCamTwo);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        CubeGrid.ClcikViewEnd(true);
+        UIManager.Instance.UIDisable();
     }
 
     public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
     {
-        /*if (_attackCheck)
+        PlayerAttackModule module = _attackModule as PlayerAttackModule;
+        if (module.AttackCheck)
         {
         }
         else
@@ -66,7 +112,7 @@ public class PlayerMainModule : BaseMainModule
             {
                 ViewDataByCellIndex();
             }
-        }*/
+        }
     }
 
     public void PlayerMove(Vector3Int v)
@@ -79,6 +125,12 @@ public class PlayerMainModule : BaseMainModule
     {
         PlayerAttackModule module = _attackModule as PlayerAttackModule;
         module.TryAttack();
+    }
+
+    public void Attack(AttackDirection dir)
+    {
+        PlayerAttackModule module = _attackModule as PlayerAttackModule;
+        module.PlayerAttack(dir);
     }
 
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
@@ -109,7 +161,7 @@ public class PlayerMainModule : BaseMainModule
             if (enemyCheck == false)
                 continue;
             AttackDirectionObject ob = Instantiate(_attackDirectionObj);
-            //ob.Initailize((AttackDirection)i, this, isSkill);
+            ob.Initailize((AttackDirection)i, this, isSkill);
             ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
             float angle = 0f;
             switch ((AttackDirection)i)
@@ -141,7 +193,7 @@ public class PlayerMainModule : BaseMainModule
         else
             CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, DataSO.normalAttackRange), true);
     }
-    private Vector3Int GetAttackDirection(AttackDirection dir)
+    public Vector3Int GetAttackDirection(AttackDirection dir)
     {
         Vector3Int v = Vector3Int.zero;
         switch (dir)

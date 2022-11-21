@@ -12,11 +12,11 @@ public class AttackDirectionObject : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _spriteRenderer = null;
 
-    private Player _player = null;
+    private PlayerMainModule _player = null;
     private bool _isSkillObj = false;
     private AttackDirection _dir = AttackDirection.Up;
 
-    public void Initailize(AttackDirection dir, Player player, bool skill)
+    public void Initailize(AttackDirection dir, PlayerMainModule player, bool skill)
     {
         _isSkillObj = skill;
         _dir = dir;
@@ -42,10 +42,10 @@ public class AttackDirectionObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(_isSkillObj)
-            _player.PlayerSkill(_dir);
-        else
-            _player.PlayerAttack(_dir);
+        //if(_isSkillObj)
+            //_player.PlayerSkill(_dir);
+        //else
+            _player.Attack(_dir);
         Debug.Log($"d");
     }
 }
