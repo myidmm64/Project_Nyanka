@@ -3,14 +3,6 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-public enum GridType
-{
-    None,
-    Normal,
-    Attack,
-    Click,
-    Skill
-}
 namespace MapTileGridCreator.Core
 {
     /// <summary>

@@ -3,16 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
-
-[System.Serializable]
-public enum AttackDirection
-{
-    Up,
-    Right,
-    Left,
-    Down
-}
-
 public class Player : Entity
 {
     #region º¯¼ö

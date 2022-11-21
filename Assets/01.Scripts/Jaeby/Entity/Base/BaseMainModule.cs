@@ -8,13 +8,6 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
 
-[SerializeField]
-public enum PhaseType
-{
-    None,
-    Player,
-    Enemy
-}
 
 public abstract class BaseMainModule : MonoBehaviour, ISelectable
 {

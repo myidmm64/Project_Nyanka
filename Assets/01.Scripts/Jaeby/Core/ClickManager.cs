@@ -186,12 +186,3 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _rightClickLock = right;
     }
 }
-
-[System.Serializable]
-public enum LeftClickMode
-{
-    NONE,
-    AllClick,
-    JustCell,
-    Nothing
-}

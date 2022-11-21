@@ -8,23 +8,6 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
 
-[System.Serializable]
-public enum EntityType
-{
-    None,
-    Player,
-    Enemy
-}
-
-[System.Serializable]
-public enum ElementType
-{
-    NONE,
-    Fire,
-    Water,
-    Thunder,
-    SIZE
-}
 
 public abstract class Entity : MonoBehaviour, ISelectable
 {
