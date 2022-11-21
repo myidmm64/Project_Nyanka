@@ -15,4 +15,6 @@ public class EntityDataSO : ScriptableObject
     public ElementType elementType = ElementType.NONE;
     public List<Vector3Int> normalAttackRange = new List<Vector3Int>();
     public List<Vector3Int> normalMoveRange = new List<Vector3Int>();
+    public List<Vector3Int> normalSkillRange = new List<Vector3Int>();
+    public List<Vector3Int> transSkillRange = new List<Vector3Int>();
 }

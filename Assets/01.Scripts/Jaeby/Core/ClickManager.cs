@@ -153,18 +153,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer = null;
     }
 
-
     public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
         _currentPlayer.PlayerIdle();
-    }
-
-    public void PlayerAttack()
-    {
-        if (_currentPlayer == null) return;
-        _currentPlayer.AttackCheck = true;
-        ClickModeSet(LeftClickMode.JustCell, true);
     }
 
     public void PlayerMove()
@@ -183,6 +175,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void PlayerSkill()
     {
         if (_currentPlayer == null) return;
+        if (_currentPlayer.Skillable)
+            _currentPlayer.SkillMode();
     }
 
     public void ClickModeSet(LeftClickMode left, bool right)
