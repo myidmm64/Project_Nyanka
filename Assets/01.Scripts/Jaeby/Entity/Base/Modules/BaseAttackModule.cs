@@ -7,6 +7,12 @@ public abstract class BaseAttackModule : MonoBehaviour
 {
     protected BaseMainModule _mainModule = null;
 
+    // 애니메이션 이벤트들
+    [SerializeField]
+    protected PlayerAnimationEvent _normalAttackEvent = null;
+    [SerializeField]
+    protected PlayerAnimationEvent _normalSkillEvent = null;
+
     private void Start()
     {
         _mainModule = GetComponent<BaseMainModule>();

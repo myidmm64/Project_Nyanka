@@ -8,8 +8,9 @@ public class PlayerAttackModule : BaseAttackModule
 {
     // 애니메이션 이벤트들
     [SerializeField]
-    private PlayerAnimationEvent _playerAnimationEvent = null;
-
+    private PlayerAnimationEvent _transAttackEvent = null;
+    [SerializeField]
+    private PlayerAnimationEvent _transSkillEvent = null;
 
     private PlayerAnimationEvent _currentEvent = null;
 
@@ -33,25 +34,43 @@ public class PlayerAttackModule : BaseAttackModule
     protected AttackDirection _currentDirection = AttackDirection.Up;
     public AttackDirection CurrentDirection { get => _currentDirection; set => _currentDirection = value; }
 
-    public void EventSet()
+    public void EventSet(AttackAnimationType type)
     {
-
+        switch (type)
+        {
+            case AttackAnimationType.None:
+                break;
+            case AttackAnimationType.NormalAttack:
+                _currentEvent = _normalAttackEvent;
+                break;
+            case AttackAnimationType.NormalSkill:
+                _currentEvent = _normalSkillEvent;
+                break;
+            case AttackAnimationType.TransAttack:
+                _currentEvent = _transAttackEvent;
+                break;
+            case AttackAnimationType.TransSkill:
+                _currentEvent = _transSkillEvent;
+                break;
+            default:
+                break;
+        }
     }
 
     public void PlayerAttackStarted() // 시작
     {
         CubeGrid.ViewEnd();
-        _playerAnimationEvent.AttackStarted();
+        _currentEvent.AttackStarted();
     }
 
     public void PlayerAttackAnimation(int id) // 중간 애니메이션
     {
-        _playerAnimationEvent.AttackAnimation(id);
+        _currentEvent.AttackAnimation(id);
     }
 
     public void PlayerAttackEnd() // 끝
     {
-        _playerAnimationEvent.AttackEnd();
+        _currentEvent.AttackEnd();
     }
 
     public void TryAttack() // 플레이어 어택 시도
@@ -74,6 +93,12 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
     {
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        if (module.Transed)
+            EventSet(AttackAnimationType.TransAttack);
+        else
+            EventSet(AttackAnimationType.NormalAttack);
+
         AttackReady(dir);
     }
 

@@ -92,6 +92,7 @@ public class PlayerMainModule : BaseMainModule
         CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         CubeGrid.ClcikViewEnd(true);
+        CubeGrid.ViewEnd();
         UIManager.Instance.UIDisable();
     }
 

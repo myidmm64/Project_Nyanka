@@ -35712,7 +35712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c9b52dccb89ca4fae52ba216fcabd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAnimationEvent: {fileID: 1915851369}
+  _normalAttackEvent: {fileID: 1915851369}
+  _normalSkillEvent: {fileID: 0}
+  _transAttackEvent: {fileID: 0}
+  _transSkillEvent: {fileID: 0}
 --- !u!114 &1915851367
 MonoBehaviour:
   m_ObjectHideFlags: 0
