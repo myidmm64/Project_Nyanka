@@ -170,6 +170,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (_currentPlayer == null) return;
         if (TurnManager.Instance.BattlePoint < 8) return;
         TurnManager.Instance.BattlePointChange(0);
+
     }
 
     public void PlayerSkill()
