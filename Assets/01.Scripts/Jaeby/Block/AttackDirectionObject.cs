@@ -30,7 +30,7 @@ public class AttackDirectionObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        _player.ViewAttackRange(_dir);
+        _player.ViewAttackRange(_dir, _isSkillObj);
         Debug.Log($"entr");
     }
 
