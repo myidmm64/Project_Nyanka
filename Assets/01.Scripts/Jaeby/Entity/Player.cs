@@ -121,6 +121,19 @@ public class Player : Entity
 
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
     {
+        AttackReady(dir);
+        StartCoroutine(Attack());
+    }
+
+    public void PlayerSkill(AttackDirection dir)
+    {
+        AttackReady(dir);
+        StartCoroutine(Skill());
+    }
+
+
+    private void AttackReady(AttackDirection dir)
+    {
         CubeGrid.ViewEnd();
         for (int i = 0; i < _attackDirections.Count; i++)
             Destroy(_attackDirections[i]);
@@ -130,7 +143,6 @@ public class Player : Entity
         look.y = transform.position.y;
         _modelController.LookAt(look);
         _currentDirection = dir;
-        StartCoroutine(Attack());
     }
 
     private void TryAttack() // 공격 모드 돌입 시도
@@ -175,6 +187,14 @@ public class Player : Entity
     {
         AttackStarted();
         _animator.Play("Attack");
+        _animator.Update(0);
+        yield break;
+    }
+
+    public override IEnumerator Skill()
+    {
+        SkillStarted();
+        _animator.Play("Skill_Start");
         _animator.Update(0);
         yield break;
     }
@@ -304,7 +324,17 @@ public class Player : Entity
 
     }
 
+    public virtual void SkillStarted()
+    {
+
+    }
+
     public virtual void AttackAnimation(int id)
+    {
+
+    }
+
+    public virtual void SkillAnimation(int trans)
     {
 
     }

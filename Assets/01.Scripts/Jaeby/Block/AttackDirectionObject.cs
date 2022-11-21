@@ -29,7 +29,8 @@ public class AttackDirectionObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _player.PlayerAttack(_dir);
+        //_player.PlayerAttack(_dir);
+        _player.PlayerSkill(_dir);
         Debug.Log($"d");
     }
 }

@@ -143,6 +143,11 @@ public abstract class Entity : MonoBehaviour, ISelectable
         yield break;
     }
 
+    public virtual IEnumerator Skill()
+    {
+        yield break;
+    }
+
     protected void ViewStart()
     {
         ViewData(CellIndex);

@@ -16,11 +16,19 @@ public class Player_Wakamo : Player
     private GameObject _attackPrefab1 = null;
     [SerializeField]
     private GameObject _attackPrefab2 = null;
+    [SerializeField]
+    private GameObject _normalSkillPrefab = null;
 
     public override void AttackStarted()
     {
         base.AttackStarted();
         //CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
+    }
+
+    public override void SkillStarted()
+    {
+        base.SkillStarted();
+        CameraManager.Instance.CartCamSelect(_path, _modelController, 0f);
     }
 
     public override void AttackEnd()
@@ -35,6 +43,39 @@ public class Player_Wakamo : Player
     {
         yield return new WaitForSeconds(0f);
         a?.Invoke();
+    }
+
+    public override void SkillAnimation(int trans)
+    {
+        List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections(_currentDirection, _dataSO.normalAttackRange), true);
+        if (cells.Count == 0) return;
+
+        for (int i = 0; i < cells.Count; i++)
+            cells[i].CellAttack(_dataSO.normalAtk, _dataSO.elementType, _entityType);
+
+        List<Enemy> enemys = new List<Enemy>();
+        for (int i = 0; i < cells.Count; i++)
+            if (cells[i].GetObj?.GetComponent<Enemy>() != null)
+                enemys.Add(cells[i].GetObj?.GetComponent<Enemy>());
+        if (trans == 0)
+        {
+
+        }
+        else
+        {
+            GameObject obj = Instantiate(_normalSkillPrefab);
+            Destroy(obj, 1.5f);
+            CameraManager.Instance.CameraShake(12f, 10f, 0.24f);
+
+            for (int i = 0; i < enemys.Count; i++)
+            {
+                int dmg = UnityEngine.Random.Range(_dataSO.normalMinAtk, _dataSO.normalMaxAtk);
+                bool critical = UnityEngine.Random.Range(0, 100) < 50;
+                if (critical)
+                    dmg = Mathf.RoundToInt(dmg * 1.5f);
+                enemys[i].ApplyDamage(dmg, _dataSO.elementType, critical, true);
+            }
+        }
     }
 
     public override void AttackAnimation(int id)
