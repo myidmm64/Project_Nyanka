@@ -38,12 +38,9 @@ public class PlayerMainModule : BaseMainModule
     public PlayerSkillModule SkillModule => _skillModule as PlayerSkillModule;
 
     // 간단 매크로
-    public bool IsLived => _hpModule.IsLived;
+    public bool IsLived => HPModule.IsLived;
     public bool Attackable => AttackModule.Attackable;
-
-    // 변신 관련
-    private bool _transed = false;
-    public bool Transed => _transed;
+    public bool Transed => _transformModule.Transed;
 
     private void Start()
     {
@@ -129,6 +126,11 @@ public class PlayerMainModule : BaseMainModule
     public void Attack(AttackDirection dir) // 실질적 공격
     {
         AttackModule.PlayerAttack(dir);
+    }
+
+    public void Transformation()
+    {
+        _transformModule.TransfomationStart();
     }
 
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시

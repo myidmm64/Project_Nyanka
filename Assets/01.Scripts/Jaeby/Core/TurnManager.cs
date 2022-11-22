@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -40,6 +41,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public UnityEvent<int> OnNextTurn = null;
     public UnityEvent<int> OnBattlePointUp = null;
 
+    private List<TurnAction> _turnActions = new List<TurnAction>();
 
     private int _playerTurnCount = 0;
     private int PlayerTurnCount
@@ -115,6 +117,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         for (int i = 0; i < livePlayers.Count; i++)
             livePlayers[i].PhaseChange(PhaseType.Player);
         OnNextPhase?.Invoke(true);
+        TurnActionCheck();
         NewTurnReset();
     }
 
@@ -191,5 +194,52 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         _loseTurn = false;
         _plusTurn = false;
+    }
+
+    public void TurnActionAdd(TurnAction turnAction)
+    {
+        _turnActions.Add(turnAction);
+    }
+
+    private void TurnActionCheck()
+    {
+        for(int i = 0; i < _turnActions.Count; i++)
+        {
+
+        }
+        //if(locked?)
+    }
+}
+
+public class TurnAction
+{
+    private Action _callback = null;
+    private Action _startAction = null;
+    private int _maxCount = 0;
+    private int _count = 0;
+    private bool _locked = true;
+    public bool Locked { get => _locked; set => _locked = value; }
+
+    public TurnAction(int cnt, Action StartAction, Action Callback)
+    {
+        _count = cnt;
+        _maxCount = _count;
+        _startAction = StartAction;
+        _callback = Callback;
+        _startAction?.Invoke();
+    }
+
+    public void TryCallback()
+    {
+        _count--;
+        if (_count <= 0)
+            _callback?.Invoke();
+    }
+
+    public void Restart()
+    {
+        _startAction?.Invoke();
+        _count = _maxCount;
+        _locked = false;
     }
 }

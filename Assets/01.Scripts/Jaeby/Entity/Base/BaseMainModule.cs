@@ -20,6 +20,8 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     protected BaseHPModule _hpModule = null;
     [SerializeField]
     protected BaseSkillModule _skillModule = null;
+    [SerializeField]
+    protected BaseTransformModule _transformModule = null;
 
     // ตฅภฬลอ
     [SerializeField]
