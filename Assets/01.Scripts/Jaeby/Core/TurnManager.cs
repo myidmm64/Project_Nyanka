@@ -16,11 +16,11 @@ public class TurnManager : MonoSingleTon<TurnManager>
     [SerializeField]
     private TextMeshProUGUI _battlePointText = null;
 
-    private List<Entity> _entitys;
+    private List<BaseMainModule> _entitys;
     private List<PlayerMainModule> _players;
     public List<PlayerMainModule> Players => _players;
-    private List<Enemy> _enemys;
-    public List<Enemy> Enemys => _enemys;
+    private List<AIMainModule> _enemys;
+    public List<AIMainModule> Enemys => _enemys;
 
     [SerializeField]
     private int _turn = 1;
@@ -58,15 +58,15 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private void Awake()
     {
-        _entitys = new List<Entity>(FindObjectsOfType<Entity>());
+        _entitys = new List<BaseMainModule>(FindObjectsOfType<BaseMainModule>());
         _players = new List<PlayerMainModule>(FindObjectsOfType<PlayerMainModule>());
-        _enemys = new List<Enemy>(FindObjectsOfType<Enemy>());
+        _enemys = new List<AIMainModule>(FindObjectsOfType<AIMainModule>());
     }
 
     private void Start()
     {
-        for (int i = 0; i < _entitys.Count; i++)
-            OnNextPhase.AddListener(_entitys[i].PhaseChanged);
+        //for (int i = 0; i < _entitys.Count; i++)
+        //    OnNextPhase.AddListener(_entitys[i].PhaseChanged);
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
         PlayerTurnCount = GetLiveCount(_players);
@@ -97,12 +97,14 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private IEnumerator EnemysTurn()
     {
+        Debug.Log("야몸ㄴ놈너머");
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-        List<Enemy> liveEnemys = _enemys.FindAll(v => v.IsLived);
+        List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
 
         for (int i = 0; i < liveEnemys.Count; i++)
         {
-            yield return StartCoroutine(liveEnemys[i].GetComponent<NearAIBT>().StartAI());
+            Debug.Log(liveEnemys[i].name);
+            yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         }
         NextTurn();
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
@@ -150,7 +152,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         return entitys.FindAll(x => x.IsLived).Count;
     }
-    private int GetLiveCount(List<Enemy> entitys)
+    private int GetLiveCount(List<AIMainModule> entitys)
     {
         return entitys.FindAll(x => x.IsLived).Count;
     }

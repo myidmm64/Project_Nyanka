@@ -26,10 +26,10 @@ public class PlayerAnimationEvent_Wakamo : PlayerAnimationEvent
         for (int i = 0; i < cells.Count; i++)
             cells[i].CellAttack(module.MinDamage, _mainModule.DataSO.elementType, _mainModule.entityType);
 
-        List<Enemy> enemys = new List<Enemy>();
+        List<AIMainModule> enemys = new List<AIMainModule>();
         for (int i = 0; i < cells.Count; i++)
-            if (cells[i].GetObj?.GetComponent<Enemy>() != null)
-                enemys.Add(cells[i].GetObj?.GetComponent<Enemy>());
+            if (cells[i].GetObj?.GetComponent<AIMainModule>() != null)
+                enemys.Add(cells[i].GetObj?.GetComponent<AIMainModule>());
 
         GameObject obj = null;
         switch (id)

@@ -22,7 +22,7 @@ public class PlayerAttackModule : BaseAttackModule
             bool check = false;
             PlayerMainModule module = _mainModule as PlayerMainModule;
             for (int i = 0; i < 4; i++)
-                if (CellUtility.FindTarget<Enemy>(_mainModule.CellIndex, _mainModule.GetAttackVectorByDirections((AttackDirection)i, module.AttackRange), true).Count > 0)
+                if (CellUtility.FindTarget<AIMainModule>(_mainModule.CellIndex, _mainModule.GetAttackVectorByDirections((AttackDirection)i, module.AttackRange), true).Count > 0)
                     check = true;
 
             return check;

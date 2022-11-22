@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PosManager : MonoSingleTon<PosManager>
 {
-    public List<Entity> playerInfo = new List<Entity>();
-    public List<Entity> monsterInfo = new List<Entity>();
+    public List<BaseMainModule> playerInfo = new List<BaseMainModule>();
+    public List<BaseMainModule> monsterInfo = new List<BaseMainModule>();
 
     // Start is called before the first frame update
     void Start()

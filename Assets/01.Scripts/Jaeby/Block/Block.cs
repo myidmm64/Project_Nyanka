@@ -37,12 +37,12 @@ public class Block : MonoBehaviour
     /// <param name="index"></param>
     /// <param name="type"></param>
     /// <param name="entity"></param>
-    public void Explosion(int dmg, Vector3Int index, Entity entity)
+    public void Explosion(int dmg, Vector3Int index, BaseMainModule entity)
     {
         StartCoroutine(ExplosionWait(dmg, index, entity, 0.5f));
     }
 
-    private IEnumerator ExplosionWait(int dmg, Vector3Int index, Entity entity, float duration)
+    private IEnumerator ExplosionWait(int dmg, Vector3Int index, BaseMainModule entity, float duration)
     {
         Debug.Log($"{_elementType.ToString()}으로 같음");
         yield return new WaitForSeconds(duration);

@@ -18,8 +18,6 @@ namespace BehaviorTree
         public Node parent;
         protected List<Node> children = new List<Node>();
 
-        public List<Vector3Int> _target = new List<Vector3Int>();
-
         public Node()
         {
             parent = null;

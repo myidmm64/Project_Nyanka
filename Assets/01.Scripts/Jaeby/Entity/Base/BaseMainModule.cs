@@ -23,6 +23,15 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     [SerializeField]
     protected BaseTransformModule _transformModule = null;
 
+    // 프로퍼티
+    public virtual bool IsLived
+    {
+        get
+        {
+            return _hpModule?.IsLived == true;
+        }
+    }
+
     // 데이터
     [SerializeField]
     private EntityDataSO _dataSO = null;
@@ -92,6 +101,10 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     {
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
+    }
+    public void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
+    {
+        _hpModule?.ApplyDamage(dmg, elementType, critical, isPlayer);
     }
     public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
     {

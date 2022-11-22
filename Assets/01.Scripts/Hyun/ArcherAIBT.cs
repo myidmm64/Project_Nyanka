@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 
-public class NearAIBT : BehaviorTree.Tree
+public class ArcherAIBT : BehaviorTree.Tree
 {
-    private Enemy enemy;
 
     protected override void Start()
     {
-        enemy = GetComponent<Enemy>();
         base.Start();
     }
 
@@ -20,15 +18,15 @@ public class NearAIBT : BehaviorTree.Tree
         {
             new Sequence(new List<Node>
             {
-                 new CheckPlayerInAttackRange(enemy),
-                 new AttackToPlayer(enemy)
+                 //new CheckPlayerInAttackRange(enemy),
+                 //new AttackToPlayer(enemy)
             }),
             new Sequence(new List<Node>
             {
-                new FindPlayer(enemy),
-                new MoveToPlayer(transform,enemy),
-                new CheckPlayerInAttackRange(enemy),
-                new AttackToPlayer(enemy)
+                //new FindPlayer(enemy),
+                //new MoveToPlayer(transform,enemy),
+                //new CheckPlayerInAttackRange(enemy),
+                //new AttackToPlayer(enemy)
             })
         });
         return root;

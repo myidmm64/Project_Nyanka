@@ -39,7 +39,7 @@ public class PlayerMainModule : BaseMainModule
     public PlayerTransformModule TransformModule => _transformModule as PlayerTransformModule;
 
     // 간단 매크로
-    public bool IsLived => HPModule.IsLived;
+    public override bool IsLived => HPModule.IsLived;
     public bool Attackable => AttackModule.Attackable;
     public bool Transed => TransformModule.Transed;
 
@@ -209,7 +209,7 @@ public class PlayerMainModule : BaseMainModule
             List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
             bool enemyCheck = false;
             for (int j = 0; j < cells.Count; j++)
-                if (cells[j].GetObj?.GetComponent<Enemy>() != null)
+                if (cells[j].GetObj?.GetComponent<AIMainModule>() != null)
                 {
                     enemyCheck = true;
                     break;

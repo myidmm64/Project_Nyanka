@@ -8,8 +8,6 @@ namespace BehaviorTree
     {
         private Node _root = null;
 
-        public Vector3Int target;
-
         protected virtual void Start()
         {
             _root = SetupTree();

@@ -47,7 +47,7 @@ namespace MapTileGridCreator.Core
 
         public void CellAttack(int dmg, ElementType elementType, EntityType freindEntity)
         {
-            Entity entity = GetObj?.GetComponent<Entity>();
+            AIMainModule entity = GetObj?.GetComponent<AIMainModule>();
             if (entity != null)
             {
                 if (entity.entityType != freindEntity)
