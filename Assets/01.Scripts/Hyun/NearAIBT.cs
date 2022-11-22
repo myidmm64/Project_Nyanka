@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
 
-public class WarriorAIBT : BehaviorTree.Tree
+public class NearAIBT : BehaviorTree.Tree
 {
     private Enemy enemy;
 

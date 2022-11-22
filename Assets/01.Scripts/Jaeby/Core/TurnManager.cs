@@ -102,7 +102,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
         for (int i = 0; i < liveEnemys.Count; i++)
         {
-            yield return StartCoroutine(liveEnemys[i].GetComponent<WarriorAIBT>().StartAI());
+            yield return StartCoroutine(liveEnemys[i].GetComponent<NearAIBT>().StartAI());
         }
         NextTurn();
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
