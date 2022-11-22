@@ -199,15 +199,14 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public void TurnActionAdd(TurnAction turnAction)
     {
         _turnActions.Add(turnAction);
+        turnAction.Locked = false;
     }
 
     private void TurnActionCheck()
     {
         for(int i = 0; i < _turnActions.Count; i++)
-        {
-
-        }
-        //if(locked?)
+            if (_turnActions[i]?.Locked == false)
+                _turnActions[i].TryCallback();
     }
 }
 
@@ -233,7 +232,10 @@ public class TurnAction
     {
         _count--;
         if (_count <= 0)
+        {
+            _locked = true;
             _callback?.Invoke();
+        }
     }
 
     public void Restart()

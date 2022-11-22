@@ -8,7 +8,7 @@ public abstract class BaseTransformModule : MonoBehaviour
     private bool _transed = false;
     public bool Transed => _transed;
 
-    private TurnAction _transformAction;
+    protected TurnAction _transformAction;
 
     private void Start()
     {
@@ -23,10 +23,15 @@ public abstract class BaseTransformModule : MonoBehaviour
     }
     public abstract void ChildTransfomationStart();
     public abstract IEnumerator TransformCoroutine();
-    public abstract void TransfomationEnd();
+    public virtual void TransfomationEnd()
+    {
+        _transed = false;
+        ChildTransfomationEnd();
+    }
+    public abstract void ChildTransfomationEnd();
 
     private void OnDestroy()
     {
-        _transformAction = null;
+        //_transformAction = null;
     }
 }

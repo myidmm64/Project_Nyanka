@@ -36,11 +36,58 @@ public class PlayerMainModule : BaseMainModule
     public PlayerMoveModule MoveModule => _moveModule as PlayerMoveModule;
     public PlayerHPModule HPModule => _hpModule as PlayerHPModule;
     public PlayerSkillModule SkillModule => _skillModule as PlayerSkillModule;
+    public PlayerTransformModule TransformModule => _transformModule as PlayerTransformModule;
 
     // 간단 매크로
     public bool IsLived => HPModule.IsLived;
     public bool Attackable => AttackModule.Attackable;
-    public bool Transed => false;
+    public bool Transed => TransformModule.Transed;
+
+    // 수치 데이터
+    public List<Vector3Int> MoveRange
+    {
+        get
+        {
+            PlayerDataSO so = DataSO as PlayerDataSO;
+            if (Transed)
+                return so.transMoveRange;
+            else
+                return so.normalMoveRange;
+        }
+    }
+    public List<Vector3Int> AttackRange
+    {
+        get
+        {
+            PlayerDataSO so = DataSO as PlayerDataSO;
+            if (Transed)
+                return so.transAttackRange;
+            else
+                return so.normalAttackRange;
+        }
+    }
+    public int MinDamage
+    {
+        get
+        {
+            PlayerDataSO so = DataSO as PlayerDataSO;
+            if (Transed)
+                return so.transMinAtk;
+            else
+                return so.normalMinAtk;
+        }
+    }
+    public int MaxDamage
+    {
+        get
+        {
+            PlayerDataSO so = DataSO as PlayerDataSO;
+            if (Transed)
+                return so.transMaxAtk;
+            else
+                return so.normalMaxAtk;
+        }
+    }
 
     private void Start()
     {
@@ -137,8 +184,8 @@ public class PlayerMainModule : BaseMainModule
     {
         CubeGrid.ViewEnd();
         CubeGrid.ClickView(CellIndex, true);
-        CubeGrid.ViewRange(GridType.Normal, CellIndex, DataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, DataSO.normalAttackRange, true);
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, AttackRange, true);
     }
 
     public void PlayerIdle() // 대기
@@ -152,14 +199,14 @@ public class PlayerMainModule : BaseMainModule
 
     public bool GetMoveableCheck(Vector3Int index) // index가 무브 가능한지
     {
-        return CellUtility.CheckCell(CellIndex, index, DataSO.normalMoveRange, false);
+        return CellUtility.CheckCell(CellIndex, index, MoveRange, false);
     }
 
     public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
     {
         for (int i = 0; i < 4; i++)
         {
-            List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, DataSO.normalAttackRange), true);
+            List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
             bool enemyCheck = false;
             for (int j = 0; j < cells.Count; j++)
                 if (cells[j].GetObj?.GetComponent<Enemy>() != null)
@@ -198,9 +245,9 @@ public class PlayerMainModule : BaseMainModule
     {
         Vector3Int index = CellIndex;
         if (isSkill)
-            CubeGrid.ViewRange(GridType.Skill, index, GetAttackVectorByDirections(dir, DataSO.normalAttackRange), true);
+            CubeGrid.ViewRange(GridType.Skill, index, GetAttackVectorByDirections(dir, AttackRange), true);
         else
-            CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, DataSO.normalAttackRange), true);
+            CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, AttackRange), true);
     }
     public Vector3Int GetAttackDirection(AttackDirection dir)
     {

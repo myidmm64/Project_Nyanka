@@ -18,11 +18,13 @@ public class PlayerAnimationEvent_Wakamo : PlayerAnimationEvent
 
     public override void AttackAnimation(int id)
     {
-        List<Cell> cells = CellUtility.SearchCells(_mainModule.CellIndex, _mainModule.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, _mainModule.DataSO.normalAttackRange), true);
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+
+        List<Cell> cells = CellUtility.SearchCells(_mainModule.CellIndex, _mainModule.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, module.AttackRange), true);
         if (cells.Count == 0) return;
 
         for (int i = 0; i < cells.Count; i++)
-            cells[i].CellAttack(_mainModule.DataSO.normalAtk, _mainModule.DataSO.elementType, _mainModule.entityType);
+            cells[i].CellAttack(module.MinDamage, _mainModule.DataSO.elementType, _mainModule.entityType);
 
         List<Enemy> enemys = new List<Enemy>();
         for (int i = 0; i < cells.Count; i++)
@@ -49,7 +51,7 @@ public class PlayerAnimationEvent_Wakamo : PlayerAnimationEvent
 
         for (int i = 0; i < enemys.Count; i++)
         {
-            int dmg = UnityEngine.Random.Range(_mainModule.DataSO.normalMinAtk, _mainModule.DataSO.normalMaxAtk);
+            int dmg = UnityEngine.Random.Range(module.MinDamage, module.MaxDamage);
             bool critical = UnityEngine.Random.Range(0, 100) < 50;
             if (critical)
                 dmg = Mathf.RoundToInt(dmg * 1.5f);
