@@ -38,6 +38,7 @@ public class PlayerMoveModule : BaseMoveModule
 
     public bool GetMoveableCheck(Vector3Int index) // index가 무브 가능한지
     {
-        return CellUtility.CheckCell(_mainModule.CellIndex, index, _mainModule.DataSO.normalMoveRange, false);
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        return CellUtility.CheckCell(_mainModule.CellIndex, index, module.MoveRange, false);
     }
 }
