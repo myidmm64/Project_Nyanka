@@ -40,7 +40,7 @@ public class PlayerMainModule : BaseMainModule
     // 간단 매크로
     public bool IsLived => HPModule.IsLived;
     public bool Attackable => AttackModule.Attackable;
-    public bool Transed => _transformModule.Transed;
+    public bool Transed => false;
 
     private void Start()
     {
