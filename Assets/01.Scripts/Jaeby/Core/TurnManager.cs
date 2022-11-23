@@ -198,10 +198,13 @@ public class TurnManager : MonoSingleTon<TurnManager>
         _plusTurn = false;
     }
 
-    public void TurnActionAdd(TurnAction turnAction)
+    public void TurnActionAdd(TurnAction turnAction, bool locked)
     {
+        for (int i = 0; i < _turnActions.Count; i++)
+            if (_turnActions[i] == turnAction)
+                return;
         _turnActions.Add(turnAction);
-        turnAction.Locked = false;
+        turnAction.Locked = locked;
     }
 
     private void TurnActionCheck()
@@ -240,7 +243,7 @@ public class TurnAction
         }
     }
 
-    public void Restart()
+    public void Start()
     {
         _startAction?.Invoke();
         _count = _maxCount;

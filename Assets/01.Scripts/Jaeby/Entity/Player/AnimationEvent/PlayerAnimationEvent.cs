@@ -9,9 +9,11 @@ using static Define;
 public abstract class PlayerAnimationEvent : MonoBehaviour
 {
     protected PlayerMainModule _mainModule = null;
+    protected CameraManager _cameraManager = null;
 
     private void Start()
     {
+        _cameraManager = CameraManager.Instance;
         _mainModule = GetComponent<PlayerMainModule>();
     }
 

@@ -57,7 +57,7 @@ public class PopupPoolObject : PoolAbleObject
         _criticalImage.color = _elementColors[(int)elementType - 1];
         _criticalImage.gameObject.SetActive(critical);
 
-        Vector3 randomPos = Random.insideUnitSphere * 15f;
+        Vector3 randomPos = Random.insideUnitSphere * 0.5f;
         randomPos.y = Mathf.Abs(randomPos.y);
         randomPos.z = 0f;
         transform.localPosition = startPos + randomPos;

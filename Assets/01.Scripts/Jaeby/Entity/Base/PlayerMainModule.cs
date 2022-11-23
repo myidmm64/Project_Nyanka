@@ -180,6 +180,12 @@ public class PlayerMainModule : BaseMainModule
         _transformModule.TransfomationStart();
     }
 
+    protected override void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
+    {
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
+    }
+
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
     {
         CubeGrid.ViewEnd();
