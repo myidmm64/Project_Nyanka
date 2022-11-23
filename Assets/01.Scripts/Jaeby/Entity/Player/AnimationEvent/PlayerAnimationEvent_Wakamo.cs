@@ -46,7 +46,7 @@ public class PlayerAnimationEvent_Wakamo : PlayerAnimationEvent
                 obj = Instantiate(_attackPrefab1, _mainModule.ModelController);
                 break;
             case 2:
-                _cameraManager.CartUpdate(80f, null, 0f);
+                _cameraManager.CartUpdate(70f, null, 0f);
                 obj = Instantiate(_attackPrefab2, _mainModule.ModelController);
                 break;
             default:

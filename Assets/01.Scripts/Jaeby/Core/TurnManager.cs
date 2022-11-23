@@ -8,13 +8,9 @@ using UnityEngine.Events;
 public class TurnManager : MonoSingleTon<TurnManager>
 {
     [SerializeField]
-    private TextMeshProUGUI _playerTurnText = null;
-    [SerializeField]
     private TextMeshProUGUI _whoseTurnText = null;
     [SerializeField]
     private TextMeshProUGUI _currentTurnText = null;
-    [SerializeField]
-    private TextMeshProUGUI _battlePointText = null;
 
     private List<BaseMainModule> _entitys;
     private List<PlayerMainModule> _players;
@@ -50,7 +46,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         set
         {
             _playerTurnCount = value;
-            _playerTurnText?.SetText($"useable Turn : {_playerTurnCount}");
         }
     }
     private bool _plusTurn = false;
@@ -132,20 +127,15 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void CurrentTurnTextChange(int val)
     {
-        _currentTurnText.SetText($"Current Turn : {val}");
-    }
-
-    public void BattlePointTextChange(int val)
-    {
-        _battlePointText.SetText($"Battle Point : {val}");
+        _currentTurnText.SetText($"턴 - {val}");
     }
 
     public void WhoseTurnTextChange(bool val)
     {
         if (val)
-            _whoseTurnText.SetText("player's Turn");
+            _whoseTurnText.SetText("플레이어 턴");
         else
-            _whoseTurnText.SetText("enemy's Turn");
+            _whoseTurnText.SetText("적 턴");
     }
 
     private int GetLiveCount(List<PlayerMainModule> entitys)
