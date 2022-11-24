@@ -167,7 +167,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void PlayerTryTransform()
     {
         if (_currentPlayer == null) return;
-        if (TurnManager.Instance.BattlePoint < 2) return;
+        if (TurnManager.Instance.BattlePoint < TurnManager.Instance.MaxPoint) return;
         TurnManager.Instance.BattlePointChange(0);
         _currentPlayer.Transformation();
     }

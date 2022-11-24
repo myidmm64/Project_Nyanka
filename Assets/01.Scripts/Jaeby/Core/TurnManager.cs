@@ -52,6 +52,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private bool _plusTurn = false;
     private bool _loseTurn = false;
 
+    private int _maxPoint = 0;
+    public int MaxPoint => _maxPoint;
+
     private void Awake()
     {
         _entitys = new List<BaseMainModule>(FindObjectsOfType<BaseMainModule>());
@@ -66,6 +69,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
         PlayerTurnCount = GetLiveCount(_players);
+
+        _maxPoint = UIManager.Instance.GetComponentInChildren<AttackPointUI>().MaxAttackPoint;
     }
 
     private void NewTurnReset()
@@ -122,7 +127,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public void BattlePointChange(int val)
     {
         _battlePoint = val;
-        _battlePoint = Mathf.Clamp(_battlePoint, 0, 8);
+        _battlePoint = Mathf.Clamp(_battlePoint, 0, _maxPoint);
         OnBattlePointUp?.Invoke(_battlePoint);
     }
 
