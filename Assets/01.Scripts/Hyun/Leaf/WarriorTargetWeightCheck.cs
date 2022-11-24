@@ -31,12 +31,13 @@ public class WarriorTargetWeightCheck : Node
                 t_pos = p_Pos;
             }
         }
+
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
             int tempX = Mathf.Abs(t_pos.x - key.x);
             int tempZ = Mathf.Abs(t_pos.z - key.z);
             _aIMainModule.cells[key] += (tempX > tempZ) ? tempX * 10 : tempZ * 10;
-            //Debug.Log(key + " " + _aIMainModule.cells[key]);
+            Debug.Log(key + " " + _aIMainModule.cells[key]);
         });
         state = NodeState.SUCCESS;
         return state;

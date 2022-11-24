@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
+using MapTileGridCreator.Core;
 
 public class MoveToTarget : Node
 {
@@ -17,9 +18,10 @@ public class MoveToTarget : Node
         Debug.Log("MoveToTarget");
         int m_W = 9999;
         Vector3Int _pos = Vector3Int.zero;
-        foreach(var temp in _aIMainModule.MoveRange)
+        List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.CellIndex, _aIMainModule.DataSO.normalMoveRange, false);
+        foreach(var temp in movableRange)
         {
-            Vector3Int key = _aIMainModule.CellIndex + temp; 
+            Vector3Int key = temp.GetIndex(); 
             if(m_W > _aIMainModule.cells[key])
             {
                 m_W = _aIMainModule.cells[key];
