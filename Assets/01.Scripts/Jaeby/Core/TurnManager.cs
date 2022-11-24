@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class TurnManager : MonoSingleTon<TurnManager>
 {
@@ -128,6 +129,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public void CurrentTurnTextChange(int val)
     {
         _currentTurnText.SetText($"턴 - {val}");
+        _currentTurnText.transform.DOKill();
+        _currentTurnText.transform.localScale = Vector3.one * 1.5f;
+        _currentTurnText.transform.DOScale(1f, 0.2f);
     }
 
     public void WhoseTurnTextChange(bool val)
@@ -136,6 +140,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
             _whoseTurnText.SetText("플레이어 턴");
         else
             _whoseTurnText.SetText("적 턴");
+        _whoseTurnText.transform.DOKill();
+        _whoseTurnText.transform.localScale = Vector3.one * 1.5f;
+        _whoseTurnText.transform.DOScale(1f, 0.2f);
     }
 
     private int GetLiveCount(List<PlayerMainModule> entitys)
