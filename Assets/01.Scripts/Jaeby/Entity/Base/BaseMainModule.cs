@@ -81,6 +81,9 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
         }
     }
 
+    public abstract List<Vector3Int> MoveRange { get; }
+    public abstract List<Vector3Int> AttackRange { get;  }
+
     // Selectable 인터페이스 구현
     private bool _selectedFlag = false;
     public bool SelectedFlag { get => _selectedFlag; set => _selectedFlag = value; }
@@ -143,5 +146,36 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
             vecList.Add(Vector3Int.RoundToInt(v));
         }
         return vecList;
+    }
+
+    public Vector3Int GetAttackDirection(AttackDirection dir)
+    {
+        Vector3Int v = Vector3Int.zero;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                v = new Vector3Int(0, 0, 1);
+                break;
+            case AttackDirection.Right:
+                v = new Vector3Int(1, 0, 0);
+                break;
+            case AttackDirection.Left:
+                v = new Vector3Int(-1, 0, 0);
+                break;
+            case AttackDirection.Down:
+                v = new Vector3Int(0, 0, -1);
+                break;
+            default:
+                break;
+        }
+        return v;
+    }
+
+    public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
+    {
+        CubeGrid.ViewEnd();
+        CubeGrid.ClickView(CellIndex, true);
+        CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, AttackRange, true);
     }
 }

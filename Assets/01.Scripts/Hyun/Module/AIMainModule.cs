@@ -32,7 +32,7 @@ public class AIMainModule : BaseMainModule
         }
     }
 
-    public List<Vector3Int> MoveRange
+    public override List<Vector3Int> MoveRange
     {
         get
         {
@@ -41,7 +41,7 @@ public class AIMainModule : BaseMainModule
             return so.normalMoveRange;
         }
     }
-    public List<Vector3Int> AttackRange
+    public override List<Vector3Int> AttackRange
     {
         get
         {
@@ -81,35 +81,14 @@ public class AIMainModule : BaseMainModule
 
     public override void Selected()
     {
-
+        CubeGrid.ClcikViewEnd(false);
+        ViewDataByCellIndex();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
     }
 
     public override void SelectEnd()
     {
-
-    }
-
-
-    public Vector3Int GetAttackDirection(AttackDirection dir)
-    {
-        Vector3Int v = Vector3Int.zero;
-        switch (dir)
-        {
-            case AttackDirection.Up:
-                v = new Vector3Int(0, 0, 1);
-                break;
-            case AttackDirection.Right:
-                v = new Vector3Int(1, 0, 0);
-                break;
-            case AttackDirection.Left:
-                v = new Vector3Int(-1, 0, 0);
-                break;
-            case AttackDirection.Down:
-                v = new Vector3Int(0, 0, -1);
-                break;
-            default:
-                break;
-        }
-        return v;
+        CubeGrid.ViewEnd();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }
 }

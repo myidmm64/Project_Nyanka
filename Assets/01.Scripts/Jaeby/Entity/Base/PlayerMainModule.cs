@@ -44,7 +44,7 @@ public class PlayerMainModule : BaseMainModule
     public bool Transed => TransformModule.Transed;
 
     // 수치 데이터
-    public List<Vector3Int> MoveRange
+    public override List<Vector3Int> MoveRange
     {
         get
         {
@@ -55,7 +55,7 @@ public class PlayerMainModule : BaseMainModule
                 return so.normalMoveRange;
         }
     }
-    public List<Vector3Int> AttackRange
+    public override List<Vector3Int> AttackRange
     {
         get
         {
@@ -185,14 +185,6 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
     }
 
-    public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
-    {
-        CubeGrid.ViewEnd();
-        CubeGrid.ClickView(CellIndex, true);
-        CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, AttackRange, true);
-    }
-
     public void PlayerIdle() // 대기
     {
         if (_myTurnEnded) return;
@@ -253,28 +245,6 @@ public class PlayerMainModule : BaseMainModule
             CubeGrid.ViewRange(GridType.Skill, index, GetAttackVectorByDirections(dir, AttackRange), true);
         else
             CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, AttackRange), true);
-    }
-    public Vector3Int GetAttackDirection(AttackDirection dir)
-    {
-        Vector3Int v = Vector3Int.zero;
-        switch (dir)
-        {
-            case AttackDirection.Up:
-                v = new Vector3Int(0, 0, 1);
-                break;
-            case AttackDirection.Right:
-                v = new Vector3Int(1, 0, 0);
-                break;
-            case AttackDirection.Left:
-                v = new Vector3Int(-1, 0, 0);
-                break;
-            case AttackDirection.Down:
-                v = new Vector3Int(0, 0, -1);
-                break;
-            default:
-                break;
-        }
-        return v;
     }
 
     public void UISet()

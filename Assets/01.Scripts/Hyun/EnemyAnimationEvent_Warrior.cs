@@ -7,7 +7,7 @@ using static Define;
 
 public class EnemyAnimationEvent_Warrior : EnemyAnimationEvent
 {
-    [SerializeField]
+    /*[SerializeField]
     private CinemachineSmoothPath _path;
     [SerializeField]
     private List<Transform> _lookPoints = new List<Transform>();
@@ -97,5 +97,19 @@ public class EnemyAnimationEvent_Warrior : EnemyAnimationEvent
     public override void AttackStarted()
     {
         
+    }*/
+    public override void AttackAnimation(int id)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void AttackEnd()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void AttackStarted()
+    {
+        throw new System.NotImplementedException();
     }
 }
