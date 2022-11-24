@@ -68,6 +68,7 @@ public abstract class BaseHPModule : MonoBehaviour
         float delta = 0f;
         float start = _hp;
         _hp -= dmg;
+        _mainModule.HpDownAction?.Invoke(_hp);
         if (_hp <= 0)
             _hp = 0;
         //_hpText?.SetText($"{_hp} / {_mainModule.DataSO.hp}");

@@ -18,11 +18,33 @@ public class UIManager : MonoSingleTon<UIManager>
     [SerializeField]
     private CanvasGroup _canvasGroup = null;
 
+    [SerializeField]
+    private CameraTargettingUI _playerTargettingUI = null;
+    [SerializeField]
+    private CameraTargettingUI _enemyTargettingUI = null;
+
+    [SerializeField]
+    private Transform _playerTargettingUIParent = null;
+    [SerializeField]
+    private Transform _enemyTargettingUIParent = null;
+
     private Sequence _seq = null;
 
     private void Start()
     {
         UIDisable();
+    }
+
+    public void SpawnTargettingUI(BaseMainModule module)
+    {
+
+        CameraTargettingUI ui = null;
+        if (module is PlayerMainModule)
+            ui = Instantiate(_playerTargettingUI, _playerTargettingUIParent);
+        else
+            ui = Instantiate(_enemyTargettingUI, _enemyTargettingUIParent);
+        ui.Init(module);
+
     }
 
     public void UIInit(PlayerMainModule player)

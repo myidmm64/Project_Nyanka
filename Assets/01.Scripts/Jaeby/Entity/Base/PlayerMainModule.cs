@@ -89,6 +89,7 @@ public class PlayerMainModule : BaseMainModule
         }
     }
 
+
     private void Start()
     {
         PosManager.Instance.playerInfo.Add(this);

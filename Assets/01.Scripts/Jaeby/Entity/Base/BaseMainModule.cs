@@ -7,7 +7,7 @@ using static Define;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using TMPro;
-
+using System;
 
 public abstract class BaseMainModule : MonoBehaviour, ISelectable
 {
@@ -89,9 +89,19 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     protected bool _selectable = true;
     public bool Selectable => _selectable;
 
+    //에이전트
     [SerializeField]
     private NavMeshAgent _agent = null;
     public NavMeshAgent Agent => _agent;
+
+    //이벤트
+    private Action<int> _hpDownAction = null;
+    public Action<int> HpDownAction { get => _hpDownAction; set => _hpDownAction = value; }
+
+    private void Awake()
+    {
+        UIManager.Instance.SpawnTargettingUI(this);
+    }
 
     // 추상함수
     public abstract void PhaseChange(PhaseType type); // 페이즈 교체
