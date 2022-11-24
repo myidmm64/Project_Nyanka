@@ -92,7 +92,7 @@ public class PlayerMainModule : BaseMainModule
 
     private void Start()
     {
-        PosManager.Instance.playerInfo.Add(this);
+        EntityManager.Instance.playerInfo.Add(this);
         Agent.updateRotation = false;
     }
 

@@ -14,7 +14,7 @@ public class AttackCheck : Node
     public override NodeState Evaluate()
     {
         Debug.Log("AttackCheck");
-        Debug.Log(_aIMainModule.ChangeableCellIndex);
+        //Debug.Log(_aIMainModule.ChangeableCellIndex);
         for (int i = 0; i <= (int)AttackDirection.Down; i++)
         {
             List<Vector3Int> vecs = _aIMainModule.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);

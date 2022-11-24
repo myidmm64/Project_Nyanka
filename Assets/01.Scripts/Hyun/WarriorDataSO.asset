@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162004c50fa198647973f7acb1b7ba7a, type: 3}
   m_Name: WarriorDataSO
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalAtk: 1
+  sprite: {fileID: 0}
+  normalAtk: 300
   normalMinAtk: 0
   normalMaxAtk: 0
   normalDef: 0
-  hp: 1500
+  hp: 2000
   elementType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}

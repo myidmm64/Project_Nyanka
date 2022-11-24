@@ -24,7 +24,7 @@ public class WarriorAIBT : BehaviorTree.Tree
                 new Selector(new List<Node>
                 {
                     new AIAttack(_aIMainModule,transform),
-                    new AISkill()
+                    new AISkill(_aIMainModule),
                 })
             }),
             new Sequence(new List<Node>
@@ -36,7 +36,8 @@ public class WarriorAIBT : BehaviorTree.Tree
                 new Selector(new List<Node>
                 {
                     new AIAttack(_aIMainModule,transform),
-                    new AISkill()
+                    new AISkill(_aIMainModule),
+
                 })
             })
         });
