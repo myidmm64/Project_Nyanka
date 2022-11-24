@@ -16,26 +16,44 @@ public class WarriorTargetWeightCheck : Node
     public override NodeState Evaluate()
     {
         Debug.Log("WarriorTargetWeightCheck");
-        List<BaseMainModule> players = PosManager.Instance.playerInfo;
-        int dis = 100000;
-        Vector3Int t_pos = Vector3Int.zero;
+        List<BaseMainModule> players = EntityManager.Instance.playerInfo;
+        Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
+
         foreach(var player in players)
         {
             Vector3Int p_Pos = player.CellIndex;
             int tempX = Mathf.Abs(_aIMainModule.CellIndex.x - p_Pos.x);
             int tempZ = Mathf.Abs(_aIMainModule.CellIndex.z - p_Pos.z);
-            int f_Dis = (tempX > tempZ) ? tempZ : tempX;
-            if(f_Dis<dis)
+            int f_Dis = (tempX > tempZ) ? tempX : tempZ;
+            t_pos.Add(p_Pos, f_Dis);
+        }
+
+        t_pos = t_pos.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+
+        Vector3Int _target = Vector3Int.zero;
+        foreach(var target in t_pos)
+        {
+            if(EntityManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
             {
-                dis = f_Dis;
-                t_pos = p_Pos;
+                if(EntityManager.Instance.enemy_TargetLists[target.Key]<_aIMainModule.maxTarget)
+                {
+                    EntityManager.Instance.enemy_TargetLists[target.Key]++;
+                    _target = target.Key;
+                    break;
+                }
+            }
+            else
+            {
+                EntityManager.Instance.enemy_TargetLists.Add(target.Key, target.Value);
+                _target = target.Key;
+                break;
             }
         }
 
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
-            int tempX = Mathf.Abs(t_pos.x - key.x);
-            int tempZ = Mathf.Abs(t_pos.z - key.z);
+            int tempX = Mathf.Abs(_target.x - key.x);
+            int tempZ = Mathf.Abs(_target.z - key.z);
             _aIMainModule.cells[key] += (tempX > tempZ) ? tempX * 10 : tempZ * 10;
             Debug.Log(key + " " + _aIMainModule.cells[key]);
         });
