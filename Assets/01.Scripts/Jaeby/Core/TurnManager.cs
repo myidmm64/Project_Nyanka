@@ -102,6 +102,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
             Debug.Log(liveEnemys[i].name);
             yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         }
+        EntityManager.Instance.enemy_TargetLists.Clear();
         NextTurn();
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }

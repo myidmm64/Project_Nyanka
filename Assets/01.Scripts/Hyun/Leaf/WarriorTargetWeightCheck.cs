@@ -35,7 +35,7 @@ public class WarriorTargetWeightCheck : Node
         {
             if(EntityManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
             {
-                if(EntityManager.Instance.enemy_TargetLists[target.Key]<_aIMainModule.maxTarget)
+                if(EntityManager.Instance.enemy_TargetLists[target.Key] < _aIMainModule.maxTarget)
                 {
                     EntityManager.Instance.enemy_TargetLists[target.Key]++;
                     _target = target.Key;
@@ -49,13 +49,13 @@ public class WarriorTargetWeightCheck : Node
                 break;
             }
         }
-
+        Debug.Log(_target);
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
             int tempX = Mathf.Abs(_target.x - key.x);
             int tempZ = Mathf.Abs(_target.z - key.z);
             _aIMainModule.cells[key] += (tempX > tempZ) ? tempX * 10 : tempZ * 10;
-            Debug.Log(key + " " + _aIMainModule.cells[key]);
+            //Debug.Log(key + " " + _aIMainModule.cells[key]);
         });
         state = NodeState.SUCCESS;
         return state;

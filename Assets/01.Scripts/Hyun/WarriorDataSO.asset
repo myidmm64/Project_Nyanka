@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WarriorDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
-  normalAtk: 1
+  normalAtk: 300
   normalMinAtk: 0
   normalMaxAtk: 0
   normalDef: 0
-  hp: 1500
+  hp: 2000
   elementType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}

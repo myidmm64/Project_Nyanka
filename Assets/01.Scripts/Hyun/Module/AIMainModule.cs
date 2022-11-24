@@ -9,6 +9,7 @@ using System;
 
 public class AIMainModule : BaseMainModule
 {
+
     public Dictionary<Vector3Int, int> cells = new Dictionary<Vector3Int, int>();
     public int maxTarget = 3;
     public Vector3Int ChangeableCellIndex
@@ -16,6 +17,8 @@ public class AIMainModule : BaseMainModule
         get => _cellIndex;
         set => _cellIndex = value;
     }
+    private AttackDirection _currentDir = AttackDirection.Up;
+    public AttackDirection CurrentDir { get => _currentDir; set => _currentDir = value; }
 
     //public BaseMainModule target;
 
@@ -72,7 +75,8 @@ public class AIMainModule : BaseMainModule
 
     public override void PhaseChange(PhaseType type)
     {
-
+        if (type == PhaseType.Enemy)
+            _currentDir = AttackDirection.Up;
     }
 
     public override void Selected()
