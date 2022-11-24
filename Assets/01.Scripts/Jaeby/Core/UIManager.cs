@@ -58,6 +58,6 @@ public class UIManager : MonoSingleTon<UIManager>
     {
         _moveCheckButton.SetActive(true);
         _idleButton.SetActive(true);
-        _skillButton.GetComponent<Button>().enabled = true;
+        //_skillButton.GetComponent<Button>().enabled = true;
     }
 }
