@@ -91,7 +91,7 @@ public class PlayerMainModule : BaseMainModule
 
     private void Start()
     {
-        //PosManager.Instance.playerInfo.Add(this);
+        PosManager.Instance.playerInfo.Add(this);
         Agent.updateRotation = false;
     }
 
@@ -120,7 +120,7 @@ public class PlayerMainModule : BaseMainModule
     public override void Selected() // 선택되었을 때
     {
         if (_selectable == false) return;
-        Debug.Log("셀렉트");
+        //Debug.Log("셀렉트");
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
@@ -131,7 +131,7 @@ public class PlayerMainModule : BaseMainModule
 
     public override void SelectEnd() // 선택 해제
     {
-        Debug.Log("셀렉트 엔드");
+        //Debug.Log("셀렉트 엔드");
         VCamOne.Follow = null;
         CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);

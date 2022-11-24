@@ -97,7 +97,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private IEnumerator EnemysTurn()
     {
-        Debug.Log("야몸ㄴ놈너머");
+        //Debug.Log("야몸ㄴ놈너머");
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
 

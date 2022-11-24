@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa14f31488e0f20408b4369d87f3c6bc, type: 3}
-  m_Name: EnemyData0
+  m_Script: {fileID: 11500000, guid: 162004c50fa198647973f7acb1b7ba7a, type: 3}
+  m_Name: WarriorDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   normalAtk: 1
@@ -24,9 +24,16 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 1}
   - {x: 1, y: 0, z: 1}
   normalMoveRange:
-  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
-  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: -1}
   - {x: 1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 1}
+  - {x: 1, y: 0, z: -1}
+  - {x: 1, y: 0, z: 1}
+  - {x: -1, y: 0, z: -1}
   normalSkillRange: []
   transSkillRange: []
+  i_moveRange: 1
+  i_attackRange: 1

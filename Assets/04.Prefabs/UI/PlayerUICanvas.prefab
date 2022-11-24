@@ -686,6 +686,7 @@ GameObject:
   - component: {fileID: 1300122477913689138}
   - component: {fileID: 1300122477913689139}
   - component: {fileID: 1300122477913689148}
+  - component: {fileID: -7661171117573100661}
   m_Layer: 0
   m_Name: PlayerUICanvas
   m_TagString: Untagged
@@ -773,6 +774,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flagReverse: 1
   worldUpDirection: 0
+--- !u!114 &-7661171117573100661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300122477913689142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9f01d1841e4754f8636c4a5c8ce68d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackModule: {fileID: 0}
+  _moveModule: {fileID: 0}
+  _hpModule: {fileID: 0}
+  _skillModule: {fileID: 0}
+  _transformModule: {fileID: 0}
+  _dataSO: {fileID: 0}
+  _entityType: 0
+  _animator: {fileID: 0}
+  _agent: {fileID: 0}
+  OnMyTurnEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerTurnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  _modelController: {fileID: 0}
+  _attackDirectionObj: {fileID: 0}
 --- !u!1 &1300122478421515997
 GameObject:
   m_ObjectHideFlags: 0

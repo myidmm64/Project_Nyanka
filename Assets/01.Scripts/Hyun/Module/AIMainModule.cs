@@ -1,13 +1,31 @@
+using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using System;
+
 
 public class AIMainModule : BaseMainModule
 {
-    private List<(Vector3Int, int)> cells = new List<(Vector3Int, int)>();
+    public Dictionary<Vector3Int, int> cells = new Dictionary<Vector3Int, int>();
+    public Vector3Int ChangeableCellIndex
+    {
+        get => _cellIndex;
+        set => _cellIndex = value;
+    }
 
-    private PlayerMainModule target;
+    //public BaseMainModule target;
+
+    private void Start()
+    {
+        Cell[] allCells = GameObject.Find("CubeGrid").GetComponentsInChildren<Cell>();
+        PosManager.Instance.monsterInfo.Add(this);
+        foreach (Cell cell in allCells)
+        {
+            cells.Add(cell.GetIndex(), 0);
+        }
+    }
 
     public List<Vector3Int> MoveRange
     {
@@ -35,10 +53,13 @@ public class AIMainModule : BaseMainModule
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public int Int_MoveRange
     {
-
+        get
+        {
+            EnemyDataSO so = DataSO as EnemyDataSO;
+            return so.i_moveRange;
+        }
     }
 
     // Update is called once per frame
@@ -60,5 +81,29 @@ public class AIMainModule : BaseMainModule
     public override void SelectEnd()
     {
 
+    }
+
+
+    public Vector3Int GetAttackDirection(AttackDirection dir)
+    {
+        Vector3Int v = Vector3Int.zero;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                v = new Vector3Int(0, 0, 1);
+                break;
+            case AttackDirection.Right:
+                v = new Vector3Int(1, 0, 0);
+                break;
+            case AttackDirection.Left:
+                v = new Vector3Int(-1, 0, 0);
+                break;
+            case AttackDirection.Down:
+                v = new Vector3Int(0, 0, -1);
+                break;
+            default:
+                break;
+        }
+        return v;
     }
 }

@@ -5,33 +5,37 @@ using BehaviorTree;
 
 public class WarriorAIBT : BehaviorTree.Tree
 {
+    AIMainModule _aIMainModule;
     protected override void Start()
     {
+        _aIMainModule = GetComponent<AIMainModule>();
         base.Start();
     }
 
     protected override Node SetupTree()
     {
-        Node root = new Sequence(new List<Node>
+        Node root = new Selector(new List<Node>
         {
-            new WeightCheck(),
-            new TargetCheck(),
             new Sequence(new List<Node>
             {
-                new AttackCheck(),
+                new DistanceWeightCheck(_aIMainModule),
+                new WarriorTargetWeightCheck(_aIMainModule),
+                new AttackCheck(_aIMainModule),
                 new Selector(new List<Node>
                 {
-                    new AIAttack(),
+                    new AIAttack(_aIMainModule,transform),
                     new AISkill()
                 })
             }),
             new Sequence(new List<Node>
             {
-                new MoveToTarget(),
-                new AttackCheck(),
+                //new WeightCheck(aIMainModule),
+                //new TargetCheck(),
+                new MoveToTarget(_aIMainModule),
+                new AttackCheck(_aIMainModule),
                 new Selector(new List<Node>
                 {
-                    new AIAttack(),
+                    new AIAttack(_aIMainModule,transform),
                     new AISkill()
                 })
             })
