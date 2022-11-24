@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using DG.Tweening;
 
 public class CameraManager : MonoSingleTon<CameraManager>
 {
@@ -19,6 +20,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
     private CinemachineBasicMultiChannelPerlin _currentNoise = null;
 
     private List<CinemachineVirtualCamera> cams = new List<CinemachineVirtualCamera>();
+
+    private CinemachineVirtualCamera _lastCam = null;
+    private Sequence _sizeSeq = null;
 
     private void Awake()
     {
@@ -41,9 +45,18 @@ public class CameraManager : MonoSingleTon<CameraManager>
                 cams[i].gameObject.SetActive(false);
     }
 
+    public void LastCamSelect()
+    {
+        CartCamReset();
+        if (_lastCam != null)
+            CameraSelect(_lastCam);
+    }
+
     public void CartCamSelect(CinemachineSmoothPath path,  Transform look, float speed)
     {
+        _lastCam = _currentCam;
         CameraSelect(CartCam);
+        Cam.orthographic = false;
         CartCam.LookAt = look;
         CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
         cart.m_Path = path;
@@ -54,12 +67,37 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void CartCamReset()
     {
+        Cam.orthographic = true;
+        
         CartCam.Follow = null;
         CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
         cart.m_Path = null;
         cart.m_Position = 0f;
         cart.m_Speed = 0f;
         cart.enabled = false;
+    }
+
+    public void CartUpdate(float? orthoSize, float? position, float? speed)
+    {
+        CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
+        if (_currentCam == CartCam)
+        {
+            if (orthoSize != null)
+                OrthoDotw(orthoSize.Value);
+            if (position != null)
+                cart.m_Position = position.Value;
+            if (speed != null)
+                cart.m_Speed = speed.Value;
+        }
+    }
+
+    private void OrthoDotw(float endVal)
+    {
+        if (_sizeSeq != null)
+            _sizeSeq.Kill();
+        _sizeSeq = DOTween.Sequence();
+        _sizeSeq.Append(DOTween.To(() => CartCam.m_Lens.FieldOfView, x => CartCam.m_Lens.FieldOfView = x, endVal, 0.5f));
+        //_sizeSeq.Append(DOTween.To(() => CartCam.m_Lens.OrthographicSize, x => CartCam.m_Lens.OrthographicSize = x, endVal, 0.5f));
     }
 
     public void CompletePrevFeedBack()

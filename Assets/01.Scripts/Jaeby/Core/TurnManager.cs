@@ -4,17 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class TurnManager : MonoSingleTon<TurnManager>
 {
     [SerializeField]
-    private TextMeshProUGUI _playerTurnText = null;
-    [SerializeField]
     private TextMeshProUGUI _whoseTurnText = null;
     [SerializeField]
     private TextMeshProUGUI _currentTurnText = null;
-    [SerializeField]
-    private TextMeshProUGUI _battlePointText = null;
 
     private List<BaseMainModule> _entitys;
     private List<PlayerMainModule> _players;
@@ -50,7 +47,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         set
         {
             _playerTurnCount = value;
-            _playerTurnText?.SetText($"useable Turn : {_playerTurnCount}");
         }
     }
     private bool _plusTurn = false;
@@ -132,20 +128,21 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void CurrentTurnTextChange(int val)
     {
-        _currentTurnText.SetText($"Current Turn : {val}");
-    }
-
-    public void BattlePointTextChange(int val)
-    {
-        _battlePointText.SetText($"Battle Point : {val}");
+        _currentTurnText.SetText($"턴 - {val}");
+        _currentTurnText.transform.DOKill();
+        _currentTurnText.transform.localScale = Vector3.one * 1.5f;
+        _currentTurnText.transform.DOScale(1f, 0.2f);
     }
 
     public void WhoseTurnTextChange(bool val)
     {
         if (val)
-            _whoseTurnText.SetText("player's Turn");
+            _whoseTurnText.SetText("플레이어 턴");
         else
-            _whoseTurnText.SetText("enemy's Turn");
+            _whoseTurnText.SetText("적 턴");
+        _whoseTurnText.transform.DOKill();
+        _whoseTurnText.transform.localScale = Vector3.one * 1.5f;
+        _whoseTurnText.transform.DOScale(1f, 0.2f);
     }
 
     private int GetLiveCount(List<PlayerMainModule> entitys)
@@ -198,10 +195,13 @@ public class TurnManager : MonoSingleTon<TurnManager>
         _plusTurn = false;
     }
 
-    public void TurnActionAdd(TurnAction turnAction)
+    public void TurnActionAdd(TurnAction turnAction, bool locked)
     {
+        for (int i = 0; i < _turnActions.Count; i++)
+            if (_turnActions[i] == turnAction)
+                return;
         _turnActions.Add(turnAction);
-        turnAction.Locked = false;
+        turnAction.Locked = locked;
     }
 
     private void TurnActionCheck()
@@ -240,7 +240,7 @@ public class TurnAction
         }
     }
 
-    public void Restart()
+    public void Start()
     {
         _startAction?.Invoke();
         _count = _maxCount;

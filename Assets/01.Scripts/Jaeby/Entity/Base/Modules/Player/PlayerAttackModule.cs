@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using Cinemachine;
 
 public class PlayerAttackModule : BaseAttackModule
 {
@@ -60,6 +61,7 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerAttackStarted() // 시작
     {
+        PlayerMainModule mo = _mainModule as PlayerMainModule;
         CubeGrid.ViewEnd();
         _currentEvent.AttackStarted();
     }
@@ -72,6 +74,7 @@ public class PlayerAttackModule : BaseAttackModule
     public void PlayerAttackEnd() // 끝
     {
         _currentEvent.AttackEnd();
+        CameraManager.Instance.LastCamSelect();
     }
 
     public void TryAttack() // 플레이어 어택 시도

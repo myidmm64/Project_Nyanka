@@ -26,7 +26,8 @@ public abstract class BaseHPModule : MonoBehaviour
         _hpSlider.minValue = 0;
         _hpSlider.maxValue = _hp;
         _hpSlider.value = _hp;
-        _hpText.SetText($"{_hp} / {_mainModule.DataSO.hp}");
+        //_hpText?.SetText($"{_hp} / {_mainModule.DataSO.hp}");
+        _hpText?.SetText((_hpSlider.normalizedValue * 100f).ToString("N0") + "%");
     }
 
     public virtual void Died()
@@ -69,7 +70,8 @@ public abstract class BaseHPModule : MonoBehaviour
         _hp -= dmg;
         if (_hp <= 0)
             _hp = 0;
-        _hpText.SetText($"{_hp} / {_mainModule.DataSO.hp}");
+        //_hpText?.SetText($"{_hp} / {_mainModule.DataSO.hp}");
+        _hpText?.SetText((_hpSlider.normalizedValue * 100f).ToString("N0") + "%");
         if (IsLived == false)
         {
             Died();

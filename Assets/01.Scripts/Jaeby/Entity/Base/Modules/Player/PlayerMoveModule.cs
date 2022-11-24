@@ -9,8 +9,8 @@ public class PlayerMoveModule : BaseMoveModule
     {
         if (Moveable == false) return;
         if (GetMoveableCheck(v) == false) return;
-        Moveable = false;
         StartCoroutine(Move(v));
+        Moveable = false;
     }
 
     public override IEnumerator Move(Vector3Int v)
