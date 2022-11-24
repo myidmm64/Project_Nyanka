@@ -84,7 +84,6 @@ public class PlayerAttackModule : BaseAttackModule
         if (Attackable)
         {
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            module.UISet();
             module.ViewAttackDirection(false);
         }
         else

@@ -17,8 +17,8 @@ MonoBehaviour:
   normalMinAtk: 100
   normalMaxAtk: 120
   normalDef: 0
-  hp: 1200
-  elementType: 2
+  hp: 9
+  elementType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
@@ -36,6 +36,8 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 1}
   transSkillRange: []
   transAtk: 2
+  transMinAtk: 0
+  transMaxAtk: 0
   transDef: 1
   transAttackRange:
   - {x: 0, y: 0, z: 1}

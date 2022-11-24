@@ -134,7 +134,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     public void ClickManagerReset()
     {
-        //ClickModeSet(LeftClickMode.AllClick, false);
+        ClickModeSet(LeftClickMode.AllClick, false);
         if (_currentPlayer != null)
         {
             _currentPlayer.SelectEnd();

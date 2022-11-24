@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public class UIManager : MonoSingleTon<UIManager>
 {
     [SerializeField]
-    private GameObject _moveCheckButton = null;
+    private CanvasGroup _moveCheckButton = null;
     [SerializeField]
-    private GameObject _idleButton = null;
+    private CanvasGroup _idleButton = null;
     [SerializeField]
-    private GameObject _skillButton = null;
+    private CanvasGroup _skillButton = null;
+    [SerializeField]
+    private CanvasGroup _transButton = null;
+
     [SerializeField]
     private CanvasGroup _canvasGroup = null;
+
+    private Sequence _seq = null;
 
     private void Start()
     {
@@ -21,26 +27,42 @@ public class UIManager : MonoSingleTon<UIManager>
 
     public void UIInit(PlayerMainModule player)
     {
-        UIReset();
-        //스킬 체크
         UIEnable();
     }
 
     public void UISetting(PlayerMainModule player)
     {
-        if(player.Attackable)
+
+        if (player.Attackable)
         {
-            _moveCheckButton.SetActive(false);
-            _idleButton.SetActive(false);
+            Debug.Log("아이고난");
+            if (_seq != null)
+                _seq.Kill();
+            _seq = DOTween.Sequence();
+            CanvasGroupSetting(_moveCheckButton, false, 1f);
+            CanvasGroupSetting(_idleButton, false, 1f);
+            CanvasGroupSetting(_transButton, false, 1f);
+            CanvasGroupSetting(_skillButton, false, 1f);
+            _seq.Append(_moveCheckButton.DOFade(0f, 0.2f));
+            _seq.Join(_idleButton.DOFade(0f, 0.2f));
+            _seq.Join(_transButton.DOFade(0f, 0.2f));
         }
         else
         {
-
+            UIReset();
         }
+    }
+
+    private void CanvasGroupSetting(CanvasGroup group, bool enable, float fade)
+    {
+        group.interactable = enable;
+        group.blocksRaycasts = enable;
+        group.alpha = fade;
     }
 
     private void UIEnable()
     {
+        UIReset();
         _canvasGroup.alpha = 1f;
         _canvasGroup.interactable = true;
         _canvasGroup.blocksRaycasts = true;
@@ -48,16 +70,17 @@ public class UIManager : MonoSingleTon<UIManager>
 
     public void UIDisable()
     {
+        UIReset();
         _canvasGroup.alpha = 0f;
         _canvasGroup.interactable = false;
         _canvasGroup.blocksRaycasts = false;
-        UIReset();
     }
 
     private void UIReset()
     {
-        _moveCheckButton.SetActive(true);
-        _idleButton.SetActive(true);
-        //_skillButton.GetComponent<Button>().enabled = true;
+        CanvasGroupSetting(_moveCheckButton, true, 1f);
+        CanvasGroupSetting(_idleButton, true, 1f);
+        CanvasGroupSetting(_transButton, true, 1f);
+        CanvasGroupSetting(_skillButton, true, 1f);
     }
 }
