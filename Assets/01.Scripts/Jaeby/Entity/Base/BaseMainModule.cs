@@ -12,15 +12,10 @@ using System;
 public abstract class BaseMainModule : MonoBehaviour, ISelectable
 {
     // 모듈 관련
-    [SerializeField]
     protected BaseAttackModule _attackModule = null;
-    [SerializeField]
     protected BaseMoveModule _moveModule = null;
-    [SerializeField]
     protected BaseHPModule _hpModule = null;
-    [SerializeField]
     protected BaseSkillModule _skillModule = null;
-    [SerializeField]
     protected BaseTransformModule _transformModule = null;
 
     // 프로퍼티
@@ -103,6 +98,12 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
 
     private void Awake()
     {
+        _attackModule = GetComponent<BaseAttackModule>();
+        _moveModule = GetComponent<BaseMoveModule>();
+        _hpModule = GetComponent<BaseHPModule>();
+        _skillModule = GetComponent<BaseSkillModule>();
+        _transformModule = GetComponent<BaseTransformModule>();
+
         UIManager.Instance.SpawnTargettingUI(this);
     }
 
