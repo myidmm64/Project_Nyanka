@@ -69,7 +69,7 @@ public class CameraTargettingUI : MonoBehaviour
     {
         if (_mainModule == null)
             return;
-        ClickManager.Instance.ForceSelect(_mainModule as PlayerMainModule);
-
+        Debug.Log("¾Ó±â¹«¶ì");
+        ClickManager.Instance.TryNormalSelect(_mainModule);
     }
 }

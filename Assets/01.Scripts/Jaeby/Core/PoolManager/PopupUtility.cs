@@ -6,12 +6,12 @@ using static Define;
 
 public static class PopupUtility
 {
-    public static void PopupDamage(Vector3 targetPos, float damage, bool critical, ElementType elementType)
+    public static void PopupDamage(Vector3 targetPos, float damage, bool critical, ElementType elementType, string msg = "치명타")
     {
         PopupPoolObject popupPoolObj = PoolManager.Instance.Pop(PoolType.PopupText) as PopupPoolObject;
         Vector3 pos = Cam.WorldToScreenPoint(targetPos + Vector3.up * 2.3f);
         if (critical)
-            popupPoolObj.PopupText(pos, damage.ToString(), elementType, true, "치명타");
+            popupPoolObj.PopupText(pos, damage.ToString(), elementType, true, msg);
         else
             popupPoolObj.PopupText(pos, damage.ToString(), elementType, false);
     }

@@ -175,7 +175,8 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
     {
         CubeGrid.ViewEnd();
-        CubeGrid.ClickView(CellIndex, true);
+        if(this is PlayerMainModule)
+            CubeGrid.ClickView(CellIndex, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, CellIndex, AttackRange, true);
     }

@@ -93,41 +93,31 @@ namespace MapTileGridCreator.Core
 
         public void ClickView(Vector3Int index, bool moveMode)
         {
-            if (_moveModedObj == null)
-            {
-                Destroy(_moveModedObj);
-                _moveModedObj = null;
-            }
-            if (_clickedObj == null)
-            {
-                Destroy(_clickedObj);
-                _clickedObj = null;
-            }
+            ClcikViewEnd();
+
             if (moveMode)
             {
-                if (_moveModedObj == null)
-                    _moveModedObj = Instantiate(_moveModeObj);
+                _moveModedObj = Instantiate(_moveModeObj);
                 _moveModedObj.transform.position = index + Vector3.up * 0.5f;
             }
             else
             {
-                if (_clickedObj == null)
-                    _clickedObj = Instantiate(_clickObj);
+                _clickedObj = Instantiate(_clickObj);
                 _clickedObj.transform.position = index + Vector3.up * 0.5f;
             }
         }
 
-        public void ClcikViewEnd(bool moveMode)
+        public void ClcikViewEnd()
         {
-            if (moveMode)
+            if (_moveModedObj != null)
             {
-                if (_moveModedObj != null)
-                    Destroy(_moveModedObj);
+                Destroy(_moveModedObj);
+                _moveModedObj = null;
             }
-            else
+            if (_clickedObj != null)
             {
-                if (_clickedObj != null)
-                    Destroy(_clickedObj);
+                Destroy(_clickedObj);
+                _clickedObj = null;
             }
         }
 

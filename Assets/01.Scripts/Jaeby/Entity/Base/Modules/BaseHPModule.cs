@@ -56,28 +56,28 @@ public abstract class BaseHPModule : MonoBehaviour
                 TurnManager.Instance.LoseTurnCheck();
         }
 
-        PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
         if (_hpCoroutine != null)
             StopCoroutine(_hpCoroutine);
-        _hpCoroutine = StartCoroutine(HpDownCoroutine(realDmg));
-
-    }
-
-    private IEnumerator HpDownCoroutine(int dmg) // 슬라이더 소모 애니메이션
-    {
-        float delta = 0f;
-        float start = _hp;
+        _hpCoroutine = StartCoroutine(HpDownCoroutine(_hp, realDmg));
         _hp -= dmg;
-        _mainModule.HpDownAction?.Invoke(_hp);
         if (_hp <= 0)
+        {
             _hp = 0;
-        //_hpText?.SetText($"{_hp} / {_mainModule.DataSO.hp}");
+            PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType, "격파");
+        }
+        else
+        {
+            PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
+        }
+        _mainModule.HpDownAction?.Invoke(_hp);
         _hpText?.SetText((_hpSlider.normalizedValue * 100f).ToString("N0") + "%");
         if (IsLived == false)
-        {
             Died();
-            yield break;
-        }
+    }
+
+    private IEnumerator HpDownCoroutine(float start, int dmg) // 슬라이더 소모 애니메이션
+    {
+        float delta = 0f;
         while (delta <= 1f)
         {
             delta += Time.deltaTime * 2f;

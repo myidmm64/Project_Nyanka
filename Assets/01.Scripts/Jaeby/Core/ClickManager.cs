@@ -24,6 +24,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     [SerializeField]
     private BaseMainModule _currentSelectedEntity = null;
+    [SerializeField]
     private PlayerMainModule _currentPlayer = null;
 
     [SerializeField]
@@ -69,9 +70,11 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void SellSelect(Cell info)
     {
+        _selectCellIndex = info.GetIndex();
         if (_currentPlayer != null)
             _currentPlayer.PreparationCellSelect(info.GetIndex());
-        _selectCellIndex = info.GetIndex();
+        else
+            CubeGrid.ClickView(info.GetIndex(), false);
     }
 
     public void UnSelect()
@@ -87,6 +90,12 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer = player;
         _currentPlayer.Selected();
         ClickModeSet(LeftClickMode.JustCell, true);
+    }
+
+    public void TryNormalSelect(BaseMainModule module)
+    {
+        SelectedEntityEnd();
+        EntitySelect(module);
     }
 
     public void ClickManagerReset()

@@ -29584,7 +29584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _leftClickMode: 1
-  _currentPlayer: {fileID: 0}
+  _currentSelectedEntity: {fileID: 0}
   _laycastMask:
     serializedVersion: 2
     m_Bits: 448

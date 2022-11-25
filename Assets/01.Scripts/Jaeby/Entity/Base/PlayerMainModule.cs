@@ -127,7 +127,7 @@ public class PlayerMainModule : BaseMainModule
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
-        CubeGrid.ClcikViewEnd(false);
+        CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
         ViewDataByCellIndex();
     }
@@ -137,28 +137,22 @@ public class PlayerMainModule : BaseMainModule
         VCamOne.Follow = null;
         CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
-        CubeGrid.ClcikViewEnd(true);
+        CubeGrid.ClcikViewEnd();
         CubeGrid.ViewEnd();
         UIManager.Instance.UIDisable();
     }
 
     public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
     {
-        PlayerAttackModule module = _attackModule as PlayerAttackModule;
-        if (module.AttackCheck)
+        //if (AttackModule.AttackCheck == false) return;
+        if (GetMoveableCheck(index))
         {
+            CubeGrid.ViewEnd();
+            ViewData(index);
         }
         else
         {
-            if (GetMoveableCheck(index))
-            {
-                CubeGrid.ViewEnd();
-                ViewData(index);
-            }
-            else
-            {
-                ViewDataByCellIndex();
-            }
+            ViewDataByCellIndex();
         }
     }
 
@@ -184,6 +178,8 @@ public class PlayerMainModule : BaseMainModule
 
     protected override void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
     {
+        Debug.Log("??");
+        CubeGrid.ClickView(index, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
         CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
     }
@@ -193,7 +189,7 @@ public class PlayerMainModule : BaseMainModule
         if (_myTurnEnded) return;
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
-        CubeGrid.ClcikViewEnd(true);
+        CubeGrid.ClcikViewEnd();
         TryAttack();
     }
 

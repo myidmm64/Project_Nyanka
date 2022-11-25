@@ -19,7 +19,7 @@ public class PlayerMoveModule : BaseMoveModule
 
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
-        CubeGrid.ClcikViewEnd(true);
+        CubeGrid.ClcikViewEnd();
 
         module.animator.SetBool("Walk", true);
         module.animator.Update(0);
