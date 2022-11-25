@@ -104,18 +104,21 @@ public class PlayerMainModule : BaseMainModule
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
         _selectable = false;
+
+        UIManager.Instance.TargettingUIEnable(true);
     }
 
     public override void PhaseChange(PhaseType type) // 페이즈가 바뀔 때
     {
         if (type == PhaseType.Player)
+        {
             OnPlayerTurnStart?.Invoke();
-
-        MoveModule.Moveable = true;
-        AttackModule.AttackCheck = false;
-        _myTurnEnded = false;
-        _pressTurnChecked = false;
-        _selectable = true;
+            MoveModule.Moveable = true;
+            AttackModule.AttackCheck = false;
+            _myTurnEnded = false;
+            _pressTurnChecked = false;
+            _selectable = true;
+        }
     }
 
     public override void Selected() // 선택되었을 때
@@ -201,6 +204,8 @@ public class PlayerMainModule : BaseMainModule
 
     public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
     {
+        UIManager.Instance.TargettingUIEnable(false);
+
         for (int i = 0; i < 4; i++)
         {
             List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);

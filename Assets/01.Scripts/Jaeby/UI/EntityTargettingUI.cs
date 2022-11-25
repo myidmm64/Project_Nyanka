@@ -23,6 +23,9 @@ public class EntityTargettingUI : MonoBehaviour
     private UIManager _uiManager = null;
     private Sequence _seq = null;
 
+    private bool _locked = false;
+    public bool Locked { get => _locked; set => _locked = value; }
+
     private void Start()
     {
         _uiManager = UIManager.Instance;
@@ -32,6 +35,8 @@ public class EntityTargettingUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            if (Locked)
+                return;
             _currentTargettingUIEnable = !_currentTargettingUIEnable;
             SpawnTargettingUIEnable(_currentTargettingUIEnable);
         }

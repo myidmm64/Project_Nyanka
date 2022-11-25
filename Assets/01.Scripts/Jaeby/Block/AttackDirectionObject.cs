@@ -31,13 +31,11 @@ public class AttackDirectionObject : MonoBehaviour
     private void OnMouseEnter()
     {
         _player.ViewAttackRange(_dir, _isSkillObj);
-        Debug.Log($"entr");
     }
 
     private void OnMouseExit()
     {
         CubeGrid.ViewEnd();
-        Debug.Log($"ex");
     }
 
     private void OnMouseDown()
@@ -46,6 +44,10 @@ public class AttackDirectionObject : MonoBehaviour
             //_player.PlayerSkill(_dir);
         //else
             _player.Attack(_dir);
-        Debug.Log($"d");
+    }
+
+    private void OnDestroy()
+    {
+        CubeGrid.ViewEnd();
     }
 }
