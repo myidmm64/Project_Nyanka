@@ -81,12 +81,12 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void UseTurn(int count, PlayerMainModule player)
     {
+        ClickManager.Instance.ClickManagerReset();
         PlayerTurnCount -= count;
         if (PlayerTurnCount <= 0)
             EnemyPhase();
         player.MyTurnEnd();
         UIManager.Instance.UIDisable();
-        ClickManager.Instance.ClickManagerReset();
     }
 
     public void EnemyPhase()
@@ -172,7 +172,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
             player.PressTurnChecked = true;
             player.MoveModule.Moveable = true;
             OnPlusTurn?.Invoke();
-            ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, true);
             ClickManager.Instance.ForceSelect(player);
             return;
         }

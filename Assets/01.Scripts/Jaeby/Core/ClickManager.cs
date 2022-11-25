@@ -19,14 +19,15 @@ public class ClickManager : MonoSingleTon<ClickManager>
         get => _leftClickMode;
         set => _leftClickMode = value;
     }
+    private bool _rightClickLock = false;
 
-    private ISelectable _selectable = null;
+
     [SerializeField]
+    private BaseMainModule _currentSelectedEntity = null;
     private PlayerMainModule _currentPlayer = null;
 
     [SerializeField]
     private LayerMask _laycastMask = 0;
-    private bool _rightClickLock = false;
 
     private void Start()
     {
@@ -43,113 +44,64 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private void Select()
     {
         if (_leftClickMode == LeftClickMode.Nothing) return;
+        if (Input.GetMouseButtonDown(0) == false) return;
+        RaycastHit hit;
+        if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask) == false) return;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask))
-            {
-                Cell c = hit.collider.GetComponent<Cell>();
-                if (c != null)
-                {
-                    _selectCellIndex = c.GetIndex();
-                    SellSelect();
-                }
-                PlayerMainModule testPlayer = hit.collider.GetComponent<PlayerMainModule>();
-                if (testPlayer != null && _currentPlayer != null)
-                    if (testPlayer.CellIndex == _currentPlayer.CellIndex)
-                    {
-                        CubeGrid.ClickView(_currentPlayer.CellIndex, true);
-                        _selectCellIndex = _currentPlayer.CellIndex;
-                        _currentPlayer.ViewDataByCellIndex();
-                    }
+        if (hit.collider.GetComponent<Cell>() != null)
+            SellSelect(hit.collider.GetComponent<Cell>());
 
-                if (_leftClickMode == LeftClickMode.JustCell)
-                    return;
-                ISelectable entity = hit.collider.GetComponent<ISelectable>();
-                if (entity != null && _selectable == null)
-                {
-                    _selectable = entity;
-                    _selectable.Selected();
-                }
-                PlayerMainModule player = hit.collider.GetComponent<PlayerMainModule>();
-                if (player != null)
-                {
-                    _currentPlayer = player;
-                    _currentPlayer.ViewDataByCellIndex();
-                    if (_currentPlayer.Selectable == false)
-                    {
-                        _selectable.SelectEnd();
-                        _selectable = null;
-                        _currentPlayer.ViewDataByCellIndex();
-                        _currentPlayer = null;
-                    }
-                }
-            }
-        }
+        if (_leftClickMode == LeftClickMode.JustCell) return;
+
+        if (hit.collider.GetComponent<BaseMainModule>() != null)
+            EntitySelect(hit.collider.GetComponent<BaseMainModule>());
     }
 
-    private void SellSelect()
+    private void EntitySelect(BaseMainModule module)
+    {
+        if (module is PlayerMainModule)
+            _currentPlayer = module as PlayerMainModule;
+        else
+            _currentSelectedEntity = module;    
+
+        module.Selected();
+    }
+
+    private void SellSelect(Cell info)
     {
         if (_currentPlayer != null)
-        {
-            _currentPlayer.PreparationCellSelect(_selectCellIndex);
-            if (_currentPlayer.GetMoveableCheck(_selectCellIndex))
-                CubeGrid.ClickView(_selectCellIndex, true);
-            return;
-        }
-        CubeGrid.ClickView(_selectCellIndex, false);
+            _currentPlayer.PreparationCellSelect(info.GetIndex());
+        _selectCellIndex = info.GetIndex();
     }
 
     public void UnSelect()
     {
         if (_rightClickLock) return;
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (_selectable != null)
-            {
-                _selectable.SelectEnd();
-                _selectable = null;
-            }
-            _currentPlayer = null;
-        }
+        if (Input.GetMouseButtonDown(1) == false) return;
+        SelectedEntityEnd();
     }
 
     public void ForceSelect(PlayerMainModule player)
     {
-        if (_currentPlayer != null)
-        {
-            _currentPlayer.SelectEnd();
-            _currentPlayer.SelectedFlag = false;
-            _currentPlayer = null;
-        }
+        SelectedEntityEnd();
         _currentPlayer = player;
-        _currentPlayer.SelectedFlag = true;
         _currentPlayer.Selected();
         ClickModeSet(LeftClickMode.JustCell, true);
-
-        Vector3 pos = player.transform.position;
-        pos.y = 0.5f;
     }
 
     public void ClickManagerReset()
     {
         ClickModeSet(LeftClickMode.AllClick, false);
-        if (_currentPlayer != null)
-        {
-            _currentPlayer.SelectEnd();
-            _currentPlayer.SelectedFlag = false;
-            _currentPlayer = null;
-        }
-        _selectable = null;
+        SelectedEntityEnd();
         CameraManager.Instance.CameraSelect(VCamTwo);
+    }
 
-        if (_selectable != null)
-        {
-            _selectable.SelectEnd();
-            _selectable = null;
-        }
+    private void SelectedEntityEnd()
+    {
+        _currentPlayer?.SelectEnd();
+        _currentSelectedEntity?.SelectEnd();
         _currentPlayer = null;
+        _currentSelectedEntity = null;
     }
 
     public void PlayerIdle()
