@@ -15,7 +15,7 @@ public class MoveToTarget : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("MoveToTarget");
+        //Debug.Log("MoveToTarget");
         int m_W = 9999;
         Vector3Int _pos = Vector3Int.zero;
         List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.CellIndex, _aIMainModule.DataSO.normalMoveRange, false);

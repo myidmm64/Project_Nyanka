@@ -9,6 +9,11 @@ using System;
 
 public class AIMainModule : BaseMainModule
 {
+    public int SkillCoolTime_1;
+
+    [SerializeField]
+    protected Transform _modelController = null;
+    public Transform ModelController => _modelController;
 
     public Dictionary<Vector3Int, int> cells = new Dictionary<Vector3Int, int>();
     public int maxTarget = 3;
@@ -17,6 +22,7 @@ public class AIMainModule : BaseMainModule
         get => _cellIndex;
         set => _cellIndex = value;
     }
+
     private AttackDirection _currentDir = AttackDirection.Up;
     public AttackDirection CurrentDir { get => _currentDir; set => _currentDir = value; }
 

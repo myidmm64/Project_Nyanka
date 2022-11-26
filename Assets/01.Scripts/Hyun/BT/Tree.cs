@@ -8,6 +8,8 @@ namespace BehaviorTree
     {
         private Node _root = null;
 
+        protected AIMainModule _aIMainModule;
+
         protected virtual void Start()
         {
             _root = SetupTree();
@@ -18,6 +20,9 @@ namespace BehaviorTree
             if (_root != null)
             {
                 NodeState nodeState = _root.Evaluate();
+                _aIMainModule.SkillCoolTime_1 -= 1;
+                if(_aIMainModule.SkillCoolTime_1<0)
+                    _aIMainModule.SkillCoolTime_1 = 3;
                 if (nodeState == NodeState.SUCCESS|| nodeState == NodeState.FAILURE)
                     yield return new WaitForSeconds(2f);
             }

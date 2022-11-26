@@ -33,7 +33,10 @@ MonoBehaviour:
   - {x: 1, y: 0, z: -1}
   - {x: 1, y: 0, z: 1}
   - {x: -1, y: 0, z: -1}
-  normalSkillRange: []
+  normalSkillRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   transSkillRange: []
   i_moveRange: 1
   i_attackRange: 1

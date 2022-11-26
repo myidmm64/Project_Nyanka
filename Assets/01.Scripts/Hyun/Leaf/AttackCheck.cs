@@ -13,7 +13,7 @@ public class AttackCheck : Node
     }
     public override NodeState Evaluate()
     {
-        Debug.Log("AttackCheck");
+        //Debug.Log("AttackCheck");
         //Debug.Log(_aIMainModule.ChangeableCellIndex);
         for (int i = 0; i <= (int)AttackDirection.Down; i++)
         {
