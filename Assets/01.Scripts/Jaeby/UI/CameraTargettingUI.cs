@@ -47,6 +47,12 @@ public class CameraTargettingUI : MonoBehaviour
         _maxHP = _mainModule.DataSO.hp;
         _hpText.SetText($"{_maxHP} / {_maxHP}");
 
+        ImageData ele = ImageManager.Instance.GetImageData(mainModule.DataSO.elementType);
+        ImageData cl = ImageManager.Instance.GetImageData(mainModule.DataSO.classType);
+        _elementImage.sprite = ele.sprite;
+        _elementImage.color = ele.color;
+        _classImage.sprite = cl.sprite;
+        _classImage.color = cl.color;
     }
 
     public void HpChanged(int val)

@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 2760155005588141442}
   - component: {fileID: 3031192923407176412}
   m_Layer: 5
-  m_Name: TypeImage
+  m_Name: ClassImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpText: {fileID: 9064793031600357881}
   _entityImage: {fileID: 9064793031760277082}
+  _elementImage: {fileID: 3406827538775733280}
+  _classImage: {fileID: 2760155005588141442}
   _imageMask: {fileID: 9064793031171195966}
   _button: {fileID: 966661951}
   _isDestroy: 0
