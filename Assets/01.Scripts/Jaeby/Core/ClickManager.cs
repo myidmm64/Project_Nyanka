@@ -30,6 +30,10 @@ public class ClickManager : MonoSingleTon<ClickManager>
     [SerializeField]
     private LayerMask _laycastMask = 0;
 
+    private Action<BaseMainModule> _entitySelectedAction = null;
+    public Action<BaseMainModule> EntitySelectedAction{ get =>
+            _entitySelectedAction; set => _entitySelectedAction = value;}
+
     private void Start()
     {
         GameManager.Instance.TimeScale = 2f;
@@ -66,6 +70,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
             _currentSelectedEntity = module;    
 
         module.Selected();
+        EntitySelectedAction?.Invoke(module);
     }
 
     private void SellSelect(Cell info)
