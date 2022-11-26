@@ -4,36 +4,19 @@ using UnityEngine;
 
 public class ImageManager : MonoSingleTon<ImageManager>
 {
-    [Header("속성 이미지")]
     [SerializeField]
-    private ImageData _fireImage;
-    [SerializeField]
-    private ImageData _waterImage ;
-    [SerializeField]
-    private ImageData _thunderImage;
-
-    [Header("클래스 이미지")]
-    [SerializeField]
-    private ImageData _warriorImage;
-    [SerializeField]
-    private ImageData _shieldImage ;
-    [SerializeField]
-    private ImageData _mageImage;
-    [SerializeField]
-    private ImageData _archerImage ;
-    [SerializeField]
-    private ImageData _assassinImage;
+    private ImageDataSO _dataSO = null;
 
     public ImageData GetImageData(ElementType type)
     {
         switch (type)
         {
             case ElementType.Fire:
-                return _fireImage;
+                return _dataSO.fireImage;
             case ElementType.Water:
-                return _waterImage;
+                return _dataSO.waterImage;
             case ElementType.Thunder:
-                return _thunderImage;
+                return _dataSO.thunderImage;
             default:
                 return default(ImageData);
         }
@@ -44,24 +27,18 @@ public class ImageManager : MonoSingleTon<ImageManager>
         switch (type)
         {
             case EntityClassType.Warrior:
-                return _warriorImage;
+                return _dataSO.warriorImage;
             case EntityClassType.Shield:
-                return _shieldImage;
+                return _dataSO.shieldImage;
             case EntityClassType.Mage:
-                return _mageImage;
+                return _dataSO.mageImage;
             case EntityClassType.Archer:
-                return _archerImage;
+                return _dataSO.archerImage;
             case EntityClassType.Assassin:
-                return _assassinImage;
+                return _dataSO.assassinImage;
             default:
                 return default(ImageData);
         }
     }
 }
 
-[System.Serializable]
-public struct ImageData
-{
-    public Sprite sprite;
-    public Color color;
-}

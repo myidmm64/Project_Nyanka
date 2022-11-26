@@ -29014,14 +29014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09384675201ea5344b6a83b3a1ba4c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireImage: {fileID: 0}
-  _waterImage: {fileID: 0}
-  _thunderImage: {fileID: 0}
-  _warriorImage: {fileID: 0}
-  _shieldImage: {fileID: 0}
-  _mageImage: {fileID: 0}
-  _archerImage: {fileID: 0}
-  _assassinImage: {fileID: 0}
+  _dataSO: {fileID: 11400000, guid: 1c83c7bdeae152b4c941d422c351c0a8, type: 2}
 --- !u!1 &1447603086
 GameObject:
   m_ObjectHideFlags: 0
