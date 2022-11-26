@@ -20,6 +20,7 @@ public class EntityHUD : MonoBehaviour
     private TextMeshProUGUI _elementDamageText = null;
 
     private ElementType _element = ElementType.NONE;
+    private EntityType _entityType = EntityType.None;
 
     public void Init(BaseMainModule targetModule)
     {
@@ -45,6 +46,7 @@ public class EntityHUD : MonoBehaviour
         ClickManager.Instance.EntitySelectedAction += TryImageEnable;
         ImageDisable();
         _element = targetModule.DataSO.elementType;
+        _entityType = targetModule.entityType;
     }
 
     private void TryImageEnable(BaseMainModule targetModule)
@@ -55,9 +57,9 @@ public class EntityHUD : MonoBehaviour
             return;
         }
 
-        if (_element == targetModule?.GetStrong)
+        if (_element == targetModule?.GetStrong && _entityType != targetModule.entityType)
             ImageEnable(true);
-        else if (_element == targetModule?.GetWeak)
+        else if (_element == targetModule?.GetWeak && _entityType != targetModule.entityType)
             ImageEnable(false);
         else
             ImageDisable();
@@ -66,7 +68,7 @@ public class EntityHUD : MonoBehaviour
     private void ImageEnable(bool isWeak)
     {
         ImageDisable();
-        if(isWeak)
+        if (isWeak)
         {
             _elementDamageText.SetText("æ‡¡°");
             _weakSubImage?.gameObject.SetActive(true);

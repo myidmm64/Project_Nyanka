@@ -92,8 +92,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void ForceSelect(PlayerMainModule player)
     {
         SelectedEntityEnd();
-        _currentPlayer = player;
-        _currentPlayer.Selected();
+        EntitySelect(player);
         ClickModeSet(LeftClickMode.JustCell, true);
     }
 
