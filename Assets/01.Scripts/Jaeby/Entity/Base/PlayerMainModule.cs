@@ -130,6 +130,7 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
         ViewDataByCellIndex();
+        SelectAction?.Invoke();
     }
 
     public override void SelectEnd() // 선택 해제
@@ -140,6 +141,7 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ClcikViewEnd();
         CubeGrid.ViewEnd();
         UIManager.Instance.UIDisable();
+        UnSelectAction?.Invoke();
     }
 
     public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택

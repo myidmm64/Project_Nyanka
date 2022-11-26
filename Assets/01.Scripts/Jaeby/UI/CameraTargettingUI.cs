@@ -15,6 +15,12 @@ public class CameraTargettingUI : MonoBehaviour
     private TextMeshProUGUI _hpText = null;
     [SerializeField]
     private Image _entityImage = null;
+
+    [SerializeField]
+    private Image _elementImage = null;
+    [SerializeField]
+    private Image _classImage = null;
+
     [SerializeField]
     private Mask _imageMask = null;
     [SerializeField]
@@ -27,15 +33,20 @@ public class CameraTargettingUI : MonoBehaviour
 
     private Vector3 _originScale = Vector3.zero;
 
+    private Sequence _selectSeq = null;
+
     public void Init(BaseMainModule mainModule)
     {
-        _originScale = transform.localScale;
-
         _mainModule = mainModule;
+        _originScale = transform.localScale;
         _mainModule.HpDownAction += HpChanged;
+        _mainModule.SelectAction += SelectAnimation;
+        _mainModule.UnSelectAction += UnSelectAnimation;
+
         _entityImage.sprite = _mainModule.DataSO.sprite;
         _maxHP = _mainModule.DataSO.hp;
         _hpText.SetText($"{_maxHP} / {_maxHP}");
+
     }
 
     public void HpChanged(int val)
@@ -71,5 +82,23 @@ public class CameraTargettingUI : MonoBehaviour
             return;
         Debug.Log("¾Ó±â¹«¶ì");
         ClickManager.Instance.TryNormalSelect(_mainModule);
+    }
+
+    public void SelectAnimation()
+    {
+        if (_selectSeq != null)
+            _selectSeq.Kill();
+        _selectSeq = DOTween.Sequence();
+        _selectSeq.Append(_entityImage.transform.DOScale(0.55f, 0.15f));
+        _imageMask.enabled = false;
+    }
+
+    public void UnSelectAnimation()
+    {
+        if (_selectSeq != null)
+            _selectSeq.Kill();
+        _selectSeq = DOTween.Sequence();
+        _selectSeq.Append(_entityImage.transform.DOScale(0.5f, 0.15f));
+        _imageMask.enabled = true;
     }
 }

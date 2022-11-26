@@ -95,6 +95,10 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     //¿Ã∫•∆Æ
     private Action<int> _hpDownAction = null;
     public Action<int> HpDownAction { get => _hpDownAction; set => _hpDownAction = value; }
+    private Action _selectAction = null;
+    public Action SelectAction { get => _selectAction; set => _selectAction = value; }
+    private Action _unSelectAction = null;
+    public Action UnSelectAction { get => _unSelectAction; set => _unSelectAction = value; }
 
     private void Awake()
     {
