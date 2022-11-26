@@ -116,6 +116,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentSelectedEntity?.SelectEnd();
         _currentPlayer = null;
         _currentSelectedEntity = null;
+        EntitySelectedAction?.Invoke(null);
     }
 
     public void PlayerIdle()

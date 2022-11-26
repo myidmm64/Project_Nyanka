@@ -66,7 +66,7 @@ public class PlayerMainModule : BaseMainModule
                 return so.normalAttackRange;
         }
     }
-    public int MinDamage
+    public override int MinDamage
     {
         get
         {
@@ -77,7 +77,7 @@ public class PlayerMainModule : BaseMainModule
                 return so.normalMinAtk;
         }
     }
-    public int MaxDamage
+    public override int MaxDamage
     {
         get
         {

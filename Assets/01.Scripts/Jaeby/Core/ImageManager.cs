@@ -18,6 +18,7 @@ public class ImageManager : MonoSingleTon<ImageManager>
             case ElementType.Thunder:
                 return _dataSO.thunderImage;
             default:
+                Debug.LogError("얘는! 뭐 이상한 엘리먼트 갖다대니?");
                 return default(ImageData);
         }
     }
@@ -37,6 +38,7 @@ public class ImageManager : MonoSingleTon<ImageManager>
             case EntityClassType.Assassin:
                 return _dataSO.assassinImage;
             default:
+                Debug.LogError("얘는! 뭐 이상한 클래스 갖다대니?");
                 return default(ImageData);
         }
     }

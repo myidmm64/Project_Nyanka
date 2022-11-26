@@ -2046,15 +2046,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 701966ee71cbdaa4d9429c159101c08d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackModule: {fileID: 0}
-  _moveModule: {fileID: 0}
-  _hpModule: {fileID: 3345467387231839356}
-  _skillModule: {fileID: 0}
-  _transformModule: {fileID: 0}
   _dataSO: {fileID: 11400000, guid: bddd65d2d9f1bb74d8ce7125e82ee1e8, type: 2}
   _entityType: 2
+  _entityHud: {fileID: 0}
   _animator: {fileID: 1983221508697079498}
   _agent: {fileID: 5399610196820296540}
+  maxTarget: 3
 --- !u!65 &6598800235144517093
 BoxCollider:
   m_ObjectHideFlags: 0

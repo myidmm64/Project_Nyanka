@@ -26,6 +26,8 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
             return _hpModule?.IsLived == true;
         }
     }
+    public virtual int MinDamage => DataSO.normalMinAtk;
+    public virtual int MaxDamage => DataSO.normalMaxAtk;
 
     // 데이터
     [SerializeField]
@@ -36,6 +38,10 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     [SerializeField]
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
+
+    //HUD
+    [SerializeField]
+    private EntityHUD _entityHud = null;
 
     // 현재 엔티티가 서있는 인덱스
     protected Vector3Int _cellIndex = Vector3Int.zero; // 현재 서있는 셀의 인덱스
@@ -62,7 +68,10 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     {
         get
         {
-            return (ElementType)(((int)_dataSO.elementType + 1) % (int)ElementType.SIZE);
+            int temp = ((int)_dataSO.elementType + 1) % (int)ElementType.SIZE;
+            if (temp == 0)
+                return (ElementType)((int)ElementType.NONE + 1);
+            return (ElementType)temp;
         }
     }
     public ElementType GetStrong // 강점 속성
@@ -108,6 +117,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
         _skillModule = GetComponent<BaseSkillModule>();
         _transformModule = GetComponent<BaseTransformModule>();
 
+        _entityHud.Init(this);
         UIManager.Instance.SpawnTargettingUI(this);
     }
 
