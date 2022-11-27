@@ -240,6 +240,7 @@ public class TurnAction
     private int _count = 0;
     private bool _locked = true;
     public bool Locked { get => _locked; set => _locked = value; }
+    public int Count { get => _count; set => _count = value; }
 
     public TurnAction(int cnt, Action StartAction, Action Callback)
     {

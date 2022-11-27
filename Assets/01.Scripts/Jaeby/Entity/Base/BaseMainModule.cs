@@ -28,6 +28,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     }
     public virtual int MinDamage => DataSO.normalMinAtk;
     public virtual int MaxDamage => DataSO.normalMaxAtk;
+    public virtual List<Vector3Int> SkillRange => DataSO.normalSkillRange;
 
     // ตฅภฬลอ
     [SerializeField]

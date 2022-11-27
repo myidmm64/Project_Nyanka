@@ -151,11 +151,9 @@ public class PlayerMainModule : BaseMainModule
         {
             CubeGrid.ViewEnd();
             ViewData(index);
+            return;
         }
-        else
-        {
-            ViewDataByCellIndex();
-        }
+        ViewDataByCellIndex();
     }
 
     public void PlayerMove(Vector3Int v) // 이동 시도
