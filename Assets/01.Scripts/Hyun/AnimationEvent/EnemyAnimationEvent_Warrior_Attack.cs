@@ -22,7 +22,7 @@ public class EnemyAnimationEvent_Warrior_Attack : EnemyAnimationEvent
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
         Destroy(obj, 1.5f);
         List<Vector3Int> attackRange = _aIMainModule.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, attackRange, true);
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
         {
             a.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);
@@ -31,6 +31,7 @@ public class EnemyAnimationEvent_Warrior_Attack : EnemyAnimationEvent
 
     public override void AttackEnd()
     {
+        _aIMainModule.isAttackComplete = true;
         _aIMainModule.animator.Play("Idle");
         _aIMainModule.animator.Update(0);
     }

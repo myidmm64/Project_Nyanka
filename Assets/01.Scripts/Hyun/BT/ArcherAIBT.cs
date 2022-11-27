@@ -25,9 +25,8 @@ public class ArcherAIBT : BehaviorTree.Tree
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
+                    new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
-                    new ArcherAISkill(_aIMainModule,transform),
-                    //new AIAttack(_aIMainModule,transform),
                 }),
                 new KeepDistance(_aIMainModule)
             }),
@@ -39,9 +38,8 @@ public class ArcherAIBT : BehaviorTree.Tree
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
+                    new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
-                    new ArcherAISkill(_aIMainModule,transform),
-                    //new AIAttack(_aIMainModule,transform),
                 }),
             })
 

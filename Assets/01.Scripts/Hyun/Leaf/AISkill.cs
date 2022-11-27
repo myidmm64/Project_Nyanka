@@ -5,13 +5,13 @@ using DG.Tweening;
 using BehaviorTree;
 using Sequence = DG.Tweening.Sequence;
 
-public class ArcherAISkill : Node
+public class AISkill : Node
 {
     AIMainModule _aIMainModule;
 
     private Transform _transform;
 
-    public ArcherAISkill(AIMainModule aIMainModule, Transform transform)
+    public AISkill(AIMainModule aIMainModule, Transform transform)
     {
         _aIMainModule = aIMainModule;
         _transform = transform;
@@ -27,7 +27,7 @@ public class ArcherAISkill : Node
             List<Vector3Int> vecs = _aIMainModule.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalSkillRange);
             for (int j = 0; j < vecs.Count; j++)
             {
-                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, vecs, true);
+                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
                 if (m.Count > 0)
                 {
                     dir = (AttackDirection)i;
@@ -38,16 +38,24 @@ public class ArcherAISkill : Node
             if (isChk)
                 break;
         }
-        _aIMainModule.CurrentDir = dir;
 
         if (_aIMainModule.SkillCoolTime_1 > 0 || isChk==false)
         {
             state = NodeState.FAILURE;
             return state;
         }
+        _aIMainModule.CurrentDir = dir;
+        _aIMainModule.isAttackComplete = false;
+        CoroutineHelper.StartCoroutine(Skill());
 
+        state = NodeState.SUCCESS;
+        return state;
+    }
+
+    IEnumerator Skill()
+    {
         Debug.Log("ArcherAISkill");
-        Vector3 lookPos = _aIMainModule.CellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
+        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
 
         Sequence seq = DOTween.Sequence();
@@ -57,8 +65,6 @@ public class ArcherAISkill : Node
             _aIMainModule.animator.Play("Skill1");
             _aIMainModule.animator.Update(0);
         });
-
-        state = NodeState.SUCCESS;
-        return state;
+        yield return null;
     }
 }

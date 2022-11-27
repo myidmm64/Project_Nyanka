@@ -23,9 +23,10 @@ public class WarriorAIBT : BehaviorTree.Tree
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
-                    new WarriorAISkill(_aIMainModule,transform),
+                    new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
-                })
+                }),
+                new NoMove(_aIMainModule)
             }),
 
 
@@ -36,7 +37,7 @@ public class WarriorAIBT : BehaviorTree.Tree
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
-                    new WarriorAISkill(_aIMainModule,transform),
+                    new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
 
                 })

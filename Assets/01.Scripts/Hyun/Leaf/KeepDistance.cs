@@ -33,7 +33,7 @@ public class KeepDistance : Node
 
         List<BaseMainModule> players = EntityManager.Instance.playerInfo;
 
-        List<PlayerMainModule> p_cnt = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, _aIMainModule.RunAwayRange, true);
+        List<PlayerMainModule> p_cnt = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, _aIMainModule.RunAwayRange, true);
         if (p_cnt.Count <= 0)
         {
             _aIMainModule.isMoveComplete = true;
@@ -58,7 +58,7 @@ public class KeepDistance : Node
 
         int m_W = 0;
         Vector3Int _pos = Vector3Int.zero;
-        List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.CellIndex, _aIMainModule.DataSO.normalMoveRange, false);
+        List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.ChangeableCellIndex, _aIMainModule.DataSO.normalMoveRange, false);
         foreach (var temp in movableRange)
         {
             Vector3Int key = temp.GetIndex();

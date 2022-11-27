@@ -22,7 +22,7 @@ public class RotateAttackRange : Node
             List<Vector3Int> vecs = _aIMainModule.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
             for (int j = 0; j < vecs.Count; j++)
             {
-                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, vecs, true);
+                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
                 if (m.Count > 0)
                 {
                     dir = (AttackDirection)i;
@@ -34,7 +34,7 @@ public class RotateAttackRange : Node
                 break;
         }
         _aIMainModule.CurrentDir = dir;
-
+        Debug.Log(_aIMainModule.CurrentDir);
         state = NodeState.SUCCESS;
         return state;
     }

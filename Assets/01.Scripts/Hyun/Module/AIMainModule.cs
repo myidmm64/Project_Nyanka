@@ -20,11 +20,11 @@ public class AIMainModule : BaseMainModule
     public bool isMoveComplete = false;
     public int maxTarget = 3;
 
-    //public Vector3Int ChangeableCellIndex
-    //{
-    //    get => _cellIndex;
-    //    set => _cellIndex = value;
-    //}
+    public Vector3Int ChangeableCellIndex
+    {
+        get => _cellIndex;
+        set => _cellIndex = value;
+    }
 
     private AttackDirection _currentDir = AttackDirection.Up;
     public AttackDirection CurrentDir { get => _currentDir; set => _currentDir = value; }

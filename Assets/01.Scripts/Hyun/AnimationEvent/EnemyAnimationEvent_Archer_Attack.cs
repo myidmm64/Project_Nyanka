@@ -16,20 +16,22 @@ public class EnemyAnimationEvent_Archer_Attack : EnemyAnimationEvent
 
     public override void AttackAnimation(int id)
     {
+        Debug.Log(_aIMainModule.CurrentDir + " !");
         List<Vector3Int> attackRange = _aIMainModule.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, attackRange, true);
-        float m_dis = 10000;
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        //Debug.Log(players.Count);
+        float m_dis = 1000000;
         PlayerMainModule target = null;
         foreach (var player in players)
         {
-            float dis = Vector3Int.Distance(_aIMainModule.CellIndex, player.CellIndex);
+            float dis = Vector3Int.Distance(_aIMainModule.ChangeableCellIndex, player.CellIndex);
+            //Debug.Log(dis + " " + player.name);
             if(m_dis > dis)
             {
                 m_dis = dis;
                 target = player;
             }
         }
-        Debug.Log(target.name);
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
         Destroy(obj, 1.5f);
         target.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);

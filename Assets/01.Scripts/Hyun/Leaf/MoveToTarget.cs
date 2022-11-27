@@ -44,6 +44,7 @@ public class MoveToTarget : Node
             }
         }
         _aIMainModule.Agent.SetDestination(_pos);
+        _aIMainModule.ChangeableCellIndex = _pos;
         yield return new WaitUntil(()=>Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance);
         _aIMainModule.isMoveComplete = true;
         state = NodeState.SUCCESS;
