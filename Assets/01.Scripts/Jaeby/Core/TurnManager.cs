@@ -134,7 +134,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void CurrentTurnTextChange(int val)
     {
-        _currentTurnText.SetText($"턴 - {val}");
+        _currentTurnText.SetText($"{val} ROUND");
         _currentTurnText.transform.DOKill();
         _currentTurnText.transform.localScale = Vector3.one * 1.5f;
         _currentTurnText.transform.DOScale(1f, 0.2f);
