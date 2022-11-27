@@ -108,14 +108,20 @@ public class AIMainModule : BaseMainModule
 
     public override void Selected()
     {
+        VCamOne.Follow = transform;
+        CameraManager.Instance.CameraSelect(VCamOne);
         CubeGrid.ClcikViewEnd();
         ViewDataByCellIndex(true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        SelectAction?.Invoke();
     }
 
     public override void SelectEnd()
     {
+        VCamOne.Follow = null;
+        CameraManager.Instance.CameraSelect(VCamTwo);
         CubeGrid.ViewEnd();
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        UnSelectAction?.Invoke();
     }
 }
