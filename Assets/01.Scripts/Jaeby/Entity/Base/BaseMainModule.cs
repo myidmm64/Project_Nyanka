@@ -126,22 +126,33 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     public abstract void PhaseChange(PhaseType type); // 페이즈 교체
     public abstract void Selected(); // 선택 
     public abstract void SelectEnd(); // 선택 종료
-    protected virtual void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
+    protected virtual void ViewData(Vector3Int index, bool fourDirection) // 인덱스에 따라 데이터 보여주기
     {
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
+        List<Vector3Int> vec = new List<Vector3Int>();
+        if (fourDirection)
+            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+        else
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
+
+        CubeGrid.ViewRange(GridType.Attack, index, vec, true);
     }
     public void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
     {
         _hpModule?.ApplyDamage(dmg, elementType, critical, isPlayer);
     }
 
-    public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시
+    public void ViewDataByCellIndex(bool fourDirection) // 플레이어의 셀에 정보 표시
     {
         CubeGrid.ViewEnd();
         if(this is PlayerMainModule)
             CubeGrid.ClickView(CellIndex, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, AttackRange, true);
+        List<Vector3Int> vec = new List<Vector3Int>();
+        if (fourDirection)
+            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+        else
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
+        CubeGrid.ViewRange(GridType.Attack, CellIndex, vec, true);
     }
 }

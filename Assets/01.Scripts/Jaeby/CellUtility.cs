@@ -93,17 +93,16 @@ public class CellUtility
         return v;
     }
 
-    public static List<Vector3Int> GetForDirectionByIndexes(Vector3Int startIndex, List<Vector3Int> indexes, bool ignore)
+    public static List<Vector3Int> GetForDirectionByIndexes(List<Vector3Int> indexes)
     {
         List<Vector3Int> vecList = new List<Vector3Int>();
         for(int i = 0;  i < (int)AttackDirection.Down + 1; i++)
         {
             List<Vector3Int> dirVecs = GetAttackVectorByDirections((AttackDirection)i, indexes);
-            List<Cell> searchDirVecs = SearchCells(startIndex, dirVecs, ignore);
-            for(int j = 0; j < searchDirVecs.Count; j++)
+            for(int j = 0; j < dirVecs.Count; j++)
             {
-                if (vecList.Contains(searchDirVecs[j].GetIndex()) == false)
-                    vecList.Add(searchDirVecs[j].GetIndex());
+                if (vecList.Contains(dirVecs[j]) == false)
+                    vecList.Add(dirVecs[j]);
             }
         }
         return vecList;

@@ -46,6 +46,9 @@ public class PlayerMainModule : BaseMainModule
     public bool Skillable => _skillModule.Skillable;
     public int SkillCount => _skillModule.Count;
 
+    // 기본 변수
+    private Vector3Int _prevIndex = Vector3Int.zero;
+
     // 수치 데이터
     public override List<Vector3Int> MoveRange
     {
@@ -142,7 +145,7 @@ public class PlayerMainModule : BaseMainModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
-        ViewDataByCellIndex();
+        ViewDataByCellIndex(false);
         SelectAction?.Invoke();
     }
 
@@ -159,14 +162,19 @@ public class PlayerMainModule : BaseMainModule
 
     public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
     {
-        //if (AttackModule.AttackCheck == false) return;
+        bool fourDirec = true;
+        Debug.Log($"prev {_prevIndex} index {index}");
+        if (_prevIndex == index)
+            fourDirec = false;
+        _prevIndex = index;
+
         if (GetMoveableCheck(index))
         {
             CubeGrid.ViewEnd();
-            ViewData(index);
+            ViewData(index, fourDirec);
             return;
         }
-        ViewDataByCellIndex();
+        ViewDataByCellIndex(fourDirec);
     }
 
     public void PlayerMove(Vector3Int v) // 이동 시도
@@ -204,12 +212,17 @@ public class PlayerMainModule : BaseMainModule
         _transformModule.TransfomationStart();
     }
 
-    protected override void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
+    protected override void ViewData(Vector3Int index, bool fourDirection) // 인덱스에 따라 데이터 보여주기
     {
         Debug.Log("??");
         CubeGrid.ClickView(index, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
+        List<Vector3Int> vec = new List<Vector3Int>();
+        if (fourDirection)
+            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+        else
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
+        CubeGrid.ViewRange(GridType.Attack, index, vec, true);
     }
 
     public void PlayerIdle() // 대기

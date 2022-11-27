@@ -29,7 +29,7 @@ public class PlayerTransformModule : BaseTransformModule
         _transed = true;
         mo.SkillRestart(true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
-        mo.ViewDataByCellIndex();
+        mo.ViewDataByCellIndex(false);
         UIManager.Instance.UIInit(mo);
     }
 }

@@ -49,7 +49,7 @@ public class AIMainModule : BaseMainModule
             return so.normalAttackRange;
         }
     }
-    public List<Vector3Int> SkillRange
+    public override List<Vector3Int> SkillRange
     {
         get
         {
@@ -82,7 +82,7 @@ public class AIMainModule : BaseMainModule
     public override void Selected()
     {
         CubeGrid.ClcikViewEnd();
-        ViewDataByCellIndex();
+        ViewDataByCellIndex(false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
     }
 
