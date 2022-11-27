@@ -31,8 +31,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private bool _isTransed = false;
 
-    public UnityEvent OnPlusTurn = null;
-    public UnityEvent OnLoseTurn = null;
+    public UnityEvent<PlayerMainModule> OnPlusTurn = null;
+    public UnityEvent<PlayerMainModule> OnLoseTurn = null;
     public UnityEvent<int> OnStarted = null;
     public UnityEvent<bool> OnNextPhase = null;
     public UnityEvent<int> OnNextTurn = null;
@@ -100,6 +100,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         //Debug.Log("야몸ㄴ놈너머");
         yield return new WaitForSecondsRealtime(1f);
+        UIManager.Instance.TargettingUIEnable(false, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
 
@@ -110,6 +111,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         }
         EntityManager.Instance.enemy_TargetLists.Clear();
         NextTurn();
+        UIManager.Instance.TargettingUIEnable(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }
 
@@ -172,18 +174,30 @@ public class TurnManager : MonoSingleTon<TurnManager>
         {
             player.PressTurnChecked = true;
             player.MoveModule.Moveable = true;
-            OnPlusTurn?.Invoke();
-            ClickManager.Instance.ForceSelect(player);
+            StartCoroutine(WaitCoroutine(true, player));
             return;
         }
         if (_loseTurn)
         {
             PlayerTurnCount = 0;
-            OnLoseTurn?.Invoke();
-            EnemyPhase();
+            OnLoseTurn?.Invoke(player);
+            StartCoroutine(WaitCoroutine(false, player));
             return;
         }
         UseTurn(1, player);
+    }
+
+    private IEnumerator WaitCoroutine(bool isPlus, PlayerMainModule player)
+    {
+        if (isPlus)
+            OnPlusTurn?.Invoke(player);
+        else
+            OnLoseTurn?.Invoke(player);
+        yield return new WaitForSecondsRealtime(1f);
+        if(isPlus)
+            ClickManager.Instance.ForceSelect(player);
+        else
+            EnemyPhase();
     }
 
     public void LoseTurnCheck()

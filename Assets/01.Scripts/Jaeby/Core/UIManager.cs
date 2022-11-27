@@ -14,10 +14,10 @@ public class UIManager : MonoSingleTon<UIManager>
 
     private Sequence _seq = null;
 
-    public void TargettingUIEnable(bool enable)
+    public void TargettingUIEnable(bool enable, bool imm)
     {
         _entityTargettingUI.Locked = !enable;
-        _entityTargettingUI.SpawnTargettingUIEnable(enable);
+        _entityTargettingUI.SpawnTargettingUIEnable(enable, imm);
     }
 
     public void SpawnTargettingUI(BaseMainModule module)

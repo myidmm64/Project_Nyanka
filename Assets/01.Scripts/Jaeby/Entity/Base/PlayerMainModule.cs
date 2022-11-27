@@ -105,7 +105,7 @@ public class PlayerMainModule : BaseMainModule
         TurnManager.Instance.TurnCheckReset();
         _selectable = false;
 
-        UIManager.Instance.TargettingUIEnable(true);
+        UIManager.Instance.TargettingUIEnable(true, true);
     }
 
     public override void PhaseChange(PhaseType type) // 페이즈가 바뀔 때
@@ -202,7 +202,7 @@ public class PlayerMainModule : BaseMainModule
 
     public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
     {
-        UIManager.Instance.TargettingUIEnable(false);
+        UIManager.Instance.TargettingUIEnable(false, true);
 
         for (int i = 0; i < 4; i++)
         {

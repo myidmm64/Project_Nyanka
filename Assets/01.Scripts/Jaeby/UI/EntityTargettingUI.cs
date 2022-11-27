@@ -38,7 +38,7 @@ public class EntityTargettingUI : MonoBehaviour
             if (Locked)
                 return;
             _currentTargettingUIEnable = !_currentTargettingUIEnable;
-            SpawnTargettingUIEnable(_currentTargettingUIEnable);
+            SpawnTargettingUIEnable(_currentTargettingUIEnable, false);
         }
     }
 
@@ -53,14 +53,21 @@ public class EntityTargettingUI : MonoBehaviour
 
     }
 
-    public void SpawnTargettingUIEnable(bool enable)
+    public void SpawnTargettingUIEnable(bool enable, bool imm)
     {
+        if (_seq != null)
+            _seq.Kill();
+
+        if (imm)
+        {
+            _uiManager.CanvasGroupSetting(_entityTargetGroup, false, 0f);
+            return;
+        }
+
         float startAlpha = enable ? 0f : 1f;
         float endAlpha = enable ? 1f : 0f;
         _uiManager.CanvasGroupSetting(_entityTargetGroup, !enable, startAlpha);
 
-        if (_seq != null)
-            _seq.Kill();
         _seq = DOTween.Sequence();
         _seq.Append(_entityTargetGroup.DOFade(endAlpha, 0.2f));
         _seq.AppendCallback(() =>

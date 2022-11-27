@@ -45,13 +45,13 @@ public abstract class BaseHPModule : MonoBehaviour
         int realDmg = dmg;
         if (elementType == _mainModule.GetWeak)
         {
-            realDmg = Mathf.RoundToInt(dmg * 1.5f);
+            realDmg = Mathf.RoundToInt(dmg * 1.25f);
             if (isPlayer)
                 TurnManager.Instance.PlusTurnCheck();
         }
         else if (elementType == _mainModule.GetStrong)
         {
-            realDmg = Mathf.RoundToInt(dmg * 0.5f);
+            realDmg = Mathf.RoundToInt(dmg * 0.75f);
             if (isPlayer)
                 TurnManager.Instance.LoseTurnCheck();
         }

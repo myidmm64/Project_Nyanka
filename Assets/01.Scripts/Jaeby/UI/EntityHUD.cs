@@ -87,8 +87,9 @@ public class EntityHUD : MonoBehaviour
         _elementDamageText.SetText("");
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        //ClickManager.Instance.EntitySelectedAction -= TryWeakImageEnable;
+        if(ClickManager.Instance != null)
+            ClickManager.Instance.EntitySelectedAction -= TryImageEnable;
     }
 }
