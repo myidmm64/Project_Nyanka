@@ -264,10 +264,13 @@ public class TurnAction
         }
     }
 
-    public void Start()
+    public void Start(int maxCount = -1)
     {
+        if (maxCount == -1)
+            maxCount = _maxCount;
+
         _startAction?.Invoke();
-        _count = _maxCount;
+        _count = maxCount;
         _locked = false;
     }
 }

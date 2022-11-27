@@ -35,7 +35,10 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
   - {x: 1, y: 0, z: 1}
-  transSkillRange: []
+  transSkillRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   transAtk: 2
   transMinAtk: 0
   transMaxAtk: 0
@@ -49,3 +52,5 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -2}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}

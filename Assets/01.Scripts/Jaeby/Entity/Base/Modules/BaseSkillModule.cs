@@ -77,8 +77,16 @@ public abstract class BaseSkillModule : MonoBehaviour
     {
         TryMakeTurnAction();
         _turnChecked = turnCheck;
-        ChangeSkillCount(_skillCooltime);
-        _skillTurnAction.Start();
+        if(turnCheck)
+        {
+            ChangeSkillCount(0);
+            _skillTurnAction.Start(0);
+        }
+        else
+        {
+            ChangeSkillCount(_skillCooltime);
+            _skillTurnAction.Start();
+        }
     }
 
     private void TryMakeTurnAction()

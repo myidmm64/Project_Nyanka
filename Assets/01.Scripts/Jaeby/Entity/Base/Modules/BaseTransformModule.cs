@@ -16,7 +16,7 @@ public abstract class BaseTransformModule : MonoBehaviour
     private void Start()
     {
         _mainModule = GetComponent<BaseMainModule>();
-        _transformAction = new TurnAction(2, null, TransfomationEnd, null);
+        _transformAction = new TurnAction(2, null, TransfomationEnd, CountDownAction);
         TurnManager.Instance.TurnActionAdd(_transformAction, true);
     }
     public abstract void ChildTransfomationStart();
@@ -37,5 +37,9 @@ public abstract class BaseTransformModule : MonoBehaviour
     {
         ChildTransfomationEnd();
         _transed = false;
+    }
+    protected virtual void CountDownAction(int val)
+    {
+
     }
 }

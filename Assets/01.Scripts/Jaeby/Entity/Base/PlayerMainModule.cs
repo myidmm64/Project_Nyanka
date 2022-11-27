@@ -184,6 +184,11 @@ public class PlayerMainModule : BaseMainModule
         AttackModule.TrySkill();
     }
 
+    public void SkillRestart(bool turnCheck)
+    {
+        _skillModule.RestartSkillCoolTime(turnCheck);
+    }
+
     public void Attack(AttackDirection dir) // 실질적 공격
     {
         AttackModule.PlayerAttack(dir);
