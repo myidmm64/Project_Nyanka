@@ -19,35 +19,23 @@ public class AIAttack : Node
 
     public override NodeState Evaluate()
     {
-        //Debug.Log("AIAttack");
-        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
+        CoroutineHelper.StartCoroutine(Attack());
+        state = NodeState.SUCCESS;
+        return state;
+    }
+
+    IEnumerator Attack()
+    {
+        Debug.Log("AIAttack");
+        Vector3 lookPos = _aIMainModule.CellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
         Sequence seq = DOTween.Sequence();
-        bool isEnd = false;
         seq.Append(_transform.DOLookAt(lookPos, 1f).SetEase(Ease.Linear));
-
         seq.AppendCallback(() =>
         {
             _aIMainModule.animator.Play("Attack");
             _aIMainModule.animator.Update(0);
-            if (_aIMainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-            {
-                isEnd = true;
-            }
-
-            //List<Vector3Int> attackRange = _aIMainModule.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-            //List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, attackRange, true);
-            //foreach (var a in players)
-            //{
-            //    a.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);
-            //}
         });
-        if (isEnd == true)
-        {
-            state = NodeState.RUNNING;
-            return state;
-        }
-        state = NodeState.SUCCESS;
-        return state;
+        yield return null;
     }
 }

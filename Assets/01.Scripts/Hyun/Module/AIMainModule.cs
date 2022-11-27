@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using DG.Tweening;
 using System;
 
 
@@ -14,14 +15,16 @@ public class AIMainModule : BaseMainModule
     [SerializeField]
     protected Transform _modelController = null;
     public Transform ModelController => _modelController;
-
     public Dictionary<Vector3Int, int> cells = new Dictionary<Vector3Int, int>();
+    public bool isAttackComplete = false;
+    public bool isMoveComplete = false;
     public int maxTarget = 3;
-    public Vector3Int ChangeableCellIndex
-    {
-        get => _cellIndex;
-        set => _cellIndex = value;
-    }
+
+    //public Vector3Int ChangeableCellIndex
+    //{
+    //    get => _cellIndex;
+    //    set => _cellIndex = value;
+    //}
 
     private AttackDirection _currentDir = AttackDirection.Up;
     public AttackDirection CurrentDir { get => _currentDir; set => _currentDir = value; }
@@ -64,12 +67,30 @@ public class AIMainModule : BaseMainModule
         }
     }
 
+    public List<Vector3Int> RunAwayRange
+    {
+        get
+        {
+            EnemyDataSO so = DataSO as EnemyDataSO;
+            return so.runAwayRange;
+        }
+    }
+
     public int Int_MoveRange
     {
         get
         {
             EnemyDataSO so = DataSO as EnemyDataSO;
             return so.i_moveRange;
+        }
+    }
+
+    public int Int_AttackRange
+    {
+        get
+        {
+            EnemyDataSO so = DataSO as EnemyDataSO;
+            return so.i_attackRange;
         }
     }
 
