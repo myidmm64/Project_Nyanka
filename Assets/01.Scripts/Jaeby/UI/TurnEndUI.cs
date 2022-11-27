@@ -41,6 +41,7 @@ public class TurnEndUI : MonoBehaviour
         _turnText = _turnTextTrm.GetComponent<TextMeshProUGUI>();
         _whoseTurnText.color = _playerTurnStartColor;
         _turnText.color = _playerTurnStartColor;
+        _fireAnimationObj.color = _playerTurnStartColor;
     }
 
     public void NextTurnAnimation(bool playerTurn)
@@ -52,6 +53,7 @@ public class TurnEndUI : MonoBehaviour
         Color startColor = playerTurn ? _playerTurnStartColor : _enemyTurnStartColor;
         _whoseTurnText.color = startColor;
         _turnText.color = startColor;
+        _fireAnimationObj.color = startColor;
         _donTouchPanel.SetActive(true);
 
         _seq = DOTween.Sequence();
