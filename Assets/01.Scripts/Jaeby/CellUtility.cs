@@ -92,4 +92,72 @@ public class CellUtility
         v.Clamp(Vector3Int.one * -1, Vector3Int.one);
         return v;
     }
+
+    public static List<Vector3Int> GetForDirectionByIndexes(Vector3Int startIndex, List<Vector3Int> indexes, bool ignore)
+    {
+        List<Vector3Int> vecList = new List<Vector3Int>();
+        for(int i = 0;  i < (int)AttackDirection.Down + 1; i++)
+        {
+            List<Vector3Int> dirVecs = GetAttackVectorByDirections((AttackDirection)i, indexes);
+            List<Cell> searchDirVecs = SearchCells(startIndex, dirVecs, ignore);
+            for(int j = 0; j < searchDirVecs.Count; j++)
+            {
+                if (vecList.Contains(searchDirVecs[j].GetIndex()) == false)
+                    vecList.Add(searchDirVecs[j].GetIndex());
+            }
+        }
+        return vecList;
+    }
+
+    public static List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
+    {
+        List<Vector3Int> vecList = new List<Vector3Int>();
+        float rot = 0f;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                rot = 0f;
+                break;
+            case AttackDirection.Right:
+                rot = 90f;
+                break;
+            case AttackDirection.Left:
+                rot = 270f;
+                break;
+            case AttackDirection.Down:
+                rot = 180f;
+                break;
+            default:
+                break;
+        }
+        for (int i = 0; i < indexes.Count; i++)
+        {
+            Vector3 v = Quaternion.AngleAxis(rot, Vector3.up) * indexes[i];
+            vecList.Add(Vector3Int.RoundToInt(v));
+        }
+        return vecList;
+    }
+
+    public static Vector3Int GetAttackDirection(AttackDirection dir)
+    {
+        Vector3Int v = Vector3Int.zero;
+        switch (dir)
+        {
+            case AttackDirection.Up:
+                v = new Vector3Int(0, 0, 1);
+                break;
+            case AttackDirection.Right:
+                v = new Vector3Int(1, 0, 0);
+                break;
+            case AttackDirection.Left:
+                v = new Vector3Int(-1, 0, 0);
+                break;
+            case AttackDirection.Down:
+                v = new Vector3Int(0, 0, -1);
+                break;
+            default:
+                break;
+        }
+        return v;
+    }
 }

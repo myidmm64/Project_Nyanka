@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9f01d1841e4754f8636c4a5c8ce68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataSO: {fileID: 11400000, guid: dfc0f539fbd390d42bde4009f67f00a1, type: 2}
+  _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
   _entityType: 1
   _entityHud: {fileID: 7912255643492170608}
   _animator: {fileID: 7052988870404041528}
@@ -17104,6 +17104,11 @@ PrefabInstance:
     - target: {fileID: 305869639636276499, guid: 976bc52adfbfe364eaa5966846ae6e0a,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 305869639993803207, guid: 976bc52adfbfe364eaa5966846ae6e0a,
+        type: 3}
+      propertyPath: m_Value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4649362316324584346, guid: 976bc52adfbfe364eaa5966846ae6e0a,

@@ -209,7 +209,7 @@ public class PlayerMainModule : BaseMainModule
         Debug.Log("??");
         CubeGrid.ClickView(index, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
+        CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange), true);
     }
 
     public void PlayerIdle() // ´ë±â
@@ -240,9 +240,9 @@ public class PlayerMainModule : BaseMainModule
         {
             List<Cell> cells = null;
             if (isSkill)
-                cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, SkillRange), true);
+                cells = CellUtility.SearchCells(CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, SkillRange), true);
             else
-                cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
+                cells = CellUtility.SearchCells(CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
 
             bool enemyCheck = false;
             for (int j = 0; j < cells.Count; j++)
@@ -255,7 +255,7 @@ public class PlayerMainModule : BaseMainModule
                 continue;
             AttackDirectionObject ob = Instantiate(_attackDirectionObj);
             ob.Initailize((AttackDirection)i, this, isSkill);
-            ob.transform.position += CellIndex + GetAttackDirection((AttackDirection)i);
+            ob.transform.position += CellIndex + CellUtility.GetAttackDirection((AttackDirection)i);
             float angle = 0f;
             switch ((AttackDirection)i)
             {
@@ -282,9 +282,9 @@ public class PlayerMainModule : BaseMainModule
     {
         Vector3Int index = CellIndex;
         if (isSkill)
-            CubeGrid.ViewRange(GridType.Skill, index, GetAttackVectorByDirections(dir, AttackRange), true);
+            CubeGrid.ViewRange(GridType.Skill, index, CellUtility.GetAttackVectorByDirections(dir, AttackRange), true);
         else
-            CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(dir, AttackRange), true);
+            CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(dir, AttackRange), true);
     }
 
     public void UISet()

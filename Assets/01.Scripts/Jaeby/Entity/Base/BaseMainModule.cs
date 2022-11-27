@@ -129,62 +129,11 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     protected virtual void ViewData(Vector3Int index) // 인덱스에 따라 데이터 보여주기
     {
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
-        CubeGrid.ViewRange(GridType.Attack, index, GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
+        CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(AttackDirection.Up, _dataSO.normalAttackRange), true);
     }
     public void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
     {
         _hpModule?.ApplyDamage(dmg, elementType, critical, isPlayer);
-    }
-    public List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
-    {
-        List<Vector3Int> vecList = new List<Vector3Int>();
-        float rot = 0f;
-        switch (dir)
-        {
-            case AttackDirection.Up:
-                rot = 0f;
-                break;
-            case AttackDirection.Right:
-                rot = 90f;
-                break;
-            case AttackDirection.Left:
-                rot = 270f;
-                break;
-            case AttackDirection.Down:
-                rot = 180f;
-                break;
-            default:
-                break;
-        }
-        for (int i = 0; i < indexes.Count; i++)
-        {
-            Vector3 v = Quaternion.AngleAxis(rot, transform.up) * indexes[i];
-            vecList.Add(Vector3Int.RoundToInt(v));
-        }
-        return vecList;
-    }
-
-    public Vector3Int GetAttackDirection(AttackDirection dir)
-    {
-        Vector3Int v = Vector3Int.zero;
-        switch (dir)
-        {
-            case AttackDirection.Up:
-                v = new Vector3Int(0, 0, 1);
-                break;
-            case AttackDirection.Right:
-                v = new Vector3Int(1, 0, 0);
-                break;
-            case AttackDirection.Left:
-                v = new Vector3Int(-1, 0, 0);
-                break;
-            case AttackDirection.Down:
-                v = new Vector3Int(0, 0, -1);
-                break;
-            default:
-                break;
-        }
-        return v;
     }
 
     public void ViewDataByCellIndex() // 플레이어의 셀에 정보 표시

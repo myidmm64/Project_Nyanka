@@ -47,7 +47,7 @@ public abstract class BaseSkillModule : MonoBehaviour
         {
             bool check = false;
             for (int i = 0; i < 4; i++)
-                if (CellUtility.FindTarget<AIMainModule>(_mainModule.CellIndex, _mainModule.GetAttackVectorByDirections((AttackDirection)i, _mainModule.SkillRange), true).Count > 0)
+                if (CellUtility.FindTarget<AIMainModule>(_mainModule.CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, _mainModule.SkillRange), true).Count > 0)
                     check = true;
 
             return check;
