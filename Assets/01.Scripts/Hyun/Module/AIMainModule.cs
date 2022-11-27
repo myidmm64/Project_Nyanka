@@ -109,7 +109,7 @@ public class AIMainModule : BaseMainModule
     public override void Selected()
     {
         CubeGrid.ClcikViewEnd();
-        ViewDataByCellIndex(false);
+        ViewDataByCellIndex(true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
     }
 

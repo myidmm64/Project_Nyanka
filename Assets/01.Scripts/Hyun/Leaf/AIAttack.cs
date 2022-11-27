@@ -28,7 +28,7 @@ public class AIAttack : Node
     {
         _aIMainModule.isAttackComplete = false;
         Debug.Log("AIAttack");
-        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
+        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
         Sequence seq = DOTween.Sequence();
         seq.Append(_transform.DOLookAt(lookPos, 1f).SetEase(Ease.Linear));

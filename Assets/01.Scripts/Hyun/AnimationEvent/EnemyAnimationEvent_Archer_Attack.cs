@@ -17,7 +17,7 @@ public class EnemyAnimationEvent_Archer_Attack : EnemyAnimationEvent
     public override void AttackAnimation(int id)
     {
         Debug.Log(_aIMainModule.CurrentDir + " !");
-        List<Vector3Int> attackRange = _aIMainModule.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         //Debug.Log(players.Count);
         float m_dis = 1000000;

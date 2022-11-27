@@ -19,7 +19,7 @@ MonoBehaviour:
   normalDef: 0
   hp: 2000
   elementType: 1
-  classType: 5
+  classType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}

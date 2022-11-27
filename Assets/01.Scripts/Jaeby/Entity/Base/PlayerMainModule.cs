@@ -120,6 +120,7 @@ public class PlayerMainModule : BaseMainModule
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
         _selectable = false;
+        _prevIndex = Vector3Int.zero;
 
         UIManager.Instance.TargettingUIEnable(true, false);
     }
@@ -145,7 +146,9 @@ public class PlayerMainModule : BaseMainModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
-        ViewDataByCellIndex(false);
+
+        _prevIndex = CellIndex;
+        ViewDataByCellIndex(true);
         SelectAction?.Invoke();
     }
 
@@ -158,10 +161,14 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ViewEnd();
         UIManager.Instance.UIDisable();
         UnSelectAction?.Invoke();
+        _prevIndex = Vector3Int.zero;
     }
 
     public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
     {
+        if (GetMoveableCheck(index) == false)
+            index = CellIndex;
+
         bool fourDirec = true;
         Debug.Log($"prev {_prevIndex} index {index}");
         if (_prevIndex == index)

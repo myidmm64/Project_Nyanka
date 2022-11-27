@@ -19,7 +19,7 @@ public class RotateAttackRange : Node
         for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
         {
             bool isChk = false;
-            List<Vector3Int> vecs = _aIMainModule.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
+            List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
             for (int j = 0; j < vecs.Count; j++)
             {
                 List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
