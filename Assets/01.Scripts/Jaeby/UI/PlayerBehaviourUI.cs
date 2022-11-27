@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class PlayerBehaviourUI : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class PlayerBehaviourUI : MonoBehaviour
     private CanvasGroup _idleButton = null;
     [SerializeField]
     private CanvasGroup _skillButton = null;
+    [SerializeField]
+    private TextMeshProUGUI _skillCountText = null;
+    [SerializeField]
+    private GameObject _skillFireImage = null;
+
     [SerializeField]
     private CanvasGroup _transButton = null;
     [SerializeField]
@@ -37,10 +43,18 @@ public class PlayerBehaviourUI : MonoBehaviour
             _uiManager.CanvasGroupSetting(_moveCheckButton, false, 1f);
             _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
             _uiManager.CanvasGroupSetting(_transButton, false, 1f);
-            //_uiManager.CanvasGroupSetting(_skillButton, false, 1f);
             _seq.Append(_moveCheckButton.DOFade(0f, 0.2f));
             _seq.Join(_idleButton.DOFade(0f, 0.2f));
             _seq.Join(_transButton.DOFade(0f, 0.2f));
+
+            if(player.Skillable == false)
+            {
+                _uiManager.CanvasGroupSetting(_skillButton, false, 1f);
+                _seq.Join(_skillButton.DOFade(0f, 0.2f));
+                _skillFireImage.SetActive(false);
+            }
+            else
+                _skillFireImage.SetActive(true);
         }
         else
         {
@@ -51,6 +65,11 @@ public class PlayerBehaviourUI : MonoBehaviour
     public void UIInit(PlayerMainModule player)
     {
         UIEnable();
+        _skillCountText.SetText(player.SkillCount.ToString());
+        if(player.Skillable)
+            _skillFireImage.SetActive(true);
+        else
+            _skillFireImage.SetActive(false);
     }
 
     private void UIEnable()

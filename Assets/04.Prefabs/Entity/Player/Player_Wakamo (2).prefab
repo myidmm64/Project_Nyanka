@@ -276,6 +276,7 @@ MonoBehaviour:
   _modelController: {fileID: 7052988869329318090}
   _attackDirectionObj: {fileID: -6348480140593270851, guid: b2fd24a4f2e230f4cbaa018a1e519efc,
     type: 3}
+  _attackDirections: []
 --- !u!114 &7052988870404041532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillableAtStart: 1
-  _skillCooltime: 2
+  _skillCooltime: 3
 --- !u!114 &7052988870404041535
 MonoBehaviour:
   m_ObjectHideFlags: 0

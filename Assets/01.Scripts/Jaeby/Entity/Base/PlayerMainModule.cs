@@ -43,6 +43,8 @@ public class PlayerMainModule : BaseMainModule
     public override bool IsLived => HPModule.IsLived;
     public bool Attackable => AttackModule.Attackable;
     public bool Transed => TransformModule.Transed;
+    public bool Skillable => _skillModule.Skillable;
+    public int SkillCount => _skillModule.Count;
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange
@@ -89,6 +91,16 @@ public class PlayerMainModule : BaseMainModule
                 return so.normalMaxAtk;
         }
     }
+    public override List<Vector3Int> SkillRange
+    {
+        get
+        {
+            if (Transed)
+                return DataSO.transSkillRange;
+            else
+                return DataSO.normalSkillRange;
+        }
+    }
 
 
     private void Start()
@@ -106,7 +118,7 @@ public class PlayerMainModule : BaseMainModule
         TurnManager.Instance.TurnCheckReset();
         _selectable = false;
 
-        UIManager.Instance.TargettingUIEnable(true, true);
+        UIManager.Instance.TargettingUIEnable(true, false);
     }
 
     public override void PhaseChange(PhaseType type) // 페이즈가 바뀔 때
@@ -213,6 +225,8 @@ public class PlayerMainModule : BaseMainModule
     {
         UIManager.Instance.TargettingUIEnable(false, true);
 
+        CubeGrid.ViewEnd();
+        CubeGrid.ClcikViewEnd();
         for (int i = 0; i < AttackDirections.Count; i++)
             Destroy(AttackDirections[i]);
         AttackDirections.Clear();

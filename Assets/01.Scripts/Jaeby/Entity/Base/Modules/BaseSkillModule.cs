@@ -62,6 +62,7 @@ public abstract class BaseSkillModule : MonoBehaviour
 
     private void SkillEnable()
     {
+        Debug.Log("³¢¸ð¶ì");
         _turnChecked = true;
     }
 

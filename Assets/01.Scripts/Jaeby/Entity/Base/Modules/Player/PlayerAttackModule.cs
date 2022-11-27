@@ -97,9 +97,8 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void TrySkill()
     {
-        Debug.Log("³¢¸ð¤¨¹Ì");
         if (Skillable == false) return;
-        Debug.Log("¼º°ø");
+        _skillModule.RestartSkillCoolTime(false);
         PlayerMainModule module = _mainModule as PlayerMainModule;
         module.UISet();
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
