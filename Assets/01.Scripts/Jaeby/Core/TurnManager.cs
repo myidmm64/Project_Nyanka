@@ -236,24 +236,27 @@ public class TurnAction
 {
     private Action _callback = null;
     private Action _startAction = null;
+    private Action<int> _countChangeAction = null;
     private int _maxCount = 0;
     private int _count = 0;
     private bool _locked = true;
     public bool Locked { get => _locked; set => _locked = value; }
     public int Count { get => _count; set => _count = value; }
 
-    public TurnAction(int cnt, Action StartAction, Action Callback)
+    public TurnAction(int cnt, Action StartAction, Action Callback, Action<int> CountChangeAction)
     {
         _count = cnt;
         _maxCount = _count;
         _startAction = StartAction;
         _callback = Callback;
         _startAction?.Invoke();
+        _countChangeAction = CountChangeAction;
     }
 
     public void TryCallback()
     {
         _count--;
+        _countChangeAction?.Invoke(_count);
         if (_count <= 0)
         {
             _locked = true;

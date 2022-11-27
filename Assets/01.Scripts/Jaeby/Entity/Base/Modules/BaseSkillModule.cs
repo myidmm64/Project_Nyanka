@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseSkillModule : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public abstract class BaseSkillModule : MonoBehaviour
     private int _skillCooltime = 0;
     public int SkillCooltime => _skillCooltime;
 
+    //스킬 UI
+    [SerializeField]
+    private Slider _skillCoolSlider = null;
+
     //현재 남은 카운트
     public int Count
     {
@@ -34,7 +39,6 @@ public abstract class BaseSkillModule : MonoBehaviour
     }
 
     private TurnAction _skillTurnAction = null;
-    public int CurCooltime => _skillTurnAction.Count;
 
     // 체크 관련
     public virtual bool SkillCellCheck
@@ -58,11 +62,14 @@ public abstract class BaseSkillModule : MonoBehaviour
             _turnChecked = true;
         else
             TryMakeTurnAction();
+        _skillCoolSlider.SetDirection(Slider.Direction.RightToLeft, false);
+        _skillCoolSlider.minValue = 0;
+        _skillCoolSlider.maxValue = _skillCooltime;
+        _skillCoolSlider.value = Count;
     }
 
     private void SkillEnable()
     {
-        Debug.Log("끼모띠");
         _turnChecked = true;
     }
 
@@ -70,13 +77,31 @@ public abstract class BaseSkillModule : MonoBehaviour
     {
         TryMakeTurnAction();
         _turnChecked = turnCheck;
+        ChangeSkillCount(_skillCooltime);
         _skillTurnAction.Start();
     }
 
     private void TryMakeTurnAction()
     {
         if (_skillTurnAction != null) return;
-        _skillTurnAction = new TurnAction(_skillCooltime, null, SkillEnable);
+        _skillTurnAction = new TurnAction(_skillCooltime, null, SkillEnable, ChangeSkillCount);
         TurnManager.Instance.TurnActionAdd(_skillTurnAction, false);
+    }
+
+    private void ChangeSkillCount(int val)
+    {
+        StartCoroutine(SkillCountDownCoroutine(val));
+    }
+
+    private IEnumerator SkillCountDownCoroutine(int end) // 슬라이더 소모 애니메이션
+    {
+        float delta = 0f;
+        while (delta <= 1f)
+        {
+            delta += Time.deltaTime * 2f;
+            _skillCoolSlider.value = end * delta;
+            yield return null;
+        }
+        _skillCoolSlider.value = end;
     }
 }

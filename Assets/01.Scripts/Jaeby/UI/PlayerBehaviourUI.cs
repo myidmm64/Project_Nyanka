@@ -62,6 +62,13 @@ public class PlayerBehaviourUI : MonoBehaviour
         }
     }
 
+    public void SkillButtonDisable()
+    {
+        _uiManager.CanvasGroupSetting(_skillButton, false, 1f);
+        _seq.Join(_skillButton.DOFade(0f, 0.2f));
+        _skillFireImage.SetActive(false);
+    }
+
     public void UIInit(PlayerMainModule player)
     {
         UIEnable();

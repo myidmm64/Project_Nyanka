@@ -16,7 +16,7 @@ public abstract class BaseTransformModule : MonoBehaviour
     private void Start()
     {
         _mainModule = GetComponent<BaseMainModule>();
-        _transformAction = new TurnAction(2, null, TransfomationEnd);
+        _transformAction = new TurnAction(2, null, TransfomationEnd, null);
         TurnManager.Instance.TurnActionAdd(_transformAction, true);
     }
     public abstract void ChildTransfomationStart();

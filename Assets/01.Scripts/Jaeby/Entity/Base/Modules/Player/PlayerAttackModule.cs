@@ -107,6 +107,8 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
     {
+        UIManager.Instance.UIDisable();
+
         PlayerMainModule module = _mainModule as PlayerMainModule;
         if (module.Transed)
             EventSet(AttackAnimationType.TransAttack);
