@@ -40,14 +40,15 @@ public class AttackDirectionObject : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //if(_isSkillObj)
-            //_player.PlayerSkill(_dir);
-        //else
+        if(_isSkillObj)
+            _player.Skill(_dir);
+        else
             _player.Attack(_dir);
     }
 
     private void OnDestroy()
     {
-        CubeGrid.ViewEnd();
+        if(CubeGrid != null)
+            CubeGrid.ViewEnd();
     }
 }

@@ -37,7 +37,7 @@ public class PlayerBehaviourUI : MonoBehaviour
             _uiManager.CanvasGroupSetting(_moveCheckButton, false, 1f);
             _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
             _uiManager.CanvasGroupSetting(_transButton, false, 1f);
-            _uiManager.CanvasGroupSetting(_skillButton, false, 1f);
+            //_uiManager.CanvasGroupSetting(_skillButton, false, 1f);
             _seq.Append(_moveCheckButton.DOFade(0f, 0.2f));
             _seq.Join(_idleButton.DOFade(0f, 0.2f));
             _seq.Join(_transButton.DOFade(0f, 0.2f));

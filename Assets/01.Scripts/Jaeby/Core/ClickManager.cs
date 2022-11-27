@@ -140,9 +140,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     public void PlayerSkill()
     {
-        //if (_currentPlayer == null) return;
-        //if (_currentPlayer.Skillable)
-        //    _currentPlayer.SkillMode();
+        if (_currentPlayer == null) return;
+        _currentPlayer.TrySkill();
     }
 
     public void ClickModeSet(LeftClickMode left, bool right)

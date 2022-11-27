@@ -5,14 +5,33 @@ using UnityEngine;
 public abstract class BaseSkillModule : MonoBehaviour
 {
     private BaseMainModule _mainModule = null;
-    private bool _skillable = false;
-    public bool Skillable => _skillable;
 
+    public bool Skillable => _turnChecked && SkillCellCheck;
+
+    //쿨타임 체크
+    private bool _turnChecked = false;
+    public bool TurnChecked => _turnChecked;
+
+    //바로 스킬 사용 가능할 것인지
     [SerializeField]
     private bool _skillableAtStart = false;
+
+    //스킬의 쿨타임
     [SerializeField]
     private int _skillCooltime = 0;
     public int SkillCooltime => _skillCooltime;
+
+    //현재 남은 카운트
+    public int Count
+    {
+        get
+        {
+            if (_skillTurnAction == null)
+                return 0;
+            else
+                return _skillTurnAction.Count;
+        }
+    }
 
     private TurnAction _skillTurnAction = null;
     public int CurCooltime => _skillTurnAction.Count;
@@ -33,27 +52,30 @@ public abstract class BaseSkillModule : MonoBehaviour
 
     private void Start()
     {
-        _skillTurnAction = new TurnAction(_skillCooltime, null, null);
-        if (_skillableAtStart)
-            _skillTurnAction.Count = 0;
-
-        TurnManager.Instance.TurnActionAdd(_skillTurnAction, false);
         _mainModule = GetComponent<BaseMainModule>();
+
+        if (_skillableAtStart)
+            _turnChecked = true;
+        else
+            TryMakeTurnAction();
     }
 
-    public void SkillEnable()
+    private void SkillEnable()
     {
-        _skillable = true;
+        _turnChecked = true;
     }
 
-    public void TrySkill()
+    public void RestartSkillCoolTime(bool turnCheck)
     {
-        if ((SkillCellCheck && _skillable) == false) return;
-
-    }
-
-    public void RestartSkillCoolTime()
-    {
+        TryMakeTurnAction();
+        _turnChecked = turnCheck;
         _skillTurnAction.Start();
+    }
+
+    private void TryMakeTurnAction()
+    {
+        if (_skillTurnAction != null) return;
+        _skillTurnAction = new TurnAction(_skillCooltime, null, SkillEnable);
+        TurnManager.Instance.TurnActionAdd(_skillTurnAction, false);
     }
 }

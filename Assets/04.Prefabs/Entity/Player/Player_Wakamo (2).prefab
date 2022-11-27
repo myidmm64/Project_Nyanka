@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9f01d1841e4754f8636c4a5c8ce68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataSO: {fileID: 11400000, guid: 432d22a0a52571a4dbbf891724bd7f37, type: 2}
+  _dataSO: {fileID: 11400000, guid: dfc0f539fbd390d42bde4009f67f00a1, type: 2}
   _entityType: 1
   _entityHud: {fileID: 7912255643492170608}
   _animator: {fileID: 7052988870404041528}
@@ -316,6 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d46a9cc5339f078459a9238e2b51911d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skillableAtStart: 1
+  _skillCooltime: 2
 --- !u!114 &7052988870404041535
 MonoBehaviour:
   m_ObjectHideFlags: 0

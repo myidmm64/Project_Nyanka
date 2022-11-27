@@ -28,7 +28,9 @@ public class PlayerAttackModule : BaseAttackModule
 
             return check;
         }
-    } // 어택이 가능한지
+    }
+    public bool Skillable => _skillModule.Skillable;
+    // 어택이 가능한지
     private bool _attackCheck = false; // 어택을 했는가요?
     public bool AttackCheck { get => _attackCheck; set => _attackCheck = value; }
 
@@ -61,7 +63,6 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerAttackStarted() // 시작
     {
-        PlayerMainModule mo = _mainModule as PlayerMainModule;
         CubeGrid.ViewEnd();
         _currentEvent.AttackStarted();
     }
@@ -94,6 +95,17 @@ public class PlayerAttackModule : BaseAttackModule
         }
     }
 
+    public void TrySkill()
+    {
+        Debug.Log("끼모ㄸ미");
+        if (Skillable == false) return;
+        Debug.Log("성공");
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        module.UISet();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+        module.ViewAttackDirection(true);
+    }
+
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행
     {
         PlayerMainModule module = _mainModule as PlayerMainModule;
@@ -102,15 +114,30 @@ public class PlayerAttackModule : BaseAttackModule
         else
             EventSet(AttackAnimationType.NormalAttack);
 
-        AttackReady(dir);
+        AttackReady(dir, false);
     }
 
-    private void AttackReady(AttackDirection dir) // 어택 수행 전 준비작업
+    public void PlayerSkill(AttackDirection dir)
+    {
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        if (module.Transed)
+            EventSet(AttackAnimationType.NormalSkill);
+        else
+            EventSet(AttackAnimationType.TransSkill);
+
+        AttackReady(dir, true);
+    }
+
+    private void AttackReady(AttackDirection dir, bool skill) // 어택 수행 전 준비작업
     {
         PlayerMainModule module = _mainModule as PlayerMainModule;
         CubeGrid.ViewEnd();
+
         for (int i = 0; i < module.AttackDirections.Count; i++)
+        {
             Destroy(module.AttackDirections[i]);
+            Debug.Log("엥ㄱ리모리");
+        }
         module.AttackDirections.Clear();
 
         Vector3 look = module.CellIndex + module.GetAttackDirection(dir);
@@ -118,13 +145,24 @@ public class PlayerAttackModule : BaseAttackModule
         module.ModelController.LookAt(look);
         _currentDirection = dir;
 
-        StartCoroutine(Attack());
+        if (skill)
+            StartCoroutine(Skill());
+        else
+            StartCoroutine(Attack());
     }
 
     public override IEnumerator Attack() // 공격
     {
         PlayerAttackStarted();
         _mainModule.animator.Play("Attack");
+        _mainModule.animator.Update(0);
+        yield break;
+    }
+
+    public override IEnumerator Skill() // 공격
+    {
+        PlayerAttackStarted();
+        _mainModule.animator.Play("Skill");
         _mainModule.animator.Update(0);
         yield break;
     }

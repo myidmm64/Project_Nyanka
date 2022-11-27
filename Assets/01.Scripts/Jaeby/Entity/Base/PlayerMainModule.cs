@@ -28,6 +28,7 @@ public class PlayerMainModule : BaseMainModule
     // 어택 방향 관련
     [SerializeField]
     private AttackDirectionObject _attackDirectionObj = null;
+    [SerializeField]
     private List<GameObject> _attackDirections = new List<GameObject>();
     public List<GameObject> AttackDirections => _attackDirections;
 
@@ -166,9 +167,19 @@ public class PlayerMainModule : BaseMainModule
         AttackModule.TryAttack();
     }
 
+    public void TrySkill() // 공격 시도
+    {
+        AttackModule.TrySkill();
+    }
+
     public void Attack(AttackDirection dir) // 실질적 공격
     {
         AttackModule.PlayerAttack(dir);
+    }
+
+    public void Skill(AttackDirection dir)
+    {
+        AttackModule.PlayerSkill(dir);
     }
 
     public void Transformation()
@@ -202,9 +213,18 @@ public class PlayerMainModule : BaseMainModule
     {
         UIManager.Instance.TargettingUIEnable(false, true);
 
+        for (int i = 0; i < AttackDirections.Count; i++)
+            Destroy(AttackDirections[i]);
+        AttackDirections.Clear();
+
         for (int i = 0; i < 4; i++)
         {
-            List<Cell> cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
+            List<Cell> cells = null;
+            if (isSkill)
+                cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, SkillRange), true);
+            else
+                cells = CellUtility.SearchCells(CellIndex, GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
+
             bool enemyCheck = false;
             for (int j = 0; j < cells.Count; j++)
                 if (cells[j].GetObj?.GetComponent<AIMainModule>() != null)
