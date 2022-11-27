@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: WarriorDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalAtk: 300
-  normalMinAtk: 0
-  normalMaxAtk: 0
+  normalMinAtk: 300
+  normalMaxAtk: 350
   normalDef: 0
   hp: 2000
   elementType: 1

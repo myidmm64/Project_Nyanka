@@ -6,7 +6,6 @@ using UnityEngine;
 public class EntityDataSO : ScriptableObject
 {
     public Sprite sprite = null;
-    public int normalAtk = 1;
     public int normalMinAtk = 0;
     public int normalMaxAtk = 0;
 

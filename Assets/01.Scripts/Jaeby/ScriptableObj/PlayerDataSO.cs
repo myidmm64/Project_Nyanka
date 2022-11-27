@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Player/Data")]
 public class PlayerDataSO : EntityDataSO
 {
-    public int transAtk = 2;
     public int transMinAtk = 0;
     public int transMaxAtk = 0;
 

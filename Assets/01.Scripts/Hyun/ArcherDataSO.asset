@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ArcherDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalAtk: 100
-  normalMinAtk: 0
-  normalMaxAtk: 0
+  normalMinAtk: 200
+  normalMaxAtk: 250
   normalDef: 0
   hp: 5000
   elementType: 3

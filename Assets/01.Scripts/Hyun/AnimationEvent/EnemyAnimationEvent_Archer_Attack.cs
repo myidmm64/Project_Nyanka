@@ -34,7 +34,8 @@ public class EnemyAnimationEvent_Archer_Attack : EnemyAnimationEvent
         }
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
         Destroy(obj, 1.5f);
-        target.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);
+        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        target.ApplyDamage(dmg, _aIMainModule.DataSO.elementType, true, false);
     }
 
     public override void AttackEnd()

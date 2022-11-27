@@ -31,7 +31,10 @@ public abstract class BaseAttackModule : MonoBehaviour
         _mainModule.animator.Update(0);
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") == false);
         for (int i = 0; i < cells.Count; i++)
-            cells[i].CellAttack(_mainModule.DataSO.normalAtk, _mainModule.DataSO.elementType, _mainModule.entityType);
+        {
+            int dmg = Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage);
+            cells[i].CellAttack(dmg, _mainModule.DataSO.elementType, _mainModule.entityType);
+        }
         if (cells.Count > 0 && _mainModule.entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;
@@ -48,7 +51,10 @@ public abstract class BaseAttackModule : MonoBehaviour
         _mainModule.animator.Update(0);
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Skill") == false);
         for (int i = 0; i < cells.Count; i++)
-            cells[i].CellAttack(_mainModule.DataSO.normalAtk, _mainModule.DataSO.elementType, _mainModule.entityType);
+        {
+            int dmg = Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage);
+            cells[i].CellAttack(dmg, _mainModule.DataSO.elementType, _mainModule.entityType);
+        }
         if (cells.Count > 0 && _mainModule.entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
         yield break;

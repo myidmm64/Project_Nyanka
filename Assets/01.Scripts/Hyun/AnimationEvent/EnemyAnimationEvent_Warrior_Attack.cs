@@ -25,7 +25,8 @@ public class EnemyAnimationEvent_Warrior_Attack : EnemyAnimationEvent
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
         {
-            a.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);
+            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+            a.ApplyDamage(dmg, _aIMainModule.DataSO.elementType, true, false);
         }
     }
 

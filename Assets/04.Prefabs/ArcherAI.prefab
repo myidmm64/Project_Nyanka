@@ -1986,7 +1986,7 @@ GameObject:
   - component: {fileID: 8154936198198156936}
   - component: {fileID: 1513032529}
   m_Layer: 7
-  m_Name: TestEnemy
+  m_Name: ArcherAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2082,6 +2082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: 75101bd75c6695e419beda787b8db83f, type: 2}
   _entityType: 2
+  _entityHud: {fileID: 916278650636261862}
   _animator: {fileID: 1983221508697079498}
   _agent: {fileID: 5399610196820296540}
   SkillCoolTime_1: 3
@@ -3313,6 +3314,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 976bc52adfbfe364eaa5966846ae6e0a, type: 3}
+--- !u!114 &916278650636261862 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8302819489988939742, guid: 976bc52adfbfe364eaa5966846ae6e0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 9191509040294385208}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f0216423ed5b4498fee87f48079275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4542749537127951780 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4649362316324584348, guid: 976bc52adfbfe364eaa5966846ae6e0a,
