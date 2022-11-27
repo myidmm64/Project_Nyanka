@@ -25,9 +25,8 @@ public class DistanceWeightCheck : Node
             {
                 int tempX = Mathf.Abs(_aIMainModule.CellIndex.x - key.x) / _aIMainModule.Int_MoveRange;
                 int tempZ = Mathf.Abs(_aIMainModule.CellIndex.z - key.z) / _aIMainModule.Int_MoveRange;
-                _aIMainModule.cells[key] = (tempX > tempZ) ? tempZ * 10 : tempX * 10;
+                _aIMainModule.cells[key] = (tempX > tempZ) ? tempX * 10 : tempZ * 10;
             }
-            //Debug.Log(key + " " + _aIMainModule.cells[key]);
         });
         state = NodeState.SUCCESS;
         return state;

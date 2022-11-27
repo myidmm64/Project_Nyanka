@@ -14,8 +14,7 @@ public class AttackCheck : Node
     public override NodeState Evaluate()
     {
         Debug.Log("AttackCheck");
-        //Debug.Log(_aIMainModule.ChangeableCellIndex);
-        for (int i = 0; i <= (int)AttackDirection.Down; i++)
+        for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
         {
             List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
             for (int j = 0; j < vecs.Count; j++)
@@ -23,25 +22,14 @@ public class AttackCheck : Node
                 List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
                 if (m.Count > 0)
                 {
+                    //Debug.Log(m.Count);
                     state = NodeState.SUCCESS;
                     return state;
                 }
             }
         }
+        _aIMainModule.isAttackComplete = true;
         state = NodeState.FAILURE;
         return state;
-
-        //foreach (var player in PosManager.Instance.playerInfo)
-        //{
-        //    Vector3Int p_Pos = player.CellIndex;
-        //    if(_aIMainModule.AttackRange.Contains(p_Pos))
-        //    {
-        //        _aIMainModule.target = player;
-        //        state = NodeState.SUCCESS;
-        //        return state;
-        //    }
-        //}
-        //state = NodeState.FAILURE;
-        //return state;
     }
 }

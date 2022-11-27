@@ -15,27 +15,38 @@ public class MoveToTarget : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("MoveToTarget");
+        //if (state == NodeState.SUCCESS)
+        //    return NodeState.FAILURE;
+        CoroutineHelper.StartCoroutine(C_MoveToTarget());
+        //if(Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance)
+        //{
+        //    state = NodeState.RUNNING;
+        //    return state;
+        //}
+        return state;
+    }
+
+    IEnumerator C_MoveToTarget()
+    {
+        //yield return new WaitUntil(() => _aIMainModule.isAttackComplete);
+        
+        Debug.Log("움직이기");
         int m_W = 9999;
         Vector3Int _pos = Vector3Int.zero;
         List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.CellIndex, _aIMainModule.DataSO.normalMoveRange, false);
-        foreach(var temp in movableRange)
+        foreach (var temp in movableRange)
         {
-            Vector3Int key = temp.GetIndex(); 
-            if(m_W > _aIMainModule.cells[key])
+            Vector3Int key = temp.GetIndex();
+            if (m_W > _aIMainModule.cells[key])
             {
                 m_W = _aIMainModule.cells[key];
                 _pos = key;
             }
         }
-        _aIMainModule.ChangeableCellIndex = _pos;
         _aIMainModule.Agent.SetDestination(_pos);
-        if(Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance)
-        {
-            state = NodeState.RUNNING;
-            return state;
-        }
+        _aIMainModule.ChangeableCellIndex = _pos;
+        yield return new WaitUntil(()=>Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance);
+        _aIMainModule.isMoveComplete = true;
         state = NodeState.SUCCESS;
-        return state;
     }
 }

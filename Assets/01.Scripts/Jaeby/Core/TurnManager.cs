@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using System.Linq;
 
 public class TurnManager : MonoSingleTon<TurnManager>
 {
@@ -103,12 +104,35 @@ public class TurnManager : MonoSingleTon<TurnManager>
         UIManager.Instance.TargettingUIEnable(false, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
-
-        for (int i = 0; i < liveEnemys.Count; i++)
+        List<PlayerMainModule> livePlayers = _players.FindAll(v => v.IsLived);
+        //플레이어와 거리가 짧은 ai 먼저 우선 실행되게 바꾸기
+        //일단 이중포문으로 각 ai마다 가장 짧은 플레이어와의 거리를 계산하고 리스트에 넣기
+        //그리고 실행
+        Dictionary<AIMainModule, int> enemys = new Dictionary<AIMainModule, int>();
+        foreach(var enemy in liveEnemys)
         {
-            Debug.Log(liveEnemys[i].name);
-            yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
+            int m_dis = 100000;
+            foreach(var player in livePlayers)
+            {
+                int tempX = Mathf.Abs(enemy.CellIndex.x - player.CellIndex.x) / enemy.Int_MoveRange;
+                int tempZ = Mathf.Abs(enemy.CellIndex.z - player.CellIndex.z) / enemy.Int_MoveRange;
+                int dis = (tempX > tempZ) ? tempX : tempZ;
+                if (m_dis > dis)
+                    m_dis = dis;
+            }
+            enemys.Add(enemy, m_dis);
         }
+        enemys = enemys.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+        foreach(var enemy in enemys)
+        {
+            Debug.Log(enemy.Key.name + " " + enemy.Value);
+            yield return StartCoroutine(enemy.Key.GetComponent<BehaviorTree.Tree>().StartAI());
+        }
+        //for (int i = 0; i < liveEnemys.Count; i++)
+        //{
+        //    Debug.Log(liveEnemys[i].name);
+        //    yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
+        //}
         EntityManager.Instance.enemy_TargetLists.Clear();
         NextTurn();
         UIManager.Instance.TargettingUIEnable(true, false);

@@ -19,41 +19,24 @@ public class AIAttack : Node
 
     public override NodeState Evaluate()
     {
+        CoroutineHelper.StartCoroutine(Attack());
+        state = NodeState.SUCCESS;
+        return state;
+    }
+
+    IEnumerator Attack()
+    {
+        _aIMainModule.isAttackComplete = false;
         Debug.Log("AIAttack");
-        AttackDirection dir = AttackDirection.Up;
-        for(int i = 0; i < (int)AttackDirection.Down + 1; i++)
-        {
-            bool isChk = false;
-            List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
-            for(int j = 0; j < vecs.Count; j++)
-            {
-                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
-                if(m.Count > 0)
-                {
-                    dir = (AttackDirection)i;
-                    isChk = true;
-                    break;
-                }
-            }
-            if (isChk)
-                break;
-        }
-        //_transform.LookAt(_aIMainModule.target.transform);
-        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(dir);
+        Vector3 lookPos = _aIMainModule.ChangeableCellIndex + _aIMainModule.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
         Sequence seq = DOTween.Sequence();
         seq.Append(_transform.DOLookAt(lookPos, 1f).SetEase(Ease.Linear));
         seq.AppendCallback(() =>
         {
-            List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(dir, _aIMainModule.DataSO.normalAttackRange);
-            List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.CellIndex, attackRange, true);
-            foreach (var a in players)
-            {
-                a.ApplyDamage(_aIMainModule.DataSO.normalAtk, _aIMainModule.DataSO.elementType, true, false);
-                //Debug.Log("Attack");
-            }
+            _aIMainModule.animator.Play("Attack");
+            _aIMainModule.animator.Update(0);
         });
-        state = NodeState.SUCCESS;
-        return state;
+        yield return null;
     }
 }
