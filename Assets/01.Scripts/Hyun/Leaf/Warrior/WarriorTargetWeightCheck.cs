@@ -15,7 +15,7 @@ public class WarriorTargetWeightCheck : Node
 
     public override NodeState Evaluate()
     {
-        List<BaseMainModule> players = EntityManager.Instance.playerInfo;
+        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
         Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
 
         foreach(var player in players)

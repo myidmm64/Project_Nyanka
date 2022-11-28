@@ -31,7 +31,7 @@ public class KeepDistance : Node
         if (_aIMainModule.isMoveComplete)
             yield break;
 
-        List<BaseMainModule> players = EntityManager.Instance.playerInfo;
+        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
 
         List<PlayerMainModule> p_cnt = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, _aIMainModule.RunAwayRange, true);
         if (p_cnt.Count <= 0)

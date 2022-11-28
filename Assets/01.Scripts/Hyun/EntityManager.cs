@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EntityManager : MonoSingleTon<EntityManager>
 {
-    public List<BaseMainModule> playerInfo = new List<BaseMainModule>();
-    public List<BaseMainModule> monsterInfo = new List<BaseMainModule>();
+    public List<PlayerMainModule> playerInfo = new List<PlayerMainModule>();
+    public List<AIMainModule> monsterInfo = new List<AIMainModule>();
 
     public Dictionary<Vector3Int, int> enemy_TargetLists = new Dictionary<Vector3Int, int>();
 

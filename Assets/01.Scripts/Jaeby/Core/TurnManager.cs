@@ -126,6 +126,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
         foreach(var enemy in enemys)
         {
             Debug.Log(enemy.Key.name + " " + enemy.Value);
+            EntityManager.Instance.playerInfo.Clear();
+            EntityManager.Instance.playerInfo= _players.FindAll(v => v.IsLived);
             yield return StartCoroutine(enemy.Key.GetComponent<BehaviorTree.Tree>().StartAI());
         }
         //for (int i = 0; i < liveEnemys.Count; i++)
