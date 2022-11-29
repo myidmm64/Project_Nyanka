@@ -39,6 +39,9 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     [SerializeField]
     protected EntityType _entityType = EntityType.None;
     public EntityType entityType => _entityType;
+    [SerializeField]
+    protected ElementType _elementType = ElementType.NONE;
+    public EntityType elemenyType => _entityType;
 
     //HUD
     [SerializeField]

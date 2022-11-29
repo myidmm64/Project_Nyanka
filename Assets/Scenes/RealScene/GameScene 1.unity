@@ -5407,7 +5407,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.0001
+  near clip plane: 0
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -18549,7 +18549,6 @@ MonoBehaviour:
   radius: 0.08
   height: 0.05
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &824092195
 Transform:
   m_ObjectHideFlags: 0
@@ -24346,7 +24345,6 @@ MonoBehaviour:
   radius: 0.08
   height: 0.05
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1149804878
 Transform:
   m_ObjectHideFlags: 0
@@ -32942,7 +32940,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 50
     OrthographicSize: 5
-    NearClipPlane: 0.0001
+    NearClipPlane: 0
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -39470,7 +39468,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
-    NearClipPlane: 0.0001
+    NearClipPlane: 0
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -43088,7 +43086,6 @@ MonoBehaviour:
   radius: 0.06
   height: 0.25
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!114 &1544998387508134300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43215,7 +43212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.14
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998387551937009
 Transform:
   m_ObjectHideFlags: 0
@@ -43280,7 +43276,6 @@ MonoBehaviour:
   width: 0.3
   height: 0.23
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998387563392779
 Transform:
   m_ObjectHideFlags: 0
@@ -43326,7 +43321,6 @@ MonoBehaviour:
   radius: 0.06
   height: 0.25
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!1 &1544998387579225207
 GameObject:
   m_ObjectHideFlags: 0
@@ -43488,7 +43482,6 @@ MonoBehaviour:
   width: 0.33
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998387608494617
 Transform:
   m_ObjectHideFlags: 0
@@ -43759,7 +43752,6 @@ MonoBehaviour:
   radius: 0.065
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998387737160401
 Transform:
   m_ObjectHideFlags: 0
@@ -43824,7 +43816,6 @@ MonoBehaviour:
   radius: 0.11
   height: 0.15
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998387797092229
 Transform:
   m_ObjectHideFlags: 0
@@ -44118,7 +44109,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0.09
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998388005222175
 Transform:
   m_ObjectHideFlags: 0
@@ -44252,7 +44242,6 @@ MonoBehaviour:
   radius: 0.06
   height: 0.2
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!1818360609 &1544998388103530716
 RotationConstraint:
   m_ObjectHideFlags: 0
@@ -45421,7 +45410,6 @@ MonoBehaviour:
   width: 0.3
   height: 0.23
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998388447034316
 Transform:
   m_ObjectHideFlags: 0
@@ -45737,7 +45725,6 @@ MonoBehaviour:
   radius: 0.1
   height: 0.03
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998388518512836
 Transform:
   m_ObjectHideFlags: 0
@@ -45872,16 +45859,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af276926b0db1c248a93ab3c1134a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticUpdates: 1
-  isPaused: 0
   simulationFrameRate: 60
   dynamicRatio: 0.5
   gravity: {x: 0, y: -10, z: 0}
-  bounce: 0
-  friction: 1
-  enableAngleLimits: 1
-  enableCollision: 1
-  enableLengthLimits: 1
   collideWithGround: 1
   groundHeight: 0
   springBones: []
@@ -46723,7 +46703,6 @@ MonoBehaviour:
   width: 0.33
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998388951693036
 Transform:
   m_ObjectHideFlags: 0
@@ -46771,7 +46750,6 @@ MonoBehaviour:
   radius: 0.065
   height: 0.3
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998388987757506
 Transform:
   m_ObjectHideFlags: 0
@@ -47526,7 +47504,6 @@ MonoBehaviour:
   radius: 0.11
   height: 0.18
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!4 &1544998389270398519
 Transform:
   m_ObjectHideFlags: 0
@@ -47621,7 +47598,6 @@ MonoBehaviour:
   radius: 0.055
   height: 0.4
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!114 &1544998389299239482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47829,7 +47805,6 @@ MonoBehaviour:
   radius: 0.055
   height: 0.4
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!1 &1544998389391743006
 GameObject:
   m_ObjectHideFlags: 0
@@ -48149,7 +48124,6 @@ MonoBehaviour:
   radius: 0.06
   height: 0.2
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!114 &1544998389524889772
 MonoBehaviour:
   m_ObjectHideFlags: 0
