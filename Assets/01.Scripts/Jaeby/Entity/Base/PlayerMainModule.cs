@@ -105,7 +105,6 @@ public class PlayerMainModule : BaseMainModule
         }
     }
 
-
     private void Start()
     {
         EntityManager.Instance.playerInfo.Add(this);
