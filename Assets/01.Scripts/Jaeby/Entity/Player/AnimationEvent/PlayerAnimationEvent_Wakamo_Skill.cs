@@ -28,7 +28,7 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
         if (cells.Count == 0) return;
 
         for (int i = 0; i < cells.Count; i++)
-            cells[i].CellAttack(_mainModule.MinDamage, _mainModule.DataSO.elementType, _mainModule.entityType);
+            cells[i].CellAttack(_mainModule.MinDamage, _mainModule.elementType, _mainModule.entityType);
 
         List<AIMainModule> enemys = new List<AIMainModule>();
         for (int i = 0; i < cells.Count; i++)
@@ -59,7 +59,7 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
             bool critical = UnityEngine.Random.Range(0, 100) < 50;
             if (critical)
                 dmg = Mathf.RoundToInt(dmg * 1.5f);
-            enemys[i].ApplyDamage(dmg, _mainModule.DataSO.elementType, critical, true);
+            enemys[i].ApplyDamage(dmg, _mainModule.elementType, critical, true);
         }
     }
 

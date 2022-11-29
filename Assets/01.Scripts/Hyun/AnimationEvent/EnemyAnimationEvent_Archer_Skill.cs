@@ -27,7 +27,7 @@ public class EnemyAnimationEvent_Archer_Skill : EnemyAnimationEvent
         foreach (var a in players)
         {
             int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-            a.ApplyDamage(dmg, _aIMainModule.DataSO.elementType, true, false);
+            a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }
     }
 
