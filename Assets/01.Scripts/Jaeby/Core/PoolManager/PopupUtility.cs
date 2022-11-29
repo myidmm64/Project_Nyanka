@@ -16,10 +16,17 @@ public static class PopupUtility
             popupPoolObj.PopupText(pos, damage.ToString(), elementType, false);
     }
 
-    public static void PopupText(Vector3 targetPos, Color color, string msg, string otherMsg = null, Material mat = null)
+    public static void PopupText(Vector3 targetPos, Color color, string msg,float timeVal = 1f, string otherMsg = null, Material mat = null)
     {
         PopupPoolObject popupPoolObj = PoolManager.Instance.Pop(PoolType.PopupText) as PopupPoolObject;
         Vector3 pos = Cam.WorldToScreenPoint(targetPos);
-        popupPoolObj.PopupText(pos, color, msg, otherMsg, mat);
+        popupPoolObj.PopupText(pos, color, msg, timeVal, otherMsg, mat);
+    }
+
+    public static void DialogText(Vector3 targetPos, Color color, string msg, float timeVal = 1f, string otherMsg = null, float criticalTimeVal = 1f, Material mat = null)
+    {
+        PopupPoolObject popupPoolObj = PoolManager.Instance.Pop(PoolType.DialogText) as PopupPoolObject;
+        Vector3 pos = Cam.WorldToScreenPoint(targetPos);
+        popupPoolObj.Dialog(pos, color, msg, timeVal, otherMsg, criticalTimeVal, mat);
     }
 }

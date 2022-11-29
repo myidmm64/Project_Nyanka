@@ -354,7 +354,7 @@ MonoBehaviour:
     type: 3}
   _attackPrefab1: {fileID: 0}
   _damageMagni:
-  - 10
+  - 8
 --- !u!114 &7052988870404041522
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -72,7 +72,10 @@ public class PlayerBehaviourUI : MonoBehaviour
     public void UIInit(PlayerMainModule player)
     {
         UIEnable();
-        _skillCountText.SetText(player.SkillCount.ToString());
+        int count = player.SkillCount;
+        if (count <= 0)
+            count = 0;
+        _skillCountText.SetText(count.ToString());
         if(player.Skillable)
             _skillFireImage.SetActive(true);
         else

@@ -70,7 +70,7 @@ public abstract class BaseHPModule : MonoBehaviour
             PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType);
         }
         _mainModule.HpDownAction?.Invoke(_hp);
-        _hpText?.SetText((_hpSlider.normalizedValue * 100f).ToString("N0") + "%");
+        _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
         if (IsLived == false)
             Died();
     }

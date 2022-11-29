@@ -39,8 +39,8 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
         switch (id)
         {
             case 0:
+                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "날아가버려!!", 1.5f, "신성한 파도");
                 _cameraManager.CartUpdate(60f, null, null);
-                PopupUtility.PopupText(transform.position + Vector3.right * 1f, Color.white, "죽어라앗!!!", "신성한 파도");
                 obj = Instantiate(_attackPrefab0, _mainModule.ModelController);
                 break;
             case 1:

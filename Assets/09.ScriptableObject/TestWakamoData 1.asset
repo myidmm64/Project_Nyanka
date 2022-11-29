@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: TestWakamoData 1
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: d3922c39adea72145a9a7f7523d094d6, type: 3}
-  normalAtk: 95
   normalMinAtk: 100
   normalMaxAtk: 120
   normalDef: 0
@@ -36,9 +35,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 1}
   - {x: 1, y: 0, z: 1}
   transSkillRange: []
-  transAtk: 2
-  transMinAtk: 0
-  transMaxAtk: 0
+  transMinAtk: 300
+  transMaxAtk: 400
   transDef: 1
   transAttackRange:
   - {x: 0, y: 0, z: 1}

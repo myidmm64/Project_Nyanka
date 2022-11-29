@@ -146,6 +146,7 @@ public class PlayerMainModule : BaseMainModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
+        Debug.Log("¼¿·ºÆ¼Æ®");
 
         _prevIndex = CellIndex;
         ViewDataByCellIndex(true);
