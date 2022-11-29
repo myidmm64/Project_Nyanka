@@ -143,7 +143,8 @@ public class PlayerMainModule : BaseMainModule
         if (_selectable == false) return;
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
-        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        //ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
         Debug.Log("¼¿·ºÆ¼Æ®");

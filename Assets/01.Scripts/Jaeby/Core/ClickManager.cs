@@ -64,6 +64,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void EntitySelect(BaseMainModule module)
     {
+        SelectedEntityEnd();
         if (module is PlayerMainModule)
             _currentPlayer = module as PlayerMainModule;
         else
