@@ -17,7 +17,7 @@ public class ArcherTargetWeightCheck : Node
     public override NodeState Evaluate()
     {
         Debug.Log("ArcherTargetWeightCheck");
-        List<BaseMainModule> players = EntityManager.Instance.playerInfo;
+        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
         Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
         
         foreach (var player in players)
