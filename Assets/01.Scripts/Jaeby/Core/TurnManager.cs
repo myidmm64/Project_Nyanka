@@ -20,6 +20,11 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private List<AIMainModule> _enemys;
     public List<AIMainModule> Enemys => _enemys;
 
+    public List<PlayerMainModule> LivePlayers => _players.FindAll(x => x.IsLived);
+    public List<AIMainModule> LiveEnemys => _enemys.FindAll(x => x.IsLived);
+
+    public Dictionary<Vector3Int, int> enemy_TargetLists = new Dictionary<Vector3Int, int>();
+
     [SerializeField]
     private int _turn = 1;
     [SerializeField]
@@ -126,8 +131,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         foreach(var enemy in enemys)
         {
             Debug.Log(enemy.Key.name + " " + enemy.Value);
-            EntityManager.Instance.playerInfo.Clear();
-            EntityManager.Instance.playerInfo= _players.FindAll(v => v.IsLived);
             yield return StartCoroutine(enemy.Key.GetComponent<BehaviorTree.Tree>().StartAI());
         }
         //for (int i = 0; i < liveEnemys.Count; i++)
@@ -135,7 +138,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         //    Debug.Log(liveEnemys[i].name);
         //    yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         //}
-        EntityManager.Instance.enemy_TargetLists.Clear();
         NextTurn();
         UIManager.Instance.TargettingUIEnable(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);

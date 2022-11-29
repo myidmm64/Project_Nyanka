@@ -31,8 +31,6 @@ public class KeepDistance : Node
         if (_aIMainModule.isMoveComplete)
             yield break;
 
-        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
-
         List<PlayerMainModule> p_cnt = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, _aIMainModule.RunAwayRange, true);
         if (p_cnt.Count <= 0)
         {
@@ -47,7 +45,7 @@ public class KeepDistance : Node
 
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
-            foreach (var player in players)
+            foreach (var player in TurnManager.Instance.LivePlayers)
             {
                 Vector3Int p_Pos = player.CellIndex;
                 int tempX = Mathf.Abs(key.x - p_Pos.x);

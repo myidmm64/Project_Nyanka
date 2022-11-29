@@ -17,10 +17,9 @@ public class ArcherTargetWeightCheck : Node
     public override NodeState Evaluate()
     {
         Debug.Log("ArcherTargetWeightCheck");
-        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
         Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
         
-        foreach (var player in players)
+        foreach (var player in TurnManager.Instance.LivePlayers)
         {
             Vector3Int p_Pos = player.CellIndex;
             int tempX = Mathf.Abs(_aIMainModule.CellIndex.x - p_Pos.x);
@@ -34,18 +33,18 @@ public class ArcherTargetWeightCheck : Node
         Vector3Int _target = Vector3Int.zero;
         foreach (var target in t_pos)
         {
-            if (EntityManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
+            if (TurnManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
             {
-                if (EntityManager.Instance.enemy_TargetLists[target.Key] < _aIMainModule.maxTarget)
+                if (TurnManager.Instance.enemy_TargetLists[target.Key] < _aIMainModule.maxTarget)
                 {
-                    EntityManager.Instance.enemy_TargetLists[target.Key]++;
+                    TurnManager.Instance.enemy_TargetLists[target.Key]++;
                     _target = target.Key;
                     break;
                 }
             }
             else
             {
-                EntityManager.Instance.enemy_TargetLists.Add(target.Key, target.Value);
+                TurnManager.Instance.enemy_TargetLists.Add(target.Key, target.Value);
                 _target = target.Key;
                 break;
             }
