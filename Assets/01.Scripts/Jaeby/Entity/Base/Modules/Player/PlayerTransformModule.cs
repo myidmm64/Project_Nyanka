@@ -51,6 +51,7 @@ public class PlayerTransformModule : BaseTransformModule
         for (int i = 0; i < _otherObject.Count; i++)
             _otherObject[i]?.SetActive(true);
         _transEffectPrefab?.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         _transed = true;
         mo.SkillRestart(true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);

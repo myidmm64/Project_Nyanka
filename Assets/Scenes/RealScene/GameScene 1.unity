@@ -5407,7 +5407,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0
+  near clip plane: 0.0001
   far clip plane: 1000
   field of view: 60
   orthographic: 1
@@ -32942,7 +32942,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 50
     OrthographicSize: 5
-    NearClipPlane: 0
+    NearClipPlane: 0.0001
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -39470,7 +39470,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
-    NearClipPlane: 0
+    NearClipPlane: 0.0001
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -54217,21 +54217,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 463134741008194909, guid: 8beff1ef799ffde49b77e6005c14f9b0,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 463134741008194909, guid: 8beff1ef799ffde49b77e6005c14f9b0,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 463134741008194909, guid: 8beff1ef799ffde49b77e6005c14f9b0,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1930595163473650961, guid: 8beff1ef799ffde49b77e6005c14f9b0,
         type: 3}
       propertyPath: m_AnchorMax.y
