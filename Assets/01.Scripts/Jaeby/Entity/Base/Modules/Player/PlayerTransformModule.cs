@@ -6,19 +6,6 @@ using static Define;
 
 public class PlayerTransformModule : BaseTransformModule
 {
-    [SerializeField]
-    private CinemachineSmoothPath _path;
-    [SerializeField]
-    private List<Transform> _lookPoints = new List<Transform>();
-    [SerializeField]
-    private GameObject _handMask = null;
-    [SerializeField]
-    private GameObject _faceMask = null;
-    [SerializeField]
-    private GameObject _transEffectPrefab = null;
-    [SerializeField]
-    private List<GameObject> _otherObject = new List<GameObject>();
-
     public override void ChildTransfomationStart()
     {
         CameraManager.Instance.CartCamSelect(_path, _lookPoints[0], 1f);

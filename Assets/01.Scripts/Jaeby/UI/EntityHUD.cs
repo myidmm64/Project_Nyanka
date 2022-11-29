@@ -24,7 +24,7 @@ public class EntityHUD : MonoBehaviour
 
     public void Init(BaseMainModule targetModule)
     {
-        ImageData elementData = ImageManager.Instance.GetImageData(targetModule.DataSO.elementType);
+        ImageData elementData = ImageManager.Instance.GetImageData(targetModule.elementType);
         ImageData classData = ImageManager.Instance.GetImageData(targetModule.DataSO.classType);
         float avrDamage = (targetModule.MinDamage + targetModule.MaxDamage) * 0.5f;
 
@@ -45,7 +45,7 @@ public class EntityHUD : MonoBehaviour
 
         ClickManager.Instance.EntitySelectedAction += TryImageEnable;
         ImageDisable();
-        _element = targetModule.DataSO.elementType;
+        _element = targetModule.elementType;
         _entityType = targetModule.entityType;
     }
 

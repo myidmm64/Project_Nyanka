@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,25 @@ public abstract class BaseTransformModule : MonoBehaviour
 
     protected TurnAction _transformAction;
 
+    [SerializeField]
+    protected CinemachineSmoothPath _path;
+    [SerializeField]
+    protected List<Transform> _lookPoints = new List<Transform>();
+    [SerializeField]
+    protected GameObject _handMask = null;
+    [SerializeField]
+    protected GameObject _faceMask = null;
+    [SerializeField]
+    protected GameObject _transEffectPrefab = null;
+    [SerializeField]
+    protected List<GameObject> _otherObject = new List<GameObject>();
+
     private void Start()
     {
+        _handMask.SetActive(false);
+        _faceMask.SetActive(false);
+        _transEffectPrefab.SetActive(false);
+
         _mainModule = GetComponent<BaseMainModule>();
         _transformAction = new TurnAction(2, null, TransfomationEnd, CountDownAction);
         TurnManager.Instance.TurnActionAdd(_transformAction, true);

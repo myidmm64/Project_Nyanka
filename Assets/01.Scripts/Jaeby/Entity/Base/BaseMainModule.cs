@@ -41,7 +41,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     public EntityType entityType => _entityType;
     [SerializeField]
     protected ElementType _elementType = ElementType.NONE;
-    public EntityType elemenyType => _entityType;
+    public ElementType elementType => _elementType;
 
     //HUD
     [SerializeField]
@@ -72,7 +72,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     {
         get
         {
-            int temp = ((int)_dataSO.elementType + 1) % (int)ElementType.SIZE;
+            int temp = ((int)elementType + 1) % (int)ElementType.SIZE;
             if (temp == 0)
                 return (ElementType)((int)ElementType.NONE + 1);
             return (ElementType)temp;
@@ -82,7 +82,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     {
         get
         {
-            int temp = (int)_dataSO.elementType - 1;
+            int temp = (int)elementType - 1;
             if (temp == 0)
                 return (ElementType)((int)ElementType.SIZE - 1);
             return (ElementType)temp;

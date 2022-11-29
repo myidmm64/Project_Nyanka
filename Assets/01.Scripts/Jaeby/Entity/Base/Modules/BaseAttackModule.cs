@@ -33,7 +33,7 @@ public abstract class BaseAttackModule : MonoBehaviour
         for (int i = 0; i < cells.Count; i++)
         {
             int dmg = Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage);
-            cells[i].CellAttack(dmg, _mainModule.DataSO.elementType, _mainModule.entityType);
+            cells[i].CellAttack(dmg, _mainModule.elementType, _mainModule.entityType);
         }
         if (cells.Count > 0 && _mainModule.entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
@@ -53,7 +53,7 @@ public abstract class BaseAttackModule : MonoBehaviour
         for (int i = 0; i < cells.Count; i++)
         {
             int dmg = Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage);
-            cells[i].CellAttack(dmg, _mainModule.DataSO.elementType, _mainModule.entityType);
+            cells[i].CellAttack(dmg, _mainModule.elementType, _mainModule.entityType);
         }
         if (cells.Count > 0 && _mainModule.entityType == EntityType.Player)
             TurnManager.Instance.BattlePointChange(TurnManager.Instance.BattlePoint + 1);
