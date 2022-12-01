@@ -57,8 +57,6 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
         {
             int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[id]);
             bool critical = UnityEngine.Random.Range(0, 100) < 50;
-            if (critical)
-                dmg = Mathf.RoundToInt(dmg * 1.5f);
             enemys[i].ApplyDamage(dmg, _mainModule.elementType, critical, true);
         }
     }

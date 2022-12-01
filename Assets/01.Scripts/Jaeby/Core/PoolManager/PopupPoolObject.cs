@@ -63,10 +63,8 @@ public class PopupPoolObject : PoolAbleObject
         if (otherText != null)
             _criticalText.SetText(otherText);
 
-        Vector3 randomPos = Random.insideUnitSphere * 0.5f;
-        randomPos.y = Mathf.Abs(randomPos.y);
-        randomPos.z = 0f;
-        transform.localPosition = startPos + randomPos;
+        float randomPosX = startPos.x * Random.Range(-0.2f, 0.2f);
+        transform.localPosition = startPos + Vector3.right * randomPosX;
         transform.localRotation = Quaternion.identity;
         transform.localScale = other ? Vector3.one * 6f : Vector3.one * 2.2f;
         _text.material = other ? _criticalMat : _normalMat;
@@ -100,10 +98,8 @@ public class PopupPoolObject : PoolAbleObject
         startPos.y -= Mathf.RoundToInt(Screen.currentResolution.height * 0.5f);
         _text.color = color;
 
-        Vector3 randomPos = Random.insideUnitSphere * 15f;
-        randomPos.y = Mathf.Abs(randomPos.y);
-        randomPos.z = 0f;
-        transform.localPosition = startPos + randomPos;
+        float randomPosX = startPos.x * Random.Range(-0.2f, 0.2f);
+        transform.localPosition = startPos + Vector3.right * randomPosX;
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.one * 2.2f;
         if (mat != null)
