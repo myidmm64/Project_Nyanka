@@ -72,6 +72,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
         module.Selected();
         EntitySelectedAction?.Invoke(module);
+        _selectCellIndex = module.CellIndex;
     }
 
     private void SellSelect(Cell info)
@@ -95,12 +96,14 @@ public class ClickManager : MonoSingleTon<ClickManager>
         SelectedEntityEnd();
         EntitySelect(player);
         ClickModeSet(LeftClickMode.JustCell, true);
+        _selectCellIndex = player.CellIndex;
     }
 
     public void TryNormalSelect(BaseMainModule module)
     {
         SelectedEntityEnd();
         EntitySelect(module);
+        _selectCellIndex = module.CellIndex;
     }
 
     public void ClickManagerReset()

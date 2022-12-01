@@ -105,7 +105,6 @@ public class PlayerMainModule : BaseMainModule
         }
     }
 
-
     private void Start()
     {
         Agent.updateRotation = false;

@@ -8,6 +8,13 @@ public class PlayerMoveModule : BaseMoveModule
     public void TryMove(Vector3Int v)
     {
         if (Moveable == false) return;
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        Debug.Log($"V {v} ce {module.CellIndex}");
+        if (v == module.CellIndex)
+        {
+            module.PlayerIdle();
+            return;
+        }
         if (GetMoveableCheck(v) == false) return;
         StartCoroutine(Move(v));
         Moveable = false;

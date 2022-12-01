@@ -79,7 +79,7 @@ public class CellUtility
     public static bool CheckCell(Vector3Int cellIndex, Vector3Int target, List<Vector3Int> indexes, bool ignore)
     {
         List<Cell> cells = SearchCells(cellIndex, indexes, ignore);
-        for(int i = 0; i < cells.Count; i++)
+        for (int i = 0; i < cells.Count; i++)
         {
             if (cells[i].GetIndex() == target)
                 return true;
@@ -96,10 +96,10 @@ public class CellUtility
     public static List<Vector3Int> GetForDirectionByIndexes(List<Vector3Int> indexes)
     {
         List<Vector3Int> vecList = new List<Vector3Int>();
-        for(int i = 0;  i < (int)AttackDirection.Down + 1; i++)
+        for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
         {
             List<Vector3Int> dirVecs = GetAttackVectorByDirections((AttackDirection)i, indexes);
-            for(int j = 0; j < dirVecs.Count; j++)
+            for (int j = 0; j < dirVecs.Count; j++)
             {
                 if (vecList.Contains(dirVecs[j]) == false)
                     vecList.Add(dirVecs[j]);
@@ -158,5 +158,17 @@ public class CellUtility
                 break;
         }
         return v;
+    }
+
+    public static List<Vector3Int> CheckContainVectors(List<Vector3Int> vec1, List<Vector3Int> vec2)
+    {
+        List<Vector3Int> resultVec = new List<Vector3Int>();
+        for (int i = 0; i < vec2.Count; i++)
+            if (vec1.Contains(vec2[i]))
+                continue;
+            else
+                resultVec.Add(vec2[i]);
+
+        return resultVec;
     }
 }

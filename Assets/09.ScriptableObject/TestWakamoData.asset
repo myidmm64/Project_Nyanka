@@ -17,7 +17,6 @@ MonoBehaviour:
   normalMaxAtk: 120
   normalDef: 0
   hp: 3000
-  elementType: 3
   classType: 3
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
@@ -30,6 +29,7 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: 0}
   normalSkillRange:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
