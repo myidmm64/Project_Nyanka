@@ -34,7 +34,6 @@ public class AIMainModule : BaseMainModule
     private void Start()
     {
         Cell[] allCells = GameObject.Find("CubeGrid").GetComponentsInChildren<Cell>();
-        EntityManager.Instance.monsterInfo.Add(this);
         foreach (Cell cell in allCells)
         {
             cells.Add(cell.GetIndex(), 0);
