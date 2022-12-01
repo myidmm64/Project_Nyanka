@@ -17,6 +17,7 @@ public abstract class BaseHPModule : MonoBehaviour
 
     // 수치 데이터
     protected int _hp = 1; // 현재 체력
+    public int hp => _hp;
     public bool IsLived => _hp > 0; // 살아있누?
 
     protected virtual void Start()

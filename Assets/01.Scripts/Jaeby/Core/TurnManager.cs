@@ -15,8 +15,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private TextMeshProUGUI _currentTurnText = null;
 
     private List<BaseMainModule> _entitys;
+
     private List<PlayerMainModule> _players;
     public List<PlayerMainModule> Players => _players;
+
     private List<AIMainModule> _enemys;
     public List<AIMainModule> Enemys => _enemys;
 
@@ -33,6 +35,15 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         get => _battlePoint;
         set => _battlePoint = value;
+    }
+
+    [ContextMenu("살아있는 플레이어")]
+    public void TextMonster()
+    {
+        foreach(PlayerMainModule player in LivePlayers)
+        {
+            Debug.Log(player.name);
+        }
     }
 
     private bool _isTransed = false;

@@ -17,13 +17,12 @@ MonoBehaviour:
   normalMaxAtk: 0
   normalDef: 0
   hp: 0
-  elementType: 2
   classType: 3
   normalAttackRange: []
   normalMoveRange: []
   normalSkillRange: []
   transSkillRange: []
-  i_moveRange: 1
+  i_moveRange: 2
   i_attackRange: 1
   runAwayRange:
   - {x: 0, y: 0, z: 0}

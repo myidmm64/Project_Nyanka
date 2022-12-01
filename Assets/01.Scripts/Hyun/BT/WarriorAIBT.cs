@@ -39,7 +39,6 @@ public class WarriorAIBT : BehaviorTree.Tree
                 {
                     new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
-
                 })
             })
         });

@@ -30,25 +30,7 @@ public class ArcherTargetWeightCheck : Node
 
         t_pos = t_pos.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-        Vector3Int _target = Vector3Int.zero;
-        foreach (var target in t_pos)
-        {
-            if (TurnManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
-            {
-                if (TurnManager.Instance.enemy_TargetLists[target.Key] < _aIMainModule.maxTarget)
-                {
-                    TurnManager.Instance.enemy_TargetLists[target.Key]++;
-                    _target = target.Key;
-                    break;
-                }
-            }
-            else
-            {
-                TurnManager.Instance.enemy_TargetLists.Add(target.Key, target.Value);
-                _target = target.Key;
-                break;
-            }
-        }
+        Vector3Int _target = t_pos.Keys.First();
 
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
