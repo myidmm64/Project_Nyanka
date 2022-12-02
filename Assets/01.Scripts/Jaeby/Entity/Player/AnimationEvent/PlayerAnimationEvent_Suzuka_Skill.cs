@@ -64,6 +64,8 @@ public class PlayerAnimationEvent_Suzuka_Skill : PlayerAnimationEvent
             {
                 int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]);
                 bool critical = UnityEngine.Random.Range(0, 100) < 50;
+                if (enemys[i] == null)
+                    continue;
                 Vector3Int index = enemys[i].CellIndex;
                 Cell c = CubeGrid.TryGetCellByIndex(ref index);
                 c?.CellAttack(dmg, _mainModule.elementType, _mainModule.entityType);

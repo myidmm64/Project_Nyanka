@@ -70,7 +70,11 @@ public class ClickManager : MonoSingleTon<ClickManager>
         else
             _currentSelectedEntity = module;    
 
-        module.Selected();
+        if(module is PlayerMainModule && module.Selectable)
+            module.Selected();
+        else if (module is AIMainModule)
+            module.Selected();
+
         EntitySelectedAction?.Invoke(module);
         _selectCellIndex = module.CellIndex;
     }

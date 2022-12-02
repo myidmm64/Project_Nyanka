@@ -18,9 +18,37 @@ MonoBehaviour:
   normalDef: 0
   hp: 3000
   classType: 4
-  normalAttackRange: []
-  normalMoveRange: []
-  normalSkillRange: []
+  normalAttackRange:
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: 6}
+  normalMoveRange:
+  - {x: -2, y: 0, z: 2}
+  - {x: -2, y: 0, z: -2}
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: -1}
+  - {x: -1, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: -2}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: -1}
+  - {x: 2, y: 0, z: 2}
+  - {x: 2, y: 0, z: 0}
+  - {x: 2, y: 0, z: -2}
+  normalSkillRange:
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
+  - {x: 0, y: 0, z: 6}
   transSkillRange:
   - {x: -1, y: 0, z: 1}
   - {x: 0, y: 0, z: 1}
