@@ -1,10 +1,15 @@
+using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class EnemyAnimationEvent_Wizard_Attack : EnemyAnimationEvent
 {
     private AIMainModule _aIMainModule;
+
+    int[] dx = { 1, 1, 1, 0, 0, 0, -1, -1, -1 };
+    int[] dz = { 1, 0, -1, 1, 0, -1, 1, 0, -1 };
 
     [SerializeField]
     private GameObject _attackPrefab0 = null;
@@ -19,22 +24,27 @@ public class EnemyAnimationEvent_Wizard_Attack : EnemyAnimationEvent
         Debug.Log(_aIMainModule.CurrentDir + " !");
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
-        //Debug.Log(players.Count);
-        float m_dis = 1000000;
+        float _hp = 999999999;
         PlayerMainModule target = null;
         foreach (var player in players)
         {
-            float dis = Vector3Int.Distance(_aIMainModule.ChangeableCellIndex, player.CellIndex);
-            if (m_dis > dis)
+            float hp = player.HPModule.hp;
+            if (_hp > hp)
             {
-                m_dis = dis;
+                _hp = hp;
                 target = player;
             }
         }
+
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-        target.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        for (int i = 0; i < 9; i++)
+        {
+            Vector3Int attackCell = new Vector3Int(target.CellIndex.x + dx[i], 0, target.CellIndex.z + dz[i]);
+            Cell c = CubeGrid.TryGetCellByIndex(ref attackCell);
+            c.GetObj?.GetComponent<PlayerMainModule>()?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        }
     }
 
     public override void AttackEnd()

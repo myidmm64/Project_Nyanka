@@ -9,7 +9,8 @@ public enum RangeType
     None,
     Move,
     Attack,
-    Skill
+    Skill,
+    RunAway
 }
 
 public class EntityDataSOData : MonoBehaviour
@@ -35,6 +36,10 @@ public class EntityDataSOData : MonoBehaviour
             case RangeType.Skill:
                 AddRangeSO(targetSO.normalSkillRange, false);
                 break;
+            case RangeType.RunAway:
+                EnemyDataSO e = targetSO as EnemyDataSO;
+                AddRangeSO(e.runAwayRange, false);
+                break;
             default:
                 break;
         }
@@ -53,6 +58,10 @@ public class EntityDataSOData : MonoBehaviour
                 break;
             case RangeType.Skill:
                 AddRangeSO(targetSO.normalSkillRange, true);
+                break;
+            case RangeType.RunAway:
+                EnemyDataSO e = targetSO as EnemyDataSO;
+                AddRangeSO(e.runAwayRange, true);
                 break;
             default:
                 break;
@@ -73,6 +82,10 @@ public class EntityDataSOData : MonoBehaviour
             case RangeType.Skill:
                 AddRangeSOWanted(targetSO.normalSkillRange, false);
                 break;
+            case RangeType.RunAway:
+                EnemyDataSO e = targetSO as EnemyDataSO;
+                AddRangeSOWanted(e.runAwayRange, false);
+                break;
             default:
                 break;
         }
@@ -92,6 +105,10 @@ public class EntityDataSOData : MonoBehaviour
                 break;
             case RangeType.Skill:
                 AddRangeSOWanted(targetSO.normalSkillRange, true);
+                break;
+            case RangeType.RunAway:
+                EnemyDataSO e = targetSO as EnemyDataSO;
+                AddRangeSOWanted(e.runAwayRange, true);
                 break;
             default:
                 break;

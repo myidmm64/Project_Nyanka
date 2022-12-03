@@ -17,29 +17,15 @@ public class WizardBT : BehaviorTree.Tree
         {
             new Sequence(new List<Node>
             {
-                new DistanceWeightCheck(_aIMainModule),
-                new WizardTargetWeightCheck(_aIMainModule),
-                new AttackCheck(_aIMainModule),
+                new FinalAttackCheck(_aIMainModule),
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
                     new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
                 }),
-                new KeepDistance(_aIMainModule)
+                new KeepDistance(_aIMainModule,transform)
             }),
-
-            new Sequence(new List<Node>
-            {
-                new AttackCheck(_aIMainModule),
-                new RotateAttackRange(_aIMainModule),
-                new Selector(new List<Node>
-                {
-                    new AISkill(_aIMainModule,transform),
-                    new AIAttack(_aIMainModule,transform),
-                }),
-            })
-
         });
 
         return root;

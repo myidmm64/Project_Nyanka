@@ -143,6 +143,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         {
             Debug.Log(enemy.Key.name + " " + enemy.Value);
             yield return StartCoroutine(enemy.Key.GetComponent<BehaviorTree.Tree>().StartAI());
+            yield return new WaitForSeconds(1f);
         }
         //for (int i = 0; i < liveEnemys.Count; i++)
         //{
@@ -150,6 +151,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         //    yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         //}
         NextTurn();
+        enemy_TargetLists.Clear();
         UIManager.Instance.TargettingUIEnable(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }

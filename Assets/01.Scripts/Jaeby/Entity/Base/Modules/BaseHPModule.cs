@@ -16,6 +16,8 @@ public abstract class BaseHPModule : MonoBehaviour
     private TextMeshProUGUI _hpText = null;
 
     // 수치 데이터
+    protected int _maxHp = 1; // 최대 체력
+    public int maxHp => _maxHp;
     protected int _hp = 1; // 현재 체력
     public int hp => _hp;
     public bool IsLived => _hp > 0; // 살아있누?
@@ -24,6 +26,7 @@ public abstract class BaseHPModule : MonoBehaviour
     {
         _mainModule = GetComponent<BaseMainModule>();
         _hp = _mainModule.DataSO.hp;
+        _maxHp= _mainModule.DataSO.hp;
         _hpSlider.minValue = 0;
         _hpSlider.maxValue = _hp;
         _hpSlider.value = _hp;

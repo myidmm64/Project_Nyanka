@@ -43,10 +43,14 @@ public class MoveToTarget : Node
                 _pos = key;
             }
         }
+        _aIMainModule.animator.Play("Move");
+        _aIMainModule.animator.Update(0);
         _aIMainModule.Agent.SetDestination(_pos);
         _aIMainModule.ChangeableCellIndex = _pos;
         yield return new WaitUntil(()=>Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance);
         _aIMainModule.isMoveComplete = true;
+        _aIMainModule.animator.Play("Idle");
+        _aIMainModule.animator.Update(0);
         state = NodeState.SUCCESS;
     }
 }

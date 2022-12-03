@@ -19,6 +19,7 @@ public class EnemyAnimationEvent_Warrior_Attack : EnemyAnimationEvent
 
     public override void AttackAnimation(int id)
     {
+        Debug.Log("AttackEvent");
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
         Destroy(obj, 1.5f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);

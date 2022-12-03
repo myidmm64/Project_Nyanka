@@ -54,7 +54,7 @@ public class AISkill : Node
 
     IEnumerator Skill()
     {
-        Debug.Log("ArcherAISkill");
+        yield return new WaitUntil(() => !_aIMainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Move"));
         Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
 

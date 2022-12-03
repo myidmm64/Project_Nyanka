@@ -2604,6 +2604,8 @@ GameObject:
   - component: {fileID: 2593649914825874334}
   - component: {fileID: 7233330291047477954}
   - component: {fileID: 3017840514073092049}
+  - component: {fileID: 3135292565026822136}
+  - component: {fileID: 4777826719666856077}
   m_Layer: 7
   m_Name: WizardAI
   m_TagString: Untagged
@@ -2661,7 +2663,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2701,7 +2703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: 0bbf81f6a43bb9742966f90fa7fa77d1, type: 2}
   _entityType: 2
-  _elementType: 3
+  _elementType: 0
   _entityHud: {fileID: 3694377600048332481}
   _animator: {fileID: 2627717604121582061}
   _agent: {fileID: 8438921707392443515}
@@ -2735,6 +2737,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe682c51c0d41b446b4dc3550abeb0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3135292565026822136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781028909823596845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71fa92ceccb9cd4bab4cc1b05011700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPrefab0: {fileID: 100012, guid: 2773c6c2c174c334890f7ce3d5f3d936, type: 3}
+--- !u!114 &4777826719666856077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8781028909823596845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050140157a6bd3d45b23674b251897da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackPrefab0: {fileID: 100010, guid: c0a15d884e5e7a9468ab38bba8a32604, type: 3}
 --- !u!1 &8818405388944703086
 GameObject:
   m_ObjectHideFlags: 0

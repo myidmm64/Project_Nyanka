@@ -28,13 +28,13 @@ public class ArcherAIBT : BehaviorTree.Tree
                     new AISkill(_aIMainModule,transform),
                     new AIAttack(_aIMainModule,transform),
                 }),
-                new KeepDistance(_aIMainModule)
+                new KeepDistance(_aIMainModule,transform)
             }),
 
             new Sequence(new List<Node>
             {
                 new MoveToTarget(_aIMainModule),
-                new AttackCheck(_aIMainModule),
+                new FinalAttackCheck(_aIMainModule),
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {

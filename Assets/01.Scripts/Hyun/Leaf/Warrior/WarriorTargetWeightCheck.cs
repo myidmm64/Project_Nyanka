@@ -22,7 +22,7 @@ public class WarriorTargetWeightCheck : Node
             Vector3Int p_Pos = player.CellIndex;
             int tempX = Mathf.Abs(_aIMainModule.CellIndex.x - p_Pos.x);
             int tempZ = Mathf.Abs(_aIMainModule.CellIndex.z - p_Pos.z);
-            int f_Dis = (tempX > tempZ) ? tempX : tempZ;
+            int f_Dis = (tempX > tempZ) ? tempZ : tempX;
             t_pos.Add(p_Pos, f_Dis);
         }
 

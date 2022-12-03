@@ -28,7 +28,7 @@ public class AttackCheck : Node
                 }
             }
         }
-        _aIMainModule.isAttackComplete = true;
+
         state = NodeState.FAILURE;
         return state;
     }
