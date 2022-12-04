@@ -22,7 +22,7 @@ public class EnemyAnimationEvent_Archer_Skill : EnemyAnimationEvent
         GameObject obj = null;
         obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
         Destroy(obj, 1.5f);
-        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalSkillRange);
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
         {

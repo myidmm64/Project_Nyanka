@@ -38,8 +38,7 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
     {
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
-        int _hp = 999999;
-        PlayerMainModule attackPlayer = null;
+        int _hp = 99999999;
         foreach (var a in players)
         {
             if (a.HPModule.hp < _hp)
