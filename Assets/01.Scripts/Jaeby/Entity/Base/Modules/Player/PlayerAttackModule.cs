@@ -137,7 +137,6 @@ public class PlayerAttackModule : BaseAttackModule
         for (int i = 0; i < module.AttackDirections.Count; i++)
         {
             Destroy(module.AttackDirections[i]);
-            Debug.Log("¿¨¤¡¸®¸ð¸®");
         }
         module.AttackDirections.Clear();
 

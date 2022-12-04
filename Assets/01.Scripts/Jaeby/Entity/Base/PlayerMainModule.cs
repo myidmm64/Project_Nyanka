@@ -50,6 +50,7 @@ public class PlayerMainModule : BaseMainModule
     private Vector3Int _prevIndex = Vector3Int.zero;
     private bool _fourDirec = false;
     private bool _attackMode = false;
+    public bool AttackMode => _attackMode;
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange

@@ -25,9 +25,12 @@ public class PlayerTransformModule : BaseTransformModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         PlayerMainModule mo = _mainModule as PlayerMainModule;
         CubeGrid.ViewEnd();
+        for (int i = 0; i < mo.AttackDirections.Count; i++)
+            Destroy(mo.AttackDirections[i]);
+
         UIManager.Instance.UIDisable();
         PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f,
-            Color.red, "지금부터야 !!", 1.8f, "transformation !!", 0.5f);
+            Color.white, "지금부터야 !!", 1.8f, "형상 변환", 0.5f);
 
         _mainModule.animator.Play("Trans");
         _mainModule.animator.Update(0);
@@ -41,9 +44,19 @@ public class PlayerTransformModule : BaseTransformModule
         yield return new WaitForSeconds(0.5f);
         _transed = true;
         mo.SkillRestart(true);
-        ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CameraManager.Instance.LastCamSelect();
-        mo.ViewDataByCellIndex(false, false);
-        UIManager.Instance.UIInit(mo);
+
+        if(mo.AttackMode)
+        {
+            ClickManager.Instance.ClickModeSet(LeftClickMode.NONE, true);
+            mo.ViewAttackDirection(false);
+            mo.UISet();
+        }
+        else
+        {
+            ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
+            mo.ViewDataByCellIndex(false, false);
+            UIManager.Instance.UIInit(mo);
+        }
     }
 }
