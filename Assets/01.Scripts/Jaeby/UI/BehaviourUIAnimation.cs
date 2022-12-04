@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 public class BehaviourUIAnimation : MonoBehaviour
 {
@@ -25,5 +26,15 @@ public class BehaviourUIAnimation : MonoBehaviour
     {
         _animator.SetBool("OnMouse", false);
         _animator.SetBool("ExitMouse", false);
+    }
+
+    public void ViewPlayerSkill()
+    {
+        ClickManager.Instance.CurrentPlayer?.ViewSkillRange();
+    }
+
+    public void ViewEnd()
+    {
+        ClickManager.Instance.CurrentPlayer?.ViewEndSkillRange();
     }
 }

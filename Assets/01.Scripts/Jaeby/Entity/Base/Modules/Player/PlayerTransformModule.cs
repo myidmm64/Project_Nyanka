@@ -43,7 +43,7 @@ public class PlayerTransformModule : BaseTransformModule
         mo.SkillRestart(true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         CameraManager.Instance.LastCamSelect();
-        mo.ViewDataByCellIndex(false);
+        mo.ViewDataByCellIndex(false, false);
         UIManager.Instance.UIInit(mo);
     }
 }

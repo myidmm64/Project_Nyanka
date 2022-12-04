@@ -111,7 +111,7 @@ public class AIMainModule : BaseMainModule
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
         CubeGrid.ClcikViewEnd();
-        ViewDataByCellIndex(true);
+        ViewDataByCellIndex(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         //ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         SelectAction?.Invoke();

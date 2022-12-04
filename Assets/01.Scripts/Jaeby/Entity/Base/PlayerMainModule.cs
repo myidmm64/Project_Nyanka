@@ -48,6 +48,8 @@ public class PlayerMainModule : BaseMainModule
 
     // 기본 변수
     private Vector3Int _prevIndex = Vector3Int.zero;
+    private Vector3Int _tempIndex = Vector3Int.zero;
+    private bool _fourDirec = false;
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange
@@ -149,7 +151,7 @@ public class PlayerMainModule : BaseMainModule
         Debug.Log("셀렉티트");
 
         _prevIndex = CellIndex;
-        ViewDataByCellIndex(true);
+        ViewDataByCellIndex(true, false);
         SelectAction?.Invoke();
     }
 
@@ -163,26 +165,41 @@ public class PlayerMainModule : BaseMainModule
         UIManager.Instance.UIDisable();
         UnSelectAction?.Invoke();
         _prevIndex = Vector3Int.zero;
+        _fourDirec = false;
     }
 
-    public void PreparationCellSelect(Vector3Int index) // 플레이어를 선택하고 예비 셀 선택
+    public void PreparationCellSelect(Vector3Int index, bool isSkill) // 플레이어를 선택하고 예비 셀 선택
     {
         if (GetMoveableCheck(index) == false)
             index = CellIndex;
 
-        bool fourDirec = true;
         Debug.Log($"prev {_prevIndex} index {index}");
         if (_prevIndex == index)
-            fourDirec = false;
+            _fourDirec = !_fourDirec;
         _prevIndex = index;
 
         if (GetMoveableCheck(index))
         {
             CubeGrid.ViewEnd();
-            ViewData(index, fourDirec);
+            ViewData(index, _fourDirec, isSkill);
             return;
         }
-        ViewDataByCellIndex(fourDirec);
+        ViewDataByCellIndex(_fourDirec, isSkill);
+    }
+
+    public void ViewSkillRange()
+    {
+        //_tempIndex = _prevIndex;
+        _fourDirec = !_fourDirec;
+        PreparationCellSelect(_prevIndex, true);
+        //_prevIndex = Vector3Int.zero;
+    }
+
+    public void ViewEndSkillRange()
+    {
+        //_prevIndex = _tempIndex;
+        _fourDirec = !_fourDirec;
+        PreparationCellSelect(_prevIndex, false);
     }
 
     public void PlayerMove(Vector3Int v) // 이동 시도
@@ -220,17 +237,17 @@ public class PlayerMainModule : BaseMainModule
         _transformModule.TransfomationStart();
     }
 
-    protected override void ViewData(Vector3Int index, bool fourDirection) // 인덱스에 따라 데이터 보여주기
+    protected override void ViewData(Vector3Int index, bool fourDirection, bool isSkill) // 인덱스에 따라 데이터 보여주기
     {
         Debug.Log("??");
         CubeGrid.ClickView(index, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
         List<Vector3Int> vec = new List<Vector3Int>();
         if (fourDirection)
-            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+            vec = CellUtility.GetForDirectionByIndexes(isSkill ? SkillRange : AttackRange);
         else
-            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
-        CubeGrid.ViewRange(GridType.Attack, index, vec, true);
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, isSkill ? SkillRange : AttackRange);
+        CubeGrid.ViewRange(isSkill ? GridType.Skill : GridType.Attack, index, vec, true);
     }
 
     public void PlayerIdle() // 대기

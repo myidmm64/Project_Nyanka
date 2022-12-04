@@ -61,7 +61,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
         }
         set => _cellIndex = value;
     }
-    
+
     // 애니메이터
     [SerializeField]
     protected Animator _animator = null;
@@ -90,7 +90,7 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     }
 
     public abstract List<Vector3Int> MoveRange { get; }
-    public abstract List<Vector3Int> AttackRange { get;  }
+    public abstract List<Vector3Int> AttackRange { get; }
 
     // Selectable 인터페이스 구현
     private bool _selectedFlag = false;
@@ -129,33 +129,33 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
     public abstract void PhaseChange(PhaseType type); // 페이즈 교체
     public abstract void Selected(); // 선택 
     public abstract void SelectEnd(); // 선택 종료
-    protected virtual void ViewData(Vector3Int index, bool fourDirection) // 인덱스에 따라 데이터 보여주기
+    protected virtual void ViewData(Vector3Int index, bool fourDirection, bool isSkill) // 인덱스에 따라 데이터 보여주기
     {
         CubeGrid.ViewRange(GridType.Normal, CellIndex, _dataSO.normalMoveRange, false);
         List<Vector3Int> vec = new List<Vector3Int>();
         if (fourDirection)
-            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+            vec = CellUtility.GetForDirectionByIndexes(isSkill ? SkillRange : AttackRange);
         else
-            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, isSkill ? SkillRange : AttackRange);
 
-        CubeGrid.ViewRange(GridType.Attack, index, vec, true);
+        CubeGrid.ViewRange(isSkill ? GridType.Skill : GridType.Attack, index, vec, true);
     }
     public void ApplyDamage(int dmg, ElementType elementType, bool critical, bool isPlayer)
     {
         _hpModule?.ApplyDamage(dmg, elementType, critical, isPlayer);
     }
 
-    public void ViewDataByCellIndex(bool fourDirection) // 플레이어의 셀에 정보 표시
+    public void ViewDataByCellIndex(bool fourDirection, bool isSkill) // 플레이어의 셀에 정보 표시
     {
         CubeGrid.ViewEnd();
-        if(this is PlayerMainModule)
+        if (this is PlayerMainModule)
             CubeGrid.ClickView(CellIndex, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
         List<Vector3Int> vec = new List<Vector3Int>();
         if (fourDirection)
-            vec = CellUtility.GetForDirectionByIndexes(AttackRange);
+            vec = CellUtility.GetForDirectionByIndexes(isSkill ? SkillRange : AttackRange);
         else
-            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, AttackRange);
-        CubeGrid.ViewRange(GridType.Attack, CellIndex, vec, true);
+            vec = CellUtility.GetAttackVectorByDirections(AttackDirection.Up, isSkill ? SkillRange : AttackRange);
+        CubeGrid.ViewRange(isSkill ? GridType.Skill : GridType.Attack, CellIndex, vec, true);
     }
 }
