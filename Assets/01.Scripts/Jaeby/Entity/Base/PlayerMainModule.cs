@@ -48,8 +48,8 @@ public class PlayerMainModule : BaseMainModule
 
     // 기본 변수
     private Vector3Int _prevIndex = Vector3Int.zero;
-    private Vector3Int _tempIndex = Vector3Int.zero;
     private bool _fourDirec = false;
+    private bool _attackMode = false;
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange
@@ -142,6 +142,7 @@ public class PlayerMainModule : BaseMainModule
     public override void Selected() // 선택되었을 때
     {
         if (_selectable == false) return;
+        _attackMode = false;
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
         //ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
@@ -157,6 +158,7 @@ public class PlayerMainModule : BaseMainModule
 
     public override void SelectEnd() // 선택 해제
     {
+        _attackMode = false;
         VCamOne.Follow = null;
         CameraManager.Instance.CameraSelect(VCamTwo);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
@@ -189,17 +191,32 @@ public class PlayerMainModule : BaseMainModule
 
     public void ViewSkillRange()
     {
-        //_tempIndex = _prevIndex;
         _fourDirec = !_fourDirec;
-        PreparationCellSelect(_prevIndex, true);
-        //_prevIndex = Vector3Int.zero;
+        if(_attackMode)
+        {
+            CubeGrid.ViewEnd();
+            ViewAttackRange(AttackDirection.Up, true);
+            ViewAttackRange(AttackDirection.Left, true);
+            ViewAttackRange(AttackDirection.Right, true);
+            ViewAttackRange(AttackDirection.Down, true);
+        }
+        else
+        {
+            PreparationCellSelect(_prevIndex, true);
+        }
     }
 
     public void ViewEndSkillRange()
     {
-        //_prevIndex = _tempIndex;
         _fourDirec = !_fourDirec;
-        PreparationCellSelect(_prevIndex, false);
+        if (_attackMode)
+        {
+            CubeGrid.ViewEnd();
+        }
+        else
+        {
+            PreparationCellSelect(_prevIndex, false);
+        }
     }
 
     public void PlayerMove(Vector3Int v) // 이동 시도
@@ -266,6 +283,7 @@ public class PlayerMainModule : BaseMainModule
 
     public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
     {
+        _attackMode = true;
         UIManager.Instance.TargettingUIEnable(false, true);
 
         CubeGrid.ViewEnd();
@@ -320,7 +338,7 @@ public class PlayerMainModule : BaseMainModule
     {
         Vector3Int index = CellIndex;
         if (isSkill)
-            CubeGrid.ViewRange(GridType.Skill, index, CellUtility.GetAttackVectorByDirections(dir, AttackRange), true);
+            CubeGrid.ViewRange(GridType.Skill, index, CellUtility.GetAttackVectorByDirections(dir, SkillRange), true);
         else
             CubeGrid.ViewRange(GridType.Attack, index, CellUtility.GetAttackVectorByDirections(dir, AttackRange), true);
     }
