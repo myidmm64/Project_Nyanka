@@ -113,7 +113,7 @@ public abstract class BaseSkillModule : MonoBehaviour
         _skillCoolSlider.value = end;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         _skillTurnAction = null;
     }

@@ -21,6 +21,13 @@ public class PlayerBehaviourUI : MonoBehaviour
     [SerializeField]
     private CanvasGroup _transButton = null;
     [SerializeField]
+    private GameObject _transFireImage = null;
+    [SerializeField]
+    private Image _transImage = null;
+    [SerializeField]
+    private Image _transImageTwo = null;
+
+    [SerializeField]
     private CanvasGroup _canvasGroup = null;
 
     private UIManager _uiManager = null;
@@ -72,6 +79,13 @@ public class PlayerBehaviourUI : MonoBehaviour
     public void UIInit(PlayerMainModule player)
     {
         UIEnable();
+        if(TurnManager.Instance.BattlePoint >= TurnManager.Instance.MaxPoint)
+            _transFireImage.SetActive(true);
+        else
+            _transFireImage.SetActive(false);
+        _transImage.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
+        _transImageTwo.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
+
         int count = player.SkillCount;
         if (count <= 0)
             count = 0;
