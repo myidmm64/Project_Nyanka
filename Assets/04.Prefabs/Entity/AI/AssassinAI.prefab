@@ -2517,7 +2517,8 @@ MonoBehaviour:
   _entityHud: {fileID: 4180464091584279259}
   _animator: {fileID: 3256500651132671479}
   _agent: {fileID: 8961037080769063009}
-  SkillCoolTime_1: 3
+  SkillCoolTime: 03000000
+  MaxSkilCoolTime: 03000000
   _modelController: {fileID: 2695072936993052072}
   isAttackComplete: 0
   isMoveComplete: 0

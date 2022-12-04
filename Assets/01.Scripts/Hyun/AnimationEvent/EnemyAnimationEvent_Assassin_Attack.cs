@@ -11,6 +11,8 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
     [SerializeField]
     private GameObject _attackPrefab0 = null;
 
+    PlayerMainModule attackPlayer = null;
+
     private void Start()
     {
         _aIMainModule = GetComponent<AIMainModule>();
@@ -21,13 +23,8 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
         Debug.Log("AttackEvent");
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
         Destroy(obj, 1.5f);
-        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
-        foreach (var a in players)
-        {
-            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-            a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
-        }
+        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     public override void AttackEnd()
@@ -39,6 +36,18 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
 
     public override void AttackStarted()
     {
-
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        int _hp = 999999;
+        PlayerMainModule attackPlayer = null;
+        foreach (var a in players)
+        {
+            if (a.HPModule.hp < _hp)
+            {
+                attackPlayer = a;
+                _hp = a.HPModule.hp;
+            }
+        }
+        transform.LookAt(attackPlayer.transform);
     }
 }
