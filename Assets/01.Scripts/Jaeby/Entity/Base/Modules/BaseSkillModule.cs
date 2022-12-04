@@ -112,4 +112,9 @@ public abstract class BaseSkillModule : MonoBehaviour
         }
         _skillCoolSlider.value = end;
     }
+
+    private void OnDestroy()
+    {
+        _skillTurnAction = null;
+    }
 }

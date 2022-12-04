@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class AttackDirectionObject : MonoBehaviour
+public class AttackDirectionObject : PoolAbleObject
 {
     [SerializeField]
     private Color _attackColor = Color.white;
@@ -50,5 +50,15 @@ public class AttackDirectionObject : MonoBehaviour
     {
         if(CubeGrid != null)
             CubeGrid.ViewEnd();
+    }
+
+    public override void Init_Pop()
+    {
+        transform.position = Vector3.zero;
+    }
+
+    public override void Init_Push()
+    {
+        transform.position = Vector3.zero;
     }
 }

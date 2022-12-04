@@ -142,6 +142,7 @@ public class PlayerMainModule : BaseMainModule
     public override void Selected() // 선택되었을 때
     {
         if (_selectable == false) return;
+        _fourDirec = true;
         _attackMode = false;
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
@@ -158,6 +159,7 @@ public class PlayerMainModule : BaseMainModule
 
     public override void SelectEnd() // 선택 해제
     {
+        _fourDirec = true;
         _attackMode = false;
         VCamOne.Follow = null;
         CameraManager.Instance.CameraSelect(VCamTwo);
@@ -167,7 +169,6 @@ public class PlayerMainModule : BaseMainModule
         UIManager.Instance.UIDisable();
         UnSelectAction?.Invoke();
         _prevIndex = Vector3Int.zero;
-        _fourDirec = false;
     }
 
     public void PreparationCellSelect(Vector3Int index, bool isSkill) // 플레이어를 선택하고 예비 셀 선택
