@@ -24,7 +24,7 @@ public class PlayerAnimationEvent_Suzuka_Skill : PlayerAnimationEvent
     public override void AttackAnimation(int id)
     {
         List<Cell> cells = CellUtility.SearchCells(
-            _mainModule.CellIndex, CellUtility.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, _mainModule.AttackRange), true);
+            _mainModule.CellIndex, CellUtility.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, _mainModule.SkillRange), true);
         if (cells.Count == 0) return;
 
         for (int i = 0; i < cells.Count; i++)
