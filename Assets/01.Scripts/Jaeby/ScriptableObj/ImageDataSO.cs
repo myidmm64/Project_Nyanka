@@ -16,6 +16,7 @@ public class ImageDataSO : ScriptableObject
     public ImageData mageImage;
     public ImageData archerImage;
     public ImageData assassinImage;
+    public ImageData hammerImage;
 }
 
 [System.Serializable]
