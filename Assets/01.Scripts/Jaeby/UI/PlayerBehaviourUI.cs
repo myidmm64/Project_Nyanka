@@ -23,6 +23,8 @@ public class PlayerBehaviourUI : MonoBehaviour
     [SerializeField]
     private GameObject _transFireImage = null;
     [SerializeField]
+    private GameObject _transText = null;
+    [SerializeField]
     private Image _transImage = null;
     [SerializeField]
     private Image _transImageTwo = null;
@@ -103,9 +105,15 @@ public class PlayerBehaviourUI : MonoBehaviour
     private void BattlePointUISet()
     {
         if (TurnManager.Instance.BattlePoint >= TurnManager.Instance.MaxPoint)
+        {
             _transFireImage.SetActive(true);
+            _transText.SetActive(true);
+        }
         else
+        {
             _transFireImage.SetActive(false);
+            _transText.SetActive(false);
+        }
         _transImage.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
         _transImageTwo.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
     }
