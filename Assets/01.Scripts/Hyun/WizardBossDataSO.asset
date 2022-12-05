@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a9dbabb09a80d48a9de417e7ef558f, type: 3}
   m_Name: WizardBossDataSO
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  normalMinAtk: 0
-  normalMaxAtk: 0
-  normalDef: 0
-  hp: 0
-  classType: 0
+  sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
+  normalMinAtk: 100
+  normalMaxAtk: 100
+  normalDef: 1
+  hp: 99999
+  classType: 3
   normalAttackRange: []
   normalMoveRange: []
   normalSkillRange: []
@@ -25,4 +25,6 @@ MonoBehaviour:
   i_moveRange: 1
   i_attackRange: 1
   runAwayRange: []
-  SkillsRange: []
+  SkillsRange:
+  - skillRange: []
+  - skillRange: []

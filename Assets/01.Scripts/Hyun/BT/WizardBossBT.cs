@@ -17,7 +17,7 @@ public class WizardBossBT : BehaviorTree.Tree
         {
             new Sequence(new List<Node>
             {
-                new FinalAttackCheck(_aIMainModule),
+                new AttackCheck(_aIMainModule),
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
