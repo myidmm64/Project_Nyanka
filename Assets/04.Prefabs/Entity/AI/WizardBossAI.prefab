@@ -3851,7 +3851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: 45cd1b64d305a3744959d52725666df3, type: 2}
   _entityType: 2
-  _elementType: 0
+  _elementType: 2
   _entityHud: {fileID: 506071612614613578}
   _animator: {fileID: 3205935715305239945}
   _agent: {fileID: 9013761302811707423}
@@ -3898,6 +3898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e14c14a6c0c51049b4fd6fbaf46ca08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackPrefab0: {fileID: 100010, guid: c0a15d884e5e7a9468ab38bba8a32604, type: 3}
 --- !u!114 &5207706364359718281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3910,6 +3911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134e6ef986ac37341bf9dae33c6a1761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackPrefab0: {fileID: 100006, guid: ea4ce2b1817aec64f9a23ae028ffe62c, type: 3}
 --- !u!114 &443295397743706622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3922,6 +3924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf63046c74a8a740b381ecb006b9524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackPrefab0: {fileID: 100038, guid: 2c39fb930164bbd47b1b317081d8661d, type: 3}
 --- !u!1 &8244690465065325066
 GameObject:
   m_ObjectHideFlags: 0
