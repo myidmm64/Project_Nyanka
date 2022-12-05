@@ -17,7 +17,6 @@ MonoBehaviour:
   normalMaxAtk: 350
   normalDef: 0
   hp: 2000
-  elementType: 1
   classType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
@@ -26,14 +25,16 @@ MonoBehaviour:
   normalMoveRange:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: -2}
+  - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: -2, y: 0, z: 0}
   normalSkillRange:
-  - {x: -1, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
   - {x: 1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: -1, y: 0, z: 1}
   transSkillRange: []
   i_moveRange: 3
   i_attackRange: 1

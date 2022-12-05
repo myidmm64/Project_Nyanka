@@ -10,7 +10,8 @@ using System;
 
 public class AIMainModule : BaseMainModule
 {
-    public int SkillCoolTime_1;
+    public int[] SkillCoolTime;
+    public int[] m_SkilCoolTime;
 
     [SerializeField]
     protected Transform _modelController = null;
@@ -34,7 +35,6 @@ public class AIMainModule : BaseMainModule
     private void Start()
     {
         Cell[] allCells = GameObject.Find("CubeGrid").GetComponentsInChildren<Cell>();
-        EntityManager.Instance.monsterInfo.Add(this);
         foreach (Cell cell in allCells)
         {
             cells.Add(cell.GetIndex(), 0);
@@ -73,6 +73,24 @@ public class AIMainModule : BaseMainModule
         {
             EnemyDataSO so = DataSO as EnemyDataSO;
             return so.runAwayRange;
+        }
+    }
+
+    public List<Vector3Int> BossSKill1Range
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.SkillsRange[0].skillRange;
+        }
+    }
+
+    public List<Vector3Int> BossSKill2Range
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.SkillsRange[1].skillRange;
         }
     }
 

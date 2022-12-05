@@ -4,14 +4,18 @@ using UnityEngine;
 using BehaviorTree;
 using System.Linq;
 using MapTileGridCreator.Core;
+using DG.Tweening;
 
 public class KeepDistance : Node
 {
     AIMainModule _aIMainModule;
 
-    public KeepDistance(AIMainModule aIMainModule)
+    private Transform _transform;
+
+    public KeepDistance(AIMainModule aIMainModule, Transform transform)
     {
         _aIMainModule = aIMainModule;
+        _transform = transform;
     }
 
     public override NodeState Evaluate()
@@ -31,8 +35,6 @@ public class KeepDistance : Node
         if (_aIMainModule.isMoveComplete)
             yield break;
 
-        List<PlayerMainModule> players = EntityManager.Instance.playerInfo;
-
         List<PlayerMainModule> p_cnt = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, _aIMainModule.RunAwayRange, true);
         if (p_cnt.Count <= 0)
         {
@@ -47,7 +49,7 @@ public class KeepDistance : Node
 
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
-            foreach (var player in players)
+            foreach (var player in TurnManager.Instance.LivePlayers)
             {
                 Vector3Int p_Pos = player.CellIndex;
                 int tempX = Mathf.Abs(key.x - p_Pos.x);
@@ -55,6 +57,20 @@ public class KeepDistance : Node
                 _aIMainModule.cells[key] += (tempX > tempZ) ? tempX : tempZ;
             }
         });
+
+        Vector3 targetPos = Vector3.zero;
+        float _dis = 9999999;
+        foreach (var player in TurnManager.Instance.LivePlayers)
+        {
+            Vector3 p_Pos = player.CellIndex;
+            float dis = Vector3.Distance(_aIMainModule.CellIndex, p_Pos);
+            if (_dis > dis)
+            {
+                targetPos = p_Pos;
+                _dis = Vector3.Distance(_aIMainModule.CellIndex, p_Pos);
+            }
+        }
+        targetPos.y = _transform.position.y;
 
         int m_W = 0;
         Vector3Int _pos = Vector3Int.zero;
@@ -68,9 +84,15 @@ public class KeepDistance : Node
                 _pos = key;
             }
         }
-        //_aIMainModule.ChangeableCellIndex = _pos;
+
+        _aIMainModule.animator.Play("Move");
+        _aIMainModule.animator.Update(0);
         _aIMainModule.Agent.SetDestination(_pos);
-        yield return new WaitUntil(() => Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) < _aIMainModule.Agent.stoppingDistance);
+        yield return new WaitUntil(() => Vector3.Distance(_aIMainModule.transform.position, _aIMainModule.Agent.destination) <= _aIMainModule.Agent.stoppingDistance);
+        _aIMainModule.animator.Play("Idle");
+        _aIMainModule.animator.Update(0);
+        _transform.DOLookAt(targetPos, 1f).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(1f);
         _aIMainModule.isMoveComplete = true;
     }
 }

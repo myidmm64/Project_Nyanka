@@ -22,11 +22,10 @@ namespace BehaviorTree
                 _aIMainModule.isAttackComplete = false;
                 _aIMainModule.isMoveComplete = false;
                 _root.Evaluate();
-                _aIMainModule.SkillCoolTime_1 -= 1;
-
-                if(_aIMainModule.SkillCoolTime_1<0)
-                    _aIMainModule.SkillCoolTime_1 = 3;
-
+                for(int i=0;i<_aIMainModule.SkillCoolTime.Length;i++)
+                {
+                    _aIMainModule.SkillCoolTime[i] -= 1;
+                }
                 yield return new WaitUntil(() => _aIMainModule.isAttackComplete && _aIMainModule.isMoveComplete);
             }
         }

@@ -15,10 +15,17 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private TextMeshProUGUI _currentTurnText = null;
 
     private List<BaseMainModule> _entitys;
+
     private List<PlayerMainModule> _players;
     public List<PlayerMainModule> Players => _players;
+
     private List<AIMainModule> _enemys;
     public List<AIMainModule> Enemys => _enemys;
+
+    public List<PlayerMainModule> LivePlayers => _players.FindAll(x => x.IsLived);
+    public List<AIMainModule> LiveEnemys => _enemys.FindAll(x => x.IsLived);
+
+    public Dictionary<Vector3Int, int> enemy_TargetLists = new Dictionary<Vector3Int, int>();
 
     [SerializeField]
     private int _turn = 1;
@@ -28,6 +35,15 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         get => _battlePoint;
         set => _battlePoint = value;
+    }
+
+    [ContextMenu("살아있는 플레이어")]
+    public void TextMonster()
+    {
+        foreach(PlayerMainModule player in LivePlayers)
+        {
+            Debug.Log(player.name);
+        }
     }
 
     private bool _isTransed = false;
@@ -126,17 +142,16 @@ public class TurnManager : MonoSingleTon<TurnManager>
         foreach(var enemy in enemys)
         {
             Debug.Log(enemy.Key.name + " " + enemy.Value);
-            EntityManager.Instance.playerInfo.Clear();
-            EntityManager.Instance.playerInfo= _players.FindAll(v => v.IsLived);
             yield return StartCoroutine(enemy.Key.GetComponent<BehaviorTree.Tree>().StartAI());
+            yield return new WaitForSeconds(1f);
         }
         //for (int i = 0; i < liveEnemys.Count; i++)
         //{
         //    Debug.Log(liveEnemys[i].name);
         //    yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         //}
-        EntityManager.Instance.enemy_TargetLists.Clear();
         NextTurn();
+        enemy_TargetLists.Clear();
         UIManager.Instance.TargettingUIEnable(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }

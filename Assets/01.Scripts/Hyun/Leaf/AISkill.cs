@@ -39,11 +39,12 @@ public class AISkill : Node
                 break;
         }
 
-        if (_aIMainModule.SkillCoolTime_1 > 0 || isChk==false)
+        if (_aIMainModule.SkillCoolTime[0] > 0 || isChk==false)
         {
             state = NodeState.FAILURE;
             return state;
         }
+
         _aIMainModule.CurrentDir = dir;
         _aIMainModule.isAttackComplete = false;
         CoroutineHelper.StartCoroutine(Skill());
@@ -54,7 +55,7 @@ public class AISkill : Node
 
     IEnumerator Skill()
     {
-        Debug.Log("ArcherAISkill");
+        yield return new WaitUntil(() => !_aIMainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Move"));
         Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
 
@@ -65,6 +66,7 @@ public class AISkill : Node
             _aIMainModule.animator.Play("Skill1");
             _aIMainModule.animator.Update(0);
         });
+        _aIMainModule.SkillCoolTime[0] = _aIMainModule.m_SkilCoolTime[0];
         yield return null;
     }
 }
