@@ -60,4 +60,10 @@ public abstract class BaseTransformModule : MonoBehaviour
     {
 
     }
+
+    public void TurnActionDelete()
+    {
+        TurnManager.Instance.TurnActionDelete(_transformAction);
+        _transformAction = null;
+    }
 }

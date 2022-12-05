@@ -265,6 +265,11 @@ public class TurnManager : MonoSingleTon<TurnManager>
         turnAction.Locked = locked;
     }
 
+    public void TurnActionDelete(TurnAction turnAction)
+    {
+        _turnActions.Remove(turnAction);
+    }
+
     private void TurnActionCheck()
     {
         for(int i = 0; i < _turnActions.Count; i++)

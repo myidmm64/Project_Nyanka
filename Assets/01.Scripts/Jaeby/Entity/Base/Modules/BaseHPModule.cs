@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public abstract class BaseHPModule : MonoBehaviour
 {
     private BaseMainModule _mainModule = null;
+
+    [field: SerializeField]
+    private UnityEvent OnDie = null;
 
     // 필요한 데이터들
     [SerializeField]
@@ -75,7 +79,10 @@ public abstract class BaseHPModule : MonoBehaviour
         _mainModule.HpDownAction?.Invoke(_hp);
         _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
         if (IsLived == false)
+        {
+            OnDie?.Invoke();
             Died();
+        }
     }
 
     private IEnumerator HpDownCoroutine(float start, int dmg) // 슬라이더 소모 애니메이션

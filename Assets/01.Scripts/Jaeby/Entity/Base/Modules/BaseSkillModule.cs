@@ -113,8 +113,9 @@ public abstract class BaseSkillModule : MonoBehaviour
         _skillCoolSlider.value = end;
     }
 
-    private void OnDisable()
+    public void TurnActionDelete()
     {
+        TurnManager.Instance.TurnActionDelete(_skillTurnAction);
         _skillTurnAction = null;
     }
 }
