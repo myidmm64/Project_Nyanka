@@ -45,7 +45,6 @@ public class PlayerBehaviourUI : MonoBehaviour
     {
         if (player.Attackable)
         {
-            Debug.Log("아이고난");
             if (_seq != null)
                 _seq.Kill();
             _seq = DOTween.Sequence();

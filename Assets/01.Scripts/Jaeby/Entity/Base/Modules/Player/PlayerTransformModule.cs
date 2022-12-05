@@ -49,24 +49,10 @@ public class PlayerTransformModule : BaseTransformModule
         if(mo.AttackMode)
         {
             UIManager.Instance.UIInit(mo);
-            //mo.UISet();
             mo.AttackMode = false;
             mo.MoveModule.Moveable = true;
             mo.ViewDataByCellIndex(false, false);
             ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, true);
-            /*if (mo.Attackable)
-            {
-                mo.ViewAttackDirection(false);
-                ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            }
-            else if (mo.Skillable)
-            {
-                mo.ViewAttackDirection(true);
-                ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-            }
-            else
-            {
-            }*/
         }
         else
         {

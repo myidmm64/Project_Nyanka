@@ -151,7 +151,6 @@ public class PlayerMainModule : BaseMainModule
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);
-        Debug.Log("셀렉티트");
 
         _prevIndex = CellIndex;
         ViewDataByCellIndex(true, false);
@@ -177,7 +176,6 @@ public class PlayerMainModule : BaseMainModule
         if (GetMoveableCheck(index) == false)
             index = CellIndex;
 
-        Debug.Log($"prev {_prevIndex} index {index}");
         if (_prevIndex == index)
             _fourDirec = !_fourDirec;
         _prevIndex = index;
@@ -258,7 +256,6 @@ public class PlayerMainModule : BaseMainModule
 
     protected override void ViewData(Vector3Int index, bool fourDirection, bool isSkill) // 인덱스에 따라 데이터 보여주기
     {
-        Debug.Log("??");
         CubeGrid.ClickView(index, true);
         CubeGrid.ViewRange(GridType.Normal, CellIndex, MoveRange, false);
         List<Vector3Int> vec = new List<Vector3Int>();

@@ -120,6 +120,8 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerSkill(AttackDirection dir)
     {
+        UIManager.Instance.UIDisable();
+
         PlayerMainModule module = _mainModule as PlayerMainModule;
         if (module.Transed)
             EventSet(AttackAnimationType.NormalSkill);

@@ -32,7 +32,6 @@ public abstract class BaseHPModule : MonoBehaviour
 
     public virtual void Died()
     {
-        Debug.Log("»ç¸Á¶ì");
         StopAllCoroutines();
         Destroy(gameObject);
     }

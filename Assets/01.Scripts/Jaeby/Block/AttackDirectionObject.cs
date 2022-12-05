@@ -21,7 +21,6 @@ public class AttackDirectionObject : PoolAbleObject
         _isSkillObj = skill;
         _dir = dir;
         _player = player;
-        Debug.Log($"{dir} {player.name},");
         if (_isSkillObj)
             _spriteRenderer.color = _skillColor;
         else

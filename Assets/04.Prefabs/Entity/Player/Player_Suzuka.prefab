@@ -260,7 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: 0dc3ef081fc148746a84f1b591eb4d72, type: 2}
   _entityType: 1
-  _elementType: 2
+  _elementType: 3
   _entityHud: {fileID: 4671846098805546801}
   _animator: {fileID: 5546466419278876537}
   _agent: {fileID: 5546466419278876538}

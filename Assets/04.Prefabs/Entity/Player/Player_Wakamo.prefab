@@ -16747,7 +16747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
   _entityType: 1
-  _elementType: 1
+  _elementType: 3
   _entityHud: {fileID: 8716374556848837887}
   _animator: {fileID: 8716374557199257872}
   _agent: {fileID: 8716374557199257874}
