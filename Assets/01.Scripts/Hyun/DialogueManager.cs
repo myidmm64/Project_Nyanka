@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private int cnt = 0;
     [SerializeField]
-    private Text name;
+    private TextMeshProUGUI name;
     [SerializeField]
-    private Text context;
+    private TextMeshProUGUI context;
     [SerializeField]
     private float textDelay;
     private int lineCnt = 0;
