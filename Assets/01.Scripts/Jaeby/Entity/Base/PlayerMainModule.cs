@@ -172,6 +172,8 @@ public class PlayerMainModule : BaseMainModule
 
     public void PreparationCellSelect(Vector3Int index, bool isSkill) // 플레이어를 선택하고 예비 셀 선택
     {
+        if (Selectable == false) return;
+
         if (GetMoveableCheck(index) == false)
             index = CellIndex;
 
@@ -191,7 +193,7 @@ public class PlayerMainModule : BaseMainModule
     public void ViewSkillRange()
     {
         _fourDirec = !_fourDirec;
-        if(_attackMode)
+        if (_attackMode)
         {
             CubeGrid.ViewEnd();
             ViewAttackRange(AttackDirection.Up, true);

@@ -40,7 +40,7 @@ public class PlayerAnimationEvent_Kagura : PlayerAnimationEvent
         obj.transform.SetParent(null);
         Arrow arrow = obj.AddComponent<Arrow>();
         arrow.ArrowInit(_arrowSpeed, transform.position + Vector3.up, Quaternion.LookRotation(CellUtility.GetAttackDirection(_mainModule.AttackModule.CurrentDirection)), _cellBoomVectors,
-            2, 1f, Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage), _mainModule.elementType, Random.Range(0, 100) < 50, true);
+            0, 1f, Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage), _mainModule.elementType, Random.Range(0, 100) < 50, true);
 
         _cameraManager.CameraShake(8f, 10f, 0.24f);
     }

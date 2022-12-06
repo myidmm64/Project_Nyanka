@@ -67,9 +67,9 @@ public abstract class BaseHPModule : MonoBehaviour
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(_hp, realDmg));
         _hp -= dmg;
+        _hp = Mathf.Clamp(_hp, 0, _mainModule.DataSO.hp);
         if (_hp <= 0)
         {
-            _hp = 0;
             PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType, "°ÝÆÄ");
         }
         else

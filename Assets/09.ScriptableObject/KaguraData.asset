@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a0acebc985e954a9cf6008362e61de, type: 3}
   m_Name: KaguraData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 36c3a14551a325f45b1e952b4902a937, type: 3}
+  sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
   normalMinAtk: 200
   normalMaxAtk: 300
   normalDef: 0
