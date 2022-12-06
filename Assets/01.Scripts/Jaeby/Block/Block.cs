@@ -52,24 +52,33 @@ public class Block : MonoBehaviour
     public void ChangeBlock(ElementType type)
     {
         Color c = Color.white;
+        Sprite s = null;
         switch (type)
         {
             case ElementType.NONE:
                 break;
             case ElementType.Fire:
-                c = Color.red;
+                c = ImageManager.Instance.GetImageData(ElementType.Fire).color;
+                s = ImageManager.Instance.GetImageData(ElementType.Fire).sprite;
                 break;
             case ElementType.Water:
-                c = Color.blue;
+                c = ImageManager.Instance.GetImageData(ElementType.Water).color;
+                s = ImageManager.Instance.GetImageData(ElementType.Water).sprite;
                 break;
             case ElementType.Thunder:
-                c = new Color(1,0,1);
+                c = ImageManager.Instance.GetImageData(ElementType.Thunder).color;
+                s = ImageManager.Instance.GetImageData(ElementType.Thunder).sprite;
                 break;
             case ElementType.SIZE:
                 break;
             default:
                 break;
         }
+        c.r -= 100f / 255;
+        c.g -= 100f / 255;
+        c.b -= 100f / 255;
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().color = c;
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = s;
         GetComponent<MeshRenderer>().material.color = c;
     }
 }
