@@ -16,22 +16,21 @@ public class RotateAttackRange : Node
     {
         Debug.Log("RotateAttackRange");
         AttackDirection dir = AttackDirection.Up;
+        int[] directions = new int[4];
         for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
         {
-            bool isChk = false;
             List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
-            for (int j = 0; j < vecs.Count; j++)
+            List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
+            directions[i] = m.Count;
+        }
+        int maxinum = 0;
+        for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
+        {
+            if (maxinum < directions[i])
             {
-                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
-                if (m.Count > 0)
-                {
-                    dir = (AttackDirection)i;
-                    isChk = true;
-                    break;
-                }
+                maxinum = directions[i];
+                dir = (AttackDirection)i;
             }
-            if (isChk)
-                break;
         }
         _aIMainModule.CurrentDir = dir;
         Debug.Log(_aIMainModule.CurrentDir);

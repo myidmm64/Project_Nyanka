@@ -21,7 +21,9 @@ public class EnemyAnimationEvent_Warrior_Attack : EnemyAnimationEvent
     {
         Debug.Log("AttackEvent");
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
+        obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
+        Debug.Log(_aIMainModule.CurrentDir);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)

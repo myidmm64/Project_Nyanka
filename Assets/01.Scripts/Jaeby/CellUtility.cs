@@ -62,7 +62,7 @@ public class CellUtility
             GameObject obj = cells[i].GetObj;
             if (obj != null)
             {
-                t = obj.GetComponent<T>();
+                t = obj.transform.root.GetComponent<T>();
                 if (t != null)
                     tList.Add(t);
             }

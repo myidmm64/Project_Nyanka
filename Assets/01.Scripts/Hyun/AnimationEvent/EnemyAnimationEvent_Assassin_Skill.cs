@@ -21,11 +21,11 @@ public class EnemyAnimationEvent_Assassin_Skill : EnemyAnimationEvent
 
     public void SkillAnimation(int id)
     {
-        if(id==0)
-        {
-            GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
-            Destroy(obj, 1.5f);
-        }
+        Transform skillPos = _aIMainModule.ModelController;
+        skillPos.position = new Vector3(_aIMainModule.ModelController.position.x, 0.25f, _aIMainModule.ModelController.position.z);
+        GameObject obj = Instantiate(_attackPrefab0, skillPos);
+        obj.transform.SetParent(null);
+        Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
         attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }

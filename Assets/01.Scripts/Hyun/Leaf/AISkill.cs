@@ -22,30 +22,17 @@ public class AISkill : Node
 
         AttackDirection dir = AttackDirection.Up;
         bool isChk = false;
-        for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
+        List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalSkillRange);
+        List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
+        if (m.Count > 0)
         {
-            List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalSkillRange);
-            for (int j = 0; j < vecs.Count; j++)
-            {
-                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
-                if (m.Count > 0)
-                {
-                    dir = (AttackDirection)i;
-                    isChk = true;
-                    break;
-                }
-            }
-            if (isChk)
-                break;
+            isChk = true;
         }
-
         if (_aIMainModule.SkillCoolTime[0] > 0 || isChk==false)
         {
             state = NodeState.FAILURE;
             return state;
         }
-
-        _aIMainModule.CurrentDir = dir;
         _aIMainModule.isAttackComplete = false;
         CoroutineHelper.StartCoroutine(Skill());
 
@@ -61,6 +48,7 @@ public class AISkill : Node
 
         Sequence seq = DOTween.Sequence();
         seq.Append(_transform.DOLookAt(lookPos, 1f).SetEase(Ease.Linear));
+        Debug.Log(_aIMainModule.CurrentDir);
         seq.AppendCallback(() =>
         {
             _aIMainModule.animator.Play("Skill1");

@@ -37,6 +37,7 @@ public class EnemyAnimationEvent_Wizard_Skill : EnemyAnimationEvent
         }
 
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
+        obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
         for (int i = 0; i < 25; i++)

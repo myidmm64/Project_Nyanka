@@ -109,7 +109,7 @@ MonoBehaviour:
   - {x: 5, y: 0, z: -2}
   normalSkillRange: []
   transSkillRange: []
-  i_moveRange: 1
+  i_moveRange: 5
   i_attackRange: 1
   runAwayRange: []
   SkillsRange:
