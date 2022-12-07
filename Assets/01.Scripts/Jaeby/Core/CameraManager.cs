@@ -52,10 +52,12 @@ public class CameraManager : MonoSingleTon<CameraManager>
             CameraSelect(_lastCam);
     }
 
-    public void CartCamSelect(CinemachineSmoothPath path,  Transform look, float speed)
+    public void CartCamSelect(CinemachineSmoothPath path,  Transform look, float speed, LayerMask cullingMask = default(LayerMask))
     {
         _lastCam = _currentCam;
         CameraSelect(CartCam);
+        if(cullingMask != default(LayerMask))
+            Cam.cullingMask = cullingMask;
         Cam.orthographic = false;
         CartCam.LookAt = look;
         CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
@@ -75,6 +77,7 @@ public class CameraManager : MonoSingleTon<CameraManager>
         cart.m_Position = 0f;
         cart.m_Speed = 0f;
         cart.enabled = false;
+        Cam.cullingMask = -1;
     }
 
     public void CartUpdate(float? orthoSize, float? position, float? speed)

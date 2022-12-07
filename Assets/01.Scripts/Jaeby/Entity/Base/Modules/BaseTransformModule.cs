@@ -26,6 +26,8 @@ public abstract class BaseTransformModule : MonoBehaviour
     protected GameObject _transEffectPrefab = null;
     [SerializeField]
     protected List<GameObject> _otherObject = new List<GameObject>();
+    [SerializeField]
+    protected LayerMask _cullingMask = 0;
 
     private void Start()
     {

@@ -8,7 +8,7 @@ public class PlayerTransformModule : BaseTransformModule
 {
     public override void ChildTransfomationStart()
     {
-        CameraManager.Instance.CartCamSelect(_path, _lookPoints[0], 1f);
+        CameraManager.Instance.CartCamSelect(_path, _lookPoints[0], 1f, _cullingMask);
         for(int i = 0; i < _otherObject.Count; i++)
             _otherObject[i]?.SetActive(false);
         _handMask?.SetActive(true);

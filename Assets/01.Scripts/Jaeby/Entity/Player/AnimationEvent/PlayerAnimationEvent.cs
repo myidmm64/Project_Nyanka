@@ -10,6 +10,8 @@ public abstract class PlayerAnimationEvent : MonoBehaviour
 {
     protected PlayerMainModule _mainModule = null;
     protected CameraManager _cameraManager = null;
+    [SerializeField]
+    protected LayerMask _cullingMask = 0;
 
     private void Start()
     {
