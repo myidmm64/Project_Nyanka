@@ -11,6 +11,8 @@ public abstract class BaseHPModule : MonoBehaviour
 
     [field: SerializeField]
     private UnityEvent OnDie = null;
+    [SerializeField]
+    private GameObject _dieEffect = null;
 
     // 필요한 데이터들
     [SerializeField]
@@ -40,7 +42,20 @@ public abstract class BaseHPModule : MonoBehaviour
 
     public virtual void Died()
     {
+        _mainModule.enabled = false;
+        OnDie?.Invoke();
         StopAllCoroutines();
+        StartCoroutine(DieAnimationCoroutine());
+    }
+
+    private IEnumerator DieAnimationCoroutine()
+    {
+        _mainModule.animator.applyRootMotion = true;
+        _mainModule.Agent.ResetPath();
+        _mainModule.animator.Play("Die");
+        _mainModule.animator.Update(0);
+        yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
+        Instantiate(_dieEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -62,11 +77,14 @@ public abstract class BaseHPModule : MonoBehaviour
             if (isPlayer)
                 TurnManager.Instance.LoseTurnCheck();
         }
+        realDmg -= _mainModule.DataSO.normalDef;
+        if (realDmg <= 0)
+            realDmg = 0;
 
         if (_hpCoroutine != null)
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(_hp, realDmg));
-        _hp -= dmg;
+        _hp -= realDmg;
         _hp = Mathf.Clamp(_hp, 0, _mainModule.DataSO.hp);
         if (_hp <= 0)
         {
@@ -78,11 +96,29 @@ public abstract class BaseHPModule : MonoBehaviour
         }
         _mainModule.HpDownAction?.Invoke(_hp);
         _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
+
         if (IsLived == false)
         {
-            OnDie?.Invoke();
+            _hpSlider.value = 0;
+            _hpText?.SetText("0%");
             Died();
         }
+        else
+        {
+            _mainModule.animator.Play("Damaged");
+        }
+    }
+
+    public void Healing(int amount, ElementType elementType)
+    {
+        if (_hpCoroutine != null)
+            StopCoroutine(_hpCoroutine);
+        _hp += amount;
+        _hpSlider.value = _hp;
+        _hp = Mathf.Clamp(_hp, 0, _mainModule.DataSO.hp);
+        _mainModule.HpDownAction?.Invoke(_hp);
+        _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
+        PopupUtility.PopupDamage(transform.position, amount, false, elementType, "치유");
     }
 
     private IEnumerator HpDownCoroutine(float start, int dmg) // 슬라이더 소모 애니메이션

@@ -31,7 +31,7 @@ public class PlayerAnimationEvent_Kagura_Skill : PlayerAnimationEvent
             case 1:
                 _cameraManager.CartUpdate(60f, null, 0f);
                 List<AIMainModule> ais = TurnManager.Instance.LiveEnemys;
-                for(int i = 0; i < ais.Count; i++)
+                for (int i = 0; i < ais.Count; i++)
                 {
                     int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]);
                     bool critical = UnityEngine.Random.Range(0, 100) < 50;
@@ -44,10 +44,9 @@ public class PlayerAnimationEvent_Kagura_Skill : PlayerAnimationEvent
                 for (int i = 0; i < players.Count; i++)
                 {
                     int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]);
-                    bool critical = UnityEngine.Random.Range(0, 100) < 50;
                     GameObject obj = null;
                     obj = Instantiate(_healPrefab, players[i].CellIndex, Quaternion.identity);
-                    players[i]?.ApplyDamage(-1 * dmg, _mainModule.elementType, critical, true);
+                    players[i]?.HPModule.Healing(dmg, _mainModule.elementType);
                     Destroy(obj, 1.5f);
                 }
                 break;
