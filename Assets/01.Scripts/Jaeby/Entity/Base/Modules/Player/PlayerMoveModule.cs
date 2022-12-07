@@ -23,6 +23,8 @@ public class PlayerMoveModule : BaseMoveModule
     public override IEnumerator Move(Vector3Int v)
     {
         PlayerMainModule module = _mainModule as PlayerMainModule;
+        UIManager.Instance.UIDisable();
+        UIManager.Instance.TargettingUIEnable(false, true);
 
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
@@ -40,6 +42,7 @@ public class PlayerMoveModule : BaseMoveModule
         module.CellIndex = v;
         module.animator.SetBool("Walk", false);
 
+        UIManager.Instance.UIInit(module);
         module.TryAttack();
     }
 

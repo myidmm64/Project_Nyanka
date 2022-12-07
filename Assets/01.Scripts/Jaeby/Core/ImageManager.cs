@@ -37,6 +37,8 @@ public class ImageManager : MonoSingleTon<ImageManager>
                 return _dataSO.archerImage;
             case EntityClassType.Assassin:
                 return _dataSO.assassinImage;
+            case EntityClassType.Hammer:
+                return _dataSO.hammerImage;
             default:
                 Debug.LogError("얘는! 뭐 이상한 클래스 갖다대니?");
                 return default(ImageData);

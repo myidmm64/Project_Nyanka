@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: ImageData
   m_EditorClassIdentifier: 
   fireImage:
-    sprite: {fileID: 21300000, guid: 588ac5b533407b74ab8b59d1f45e90db, type: 3}
+    sprite: {fileID: 21300000, guid: a79966300db24ab4cb0d4544cd139927, type: 3}
     color: {r: 1, g: 0.5176471, b: 0.078431375, a: 1}
   waterImage:
-    sprite: {fileID: 21300000, guid: 1d831cc6f772c4549a5249de23a03c97, type: 3}
+    sprite: {fileID: 21300000, guid: 61a835fe7c7c39c42a01e39f43c45d4a, type: 3}
     color: {r: 0.3372549, g: 0.6431373, b: 1, a: 1}
   thunderImage:
-    sprite: {fileID: 21300000, guid: 7b7de2430deee964da27ba2590989b37, type: 3}
+    sprite: {fileID: 21300000, guid: 188ab97ae40b92a4095f08d8566ced5d, type: 3}
     color: {r: 0.8509804, g: 0.627451, b: 1, a: 1}
   warriorImage:
-    sprite: {fileID: 21300000, guid: a4eeb9c26c3c16e469eb5b1039512d80, type: 3}
+    sprite: {fileID: 21300000, guid: 651523dfee39cdc4098bea2322a6ec01, type: 3}
     color: {r: 1, g: 0.18620144, b: 0.07843137, a: 1}
   shieldImage:
     sprite: {fileID: 21300000, guid: 8c013fbd1dde7bc4db457cfd3b7b7ffa, type: 3}
@@ -31,8 +31,11 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 8a9500c26a7c49542a1e04f0e9f95f64, type: 3}
     color: {r: 0.3372549, g: 0.34117648, b: 1, a: 1}
   archerImage:
-    sprite: {fileID: 21300000, guid: 088622662c426514d81d7de51e5d3090, type: 3}
+    sprite: {fileID: 21300000, guid: 86795f1239461ac4fac4797662180c5c, type: 3}
     color: {r: 0.39215687, g: 0.8509804, b: 0.47843137, a: 1}
   assassinImage:
-    sprite: {fileID: 21300000, guid: 9b901b0342008d345a7c96c77616dfe5, type: 3}
+    sprite: {fileID: 21300000, guid: b917ff0a9ae9a444491e640b796345d2, type: 3}
     color: {r: 0.7268218, g: 0.3726415, b: 1, a: 1}
+  hammerImage:
+    sprite: {fileID: 21300000, guid: 7f7727e850aae514da3abf1e98d85a08, type: 3}
+    color: {r: 1, g: 0.5176471, b: 0.078431375, a: 1}

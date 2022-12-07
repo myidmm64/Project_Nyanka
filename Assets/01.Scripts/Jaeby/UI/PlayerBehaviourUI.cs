@@ -21,6 +21,15 @@ public class PlayerBehaviourUI : MonoBehaviour
     [SerializeField]
     private CanvasGroup _transButton = null;
     [SerializeField]
+    private GameObject _transFireImage = null;
+    [SerializeField]
+    private GameObject _transText = null;
+    [SerializeField]
+    private Image _transImage = null;
+    [SerializeField]
+    private Image _transImageTwo = null;
+
+    [SerializeField]
     private CanvasGroup _canvasGroup = null;
 
     private UIManager _uiManager = null;
@@ -36,18 +45,26 @@ public class PlayerBehaviourUI : MonoBehaviour
     {
         if (player.Attackable)
         {
-            Debug.Log("아이고난");
             if (_seq != null)
                 _seq.Kill();
             _seq = DOTween.Sequence();
             _uiManager.CanvasGroupSetting(_moveCheckButton, false, 1f);
             _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
-            _uiManager.CanvasGroupSetting(_transButton, false, 1f);
             _seq.Append(_moveCheckButton.DOFade(0f, 0.2f));
             _seq.Join(_idleButton.DOFade(0f, 0.2f));
-            _seq.Join(_transButton.DOFade(0f, 0.2f));
+            BattlePointUISet();
+            if (TurnManager.Instance.BattlePoint >= TurnManager.Instance.MaxPoint)
+            {
+                _uiManager.CanvasGroupSetting(_transButton, true, 1f);
+            }
+            else
+            {
+                _uiManager.CanvasGroupSetting(_transButton, false, 1f);
+                _seq.Join(_transButton.DOFade(0f, 0.2f));
+            }
 
-            if(player.Skillable == false)
+
+            if (player.Skillable == false)
             {
                 _uiManager.CanvasGroupSetting(_skillButton, false, 1f);
                 _seq.Join(_skillButton.DOFade(0f, 0.2f));
@@ -72,14 +89,32 @@ public class PlayerBehaviourUI : MonoBehaviour
     public void UIInit(PlayerMainModule player)
     {
         UIEnable();
+        BattlePointUISet();
+
         int count = player.SkillCount;
         if (count <= 0)
             count = 0;
         _skillCountText.SetText(count.ToString());
-        if(player.Skillable)
+        if (player.Skillable)
             _skillFireImage.SetActive(true);
         else
             _skillFireImage.SetActive(false);
+    }
+
+    private void BattlePointUISet()
+    {
+        if (TurnManager.Instance.BattlePoint >= TurnManager.Instance.MaxPoint)
+        {
+            _transFireImage.SetActive(true);
+            _transText.SetActive(true);
+        }
+        else
+        {
+            _transFireImage.SetActive(false);
+            _transText.SetActive(false);
+        }
+        _transImage.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
+        _transImageTwo.fillAmount = (float)TurnManager.Instance.BattlePoint / TurnManager.Instance.MaxPoint;
     }
 
     private void UIEnable()

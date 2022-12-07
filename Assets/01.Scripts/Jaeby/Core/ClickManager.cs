@@ -26,6 +26,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private BaseMainModule _currentSelectedEntity = null;
     [SerializeField]
     private PlayerMainModule _currentPlayer = null;
+    public PlayerMainModule CurrentPlayer => _currentPlayer;
 
     [SerializeField]
     private LayerMask _laycastMask = 0;
@@ -70,7 +71,11 @@ public class ClickManager : MonoSingleTon<ClickManager>
         else
             _currentSelectedEntity = module;    
 
-        module.Selected();
+        if(module is PlayerMainModule && module.Selectable)
+            module.Selected();
+        else if (module is AIMainModule)
+            module.Selected();
+
         EntitySelectedAction?.Invoke(module);
         _selectCellIndex = module.CellIndex;
     }
@@ -79,7 +84,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
     {
         _selectCellIndex = info.GetIndex();
         if (_currentPlayer != null)
-            _currentPlayer.PreparationCellSelect(info.GetIndex());
+            _currentPlayer.PreparationCellSelect(info.GetIndex(), false);
         else
             CubeGrid.ClickView(info.GetIndex(), false);
     }

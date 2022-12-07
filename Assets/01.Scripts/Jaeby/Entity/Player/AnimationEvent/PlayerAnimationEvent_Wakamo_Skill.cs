@@ -14,8 +14,6 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
 
     [SerializeField]
     private GameObject _attackPrefab0 = null;
-    [SerializeField]
-    private GameObject _attackPrefab1 = null;
 
     [SerializeField]
     private float[] _damageMagni = null;
@@ -23,8 +21,24 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
 
     public override void AttackAnimation(int id)
     {
+
+        GameObject obj = null;
+        switch (id)
+        {
+            case 0:
+                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "날아가버려!!", 1.5f, "홍염의 파도");
+                _cameraManager.CartUpdate(60f, null, 0.1f);
+                return;
+            case 1:
+                _cameraManager.CartUpdate(70f, 3f, 0f);
+                obj = Instantiate(_attackPrefab0, _mainModule.ModelController);
+                break;
+            default:
+                break;
+        }
+        Destroy(obj, 1.5f);
         List<Cell> cells = CellUtility.SearchCells(
-            _mainModule.CellIndex, CellUtility.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, _mainModule.AttackRange), true);
+            _mainModule.CellIndex, CellUtility.GetAttackVectorByDirections(_mainModule.AttackModule.CurrentDirection, _mainModule.SkillRange), true);
         if (cells.Count == 0) return;
 
         for (int i = 0; i < cells.Count; i++)
@@ -35,30 +49,12 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
             if (cells[i].GetObj?.GetComponent<AIMainModule>() != null)
                 enemys.Add(cells[i].GetObj?.GetComponent<AIMainModule>());
 
-        GameObject obj = null;
-        switch (id)
-        {
-            case 0:
-                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "날아가버려!!", 1.5f, "신성한 파도");
-                _cameraManager.CartUpdate(60f, null, null);
-                obj = Instantiate(_attackPrefab0, _mainModule.ModelController);
-                break;
-            case 1:
-                _cameraManager.CartUpdate(60f, null, 0f);
-                obj = Instantiate(_attackPrefab1, _mainModule.ModelController);
-                break;
-            default:
-                break;
-        }
-        Destroy(obj, 1.5f);
         _cameraManager.CameraShake(8f, 10f, 0.24f);
 
         for (int i = 0; i < enemys.Count; i++)
         {
             int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[id]);
             bool critical = UnityEngine.Random.Range(0, 100) < 50;
-            if (critical)
-                dmg = Mathf.RoundToInt(dmg * 1.5f);
             enemys[i].ApplyDamage(dmg, _mainModule.elementType, critical, true);
         }
     }

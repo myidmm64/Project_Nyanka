@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7889572632218410624}
   - component: {fileID: 7889572632218410631}
   - component: {fileID: 2997607467750647857}
+  - component: {fileID: -4152459086475906476}
   m_Layer: 0
   m_Name: SkillableIcon
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 8a9500c26a7c49542a1e04f0e9f95f64, type: 3}
-  m_Color: {r: 0, g: 0.033423424, b: 1, a: 1}
+  m_Color: {r: 0.627451, g: 0.90588236, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -106,6 +107,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4152459086475906476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889572632218410630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41caeed8824264348a724a0aadb51999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7889572632427064480
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7889572632427064481
 Transform:
   m_ObjectHideFlags: 0

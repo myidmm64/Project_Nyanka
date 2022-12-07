@@ -120,11 +120,13 @@ public class PlayerAttackModule : BaseAttackModule
 
     public void PlayerSkill(AttackDirection dir)
     {
+        UIManager.Instance.UIDisable();
+
         PlayerMainModule module = _mainModule as PlayerMainModule;
         if (module.Transed)
-            EventSet(AttackAnimationType.NormalSkill);
-        else
             EventSet(AttackAnimationType.TransSkill);
+        else
+            EventSet(AttackAnimationType.NormalSkill);
 
         AttackReady(dir, true);
     }
@@ -137,7 +139,6 @@ public class PlayerAttackModule : BaseAttackModule
         for (int i = 0; i < module.AttackDirections.Count; i++)
         {
             Destroy(module.AttackDirections[i]);
-            Debug.Log("엥ㄱ리모리");
         }
         module.AttackDirections.Clear();
 
@@ -163,7 +164,11 @@ public class PlayerAttackModule : BaseAttackModule
     public override IEnumerator Skill() // 공격
     {
         PlayerAttackStarted();
-        _mainModule.animator.Play("Skill");
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        if(module.Transed)
+            _mainModule.animator.Play("TransSkill");
+        else
+            _mainModule.animator.Play("Skill");
         _mainModule.animator.Update(0);
         yield break;
     }

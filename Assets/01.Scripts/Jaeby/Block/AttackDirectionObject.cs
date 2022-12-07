@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Define;
 
-public class AttackDirectionObject : MonoBehaviour
+public class AttackDirectionObject : PoolAbleObject
 {
     [SerializeField]
     private Color _attackColor = Color.white;
@@ -21,7 +21,6 @@ public class AttackDirectionObject : MonoBehaviour
         _isSkillObj = skill;
         _dir = dir;
         _player = player;
-        Debug.Log($"{dir} {player.name},");
         if (_isSkillObj)
             _spriteRenderer.color = _skillColor;
         else
@@ -50,5 +49,15 @@ public class AttackDirectionObject : MonoBehaviour
     {
         if(CubeGrid != null)
             CubeGrid.ViewEnd();
+    }
+
+    public override void Init_Pop()
+    {
+        transform.position = Vector3.zero;
+    }
+
+    public override void Init_Push()
+    {
+        transform.position = Vector3.zero;
     }
 }

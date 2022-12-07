@@ -6,4 +6,5 @@ public enum EntityClassType
     Mage,
     Archer,
     Assassin,
+    Hammer
 }

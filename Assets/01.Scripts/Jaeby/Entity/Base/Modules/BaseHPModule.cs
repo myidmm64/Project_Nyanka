@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public abstract class BaseHPModule : MonoBehaviour
 {
     private BaseMainModule _mainModule = null;
+
+    [field: SerializeField]
+    private UnityEvent OnDie = null;
+    [SerializeField]
+    private GameObject _dieEffect = null;
 
     // 필요한 데이터들
     [SerializeField]
@@ -36,8 +43,29 @@ public abstract class BaseHPModule : MonoBehaviour
 
     public virtual void Died()
     {
-        Debug.Log("사망띠");
+        _mainModule.enabled = false;
+        OnDie?.Invoke();
         StopAllCoroutines();
+        StartCoroutine(DieAnimationCoroutine());
+    }
+
+    private IEnumerator DieAnimationCoroutine()
+    {
+        _mainModule.Agent.ResetPath();
+        _mainModule.animator.Play("Die");
+        if (_mainModule.entityType == EntityType.Player)
+        {
+            PlayerMainModule m = _mainModule as PlayerMainModule;
+            _mainModule.transform.DOMove(_mainModule.transform.position + (m.ModelController.transform.forward * -1f), 1.6f);
+        }
+        else
+        {
+            _mainModule.transform.DOMove(_mainModule.transform.position + (_mainModule.transform.forward * -1f * 2f), 2f);
+        }
+        _mainModule.animator.Update(0);
+        yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
+        _mainModule.transform.DOKill();
+        Instantiate(_dieEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -59,14 +87,17 @@ public abstract class BaseHPModule : MonoBehaviour
             if (isPlayer)
                 TurnManager.Instance.LoseTurnCheck();
         }
+        realDmg -= _mainModule.DataSO.normalDef;
+        if (realDmg <= 0)
+            realDmg = 0;
 
         if (_hpCoroutine != null)
             StopCoroutine(_hpCoroutine);
         _hpCoroutine = StartCoroutine(HpDownCoroutine(_hp, realDmg));
-        _hp -= dmg;
+        _hp -= realDmg;
+        _hp = Mathf.Clamp(_hp, 0, _mainModule.DataSO.hp);
         if (_hp <= 0)
         {
-            _hp = 0;
             PopupUtility.PopupDamage(transform.position, realDmg, critical, elementType, "격파");
         }
         else
@@ -75,8 +106,29 @@ public abstract class BaseHPModule : MonoBehaviour
         }
         _mainModule.HpDownAction?.Invoke(_hp);
         _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
+
         if (IsLived == false)
+        {
+            _hpSlider.value = 0;
+            _hpText?.SetText("0%");
             Died();
+        }
+        else
+        {
+            _mainModule.animator.Play("Damaged");
+        }
+    }
+
+    public void Healing(int amount, ElementType elementType)
+    {
+        if (_hpCoroutine != null)
+            StopCoroutine(_hpCoroutine);
+        _hp += amount;
+        _hpSlider.value = _hp;
+        _hp = Mathf.Clamp(_hp, 0, _mainModule.DataSO.hp);
+        _mainModule.HpDownAction?.Invoke(_hp);
+        _hpText?.SetText(((_hp / (float)_mainModule.DataSO.hp) * 100f).ToString("N0") + "%");
+        PopupUtility.PopupDamage(transform.position, amount, false, elementType, "치유");
     }
 
     private IEnumerator HpDownCoroutine(float start, int dmg) // 슬라이더 소모 애니메이션
