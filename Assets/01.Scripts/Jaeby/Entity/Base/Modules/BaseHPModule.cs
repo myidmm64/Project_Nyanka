@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 using UnityEngine.UI;
 
 public abstract class BaseHPModule : MonoBehaviour
@@ -50,11 +51,20 @@ public abstract class BaseHPModule : MonoBehaviour
 
     private IEnumerator DieAnimationCoroutine()
     {
-        _mainModule.animator.applyRootMotion = true;
         _mainModule.Agent.ResetPath();
         _mainModule.animator.Play("Die");
+        if (_mainModule.entityType == EntityType.Player)
+        {
+            PlayerMainModule m = _mainModule as PlayerMainModule;
+            _mainModule.transform.DOMove(_mainModule.transform.position + (m.ModelController.transform.forward * -1f), 1.6f);
+        }
+        else
+        {
+            _mainModule.transform.DOMove(_mainModule.transform.position + (_mainModule.transform.forward * -1f * 2f), 2f);
+        }
         _mainModule.animator.Update(0);
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
+        _mainModule.transform.DOKill();
         Instantiate(_dieEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

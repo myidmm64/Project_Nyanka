@@ -164,7 +164,11 @@ public class PlayerAttackModule : BaseAttackModule
     public override IEnumerator Skill() // АјАн
     {
         PlayerAttackStarted();
-        _mainModule.animator.Play("Skill");
+        PlayerMainModule module = _mainModule as PlayerMainModule;
+        if(module.Transed)
+            _mainModule.animator.Play("TransSkill");
+        else
+            _mainModule.animator.Play("Skill");
         _mainModule.animator.Update(0);
         yield break;
     }

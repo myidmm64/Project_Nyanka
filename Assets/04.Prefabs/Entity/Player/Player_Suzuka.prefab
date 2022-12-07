@@ -356,6 +356,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _dieEffect: {fileID: 100006, guid: bf350f60afaca7e44b4533526bda51c2, type: 3}
   _hpSlider: {fileID: 4022448677815834270}
   _hpText: {fileID: 4022448676872562195}
 --- !u!114 &7297510675746679464
