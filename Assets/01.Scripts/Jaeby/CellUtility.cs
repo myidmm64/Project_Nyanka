@@ -44,6 +44,10 @@ public class CellUtility
         return cells;
     }
 
+    private bool CheckDir(Vector3Int dir, Vector3Int originPower, Vector3Int newPower)
+    {
+        return true;
+    }
     /// <summary>
     /// 셀의 오브젝트를 돌며 T 리스트를 반환합니다
     /// </summary>

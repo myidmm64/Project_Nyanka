@@ -60,12 +60,12 @@ public abstract class BaseHPModule : MonoBehaviour
         }
         else
         {
-            _mainModule.transform.DOMove(_mainModule.transform.position + (_mainModule.transform.forward * -1f * 2f), 2f);
+            _mainModule.transform.DOMove(_mainModule.transform.position + (_mainModule.transform.forward * -0.5f), 1.6f);
         }
         _mainModule.animator.Update(0);
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
         _mainModule.transform.DOKill();
-        Instantiate(_dieEffect, transform.position, Quaternion.identity);
+        //Instantiate(_dieEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
