@@ -124,9 +124,9 @@ public class PlayerAttackModule : BaseAttackModule
 
         PlayerMainModule module = _mainModule as PlayerMainModule;
         if (module.Transed)
-            EventSet(AttackAnimationType.NormalSkill);
-        else
             EventSet(AttackAnimationType.TransSkill);
+        else
+            EventSet(AttackAnimationType.NormalSkill);
 
         AttackReady(dir, true);
     }

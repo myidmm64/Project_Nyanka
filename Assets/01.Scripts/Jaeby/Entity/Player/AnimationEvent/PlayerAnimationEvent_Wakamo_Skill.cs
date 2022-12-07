@@ -26,7 +26,7 @@ public class PlayerAnimationEvent_Wakamo_Skill : PlayerAnimationEvent
         switch (id)
         {
             case 0:
-                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "날아가버려!!", 1.5f, "신성한 파도");
+                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "날아가버려!!", 1.5f, "홍염의 파도");
                 _cameraManager.CartUpdate(60f, null, 0.1f);
                 return;
             case 1:

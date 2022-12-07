@@ -16,7 +16,7 @@ MonoBehaviour:
   normalMinAtk: 200
   normalMaxAtk: 300
   normalDef: 0
-  hp: 200
+  hp: 10
   classType: 3
   normalAttackRange:
   - {x: 0, y: 0, z: 1}

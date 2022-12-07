@@ -16703,6 +16703,7 @@ GameObject:
   - component: {fileID: 8716374557199257887}
   - component: {fileID: 8716374557199257884}
   - component: {fileID: 8716374557199257885}
+  - component: {fileID: 4617293114106266048}
   - component: {fileID: 8716374557199257882}
   - component: {fileID: 8716374557199257883}
   - component: {fileID: 8716374557199257880}
@@ -16844,7 +16845,7 @@ MonoBehaviour:
   _normalAttackEvent: {fileID: 8716374557199257883}
   _normalSkillEvent: {fileID: 8716374557199257882}
   _transAttackEvent: {fileID: 8716374557199257883}
-  _transSkillEvent: {fileID: 8716374557199257882}
+  _transSkillEvent: {fileID: 4617293114106266048}
 --- !u!114 &8716374557199257884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16902,6 +16903,29 @@ MonoBehaviour:
   _dieEffect: {fileID: 100006, guid: bf350f60afaca7e44b4533526bda51c2, type: 3}
   _hpSlider: {fileID: 8716374555314819455}
   _hpText: {fileID: 8716374555249842209}
+--- !u!114 &4617293114106266048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8716374556721689745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcffb993a7016a41bf725d2d6a70d1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cullingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _path: {fileID: 237705656}
+  _lookPoints:
+  - {fileID: 8716374556528970852}
+  _attackPrefab0: {fileID: 5397350238696580513, guid: 12b66de7ae8b9454887c83106817ce55,
+    type: 3}
+  _damageMagni:
+  - 0
+  - 2.5
 --- !u!114 &8716374557199257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
