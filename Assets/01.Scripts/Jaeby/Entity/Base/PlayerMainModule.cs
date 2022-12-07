@@ -284,7 +284,6 @@ public class PlayerMainModule : BaseMainModule
     public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
     {
         _attackMode = true;
-        UIManager.Instance.TargettingUIEnable(false, true);
 
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd();

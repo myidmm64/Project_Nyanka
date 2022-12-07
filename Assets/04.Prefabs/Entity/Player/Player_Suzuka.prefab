@@ -378,6 +378,9 @@ MonoBehaviour:
   _transEffectPrefab: {fileID: 3250500630957912414}
   _otherObject:
   - {fileID: 2439024660682496250}
+  _cullingMask:
+    serializedVersion: 2
+    m_Bits: 1911
 --- !u!114 &5546466419278876519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f208296315d54448aac996f14afb27f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cullingMask:
+    serializedVersion: 2
+    m_Bits: 0
   _path: {fileID: 5546466417607027919}
   _lookPoints:
   - {fileID: 7297510675487174244}
@@ -408,6 +414,7 @@ MonoBehaviour:
   - {x: -1, y: 0, z: -1}
   - {x: 0, y: 0, z: -1}
   - {x: 1, y: 0, z: -1}
+  - {x: 0, y: 0, z: 0}
   _arrowSpeed: 6
 --- !u!114 &5546466419278876518
 MonoBehaviour:
@@ -421,6 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd89ff0428cd2a4bb9be839c01f94b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cullingMask:
+    serializedVersion: 2
+    m_Bits: 0
   _path: {fileID: 5546466417607027919}
   _lookPoints:
   - {fileID: 7297510675487174244}

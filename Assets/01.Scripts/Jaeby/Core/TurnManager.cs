@@ -117,7 +117,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         //Debug.Log("야몸ㄴ놈너머");
         yield return new WaitForSecondsRealtime(1f);
-        UIManager.Instance.TargettingUIEnable(false, false);
+        UIManager.Instance.TargettingUIEnable(false, true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
         List<PlayerMainModule> livePlayers = _players.FindAll(v => v.IsLived);
