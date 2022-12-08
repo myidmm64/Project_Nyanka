@@ -47,6 +47,13 @@ public class PlayerAnimationEvent_Kagura : PlayerAnimationEvent
 
     public override void AttackEnd()
     {
+        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
+        for (int i = 0; i < players.Count; i++)
+        {
+            int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * 0.5f);
+            players[i]?.HPModule.Healing(dmg, _mainModule.elementType);
+        }
+
         _cameraManager.CameraSelect(VCamTwo);
         _mainModule.animator.Play("Idle");
         _mainModule.animator.Update(0);
