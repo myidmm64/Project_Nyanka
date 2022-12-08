@@ -14,14 +14,6 @@ public class UIManager : MonoSingleTon<UIManager>
 
     private Sequence _seq = null;
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PopupUtility.PopupDamage(Vector3.zero + Vector3.up * 2f, 100, true, ElementType.Fire, "Ä¡¸íÅ¸");
-        }
-    }
-
     public void TargettingUIEnable(bool enable, bool imm)
     {
         _entityTargettingUI.Locked = !enable;

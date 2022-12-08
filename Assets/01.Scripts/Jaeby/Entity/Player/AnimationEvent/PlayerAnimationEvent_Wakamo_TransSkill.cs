@@ -25,7 +25,7 @@ public class PlayerAnimationEvent_Wakamo_TransSkill : PlayerAnimationEvent
         switch (id)
         {
             case 0:
-                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, Color.white, "µµ¸Á°¥ »ý°¢ ¸¶!!", 1.5f, "ÀÏ··°Å¸²");
+                PopupUtility.DialogText(transform.position + Vector3.right * 2f + Vector3.up * 1.5f, ImageManager.Instance.GetImageData(ElementType.Fire).color, "µµ¸Á°¥ »ý°¢ ¸¶!!", 1.5f, "ÀÏ··°Å¸²");
                 _cameraManager.CartUpdate(60f, null, 0.1f);
                 return;
             case 1:
