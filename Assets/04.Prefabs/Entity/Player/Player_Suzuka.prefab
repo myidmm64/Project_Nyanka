@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &20361340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 20361341}
+  - component: {fileID: 20361342}
+  m_Layer: 0
+  m_Name: DollyTrack1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &20361341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20361340}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.58, z: -0.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5546466419278876536}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &20361342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20361340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a200b19ca1a9685429ed7e043c28e904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 0
+  m_Waypoints:
+  - position: {x: 0, y: 1.8747401, z: -0.698766}
+    roll: 0
 --- !u!1 &4998862369633441737
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +217,7 @@ GameObject:
   - component: {fileID: 7297510675746679464}
   - component: {fileID: 5546466419278876519}
   - component: {fileID: 5546466419278876518}
+  - component: {fileID: 1735391058}
   m_Layer: 6
   m_Name: Player_Suzuka
   m_TagString: Untagged
@@ -188,6 +242,7 @@ Transform:
   - {fileID: 8316437085179308915}
   - {fileID: 1828640357441911870}
   - {fileID: 3244999980126362620}
+  - {fileID: 20361341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -260,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataSO: {fileID: 11400000, guid: 0dc3ef081fc148746a84f1b591eb4d72, type: 2}
   _entityType: 1
-  _elementType: 3
+  _elementType: 2
   _entityHud: {fileID: 4671846098805546801}
   _animator: {fileID: 5546466419278876537}
   _agent: {fileID: 5546466419278876538}
@@ -301,7 +356,7 @@ MonoBehaviour:
   _normalAttackEvent: {fileID: 5546466419278876519}
   _normalSkillEvent: {fileID: 5546466419278876518}
   _transAttackEvent: {fileID: 5546466419278876519}
-  _transSkillEvent: {fileID: 5546466419278876518}
+  _transSkillEvent: {fileID: 1735391058}
 --- !u!114 &5546466419278876543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +495,30 @@ MonoBehaviour:
   _attackPrefab1: {fileID: 0}
   _damageMagni:
   - 0.5
+--- !u!114 &1735391058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546466419278876487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1122b077156e7a14f89b4aec307d07e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cullingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _path: {fileID: 5546466417607027919}
+  _lookPoints:
+  - {fileID: 7297510675487174244}
+  _attackPrefab0: {fileID: 472057961240443298, guid: 0265e20b3b2f2934f93ac413447879cb,
+    type: 3}
+  _cellBoomVectors: []
+  _arrowSpeed: -8
+  _damageMagni:
+  - 10
 --- !u!1 &7297510675054615756
 GameObject:
   m_ObjectHideFlags: 0
