@@ -8,6 +8,10 @@ public class AssassinBoss_AttackEvent : EnemyAnimationEvent
 
     [SerializeField]
     private GameObject _attackPrefab0 = null;
+    [SerializeField]
+    private GameObject _attackPrefab1 = null;
+    [SerializeField]
+    private GameObject _attackPrefab2 = null;
 
     PlayerMainModule attackPlayer = null;
 
@@ -18,11 +22,22 @@ public class AssassinBoss_AttackEvent : EnemyAnimationEvent
 
     public override void AttackAnimation(int id)
     {
-        if (id == 0)
+        GameObject obj = null;
+        switch (id)
         {
-            GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
-            Destroy(obj, 1.5f);
+            case 0:
+                obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
+                break;
+            case 1:
+                obj = Instantiate(_attackPrefab1, _aIMainModule.ModelController);
+                break;
+            case 2:
+                obj = Instantiate(_attackPrefab2, _aIMainModule.ModelController);
+                break;
+            default:
+                break;
         }
+        Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
         attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
