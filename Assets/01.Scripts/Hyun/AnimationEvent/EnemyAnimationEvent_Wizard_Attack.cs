@@ -23,7 +23,7 @@ public class EnemyAnimationEvent_Wizard_Attack : EnemyAnimationEvent
     {
         Debug.Log(_aIMainModule.CurrentDir + " !");
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
         float _hp = 999999999;
         PlayerMainModule target = null;
         foreach (var player in players)
