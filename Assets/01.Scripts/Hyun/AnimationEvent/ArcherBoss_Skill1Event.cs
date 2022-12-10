@@ -9,8 +9,13 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
 {
     private AIMainModule _aIMainModule;
 
+    public float _arrowSpeed;
+
     [SerializeField]
     private GameObject _attackPrefab0 = null;
+
+    [SerializeField]
+    private GameObject hitEffect = null;
 
     private void Start()
     {
@@ -19,16 +24,11 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
 
     public void Skill1Animation()
     {
-        GameObject obj = null;
-        obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
-        Destroy(obj, 1.5f);
-        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
-        foreach (var a in players)
-        {
-            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-            a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
-        }
+        GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
+        obj.transform.SetParent(null);
+        Arrow arrow = obj.AddComponent<Arrow>();
+        arrow.ArrowInit(-_arrowSpeed, transform.position + Vector3.up, Quaternion.LookRotation(-transform.forward), new List<Vector3Int>(),
+            10, 1.4f, Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage), _aIMainModule.elementType, Random.Range(0, 100) < 50, false, hitEffect);
     }
 
     public void Skill1End()

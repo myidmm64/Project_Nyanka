@@ -21,6 +21,7 @@ public class ArcherBoss_Skill2Event : EnemyAnimationEvent
     {
         GameObject obj = null;
         obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
+        obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
