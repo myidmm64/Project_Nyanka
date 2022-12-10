@@ -14627,7 +14627,6 @@ GameObject:
   - component: {fileID: 199904888891523420}
   - component: {fileID: 108538890786167332}
   - component: {fileID: 54921219820361980}
-  - component: {fileID: 135890836330974772}
   - component: {fileID: -1286947467642193975}
   m_Layer: 0
   m_Name: Projectile 15
@@ -19602,19 +19601,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &135890836330974772
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1762457832057232}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-1286947467642193975
 MonoBehaviour:
   m_ObjectHideFlags: 0
