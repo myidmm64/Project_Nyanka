@@ -30,7 +30,6 @@ public class PlayerAnimationEvent_Yuko : PlayerAnimationEvent
         {
             cells[i].GetComponent<Block>().ChangeBlock(_mainModule.elementType);
             cells[i].CellAttack(_mainModule.MinDamage, _mainModule.elementType, _mainModule.entityType);
-            cells[i].CellAttack(_mainModule.MinDamage, _mainModule.elementType, _mainModule.entityType);
         }
 
         List<AIMainModule> enemys = new List<AIMainModule>();

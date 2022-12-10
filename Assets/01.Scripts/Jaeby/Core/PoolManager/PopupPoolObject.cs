@@ -130,7 +130,7 @@ public class PopupPoolObject : PoolAbleObject
         });
     }
 
-    public void Dialog(Vector3 startPos, Color color, string text, float timeVal = 1f, string otherText = null, float criticalTimeVal = 1f, Material mat = null)
+    public void Dialog(Vector3 startPos, Color color, string text, float timeVal = 1f, string otherText = null, float criticalTimeVal = 1f, Material mat = null, float waitTime = 0f)
     {
         transform.SetParent(CameraCanvas.transform);
         startPos.z = 0f;
@@ -149,10 +149,10 @@ public class PopupPoolObject : PoolAbleObject
             _criticalText.gameObject.SetActive(true);
         }
 
-        StartCoroutine(DialogCoroutine(text, otherText, timeVal, criticalTimeVal));
+        StartCoroutine(DialogCoroutine(text, otherText, timeVal, criticalTimeVal, waitTime));
     }
 
-    private IEnumerator DialogCoroutine(string endText, string endCriticalText, float timeVal = 1f, float criticalTimeVal = 1f)
+    private IEnumerator DialogCoroutine(string endText, string endCriticalText, float timeVal = 1f, float criticalTimeVal = 1f, float waitTime = 0f)
     {
         string downText = "";
         string upText = "";
@@ -169,6 +169,8 @@ public class PopupPoolObject : PoolAbleObject
             _text.SetText(downText);
             yield return new WaitForSeconds(0.1f * timeVal);
         }
+        yield return new WaitForSeconds(waitTime);
+
         if (_seq != null)
             _seq.Kill();
         _seq = DOTween.Sequence();

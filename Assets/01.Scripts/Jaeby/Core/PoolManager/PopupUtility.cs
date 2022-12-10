@@ -27,6 +27,6 @@ public static class PopupUtility
     {
         PopupPoolObject popupPoolObj = PoolManager.Instance.Pop(PoolType.DialogText) as PopupPoolObject;
         Vector3 pos = Cam.WorldToScreenPoint(targetPos);
-        popupPoolObj.Dialog(pos, color, msg, timeVal, otherMsg, criticalTimeVal, mat);
+        popupPoolObj.Dialog(pos, color, msg, timeVal, otherMsg, criticalTimeVal, mat, 1.5f);
     }
 }

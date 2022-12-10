@@ -77,8 +77,7 @@ public class Block : MonoBehaviour
         c.r -= 100f / 255;
         c.g -= 100f / 255;
         c.b -= 100f / 255;
-        transform.Find("Sprite").GetComponent<SpriteRenderer>().color = c;
-        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = s;
         GetComponent<MeshRenderer>().material.color = c;
+        _elementType = type;
     }
 }

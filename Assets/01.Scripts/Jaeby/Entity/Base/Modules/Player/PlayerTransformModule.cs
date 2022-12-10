@@ -2,22 +2,29 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static Define;
 
 public class PlayerTransformModule : BaseTransformModule
 {
+    [field: SerializeField]
+    private UnityEvent OnTranformStarted = null;
+    [field: SerializeField]
+    private UnityEvent OnTranformEnded = null;
     public override void ChildTransfomationStart()
     {
         CameraManager.Instance.CartCamSelect(_path, _lookPoints[0], 1f, _cullingMask);
         for(int i = 0; i < _otherObject.Count; i++)
             _otherObject[i]?.SetActive(false);
         _handMask?.SetActive(true);
+        OnTranformStarted?.Invoke();
     }
 
     public override void ChildTransfomationEnd()
     {
         _faceMask?.SetActive(false);
         _transEffectPrefab?.SetActive(false);
+        OnTranformEnded?.Invoke();
     }
 
     public override IEnumerator ChildTransformCoroutine()

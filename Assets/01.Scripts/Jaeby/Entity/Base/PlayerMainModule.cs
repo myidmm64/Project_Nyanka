@@ -281,7 +281,7 @@ public class PlayerMainModule : BaseMainModule
         return CellUtility.CheckCell(CellIndex, index, MoveRange, false);
     }
 
-    public void ViewAttackDirection(bool isSkill) // 4방향으로 화살표 생성
+    public void ViewAttackDirection(bool isSkill, bool ignore = false) // 4방향으로 화살표 생성
     {
         _attackMode = true;
 
@@ -298,8 +298,8 @@ public class PlayerMainModule : BaseMainModule
                 cells = CellUtility.SearchCells(CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, SkillRange), true);
             else
                 cells = CellUtility.SearchCells(CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, AttackRange), true);
-
-            bool enemyCheck = false;
+            
+            bool enemyCheck = ignore;
             for (int j = 0; j < cells.Count; j++)
                 if (cells[j].GetObj?.GetComponent<AIMainModule>() != null)
                 {

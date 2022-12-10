@@ -102,7 +102,7 @@ public class PlayerAttackModule : BaseAttackModule
         PlayerMainModule module = _mainModule as PlayerMainModule;
         module.UISet();
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-        module.ViewAttackDirection(true);
+        module.ViewAttackDirection(true, module.SkillModule.SkillRangeNoLimit);
     }
 
     public void PlayerAttack(AttackDirection dir) // 공격 준비 후 공격 실행

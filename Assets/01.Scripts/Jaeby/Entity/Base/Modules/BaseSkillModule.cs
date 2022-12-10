@@ -17,6 +17,11 @@ public abstract class BaseSkillModule : MonoBehaviour
     [SerializeField]
     private bool _skillableAtStart = false;
 
+    //셀 제한이 있나요?
+    [SerializeField]
+    private bool _skillRangeNoLimit = false;
+    public bool SkillRangeNoLimit => _skillRangeNoLimit;
+
     //스킬의 쿨타임
     [SerializeField]
     private int _skillCooltime = 0;
@@ -45,6 +50,9 @@ public abstract class BaseSkillModule : MonoBehaviour
     {
         get
         {
+            if (_skillRangeNoLimit)
+                return true;
+
             bool check = false;
             for (int i = 0; i < 4; i++)
                 if (CellUtility.FindTarget<AIMainModule>(_mainModule.CellIndex, CellUtility.GetAttackVectorByDirections((AttackDirection)i, _mainModule.SkillRange), true).Count > 0)
