@@ -12,6 +12,8 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
     [SerializeField]
     private GameObject _attackPrefab0 = null;
 
+    PlayerMainModule target;
+
     private void Start()
     {
         _aIMainModule = GetComponent<AIMainModule>();
@@ -20,10 +22,32 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
     public void Skill2Animation(int id)
     {
         Debug.Log(_aIMainModule.CurrentDir + " !");
+
+        GameObject obj = Instantiate(_attackPrefab0, target.transform);
+        obj.transform.SetParent(null);
+        Destroy(obj, 5f);
+        StartCoroutine(Time());
+        InvokeRepeating("Damage", 0, 0.1f);
+    }
+
+    public void Damage()
+    {
+        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        target.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+    }
+
+    IEnumerator Time()
+    {
+        yield return new WaitForSeconds(5f);
+        _aIMainModule.isAttackComplete = true;
+        CancelInvoke("Damage");
+    }
+
+    public void Skill2Start()
+    {
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
         float _hp = 999999999;
-        PlayerMainModule target = null;
         foreach (var player in players)
         {
             float hp = player.HPModule.hp;
@@ -33,16 +57,11 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
                 target = player;
             }
         }
-
-        GameObject obj = Instantiate(_attackPrefab0, target.transform);
-        Destroy(obj, 1.5f);
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-        target.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        transform.LookAt(target.transform);
     }
 
     public void Skill2End()
     {
-        _aIMainModule.isAttackComplete = true;
         _aIMainModule.animator.Play("Idle");
         _aIMainModule.animator.Update(0);
     }

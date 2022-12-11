@@ -9729,7 +9729,6 @@ MonoBehaviour:
   width: 1
   height: 1
   linkedRenderer: {fileID: 0}
-  shouldDrawGizmosThisFrame: 0
 --- !u!1 &6053593356869232423
 GameObject:
   m_ObjectHideFlags: 0
@@ -18913,16 +18912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af276926b0db1c248a93ab3c1134a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticUpdates: 1
-  isPaused: 0
   simulationFrameRate: 60
   dynamicRatio: 0.5
   gravity: {x: 0, y: -10, z: 0}
-  bounce: 0
-  friction: 1
-  enableAngleLimits: 1
-  enableCollision: 1
-  enableLengthLimits: 1
   collideWithGround: 1
   groundHeight: 0
   springBones:

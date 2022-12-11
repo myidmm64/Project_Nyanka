@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: WarriorBossDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalMinAtk: 100
-  normalMaxAtk: 100
+  normalMinAtk: 1
+  normalMaxAtk: 1
   normalDef: 0
   hp: 2147483647
   classType: 1
@@ -58,9 +58,8 @@ MonoBehaviour:
     - {x: 1, y: 0, z: 1}
     - {x: 0, y: 0, z: 1}
     - {x: -1, y: 0, z: 1}
-    - {x: 1, y: 0, z: 2}
-    - {x: 0, y: 0, z: 2}
-    - {x: -1, y: 0, z: 2}
-    - {x: 1, y: 0, z: 3}
-    - {x: 0, y: 0, z: 3}
-    - {x: -1, y: 0, z: 3}
+    - {x: 1, y: 0, z: -1}
+    - {x: 0, y: 0, z: -1}
+    - {x: -1, y: 0, z: -1}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: 0, z: 0}

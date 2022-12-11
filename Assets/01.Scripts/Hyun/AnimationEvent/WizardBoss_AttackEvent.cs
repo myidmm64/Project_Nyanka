@@ -23,7 +23,7 @@ public class WizardBoss_AttackEvent : EnemyAnimationEvent
     {
         Debug.Log(_aIMainModule.CurrentDir + " !");
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
         float _hp = 999999999;
         PlayerMainModule target = null;
         foreach (var player in players)
@@ -35,9 +35,9 @@ public class WizardBoss_AttackEvent : EnemyAnimationEvent
                 target = player;
             }
         }
-
+        transform.LookAt(target.transform);
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
-        Destroy(obj, 1.5f);
+        Destroy(obj, 2f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
         for (int i = 0; i < 25; i++)
         {

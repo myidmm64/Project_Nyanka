@@ -31,11 +31,24 @@ public class WarriorBoss_Skill2Event : EnemyAnimationEvent
 
     }
 
+    public void Skill2Start()
+    {
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        transform.LookAt(players[0].transform);
+    }
+
     public void Skill2Animation()
     {
         Debug.Log("AttackEvent");
         GameObject obj = Instantiate(_attackPrefab0, transform);
-        Destroy(obj, 1.5f);
+        Destroy(obj, 3f);
+        StartCoroutine(Time());
+        InvokeRepeating("Damage", 0, 0.1f);
+    }
+
+    public void Damage()
+    {
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
@@ -45,9 +58,15 @@ public class WarriorBoss_Skill2Event : EnemyAnimationEvent
         }
     }
 
+    IEnumerator Time()
+    {
+        yield return new WaitForSeconds(3f);
+        _aIMainModule.isAttackComplete = true;
+        CancelInvoke("Damage");
+    }
+
     public void Skill2End()
     {
-        _aIMainModule.isAttackComplete = true;
         _aIMainModule.animator.Play("Idle");
         _aIMainModule.animator.Update(0);
     }

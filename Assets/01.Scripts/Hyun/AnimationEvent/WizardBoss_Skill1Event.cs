@@ -19,11 +19,13 @@ public class WizardBoss_Skill1Event : EnemyAnimationEvent
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.transform);
         //PopupUtility.DialogText(transform.position, Color.red, "³Í ÀÌ¹Ì Á×¾îÀÖ´Ù");
         obj.transform.SetParent(null);
-        Destroy(obj, 1.5f);
+        Destroy(obj, 2f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
+        transform.LookAt(players[0].transform);
         foreach (var a in players)
         {
+            Debug.Log(a.name);
             int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
             a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }

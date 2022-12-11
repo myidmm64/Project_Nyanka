@@ -11,6 +11,10 @@ public class WarriorBoss_AttackEvent : EnemyAnimationEvent
 
     [SerializeField]
     private GameObject _attackPrefab0 = null;
+    [SerializeField]
+    private GameObject _attackPrefab1 = null;
+    [SerializeField]
+    private GameObject _attackPrefab2 = null;
 
     private void Start()
     {
@@ -20,11 +24,22 @@ public class WarriorBoss_AttackEvent : EnemyAnimationEvent
     public override void AttackAnimation(int id)
     {
         Debug.Log("AttackEvent");
-        if(id==0)
+        GameObject obj = null;
+        switch(id)
         {
-            GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
-            Destroy(obj, 1.5f);
+            case 0:
+                obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
+                break;
+            case 1:
+                obj = Instantiate(_attackPrefab1, _aIMainModule.ModelController);
+                break;
+            case 2:
+                obj = Instantiate(_attackPrefab2, _aIMainModule.ModelController);
+                break;
+            default:
+                break;
         }
+        Destroy(obj, 1.5f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)

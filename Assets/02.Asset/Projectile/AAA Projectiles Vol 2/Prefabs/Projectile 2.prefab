@@ -10,11 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4903523721451584}
   - component: {fileID: 198524469710358768}
-  - component: {fileID: 114896872521589134}
   - component: {fileID: 199317234387275066}
   - component: {fileID: 108176094184806404}
   - component: {fileID: 54347867007870338}
-  - component: {fileID: 135713622178651324}
   - component: {fileID: -5816220196261239591}
   m_Layer: 0
   m_Name: Projectile 2
@@ -4815,25 +4813,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &114896872521589134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519322442116508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 605a456cfc02f6b499a64717539a27e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
-  hitOffset: 0.1
-  UseFirePointRotation: 0
-  rotationOffset: {x: 0, y: 0, z: 0}
-  hit: {fileID: 1570423950586096, guid: 01afa85b461d4dc49ba4530e39b61739, type: 3}
-  flash: {fileID: 1029261581862512, guid: 99649c5fed10ce848a575f679ff0e303, type: 3}
-  Detached: []
 --- !u!199 &199317234387275066
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -4985,19 +4964,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!135 &135713622178651324
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1519322442116508}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-5816220196261239591
 MonoBehaviour:
   m_ObjectHideFlags: 0
