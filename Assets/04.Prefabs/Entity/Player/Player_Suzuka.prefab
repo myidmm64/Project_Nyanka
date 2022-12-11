@@ -370,7 +370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillableAtStart: 1
-  _skillCooltime: 3
+  _skillRangeNoLimit: 0
+  _skillCooltime: 4
   _skillCoolSlider: {fileID: 4022448678563877160}
 --- !u!114 &5546466419278876542
 MonoBehaviour:
@@ -437,6 +438,12 @@ MonoBehaviour:
   _cullingMask:
     serializedVersion: 2
     m_Bits: 1911
+  OnTranformStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTranformEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5546466419278876519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,7 +497,7 @@ MonoBehaviour:
   _path: {fileID: 5546466417607027919}
   _lookPoints:
   - {fileID: 7297510675487174244}
-  _attackPrefab0: {fileID: 3543016805155131202, guid: 91060a980c46ff243b44af50c0914f4c,
+  _attackPrefab0: {fileID: 2799453754398685295, guid: ae395fa5b8672d341af16debc099a1b1,
     type: 3}
   _attackPrefab1: {fileID: 0}
   _damageMagni:
@@ -516,9 +523,9 @@ MonoBehaviour:
   _attackPrefab0: {fileID: 472057961240443298, guid: 0265e20b3b2f2934f93ac413447879cb,
     type: 3}
   _cellBoomVectors: []
-  _arrowSpeed: -8
+  _arrowSpeed: 6
   _damageMagni:
-  - 10
+  - 4
 --- !u!1 &7297510675054615756
 GameObject:
   m_ObjectHideFlags: 0

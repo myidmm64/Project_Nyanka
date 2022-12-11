@@ -16859,6 +16859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillableAtStart: 1
+  _skillRangeNoLimit: 0
   _skillCooltime: 3
   _skillCoolSlider: {fileID: 8716374555786458074}
 --- !u!114 &8716374557199257885
@@ -16924,8 +16925,8 @@ MonoBehaviour:
   _attackPrefab0: {fileID: 5397350238696580513, guid: 12b66de7ae8b9454887c83106817ce55,
     type: 3}
   _damageMagni:
-  - 0
-  - 2.5
+  - 1.4
+  - 1.4
 --- !u!114 &8716374557199257882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16947,8 +16948,8 @@ MonoBehaviour:
   _attackPrefab0: {fileID: 5397350238696580513, guid: 12b66de7ae8b9454887c83106817ce55,
     type: 3}
   _damageMagni:
-  - 8
-  - 8
+  - 5
+  - 5
 --- !u!114 &8716374557199257883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16996,6 +16997,12 @@ MonoBehaviour:
   _cullingMask:
     serializedVersion: 2
     m_Bits: 1911
+  OnTranformStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTranformEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8716374556722561032
 GameObject:
   m_ObjectHideFlags: 0

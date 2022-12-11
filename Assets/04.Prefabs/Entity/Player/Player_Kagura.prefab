@@ -354,7 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillableAtStart: 1
-  _skillCooltime: 4
+  _skillRangeNoLimit: 0
+  _skillCooltime: 5
   _skillCoolSlider: {fileID: 5556244399566343449}
 --- !u!114 &3904661315585430351
 MonoBehaviour:
@@ -421,6 +422,12 @@ MonoBehaviour:
   _cullingMask:
     serializedVersion: 2
     m_Bits: 1911
+  OnTranformStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTranformEnded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2273423215381296795
 MonoBehaviour:
   m_ObjectHideFlags: 0
