@@ -13,40 +13,67 @@ MonoBehaviour:
   m_Name: WakamoData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 9b3540c5b7a7014449977ea9629c1791, type: 3}
-  normalMinAtk: 100
-  normalMaxAtk: 120
-  normalDef: 120
-  hp: 30000
+  normalMinAtk: 285
+  normalMaxAtk: 315
+  normalDef: 20
+  hp: 2000
   classType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
   - {x: 0, y: 0, z: 1}
-  - {x: 1, y: 0, z: 1}
-  normalMoveRange:
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: -1}
-  - {x: 1, y: 0, z: 0}
-  - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: 3}
-  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
+  normalMoveRange:
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: -2}
+  - {x: 0, y: 0, z: -1}
   normalSkillRange:
   - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
   - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
   transSkillRange:
+  - {x: -1, y: 0, z: -1}
+  - {x: -1, y: 0, z: 0}
   - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
+  - {x: 1, y: 0, z: -1}
+  - {x: 1, y: 0, z: 0}
   - {x: 1, y: 0, z: 1}
-  transMinAtk: 300
-  transMaxAtk: 400
+  - {x: 1, y: 0, z: 2}
+  transMinAtk: 342
+  transMaxAtk: 378
   transDef: 1
   transAttackRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: 3}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
   transMoveRange:
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
+  - {x: 2, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -1}
   - {x: 0, y: 0, z: -2}
+  - {x: 0, y: 0, z: -1}
+  - {x: -1, y: 0, z: -1}
+  - {x: 1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 1}
+  - {x: 1, y: 0, z: -1}

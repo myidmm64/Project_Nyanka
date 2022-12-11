@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: SuzukaData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 36c3a14551a325f45b1e952b4902a937, type: 3}
-  normalMinAtk: 200
-  normalMaxAtk: 300
-  normalDef: 120
-  hp: 30000
+  normalMinAtk: 342
+  normalMaxAtk: 378
+  normalDef: 5
+  hp: 1000
   classType: 4
   normalAttackRange:
   - {x: 0, y: 0, z: 1}
@@ -24,44 +24,75 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 3}
   - {x: 0, y: 0, z: 4}
   - {x: 0, y: 0, z: 5}
-  - {x: 0, y: 0, z: 6}
   normalMoveRange:
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: -2}
-  - {x: -2, y: 0, z: 0}
-  - {x: -1, y: 0, z: 1}
-  - {x: -1, y: 0, z: -1}
   - {x: -1, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -2}
-  - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 0}
-  - {x: 1, y: 0, z: -1}
+  - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
   - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 0}
+  - {x: 1, y: 0, z: -1}
   - {x: 2, y: 0, z: -2}
+  - {x: -1, y: 0, z: 1}
+  - {x: -2, y: 0, z: 2}
+  - {x: -1, y: 0, z: -1}
   normalSkillRange:
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 3}
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  transSkillRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: -1, y: 0, z: 4}
+  - {x: -1, y: 0, z: 5}
+  - {x: -1, y: 0, z: 6}
+  - {x: -1, y: 0, z: 7}
+  - {x: -1, y: 0, z: 8}
+  - {x: -1, y: 0, z: 9}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
   - {x: 0, y: 0, z: 4}
   - {x: 0, y: 0, z: 5}
   - {x: 0, y: 0, z: 6}
-  transSkillRange:
-  - {x: -1, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 7}
+  - {x: 0, y: 0, z: 8}
+  - {x: 0, y: 0, z: 9}
   - {x: 1, y: 0, z: 1}
-  transMinAtk: 400
-  transMaxAtk: 500
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  - {x: 1, y: 0, z: 4}
+  - {x: 1, y: 0, z: 5}
+  - {x: 1, y: 0, z: 6}
+  - {x: 1, y: 0, z: 7}
+  - {x: 1, y: 0, z: 8}
+  - {x: 1, y: 0, z: 9}
+  transMinAtk: 399
+  transMaxAtk: 441
   transDef: 1
   transAttackRange:
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
   transMoveRange:
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
+  - {x: -1, y: 0, z: 0}
+  - {x: 1, y: 0, z: 0}
   - {x: 0, y: 0, z: -1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 1, y: 0, z: 1}
+  - {x: 2, y: 0, z: 2}
+  - {x: 1, y: 0, z: -1}
+  - {x: 2, y: 0, z: -2}
+  - {x: -1, y: 0, z: 1}
+  - {x: -2, y: 0, z: 2}
+  - {x: 0, y: 0, z: 2}
+  - {x: 2, y: 0, z: 0}
   - {x: 0, y: 0, z: -2}
+  - {x: -2, y: 0, z: 0}
+  - {x: -1, y: 0, z: -1}

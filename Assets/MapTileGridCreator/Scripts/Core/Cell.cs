@@ -35,7 +35,7 @@ namespace MapTileGridCreator.Core
             }
         }
         Block _block = null;
-        Block block
+        public Block block
         {
             get
             {

@@ -14,6 +14,60 @@ public class PlayerAnimationEvent_Yuko_Skill : PlayerAnimationEvent
     [SerializeField]
     private List<Vector3Int> _boomVectors = new List<Vector3Int>();
 
+    private SkinnedMeshAfterImage _skined = null;
+
+    private TurnAction _defUpAction = null;
+
+    private int _originDef = 0;
+
+    public override void Start()
+    {
+        base.Start();
+        _skined = _mainModule.GetComponent<SkinnedMeshAfterImage>();
+        _originDef = _mainModule.DataSO.normalDef;
+        _skined.isMotionTrail = false;
+    }
+
+    public void DefTurnActionStart(int count)
+    {
+        DefReset();
+        if (_defUpAction == null)
+        {
+            _defUpAction = new TurnAction(0, DefUp, DefReset, null);
+            TurnManager.Instance.TurnActionAdd(_defUpAction, true);
+        }
+        _defUpAction.Start(count);
+        _skined.isMotionTrail = true;
+    }
+
+    public void DefTurnActionEnd()
+    {
+        if (_defUpAction != null)
+            _defUpAction.Locked = true;
+        DefReset();
+        _skined.isMotionTrail = false;
+    }
+
+    private void DefUp()
+    {
+        _mainModule.DataSO.normalDef = Mathf.RoundToInt(_originDef * 1.5f);
+    }
+
+    private void DefReset()
+    {
+        _mainModule.DataSO.normalDef = _originDef;
+    }
+
+    private void OnDestroy()
+    {
+        DefReset();
+    }
+
+    private void OnApplicationQuit()
+    {
+        DefReset();
+    }
+
     public override void AttackAnimation(int id)
     {
         switch (id)
@@ -31,17 +85,19 @@ public class PlayerAnimationEvent_Yuko_Skill : PlayerAnimationEvent
                 if (cells.Count == 0) return;
                 for (int i = 0; i < cells.Count; i++)
                 {
-                    cells[i].GetComponent<Block>().ChangeBlock(_mainModule.elementType);
-                    cells[i].CellAttack(_mainModule.MinDamage, _mainModule.elementType, _mainModule.entityType);
+                    cells[i].block.ChangeBlock(_mainModule.elementType);
+                    cells[i].CellAttack(_mainModule.MaxDamage * 3, _mainModule.elementType, _mainModule.entityType);
                 }
                 for (int i = 0; i < cells.Count; i++)
-                    cells[i].GetComponent<Block>().ChangeBlock(_mainModule.elementType);
+                    cells[i].block.ChangeBlock(_mainModule.elementType);
                 List<AIMainModule> enemys = new List<AIMainModule>();
                 for (int i = 0; i < cells.Count; i++)
                     if (cells[i].GetObj?.GetComponent<AIMainModule>() != null)
                         enemys.Add(cells[i].GetObj?.GetComponent<AIMainModule>());
                 for (int i = 0; i < enemys.Count; i++)
                     enemys[i].ApplyDamage(1, _mainModule.elementType, false, true);
+
+                DefTurnActionStart(1);
                 break;
             default:
                 break;

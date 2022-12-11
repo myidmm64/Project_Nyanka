@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: YukoData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 200
-  normalMaxAtk: 300
-  normalDef: 120
-  hp: 30000
+  normalMinAtk: 114
+  normalMaxAtk: 126
+  normalDef: 30
+  hp: 4000
   classType: 2
   normalAttackRange:
-  - {x: -2, y: 0, z: 1}
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: 3}
   - {x: -1, y: 0, z: 1}
   - {x: -1, y: 0, z: 2}
   - {x: -1, y: 0, z: 3}
@@ -31,44 +28,23 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 2}
   - {x: 1, y: 0, z: 3}
-  - {x: 2, y: 0, z: 1}
-  - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 3}
   normalMoveRange:
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: -2}
-  - {x: -2, y: 0, z: 0}
-  - {x: -1, y: 0, z: 1}
-  - {x: -1, y: 0, z: -1}
   - {x: -1, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -2}
-  - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 0}
-  - {x: 1, y: 0, z: -1}
-  - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 0}
-  - {x: 2, y: 0, z: -2}
-  normalSkillRange:
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: 3}
-  - {x: 0, y: 0, z: 4}
-  - {x: 0, y: 0, z: 5}
-  - {x: 0, y: 0, z: 6}
+  normalSkillRange: []
   transSkillRange:
   - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
   - {x: 1, y: 0, z: 1}
-  transMinAtk: 400
-  transMaxAtk: 500
-  transDef: 1
+  - {x: 1, y: 0, z: 2}
+  transMinAtk: 144
+  transMaxAtk: 159
+  transDef: 34
   transAttackRange:
-  - {x: -2, y: 0, z: 1}
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: 3}
   - {x: -1, y: 0, z: 1}
   - {x: -1, y: 0, z: 2}
   - {x: -1, y: 0, z: 3}
@@ -78,23 +54,8 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 2}
   - {x: 1, y: 0, z: 3}
-  - {x: 2, y: 0, z: 1}
-  - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 3}
   transMoveRange:
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: -2}
-  - {x: -2, y: 0, z: 0}
-  - {x: -1, y: 0, z: 1}
   - {x: -1, y: 0, z: -1}
-  - {x: -1, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -2}
-  - {x: 1, y: 0, z: 1}
-  - {x: 1, y: 0, z: 0}
+  - {x: -1, y: 0, z: 1}
   - {x: 1, y: 0, z: -1}
-  - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 0}
-  - {x: 2, y: 0, z: -2}
+  - {x: 1, y: 0, z: 1}

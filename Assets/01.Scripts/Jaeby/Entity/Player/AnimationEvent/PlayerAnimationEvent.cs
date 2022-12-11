@@ -13,7 +13,7 @@ public abstract class PlayerAnimationEvent : MonoBehaviour
     [SerializeField]
     protected LayerMask _cullingMask = 0;
 
-    private void Start()
+    public virtual void Start()
     {
         _cameraManager = CameraManager.Instance;
         _mainModule = GetComponent<PlayerMainModule>();

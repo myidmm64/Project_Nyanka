@@ -13,55 +13,100 @@ MonoBehaviour:
   m_Name: KaguraData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 200
-  normalMaxAtk: 300
-  normalDef: 120
-  hp: 30000
+  normalMinAtk: 114
+  normalMaxAtk: 126
+  normalDef: 10
+  hp: 1400
   classType: 3
   normalAttackRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: -1, y: 0, z: 4}
+  - {x: -1, y: 0, z: 5}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
   - {x: 0, y: 0, z: 4}
   - {x: 0, y: 0, z: 5}
-  - {x: 0, y: 0, z: 6}
-  normalMoveRange:
-  - {x: -2, y: 0, z: 2}
-  - {x: -2, y: 0, z: -2}
-  - {x: -2, y: 0, z: 0}
-  - {x: -1, y: 0, z: 1}
-  - {x: -1, y: 0, z: -1}
-  - {x: -1, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 2}
-  - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -2}
   - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  - {x: 1, y: 0, z: 4}
+  - {x: 1, y: 0, z: 5}
+  normalMoveRange:
+  - {x: -1, y: 0, z: 0}
+  - {x: -1, y: 0, z: -1}
+  - {x: -1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: -1}
   - {x: 1, y: 0, z: 0}
   - {x: 1, y: 0, z: -1}
-  - {x: 2, y: 0, z: 2}
-  - {x: 2, y: 0, z: 0}
-  - {x: 2, y: 0, z: -2}
+  - {x: 1, y: 0, z: 1}
   normalSkillRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: -1, y: 0, z: 4}
+  - {x: -1, y: 0, z: 5}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
   - {x: 0, y: 0, z: 4}
   - {x: 0, y: 0, z: 5}
-  - {x: 0, y: 0, z: 6}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  - {x: 1, y: 0, z: 4}
+  - {x: 1, y: 0, z: 5}
   transSkillRange:
   - {x: -1, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
-  - {x: 1, y: 0, z: 1}
-  transMinAtk: 400
-  transMaxAtk: 500
-  transDef: 1
-  transAttackRange:
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: -1, y: 0, z: 4}
+  - {x: -1, y: 0, z: 5}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
   - {x: 0, y: 0, z: 3}
-  transMoveRange:
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  - {x: 1, y: 0, z: 4}
+  - {x: 1, y: 0, z: 5}
+  - {x: -1, y: 0, z: 6}
+  - {x: 0, y: 0, z: 6}
+  - {x: 1, y: 0, z: 6}
+  transMinAtk: 211
+  transMaxAtk: 222
+  transDef: 1
+  transAttackRange:
+  - {x: -1, y: 0, z: 1}
+  - {x: -1, y: 0, z: 2}
+  - {x: -1, y: 0, z: 3}
+  - {x: -1, y: 0, z: 4}
+  - {x: -1, y: 0, z: 5}
   - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: 2}
+  - {x: 0, y: 0, z: 3}
+  - {x: 0, y: 0, z: 4}
+  - {x: 0, y: 0, z: 5}
+  - {x: 1, y: 0, z: 1}
+  - {x: 1, y: 0, z: 2}
+  - {x: 1, y: 0, z: 3}
+  - {x: 1, y: 0, z: 4}
+  - {x: 1, y: 0, z: 5}
+  transMoveRange:
+  - {x: -1, y: 0, z: 0}
+  - {x: -1, y: 0, z: -1}
+  - {x: -1, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   - {x: 0, y: 0, z: -1}
-  - {x: 0, y: 0, z: -2}
+  - {x: 1, y: 0, z: 0}
+  - {x: 1, y: 0, z: -1}
+  - {x: 1, y: 0, z: 1}
+  - {x: -2, y: 0, z: -2}
+  - {x: -2, y: 0, z: 2}
+  - {x: 2, y: 0, z: 2}
+  - {x: 2, y: 0, z: -2}
