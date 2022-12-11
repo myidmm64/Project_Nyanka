@@ -44,7 +44,11 @@ public class PlayerAnimationEvent_Suzuka_TransSkill : PlayerAnimationEvent
                 obj.transform.SetParent(null);
                 Arrow arrow = obj.AddComponent<Arrow>();
                 PlayerMainModule m = _mainModule as PlayerMainModule;
-                arrow.ArrowInit(_arrowSpeed, transform.position + Vector3.up + m.ModelController.forward * -4f, Quaternion.AngleAxis(180f, Vector3.forward) * Quaternion.LookRotation(CellUtility.GetAttackDirection(_mainModule.AttackModule.CurrentDirection)), _cellBoomVectors,
+                Quaternion plusRot = Quaternion.AngleAxis
+                    (((_mainModule.AttackModule.CurrentDirection == AttackDirection.Up) || 
+                    (_mainModule.AttackModule.CurrentDirection == AttackDirection.Down)) 
+                    ? 180f : 180f, Vector3.up);
+                arrow.ArrowInit(-_arrowSpeed, _mainModule.CellIndex + Vector3.up * 1.5f + m.ModelController.forward * -2f, plusRot * Quaternion.LookRotation(CellUtility.GetAttackDirection(_mainModule.AttackModule.CurrentDirection)), _cellBoomVectors,
                     10, 2f, Mathf.RoundToInt(Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]), _mainModule.elementType, Random.Range(0, 100) < 50, true);
                 Destroy(obj, 1.5f);
 
