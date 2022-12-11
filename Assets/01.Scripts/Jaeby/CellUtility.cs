@@ -26,7 +26,7 @@ public class CellUtility
             Cell tryCell = CubeGrid.TryGetCellByIndex(ref v);
             if (tryCell != null)
             {
-                blocked = false;
+                /*blocked = false;
                 Vector3Int aa = Norm(v - cellIndex);
                 if (ignore == false && tryCell.GetObj != null)
                     if (blockDir.Contains(aa) == false)
@@ -38,6 +38,10 @@ public class CellUtility
                         break;
                     }
                 if (blocked == false)
+                    cells.Add(tryCell);*/
+                if (ignore == false && tryCell.GetObj != null)
+                    continue;
+                if (cells.Contains(tryCell) == false)
                     cells.Add(tryCell);
             }
         }
