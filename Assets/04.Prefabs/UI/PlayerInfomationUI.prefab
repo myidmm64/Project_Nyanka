@@ -468,6 +468,9 @@ MonoBehaviour:
   _entityImage: {fileID: 9064793031760277082}
   _elementImage: {fileID: 3406827538775733280}
   _classImage: {fileID: 2760155005588141442}
+  _selectableObject: {fileID: 9064793031171195964}
+  _selectColor: {r: 0.18396229, g: 1, b: 0.33105418, a: 0.39215687}
+  _originColor: {r: 1, g: 1, b: 1, a: 0.39215687}
   _imageMask: {fileID: 9064793031171195966}
   _button: {fileID: 966661951}
   _isDestroy: 0

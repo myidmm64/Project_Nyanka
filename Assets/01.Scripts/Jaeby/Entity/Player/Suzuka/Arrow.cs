@@ -38,8 +38,11 @@ public class Arrow : MonoBehaviour
         if (mainModule == null) return;
         if (mainModule.entityType == _entityType) return;
         mainModule.ApplyDamage(_dmg, _type, _critical, _isPlayer);
-        GameObject o = Instantiate(_atkObj, mainModule.CellIndex, Quaternion.identity);
-        Destroy(o, 2f);
+        if(_atkObj != null)
+        {
+            GameObject o = Instantiate(_atkObj, mainModule.CellIndex, Quaternion.identity);
+            Destroy(o, 2f);
+        }
         List<Cell> cells = CellUtility.SearchCells(mainModule.CellIndex, _boomVectors, true);
         for (int i = 0; i < cells.Count; i++)
             cells[i].CellAttack(_dmg, _type, _entityType);
