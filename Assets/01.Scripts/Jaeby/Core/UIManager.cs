@@ -20,6 +20,11 @@ public class UIManager : MonoSingleTon<UIManager>
         _entityTargettingUI.SpawnTargettingUIEnable(enable, imm);
     }
 
+    public void TargettingUIPlayerTurnStart()
+    {
+        _entityTargettingUI.TargettingUIPlayerTurnStart();
+    }
+
     public void SpawnTargettingUI(BaseMainModule module)
     {
         _entityTargettingUI?.SpawnTargettingUI(module);

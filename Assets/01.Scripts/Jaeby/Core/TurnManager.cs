@@ -152,6 +152,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         //    Debug.Log(liveEnemys[i].name);
         //    yield return StartCoroutine(liveEnemys[i].GetComponent<BehaviorTree.Tree>().StartAI());
         //}
+        UIManager.Instance.TargettingUIPlayerTurnStart();
         NextTurn();
         enemy_TargetLists.Clear();
         UIManager.Instance.TargettingUIEnable(true, false);
@@ -210,6 +211,14 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         if (player.PressTurnChecked)
         {
+            if (_loseTurn && _plusTurn == false)
+            {
+                PlayerTurnCount = 0;
+                OnLoseTurn?.Invoke(player);
+                StartCoroutine(WaitCoroutine(false, player));
+                return;
+            }
+
             UseTurn(1, player);
             return;
         }

@@ -65,7 +65,6 @@ public class CameraTargettingUI : MonoBehaviour
         {
             PlayerMainModule mo = mainModule as PlayerMainModule;
             mo.OnMyTurnEnded.AddListener(PlayerTurnOver);
-            mo.OnPlayerTurnStart.AddListener(PlayerTurnStarted);
             _selectableObject.color = _selectColor;
         }
     }
@@ -73,6 +72,9 @@ public class CameraTargettingUI : MonoBehaviour
     public void HpChanged(int val)
     {
         val = Mathf.Clamp(val, 0, _maxHP);
+        if(val <= 0)
+            _died = true;
+
         _hpText.SetText($"{val} / {_maxHP}");
         if (_seq != null)
             _seq.Kill();
@@ -81,7 +83,6 @@ public class CameraTargettingUI : MonoBehaviour
         _seq.Append(transform.DOScale(_originScale, 0.2f));
         _seq.AppendCallback(() =>
         {
-            _died = true;
             if (val == 0)
             {
                 if (_isDestroy)
@@ -90,6 +91,8 @@ public class CameraTargettingUI : MonoBehaviour
                 }
                 else
                 {
+                    if(_selectableObject != null)
+                        _selectableObject.color = _diedColor;
                     _entityImage.color = _diedColor;
                     _button.enabled = false;
                 }

@@ -26,6 +26,8 @@ public class EntityTargettingUI : MonoBehaviour
     private bool _locked = false;
     public bool Locked { get => _locked; set => _locked = value; }
 
+    private List<CameraTargettingUI> _uis = new List<CameraTargettingUI>();
+
     private void Start()
     {
         _uiManager = UIManager.Instance;
@@ -42,6 +44,12 @@ public class EntityTargettingUI : MonoBehaviour
         }
     }
 
+    public void TargettingUIPlayerTurnStart()
+    {
+        for (int i = 0; i < _uis.Count; i++)
+            _uis[i].PlayerTurnStarted();
+    }
+
     public void SpawnTargettingUI(BaseMainModule module)
     {
         CameraTargettingUI ui = null;
@@ -50,7 +58,7 @@ public class EntityTargettingUI : MonoBehaviour
         else
             ui = Instantiate(_enemyTargettingUI, _enemyTargettingUIParent);
         ui.Init(module);
-
+        _uis.Add(ui);
     }
 
     public void SpawnTargettingUIEnable(bool enable, bool imm)

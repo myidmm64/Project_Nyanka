@@ -259,6 +259,8 @@ public class PlayerMainModule : BaseMainModule
 
     public void Transformation()
     {
+        UIManager.Instance.TargettingUIEnable(false, true);
+        UIManager.Instance.UIInit(this);
         _transformModule.TransfomationStart();
     }
 
@@ -277,6 +279,8 @@ public class PlayerMainModule : BaseMainModule
     public void PlayerIdle() // 대기
     {
         if (_myTurnEnded) return;
+        UIManager.Instance.TargettingUIEnable(false, true);
+        UIManager.Instance.UIInit(this);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd();
@@ -338,6 +342,7 @@ public class PlayerMainModule : BaseMainModule
             ob.transform.rotation = ob.transform.rotation * Quaternion.AngleAxis(angle, Vector3.forward);
             _attackDirections.Add(ob.gameObject);
         }
+
     }
 
     public void ViewAttackRange(AttackDirection dir, bool isSkill) // 공격범위 보여주기
