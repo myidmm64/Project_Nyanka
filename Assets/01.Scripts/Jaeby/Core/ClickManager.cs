@@ -65,13 +65,15 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void EntitySelect(BaseMainModule module)
     {
+        if (module.Selectable == false)
+            return;
         SelectedEntityEnd();
         if (module is PlayerMainModule)
             _currentPlayer = module as PlayerMainModule;
         else
             _currentSelectedEntity = module;    
 
-        if(module is PlayerMainModule && module.Selectable)
+        if(module is PlayerMainModule)
             module.Selected();
         else if (module is AIMainModule)
             module.Selected();

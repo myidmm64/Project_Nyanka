@@ -20,6 +20,13 @@ public class CameraTargettingUI : MonoBehaviour
     private Image _elementImage = null;
     [SerializeField]
     private Image _classImage = null;
+    [SerializeField]
+    private Image _selectableObject = null;
+
+    [SerializeField]
+    private Color _selectColor = Color.white;
+    [SerializeField]
+    private Color _originColor = Color.white;
 
     [SerializeField]
     private Mask _imageMask = null;
@@ -32,8 +39,8 @@ public class CameraTargettingUI : MonoBehaviour
     private Sequence _seq = null;
 
     private Vector3 _originScale = Vector3.zero;
-
     private Sequence _selectSeq = null;
+    private bool _died = false;
 
     public void Init(BaseMainModule mainModule)
     {
@@ -53,6 +60,14 @@ public class CameraTargettingUI : MonoBehaviour
         _elementImage.color = ele.color;
         _classImage.sprite = cl.sprite;
         _classImage.color = cl.color;
+
+        if (mainModule is PlayerMainModule)
+        {
+            PlayerMainModule mo = mainModule as PlayerMainModule;
+            mo.OnMyTurnEnded.AddListener(PlayerTurnOver);
+            mo.OnPlayerTurnStart.AddListener(PlayerTurnStarted);
+            _selectableObject.color = _selectColor;
+        }
     }
 
     public void HpChanged(int val)
@@ -66,6 +81,7 @@ public class CameraTargettingUI : MonoBehaviour
         _seq.Append(transform.DOScale(_originScale, 0.2f));
         _seq.AppendCallback(() =>
         {
+            _died = true;
             if (val == 0)
             {
                 if (_isDestroy)
@@ -106,5 +122,17 @@ public class CameraTargettingUI : MonoBehaviour
         _selectSeq = DOTween.Sequence();
         _selectSeq.Append(_entityImage.transform.DOScale(0.5f, 0.15f));
         _imageMask.enabled = true;
+    }
+
+    public void PlayerTurnOver()
+    {
+        if (_selectableObject != null && _died == false)
+            _selectableObject.color = _originColor;
+    }
+
+    public void PlayerTurnStarted()
+    {
+        if (_selectableObject != null && _died == false)
+            _selectableObject.color = _selectColor;
     }
 }

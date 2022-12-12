@@ -15,10 +15,9 @@ public class PlayerMainModule : BaseMainModule
         set => _pressTurnChecked = value;
     }
     private bool _myTurnEnded = false; // 자신의 턴 종료
-    [field: SerializeField]
-    private UnityEvent OnMyTurnEnded = null;
-    [field: SerializeField]
-    private UnityEvent OnPlayerTurnStart = null;
+
+    public UnityEvent OnMyTurnEnded = null;
+    public UnityEvent OnPlayerTurnStart = null;
 
     // 모델 관련
     [SerializeField]
@@ -51,6 +50,7 @@ public class PlayerMainModule : BaseMainModule
     private bool _fourDirec = false;
     private bool _attackMode = false;
     public bool AttackMode { get => _attackMode; set => _attackMode = value; }
+    private GameObject _playableObj = null;
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange
@@ -111,31 +111,38 @@ public class PlayerMainModule : BaseMainModule
     private void Start()
     {
         Agent.updateRotation = false;
+        _playableObj = transform.Find("PlayerBehav").gameObject;
     }
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
     {
+        _selectable = false;
         CubeGrid.ViewEnd();
         AttackModule.CurrentDirection = AttackDirection.Up;
-        OnMyTurnEnded?.Invoke();
         _myTurnEnded = true;
         TurnManager.Instance.TurnCheckReset();
-        _selectable = false;
         _prevIndex = Vector3Int.zero;
 
         UIManager.Instance.TargettingUIEnable(true, false);
+        _playableObj.SetActive(false);
+        OnMyTurnEnded?.Invoke();
     }
 
     public override void PhaseChange(PhaseType type) // 페이즈가 바뀔 때
     {
         if (type == PhaseType.Player)
         {
-            OnPlayerTurnStart?.Invoke();
             MoveModule.Moveable = true;
             AttackModule.AttackCheck = false;
             _myTurnEnded = false;
             _pressTurnChecked = false;
             _selectable = true;
+            _playableObj.SetActive(true);
+            OnPlayerTurnStart?.Invoke();
+        }
+        else if (type == PhaseType.Enemy)
+        {
+            _playableObj.SetActive(false);
         }
     }
 
