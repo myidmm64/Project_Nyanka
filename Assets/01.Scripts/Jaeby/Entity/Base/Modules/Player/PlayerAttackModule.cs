@@ -84,8 +84,15 @@ public class PlayerAttackModule : BaseAttackModule
         module.UISet();
         if (Attackable)
         {
+            module.AttackMode = true;
             ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
             module.ViewAttackDirection(false);
+        }
+        else if ((Attackable == false) && Skillable)
+        {
+            module.AttackMode = true;
+            ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
+            module.UISet();
         }
         else
         {
@@ -98,8 +105,8 @@ public class PlayerAttackModule : BaseAttackModule
     public void TrySkill()
     {
         if (Skillable == false) return;
-        _skillModule.RestartSkillCoolTime(false);
         PlayerMainModule module = _mainModule as PlayerMainModule;
+        module.AttackMode = true;
         module.UISet();
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
         module.ViewAttackDirection(true, module.SkillModule.SkillRangeNoLimit);
@@ -121,6 +128,7 @@ public class PlayerAttackModule : BaseAttackModule
     public void PlayerSkill(AttackDirection dir)
     {
         UIManager.Instance.UIDisable();
+        _skillModule.RestartSkillCoolTime(false);
 
         PlayerMainModule module = _mainModule as PlayerMainModule;
         if (module.Transed)

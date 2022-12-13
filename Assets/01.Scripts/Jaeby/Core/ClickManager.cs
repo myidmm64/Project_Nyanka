@@ -129,6 +129,12 @@ public class ClickManager : MonoSingleTon<ClickManager>
         EntitySelectedAction?.Invoke(null);
     }
 
+    public void PlayerCancel()
+    {
+        if (_currentPlayer == null) return;
+        _currentPlayer.BehavCancel();
+    }
+
     public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
