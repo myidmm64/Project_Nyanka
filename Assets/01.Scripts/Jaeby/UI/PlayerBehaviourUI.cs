@@ -54,7 +54,7 @@ public class PlayerBehaviourUI : MonoBehaviour
             _uiManager.CanvasGroupSetting(_moveCheckButton, false, 0f);
             _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
             _seq.Join(_idleButton.DOFade(0f, 0.2f));
-            _uiManager.CanvasGroupSetting(_transButton, false, 0f);
+            _uiManager.CanvasGroupSetting(_transButton, true, 0f);
             _seq.Join(_transButton.DOFade(1f, 0.2f));
             BattlePointUISet();
 
