@@ -112,6 +112,60 @@ public class AIMainModule : BaseMainModule
         }
     }
 
+    public int minDamageSkill1
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.normalMinskill1;
+        }
+    }
+
+    public int maxDamageSkill1
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.normalMaxskill1;
+        }
+    }
+
+    public int minDamageSkill2
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.normalMinskill2;
+        }
+    }
+
+    public int maxDamageSkill2
+    {
+        get
+        {
+            BossDataSO so = DataSO as BossDataSO;
+            return so.normalMaxskill2;
+        }
+    }
+
+    public int minEnemySkill
+    {
+        get
+        {
+            EnemyDataSO so = DataSO as EnemyDataSO;
+            return so.normalMinskill;
+        }
+    }
+
+    public int maxEnemySkill
+    {
+        get
+        {
+            EnemyDataSO so = DataSO as EnemyDataSO;
+            return so.normalMaxskill;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

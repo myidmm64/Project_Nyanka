@@ -26,7 +26,7 @@ public class WizardBoss_Skill1Event : EnemyAnimationEvent
         foreach (var a in players)
         {
             Debug.Log(a.name);
-            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+            int dmg = Random.Range(_aIMainModule.minDamageSkill1, _aIMainModule.maxDamageSkill1);
             a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }
     }
