@@ -276,6 +276,15 @@ public class PlayerMainModule : BaseMainModule
         CubeGrid.ViewRange(isSkill ? GridType.Skill : GridType.Attack, index, vec, true);
     }
 
+    public void BehavCancel()
+    {
+        if (_myTurnEnded) return;
+        for (int i = 0; i <AttackDirections.Count; i++)
+            Destroy(AttackDirections[i]);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
+        TurnManager.Instance.UseTurn(1, this);
+    }
+
     public void PlayerIdle() // 대기
     {
         if (_myTurnEnded) return;
@@ -294,8 +303,6 @@ public class PlayerMainModule : BaseMainModule
 
     public void ViewAttackDirection(bool isSkill, bool ignore = false) // 4방향으로 화살표 생성
     {
-        _attackMode = true;
-
         CubeGrid.ViewEnd();
         CubeGrid.ClcikViewEnd();
         for (int i = 0; i < AttackDirections.Count; i++)

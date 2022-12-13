@@ -8,6 +8,8 @@ using TMPro;
 public class PlayerBehaviourUI : MonoBehaviour
 {
     [SerializeField]
+    private CanvasGroup _cancelCheckButton = null;
+    [SerializeField]
     private CanvasGroup _moveCheckButton = null;
     [SerializeField]
     private CanvasGroup _idleButton = null;
@@ -48,21 +50,13 @@ public class PlayerBehaviourUI : MonoBehaviour
             if (_seq != null)
                 _seq.Kill();
             _seq = DOTween.Sequence();
-            _uiManager.CanvasGroupSetting(_moveCheckButton, false, 1f);
+            _uiManager.CanvasGroupSetting(_cancelCheckButton, true, 1f);
+            _uiManager.CanvasGroupSetting(_moveCheckButton, false, 0f);
             _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
-            _seq.Append(_moveCheckButton.DOFade(0f, 0.2f));
             _seq.Join(_idleButton.DOFade(0f, 0.2f));
+            _uiManager.CanvasGroupSetting(_transButton, false, 0f);
+            _seq.Join(_transButton.DOFade(1f, 0.2f));
             BattlePointUISet();
-            if (TurnManager.Instance.BattlePoint >= TurnManager.Instance.MaxPoint)
-            {
-                _uiManager.CanvasGroupSetting(_transButton, true, 1f);
-            }
-            else
-            {
-                _uiManager.CanvasGroupSetting(_transButton, false, 1f);
-                _seq.Join(_transButton.DOFade(0f, 0.2f));
-            }
-
 
             if (player.Skillable == false)
             {
@@ -72,6 +66,19 @@ public class PlayerBehaviourUI : MonoBehaviour
             }
             else
                 _skillFireImage.SetActive(true);
+        }
+        else if ((player.Attackable == false) && player.Skillable)
+        {
+            if (_seq != null)
+                _seq.Kill();
+            _seq = DOTween.Sequence();
+            _uiManager.CanvasGroupSetting(_cancelCheckButton, true, 1f);
+            _uiManager.CanvasGroupSetting(_moveCheckButton, false, 0f);
+            _uiManager.CanvasGroupSetting(_idleButton, false, 1f);
+            _seq.Join(_idleButton.DOFade(0f, 0.2f));
+            BattlePointUISet();
+
+            _skillFireImage.SetActive(true);
         }
         else
         {
@@ -135,6 +142,7 @@ public class PlayerBehaviourUI : MonoBehaviour
 
     private void UIReset()
     {
+        _uiManager.CanvasGroupSetting(_cancelCheckButton, false, 0f);
         _uiManager.CanvasGroupSetting(_moveCheckButton, true, 1f);
         _uiManager.CanvasGroupSetting(_idleButton, true, 1f);
         _uiManager.CanvasGroupSetting(_transButton, true, 1f);

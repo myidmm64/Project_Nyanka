@@ -211,7 +211,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         if (player.PressTurnChecked)
         {
-            if (_loseTurn && _plusTurn == false)
+            if (_loseTurn && (_plusTurn == false))
             {
                 PlayerTurnCount = 0;
                 OnLoseTurn?.Invoke(player);
@@ -241,6 +241,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private IEnumerator WaitCoroutine(bool isPlus, PlayerMainModule player)
     {
+        TurnCheckReset();
+
         if (isPlus)
             OnPlusTurn?.Invoke(player);
         else
