@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ArcherBossDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalMinAtk: 200
-  normalMaxAtk: 200
-  normalDef: 0
-  hp: 3000
+  normalMinAtk: 450
+  normalMaxAtk: 450
+  normalDef: 200
+  hp: 16000
   classType: 4
   normalAttackRange:
   - {x: -2, y: 0, z: 1}

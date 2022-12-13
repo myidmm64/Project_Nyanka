@@ -12,4 +12,8 @@ public class SkillRange
 public class BossDataSO : EnemyDataSO
 {
     public List<SkillRange> SkillsRange = new List<SkillRange>();
+    public int normalMinskill1 = 0;
+    public int normalMaxskill1 = 0;
+    public int normalMinskill2 = 0;
+    public int normalMaxskill2 = 0;
 }

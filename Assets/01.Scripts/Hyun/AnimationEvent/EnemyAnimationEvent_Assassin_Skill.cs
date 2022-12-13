@@ -26,7 +26,7 @@ public class EnemyAnimationEvent_Assassin_Skill : EnemyAnimationEvent
         GameObject obj = Instantiate(_attackPrefab0, skillPos);
         obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        int dmg = Random.Range(_aIMainModule.minEnemySkill, _aIMainModule.maxEnemySkill);
         attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 

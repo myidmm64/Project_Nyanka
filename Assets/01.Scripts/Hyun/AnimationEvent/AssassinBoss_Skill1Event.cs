@@ -46,7 +46,7 @@ public class AssassinBoss_Skill1Event : EnemyAnimationEvent
     {
         GameObject obj = Instantiate(_attackPrefab0, transform);
         Destroy(obj, 1.5f);
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        int dmg = Random.Range(_aIMainModule.minDamageSkill1, _aIMainModule.maxDamageSkill1);
         attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 

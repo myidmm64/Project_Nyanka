@@ -47,7 +47,7 @@ public class AssassinBoss_Skill2Event : EnemyAnimationEvent
         obj.transform.SetParent(null);
         obj.transform.position += -3 * transform.forward;
         Destroy(obj, 1.5f);
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        int dmg = Random.Range(_aIMainModule.minDamageSkill2, _aIMainModule.maxDamageSkill2);
         attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 

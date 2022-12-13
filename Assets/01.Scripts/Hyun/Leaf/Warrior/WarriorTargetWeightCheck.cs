@@ -34,7 +34,7 @@ public class WarriorTargetWeightCheck : Node
         {
             if(TurnManager.Instance.enemy_TargetLists.ContainsKey(target.Key))
             {
-                if(TurnManager.Instance.enemy_TargetLists[target.Key] < _aIMainModule.maxTarget)
+                if(TurnManager.Instance.enemy_TargetLists[target.Key] <= _aIMainModule.maxTarget)
                 {
                     TurnManager.Instance.enemy_TargetLists[target.Key]++;
                     _target = target.Key;

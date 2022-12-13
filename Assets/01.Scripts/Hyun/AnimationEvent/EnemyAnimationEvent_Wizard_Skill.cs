@@ -39,7 +39,7 @@ public class EnemyAnimationEvent_Wizard_Skill : EnemyAnimationEvent
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
         obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        int dmg = Random.Range(_aIMainModule.minEnemySkill, _aIMainModule.maxEnemySkill);
         for (int i = 0; i < 25; i++)
         {
             Vector3Int attackCell = new Vector3Int(target.CellIndex.x + dx[i], 0, target.CellIndex.z + dz[i]);

@@ -31,7 +31,7 @@ public class EnemyAnimationEvent_Archer_Skill : EnemyAnimationEvent
         obj.transform.SetParent(null);
         Arrow arrow = obj.AddComponent<Arrow>();
         arrow.ArrowInit(-_arrowSpeed, transform.position + Vector3.up, Quaternion.LookRotation(-transform.forward), new List<Vector3Int>(),
-            10, 1.5f, Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage), _aIMainModule.elementType, Random.Range(0, 100) < 50, false, hitEffect);
+            10, 1.5f, Random.Range(_aIMainModule.minEnemySkill, _aIMainModule.maxEnemySkill), _aIMainModule.elementType, Random.Range(0, 100) < 50, false, hitEffect);
     }
 
     public void SkillEnd()

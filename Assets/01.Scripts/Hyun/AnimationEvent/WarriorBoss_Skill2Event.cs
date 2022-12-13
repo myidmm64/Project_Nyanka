@@ -53,7 +53,7 @@ public class WarriorBoss_Skill2Event : EnemyAnimationEvent
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
         {
-            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+            int dmg = Random.Range(_aIMainModule.minDamageSkill2, _aIMainModule.maxDamageSkill2);
             a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }
     }

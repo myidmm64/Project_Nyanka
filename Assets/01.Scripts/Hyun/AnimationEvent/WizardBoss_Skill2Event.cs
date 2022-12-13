@@ -32,7 +32,7 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
 
     public void Damage()
     {
-        int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+        int dmg = Random.Range(_aIMainModule.minDamageSkill2, _aIMainModule.maxDamageSkill2);
         target.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 

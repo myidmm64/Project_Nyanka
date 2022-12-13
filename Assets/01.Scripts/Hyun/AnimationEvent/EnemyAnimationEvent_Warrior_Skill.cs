@@ -40,7 +40,7 @@ public class EnemyAnimationEvent_Warrior_Skill : EnemyAnimationEvent
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)
         {
-            int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
+            int dmg = Random.Range(_aIMainModule.minEnemySkill, _aIMainModule.maxEnemySkill);
             a.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }
     }
