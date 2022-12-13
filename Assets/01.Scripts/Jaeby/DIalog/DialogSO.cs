@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct DialogSO
+public struct DialogOptions
 {
-    public string name;
+    public string characterName;
     public int imageIndex;
-    public DialogEvent[] dialogEvent;
-}
-
-[System.Serializable]
-public struct DialogEvent
-{
     public string[] contexts;
     public DialogEventType eventType;
 }
