@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: WarriorDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 150
-  normalMaxAtk: 200
-  normalDef: 100
+  normalMinAtk: 100
+  normalMaxAtk: 150
+  normalDef: 200
   hp: 10000
   classType: 1
   normalAttackRange:
@@ -39,3 +39,5 @@ MonoBehaviour:
   i_moveRange: 3
   i_attackRange: 1
   runAwayRange: []
+  normalMinskill: 100
+  normalMaxskill: 150
