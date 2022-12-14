@@ -20,9 +20,15 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     [SerializeField]
     private Image _characterImage = null; // 캐릭터 얼굴
     [SerializeField]
+    private GameObject _donTouchPanel = null;
+    [SerializeField]
     private TextMeshProUGUI _contextText = null; // 텍스트
     [SerializeField]
     private List<Sprite> _characterImages = new List<Sprite>(); // 얼굴들
+    [SerializeField]
+    private DialogOptions _clearData;
+    [SerializeField]
+    private DialogOptions _failData;
     [SerializeField]
     private List<DialogOptions> _datas = new List<DialogOptions>(); // 데이터들
 
@@ -33,8 +39,9 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     private void Start()
     {
+        _donTouchPanel = GameObject.Find("HighCanvas").transform.GetChild(0).gameObject;
         _sb = new StringBuilder();
-        _dialogCoroutine = StartCoroutine(DialogStart(_datas[0]));
+        TryStartDialog(_datas[0]);
     }
 
     private void Update()
@@ -47,8 +54,31 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
                 _nextText = true;
     }
 
+    public void ClearDialog()
+    {
+        _donTouchPanel.SetActive(true);
+        TryStartDialog(_clearData);
+    }
+
+    public void FailDialog()
+    {
+        _donTouchPanel.SetActive(true);
+        TryStartDialog(_failData);
+    }
+
+    private void TryStartDialog(DialogOptions data)
+    {
+        if (_dialogCoroutine != null)
+        {
+            StopCoroutine(_dialogCoroutine);
+            EndDialog();
+        }
+        _dialogCoroutine = StartCoroutine(DialogStart(data));
+    }
+
     private IEnumerator DialogStart(DialogOptions data)
     {
+
         InitDialog(data);
         for (int i = 0; i < _currentData.contexts.Length; i++)
         {
@@ -95,6 +125,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _currentData = data;
         _typingStarted = true;
         _contextText.SetText("");
+        _dialogGroup.GetComponent<RectTransform>().anchoredPosition = _currentData.position;
         _characterImage.sprite = _characterImages[_currentData.imageIndex];
         if (_seq != null)
             _seq.Kill();
@@ -111,7 +142,6 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     {
         _currentData = default(DialogOptions);
         _typingStarted = false;
-        _characterImage.sprite = null;
         _complateText = false;
         _textEnded = true;
         _nextText = false;

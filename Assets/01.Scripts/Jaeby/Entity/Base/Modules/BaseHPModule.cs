@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.UI;
+using static Define;
 
 public abstract class BaseHPModule : MonoBehaviour
 {
@@ -51,6 +52,15 @@ public abstract class BaseHPModule : MonoBehaviour
 
     private IEnumerator DieAnimationCoroutine()
     {
+        bool isGameDie = false;
+        isGameDie = TurnManager.Instance.GameEndCheck(_mainModule.entityType);
+        if(isGameDie)
+        {
+            TurnManager.Instance.GameEnd();
+            CameraManager.Instance.CameraSelect(VCamOne);
+            VCamOne.Follow = _mainModule.transform;
+        }
+
         _mainModule.Agent.ResetPath();
         _mainModule.animator.Play("Die");
         if (_mainModule.entityType == EntityType.Player)
@@ -65,7 +75,10 @@ public abstract class BaseHPModule : MonoBehaviour
         _mainModule.animator.Update(0);
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
         _mainModule.transform.DOKill();
-        //Instantiate(_dieEffect, transform.position, Quaternion.identity);
+
+        if(isGameDie)
+            CameraManager.Instance.CameraSelect(VCamTwo);
+
         Destroy(gameObject);
     }
 

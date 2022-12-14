@@ -68,6 +68,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     }
     private bool _plusTurn = false;
     private bool _loseTurn = false;
+    private bool _gameEnded = false;
 
     private int _maxPoint = 0;
     public int MaxPoint => _maxPoint;
@@ -90,6 +91,24 @@ public class TurnManager : MonoSingleTon<TurnManager>
         _maxPoint = UIManager.Instance.GetComponentInChildren<AttackPointUI>().MaxAttackPoint;
     }
 
+    public void GameEnd()
+    {
+        _gameEnded = true;
+        if (LiveEnemys.Count == 0)
+            DialogSystem.Instance.ClearDialog();
+        else if (LivePlayers.Count == 0)
+            DialogSystem.Instance.FailDialog();
+    }
+
+    public bool GameEndCheck(EntityType entityType)
+    {
+        if (entityType == EntityType.Enemy)
+            return LiveEnemys.Count == 0;
+        else if (entityType == EntityType.Player)
+            return LivePlayers.Count == 0;
+        return false;
+    }
+
     private void NewTurnReset()
     {
         _plusTurn = false;
@@ -108,8 +127,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void EnemyPhase()
     {
-        OnNextPhase?.Invoke(false);
+        if (_gameEnded)
+            return;
 
+        OnNextPhase?.Invoke(false);
         StartCoroutine(EnemysTurn());
     }
 
@@ -161,6 +182,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private void NextTurn()
     {
+        if (_gameEnded)
+            return;
+
         PlayerTurnCount = GetLiveCount(_players);
         _turn++;
         OnNextTurn?.Invoke(_turn);
