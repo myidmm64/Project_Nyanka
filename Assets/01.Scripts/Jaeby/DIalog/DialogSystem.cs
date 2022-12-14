@@ -82,7 +82,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         if (_seq != null)
             _seq.Kill();
         _seq = DOTween.Sequence();
-        _seq.Append(_characterImage.transform.DOShakePosition(0.2f, 10f));
+        _seq.Append(_characterImage.transform.DOShakePosition(0.35f, 15f));
         _seq.AppendCallback(() =>
         {
             _seq = null;
@@ -94,25 +94,37 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     {
         _currentData = data;
         _typingStarted = true;
-        _dialogGroup.alpha = 1f;
-        _dialogGroup.blocksRaycasts = true;
-        _dialogGroup.interactable = true;
         _contextText.SetText("");
         _characterImage.sprite = _characterImages[_currentData.imageIndex];
+        if (_seq != null)
+            _seq.Kill();
+        _seq = DOTween.Sequence();
+        _seq.Append(_dialogGroup.DOFade(1f, 0.2f));
+        _seq.AppendCallback(() =>
+        {
+            _dialogGroup.blocksRaycasts = true;
+            _dialogGroup.interactable = true;
+        });
     }
 
     private void EndDialog()
     {
         _currentData = default(DialogOptions);
         _typingStarted = false;
-        _dialogGroup.alpha = 0f;
-        _dialogGroup.blocksRaycasts = false;
-        _dialogGroup.interactable = false;
         _characterImage.sprite = null;
         _complateText = false;
         _textEnded = true;
         _nextText = false;
         _sb.Clear();
         _contextText.SetText("");
+        if (_seq != null)
+            _seq.Kill();
+        _seq = DOTween.Sequence();
+        _seq.Append(_dialogGroup.DOFade(0f, 0.2f));
+        _seq.AppendCallback(() =>
+        {
+            _dialogGroup.blocksRaycasts = false;
+            _dialogGroup.interactable = false;
+        });
     }
 }
