@@ -26,20 +26,22 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     [SerializeField]
     private List<Sprite> _characterImages = new List<Sprite>(); // 얼굴들
     [SerializeField]
-    private DialogOptions _clearData;
+    private DialogEvent _clearData;
     [SerializeField]
-    private DialogOptions _failData;
+    private DialogEvent _failData;
     [SerializeField]
-    private List<DialogOptions> _datas = new List<DialogOptions>(); // 데이터들
+    private List<DialogEvent> _datas = new List<DialogEvent>(); // 데이터들
 
-    private DialogOptions _currentData; // 현재 데이터
+    private DialogEvent _currentData; // 현재 데이터
     private StringBuilder _sb = null; // 스트링빌더
     private Coroutine _dialogCoroutine = null; // 현재 진행중인 다이얼로그
     private Sequence _seq = null; // 이벤트 실행할 시퀀스
+    private RectTransform _rectTrm = null;
 
     private void Start()
     {
         _donTouchPanel = GameObject.Find("HighCanvas").transform.GetChild(0).gameObject;
+        _rectTrm = _dialogGroup.GetComponent<RectTransform>();
         _sb = new StringBuilder();
         TryStartDialog(_datas[0]);
     }
@@ -66,7 +68,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         TryStartDialog(_failData);
     }
 
-    private void TryStartDialog(DialogOptions data)
+    private void TryStartDialog(DialogEvent data)
     {
         if (_dialogCoroutine != null)
         {
@@ -76,33 +78,39 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogCoroutine = StartCoroutine(DialogStart(data));
     }
 
-    private IEnumerator DialogStart(DialogOptions data)
+    private IEnumerator DialogStart(DialogEvent data)
     {
 
         InitDialog(data);
-        for (int i = 0; i < _currentData.contexts.Length; i++)
+        for(int i = 0; i < _currentData.dialogs.Length; i++)
         {
-            _textEnded = false;
-            string targetText = _currentData.contexts[i];
-            if (_currentData.eventType == DialogEventType.SHAKE)
-                yield return StartCoroutine(ShakeCoroutine());
-            for (int j = 0; j < targetText.Length; j++)
+            _rectTrm.anchoredPosition = _currentData.dialogs[i].position;
+            _characterImage.sprite = _characterImages[_currentData.dialogs[i].imageIndex];
+            for (int j = 0; j < _currentData.dialogs[i].contexts.Length; j++)
             {
-                if(_complateText)
+                _textEnded = false;
+                string targetText = _currentData.dialogs[i].contexts[j];
+                if (_currentData.dialogs[i].eventType == DialogEventType.SHAKE)
+                    yield return StartCoroutine(ShakeCoroutine());
+                for (int k = 0; k < targetText.Length; k++)
                 {
-                    _complateText = false;
-                    _contextText.SetText(targetText);
-                    break;
+                    if (_complateText)
+                    {
+                        _complateText = false;
+                        _contextText.SetText(targetText);
+                        break;
+                    }
+                    _sb.Append(targetText[k]);
+                    _contextText.SetText(_sb.ToString());
+                    yield return new WaitForSeconds(_textDelay);
                 }
-                _sb.Append(targetText[j]);
-                _contextText.SetText(_sb.ToString());
-                yield return new WaitForSeconds(_textDelay);
+                _textEnded = true;
+                _nextText = false;
+                yield return new WaitUntil(() => _nextText == true);
+                _sb.Clear();
+                _contextText.SetText("");
             }
-            _textEnded = true;
-            _nextText = false;
-            yield return new WaitUntil(()=> _nextText == true);
-            _sb.Clear();
-            _contextText.SetText("");
+            _currentData.dialogs[i].Callback?.Invoke();
         }
         EndDialog();
     }
@@ -120,13 +128,11 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         yield return new WaitUntil(() => _seq == null);
     }
 
-    private void InitDialog(DialogOptions data)
+    private void InitDialog(DialogEvent data)
     {
         _currentData = data;
         _typingStarted = true;
         _contextText.SetText("");
-        _dialogGroup.GetComponent<RectTransform>().anchoredPosition = _currentData.position;
-        _characterImage.sprite = _characterImages[_currentData.imageIndex];
         if (_seq != null)
             _seq.Kill();
         _seq = DOTween.Sequence();
@@ -140,7 +146,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     private void EndDialog()
     {
-        _currentData = default(DialogOptions);
+        _currentData = default(DialogEvent);
         _typingStarted = false;
         _complateText = false;
         _textEnded = true;
