@@ -30,7 +30,7 @@ public class PlayerAnimationEvent_Kagura_Skill : PlayerAnimationEvent
                 break;
             case 1:
                 _cameraManager.CartUpdate(60f, null, 0f);
-                List<AIMainModule> ais = TurnManager.Instance.LiveEnemys;
+                List<AIMainModule> ais = GameManager.Instance.LiveEnemys;
                 for (int i = 0; i < ais.Count; i++)
                 {
                     int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]);
@@ -40,7 +40,7 @@ public class PlayerAnimationEvent_Kagura_Skill : PlayerAnimationEvent
                     ais[i]?.ApplyDamage(dmg, _mainModule.elementType, critical, true);
                     Destroy(obj, 1.5f);
                 }
-                List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
+                List<PlayerMainModule> players = GameManager.Instance.LivePlayers;
                 for (int i = 0; i < players.Count; i++)
                 {
                     int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[1]);

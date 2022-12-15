@@ -17,7 +17,7 @@ public class TimeUI : MonoBehaviour
 
     private void Start()
     {
-        float scale = PlayerPrefs.GetFloat("TIMER", 1.5f);
+        float scale = PlayerPrefs.GetFloat("TIMER", 2f);
         GameManager.Instance.TimeScale = scale;
         _xTimeText.SetText($"{scale}x");
     }
@@ -44,6 +44,11 @@ public class TimeUI : MonoBehaviour
     }
 
     public void ResetData()
+    {
+        _curTime = 0f;
+    }
+
+    public void ResetDataKey()
     {
         PlayerPrefs.DeleteKey("TIMER");
     }

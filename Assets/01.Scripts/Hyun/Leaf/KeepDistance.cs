@@ -49,7 +49,7 @@ public class KeepDistance : Node
 
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
-            foreach (var player in TurnManager.Instance.LivePlayers)
+            foreach (var player in GameManager.Instance.LivePlayers)
             {
                 Vector3Int p_Pos = player.CellIndex;
                 int tempX = Mathf.Abs(key.x - p_Pos.x);
@@ -60,7 +60,7 @@ public class KeepDistance : Node
 
         Vector3 targetPos = Vector3.zero;
         float _dis = 9999999;
-        foreach (var player in TurnManager.Instance.LivePlayers)
+        foreach (var player in GameManager.Instance.LivePlayers)
         {
             Vector3 p_Pos = player.CellIndex;
             float dis = Vector3.Distance(_aIMainModule.CellIndex, p_Pos);

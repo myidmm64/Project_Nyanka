@@ -46,7 +46,7 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
     public void Skill2Start()
     {
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
-        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
+        List<PlayerMainModule> players = GameManager.Instance.LivePlayers;
         float _hp = 999999999;
         foreach (var player in players)
         {
