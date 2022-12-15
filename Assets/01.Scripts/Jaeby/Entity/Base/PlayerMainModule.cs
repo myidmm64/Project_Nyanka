@@ -51,6 +51,15 @@ public class PlayerMainModule : BaseMainModule
     private bool _attackMode = false;
     public bool AttackMode { get => _attackMode; set => _attackMode = value; }
     private GameObject _playableObj = null;
+    private GameObject PlayableObj
+    {
+        get
+        {
+            if (_playableObj == null)
+                _playableObj = transform.Find("PlayerBehav").gameObject;
+            return _playableObj;
+        }
+    }
 
     // 수치 데이터
     public override List<Vector3Int> MoveRange
@@ -111,7 +120,6 @@ public class PlayerMainModule : BaseMainModule
     private void Start()
     {
         Agent.updateRotation = false;
-        _playableObj = transform.Find("PlayerBehav").gameObject;
     }
 
     public void MyTurnEnd() // 자신의 행동이 끝났을 때
@@ -124,7 +132,7 @@ public class PlayerMainModule : BaseMainModule
         _prevIndex = Vector3Int.zero;
 
         UIManager.Instance.TargettingUIEnable(true, false);
-        _playableObj.SetActive(false);
+        PlayableObj.SetActive(false);
         OnMyTurnEnded?.Invoke();
     }
 
@@ -137,12 +145,12 @@ public class PlayerMainModule : BaseMainModule
             _myTurnEnded = false;
             _pressTurnChecked = false;
             _selectable = true;
-            _playableObj.SetActive(true);
+            PlayableObj.SetActive(true);
             OnPlayerTurnStart?.Invoke();
         }
         else if (type == PhaseType.Enemy)
         {
-            _playableObj.SetActive(false);
+            PlayableObj.SetActive(false);
         }
     }
 

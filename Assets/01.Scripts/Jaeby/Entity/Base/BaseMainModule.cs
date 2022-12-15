@@ -56,7 +56,10 @@ public abstract class BaseMainModule : MonoBehaviour, ISelectable
 
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.down, out hit))
-                _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
+            {
+                if(hit.collider != null)
+                    _cellIndex = hit.collider.GetComponent<Cell>().GetIndex();
+            }
             return _cellIndex;
         }
         set => _cellIndex = value;

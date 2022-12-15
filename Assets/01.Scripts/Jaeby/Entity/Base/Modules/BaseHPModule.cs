@@ -76,9 +76,6 @@ public abstract class BaseHPModule : MonoBehaviour
         yield return new WaitUntil(() => _mainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Die") == false);
         _mainModule.transform.DOKill();
 
-        if(isGameDie)
-            CameraManager.Instance.CameraSelect(VCamTwo);
-
         Destroy(gameObject);
     }
 

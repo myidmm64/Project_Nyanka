@@ -72,7 +72,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
         PlayerTurnCount = GetLiveCount(GameManager.Instance.Players);
-
     }
 
     public void GameEnd()
@@ -88,6 +87,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         _turn = 0;
         _gameEnded = false;
+        NextTurn();
     }
 
     public bool GameEndCheck(EntityType entityType)
@@ -133,7 +133,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
         List<AIMainModule> liveEnemys = GameManager.Instance.Enemys.FindAll(v => v.IsLived);
         List<PlayerMainModule> livePlayers = GameManager.Instance.Players.FindAll(v => v.IsLived);
         for (int i = 0; i < livePlayers.Count; i++)
-            livePlayers[i].PhaseChange(PhaseType.Enemy);
+        {
+            if(livePlayers[i] != null)
+                livePlayers[i].PhaseChange(PhaseType.Enemy);
+        }
         //플레이어와 거리가 짧은 ai 먼저 우선 실행되게 바꾸기
         //일단 이중포문으로 각 ai마다 가장 짧은 플레이어와의 거리를 계산하고 리스트에 넣기
         //그리고 실행
