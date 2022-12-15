@@ -22,7 +22,7 @@ public class WizardBoss_Skill1Event : EnemyAnimationEvent
         Destroy(obj, 2f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
         List<PlayerMainModule> players = GameManager.Instance.LivePlayers;
-        transform.LookAt(players[0].transform);
+        transform.LookAt(players[0]?.transform);
         foreach (var a in players)
         {
             Debug.Log(a.name);

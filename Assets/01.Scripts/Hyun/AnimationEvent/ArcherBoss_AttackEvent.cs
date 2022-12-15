@@ -21,7 +21,6 @@ public class ArcherBoss_AttackEvent : EnemyAnimationEvent
 
     public override void AttackAnimation(int id)
     {
-        Debug.Log(_aIMainModule.CurrentDir + " !");
 
         GameObject obj = Instantiate(_attackPrefab0, _aIMainModule.ModelController);
         obj.transform.SetParent(null);

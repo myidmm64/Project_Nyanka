@@ -33,7 +33,7 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
     public void Damage()
     {
         int dmg = Random.Range(_aIMainModule.minDamageSkill2, _aIMainModule.maxDamageSkill2);
-        target.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        target?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     IEnumerator Time()
@@ -57,7 +57,7 @@ public class WizardBoss_Skill2Event : EnemyAnimationEvent
                 target = player;
             }
         }
-        transform.LookAt(target.transform);
+        transform.LookAt(target?.transform);
     }
 
     public void Skill2End()

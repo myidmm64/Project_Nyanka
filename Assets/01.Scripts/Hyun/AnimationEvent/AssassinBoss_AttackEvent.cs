@@ -39,7 +39,7 @@ public class AssassinBoss_AttackEvent : EnemyAnimationEvent
         }
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-        attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        attackPlayer?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     public override void AttackEnd()
@@ -62,6 +62,6 @@ public class AssassinBoss_AttackEvent : EnemyAnimationEvent
                 _hp = a.HPModule.hp;
             }
         }
-        transform.LookAt(attackPlayer.transform);
+        transform.LookAt(attackPlayer?.transform);
     }
 }

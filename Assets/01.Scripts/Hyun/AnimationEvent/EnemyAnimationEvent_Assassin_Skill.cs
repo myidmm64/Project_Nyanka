@@ -27,7 +27,7 @@ public class EnemyAnimationEvent_Assassin_Skill : EnemyAnimationEvent
         obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.minEnemySkill, _aIMainModule.maxEnemySkill);
-        attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        attackPlayer?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     public void SkillEnd()
@@ -66,6 +66,6 @@ public class EnemyAnimationEvent_Assassin_Skill : EnemyAnimationEvent
                 }
             }
         }
-        transform.LookAt(attackPlayer.transform);
+        transform.LookAt(attackPlayer?.transform);
     }
 }
