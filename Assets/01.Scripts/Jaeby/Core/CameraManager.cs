@@ -33,6 +33,16 @@ public class CameraManager : MonoSingleTon<CameraManager>
 
     public void CameraSelect(CinemachineVirtualCamera cam)
     {
+        if (GameManager.Instance.LivePlayers.Count <= 0)
+            return;
+        Vector3 nextPos = VCamTwo.transform.position;
+        float max = GameManager.Instance.LivePlayers[0].transform.position.z;
+        for (int i = 0; i < GameManager.Instance.LivePlayers.Count; i++)
+            if (max < GameManager.Instance.LivePlayers[i].transform.position.z)
+                max = GameManager.Instance.LivePlayers[i].transform.position.z;
+        nextPos.z = max - 2.5f;
+        VCamTwo.transform.position = nextPos;
+
         CartCamReset();
         for(int i = 0; i < cams.Count; i++)
             if (cam == cams[i])
