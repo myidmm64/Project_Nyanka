@@ -45,6 +45,11 @@ public class UIManager : MonoSingleTon<UIManager>
         _playerBehaviourUI.UIDisable();
     }
 
+    public void TargettingUIReset()
+    {
+        _entityTargettingUI.TargettingUIReset();
+    }
+
     public void CanvasGroupSetting(CanvasGroup group, bool enable, float fade)
     {
         group.interactable = enable;

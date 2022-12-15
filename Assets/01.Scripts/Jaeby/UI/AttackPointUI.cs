@@ -6,9 +6,6 @@ using UnityEngine;
 public class AttackPointUI : MonoBehaviour
 {
     [SerializeField]
-    private int _maxAttackPoint = 0;
-    public int MaxAttackPoint => _maxAttackPoint;
-    [SerializeField]
     private AttackPointImage _attackPointImagePrefab = null;
     [SerializeField]
     private Transform _imageParent = null;
@@ -25,7 +22,7 @@ public class AttackPointUI : MonoBehaviour
 
     private void InitUI()
     {
-        for(int i = 0; i < _maxAttackPoint; i++)
+        for(int i = 0; i < GameManager.Instance.MaxAttackPoint; i++)
         {
             AttackPointImage ui = Instantiate(_attackPointImagePrefab, _imageParent);
             _attackPointUIs.Add(ui);

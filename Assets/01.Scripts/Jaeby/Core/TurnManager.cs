@@ -61,28 +61,23 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private bool _gameEnded = false;
 
     private int _maxPoint = 0;
-    public int MaxPoint => _maxPoint;
-
-    private void Awake()
+    public int MaxPoint
     {
-        GameManager.Instance.Entitys = new List<BaseMainModule>(FindObjectsOfType<BaseMainModule>());
-        GameManager.Instance.Players = new List<PlayerMainModule>(FindObjectsOfType<PlayerMainModule>());
-        GameManager.Instance.Enemys = new List<AIMainModule>(FindObjectsOfType<AIMainModule>());
+        get => _maxPoint;
+        set => _maxPoint = value;
     }
 
     private void Start()
     {
-        //for (int i = 0; i < _entitys.Count; i++)
-        //    OnNextPhase.AddListener(_entitys[i].PhaseChanged);
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
         PlayerTurnCount = GetLiveCount(GameManager.Instance.Players);
 
-        _maxPoint = UIManager.Instance.GetComponentInChildren<AttackPointUI>().MaxAttackPoint;
     }
 
     public void GameEnd()
     {
+        _turn = 0;
         _gameEnded = true;
         if (GameManager.Instance.LiveEnemys.Count == 0)
             DialogSystem.Instance.ClearDialog();

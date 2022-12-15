@@ -45,6 +45,11 @@ public class TimeUI : MonoBehaviour
 
     public void ResetData()
     {
+        _curTime = 0f;
+    }
+
+    public void ResetDataKey()
+    {
         PlayerPrefs.DeleteKey("TIMER");
     }
 }

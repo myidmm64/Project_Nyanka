@@ -83,4 +83,11 @@ public class EntityTargettingUI : MonoBehaviour
             _uiManager.CanvasGroupSetting(_entityTargetGroup, enable, endAlpha);
         });
     }
+
+    public void TargettingUIReset()
+    {
+        for(int i = 0; i < _uis.Count; i++)
+            Destroy(_uis[i].gameObject);
+        _uis.Clear();
+    }
 }
