@@ -68,7 +68,7 @@ public class GameManager : MonoSingleTon<GameManager>
 
     public void NextStage()
     {
-        _stage++;
+        //_stage++;
         StageSettingOption setting = _stageSettingOptions[_stage];
 
         _nextStageLoadingObject.SetActive(true);
@@ -81,8 +81,10 @@ public class GameManager : MonoSingleTon<GameManager>
         Destroy(CubeGrid.gameObject);
         Instantiate(setting.gridPrefab, null);
         
-        for (int i = 0; i < Entitys.Count; i++)
-            Destroy(Entitys[i]);
+        for (int i = 0; i < LiveEnemys.Count; i++)
+            Destroy(LiveEnemys[i].gameObject);
+        for (int i = 0; i < LivePlayers.Count; i++)
+            Destroy(LivePlayers[i].gameObject);
         Entitys.Clear();
         Players.Clear();
         Enemys.Clear();
@@ -91,6 +93,7 @@ public class GameManager : MonoSingleTon<GameManager>
                 setting.entitySpawnDatas[i].position, 
                 Quaternion.Euler(setting.entitySpawnDatas[i].rotation));
         EntitysReset();
+        _maxAttackPoint = setting.maxAttackPoint;
         TurnManager.Instance.MaxPoint = setting.maxAttackPoint;
         for (int i = 0; i < _mapParents.Count; i++)
             _mapParents[i].transform.position = setting.mapParentPositions[i];

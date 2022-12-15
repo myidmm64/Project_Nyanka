@@ -58,6 +58,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     public void ClearDialog()
     {
+        Debug.Log("Å¬¸®¾î");
         _donTouchPanel.SetActive(true);
         TryStartDialog(_clearData);
     }
@@ -133,15 +134,9 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _currentData = data;
         _typingStarted = true;
         _contextText.SetText("");
-        if (_seq != null)
-            _seq.Kill();
-        _seq = DOTween.Sequence();
-        _seq.Append(_dialogGroup.DOFade(1f, 0.2f));
-        _seq.AppendCallback(() =>
-        {
-            _dialogGroup.blocksRaycasts = true;
-            _dialogGroup.interactable = true;
-        });
+        _dialogGroup.alpha = 1f;
+        _dialogGroup.blocksRaycasts = true;
+        _dialogGroup.interactable = true;
     }
 
     private void EndDialog()
@@ -153,14 +148,8 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _nextText = false;
         _sb.Clear();
         _contextText.SetText("");
-        if (_seq != null)
-            _seq.Kill();
-        _seq = DOTween.Sequence();
-        _seq.Append(_dialogGroup.DOFade(0f, 0.2f));
-        _seq.AppendCallback(() =>
-        {
-            _dialogGroup.blocksRaycasts = false;
-            _dialogGroup.interactable = false;
-        });
+        _dialogGroup.alpha = 0f;
+        _dialogGroup.blocksRaycasts = false;
+        _dialogGroup.interactable = false;
     }
 }

@@ -77,12 +77,17 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     public void GameEnd()
     {
-        _turn = 0;
         _gameEnded = true;
         if (GameManager.Instance.LiveEnemys.Count == 0)
             DialogSystem.Instance.ClearDialog();
         else if (GameManager.Instance.LivePlayers.Count == 0)
             DialogSystem.Instance.FailDialog();
+    }
+
+    public void GameRestart()
+    {
+        _turn = 0;
+        _gameEnded = false;
     }
 
     public bool GameEndCheck(EntityType entityType)

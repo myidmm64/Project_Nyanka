@@ -43,4 +43,14 @@ public class AttackPointUI : MonoBehaviour
         _currentAttackPoint = point;
         _attackPointText.SetText(_currentAttackPoint.ToString());
     }
+
+    public void GameEndSet()
+    {
+        for (int i = 0; i < _attackPointUIs.Count; i++)
+            Destroy(_attackPointUIs[i].gameObject);
+        _attackPointUIs.Clear();
+        InitUI();
+        AttackPointUpdate(0);
+        TurnManager.Instance.BattlePointChange(0);
+    }
 }
