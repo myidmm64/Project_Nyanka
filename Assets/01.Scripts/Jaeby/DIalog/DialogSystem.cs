@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class DialogSystem : MonoSingleTon<DialogSystem>
 {
@@ -25,10 +26,6 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     private TextMeshProUGUI _contextText = null; // 텍스트
     [SerializeField]
     private List<Sprite> _characterImages = new List<Sprite>(); // 얼굴들
-    [SerializeField]
-    private DialogEvent _clearData;
-    [SerializeField]
-    private DialogEvent _failData;
     [SerializeField]
     private List<DialogEvent> _datas = new List<DialogEvent>(); // 데이터들
 
@@ -58,18 +55,17 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     public void ClearDialog()
     {
-        Debug.Log("클리어");
         _donTouchPanel.SetActive(true);
-        TryStartDialog(_clearData);
+        TryStartDialog(GameManager.Instance.ClearDialog, GameManager.Instance.StageClear);
     }
 
     public void FailDialog()
     {
         _donTouchPanel.SetActive(true);
-        TryStartDialog(_failData);
+        TryStartDialog(GameManager.Instance.FailDialog, GameManager.Instance.StageFail);
     }
 
-    private void TryStartDialog(DialogEvent data)
+    private void TryStartDialog(DialogEvent data, Action EndCallback = null)
     {
         if (_dialogCoroutine != null)
         {
@@ -79,7 +75,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogCoroutine = StartCoroutine(DialogStart(data));
     }
 
-    private IEnumerator DialogStart(DialogEvent data)
+    private IEnumerator DialogStart(DialogEvent data, Action EndCallback = null)
     {
 
         InitDialog(data);

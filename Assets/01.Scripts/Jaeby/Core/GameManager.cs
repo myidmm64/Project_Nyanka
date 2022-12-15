@@ -71,6 +71,9 @@ public class GameManager : MonoSingleTon<GameManager>
 
     [SerializeField]
     private List<StageSettingOption> _stageSettingOptions = new List<StageSettingOption>();
+    private StageSettingOption _currentStageOption;
+    public DialogEvent ClearDialog => _currentStageOption.clearDialog;
+    public DialogEvent FailDialog => _currentStageOption.failDialog;
 
     private void Awake()
     {
@@ -82,10 +85,20 @@ public class GameManager : MonoSingleTon<GameManager>
         TurnManager.Instance.MaxPoint = MaxAttackPoint;
     }
 
-    public void NextStage()
+    public void StageClear()
     {
-        //_stage++;
-        StageSettingOption setting = _stageSettingOptions[_stage];
+        _stage++;
+        StageChange();
+    }
+
+    public void StageFail()
+    {
+        StageChange();
+    }
+
+    private void StageChange()
+    {
+        _currentStageOption = _stageSettingOptions[_stage];
 
         _nextStageLoadingObject.SetActive(true);
 
@@ -95,24 +108,24 @@ public class GameManager : MonoSingleTon<GameManager>
         UIManager.Instance.TargettingUIReset();
 
         Destroy(CubeGrid.gameObject);
-        Instantiate(setting.gridPrefab, null);
+        Instantiate(_currentStageOption.gridPrefab, null);
 
         for (int i = 0; i < _entitys.Count; i++)
             if (_entitys[i] != null)
                 if (_entitys[i].isActiveAndEnabled)
                     Destroy(_entitys[i].gameObject);
 
-        for (int i = 0; i < setting.entitySpawnDatas.Length; i++)
-            Instantiate(setting.entitySpawnDatas[i].prefab,
-                setting.entitySpawnDatas[i].position,
-                Quaternion.Euler(setting.entitySpawnDatas[i].rotation));
+        for (int i = 0; i < _currentStageOption.entitySpawnDatas.Length; i++)
+            Instantiate(_currentStageOption.entitySpawnDatas[i].prefab,
+                _currentStageOption.entitySpawnDatas[i].position,
+                Quaternion.Euler(_currentStageOption.entitySpawnDatas[i].rotation));
 
         EntitysReset();
-        _maxAttackPoint = setting.maxAttackPoint;
-        TurnManager.Instance.MaxPoint = setting.maxAttackPoint;
-        _mapParents.transform.position = setting.mapParentPositions;
-        _mapParents.transform.rotation = Quaternion.Euler(setting.mapParentRotations);
-        _mapNameText.SetText(setting.stageName);
+        _maxAttackPoint = _currentStageOption.maxAttackPoint;
+        TurnManager.Instance.MaxPoint = _currentStageOption.maxAttackPoint;
+        _mapParents.transform.position = _currentStageOption.mapParentPositions;
+        _mapParents.transform.rotation = Quaternion.Euler(_currentStageOption.mapParentRotations);
+        _mapNameText.SetText(_currentStageOption.stageName);
 
         OnNextStage?.Invoke(); // 
     }
@@ -147,6 +160,8 @@ public struct StageSettingOption
     public Vector3 mapParentPositions;
     public Vector3 mapParentRotations;
     public EntitySpawnData[] entitySpawnDatas;
+    public DialogEvent clearDialog;
+    public DialogEvent failDialog;
 }
 
 [System.Serializable]
