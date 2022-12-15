@@ -14,16 +14,6 @@ public class TurnManager : MonoSingleTon<TurnManager>
     [SerializeField]
     private TextMeshProUGUI _currentTurnText = null;
 
-    private List<BaseMainModule> _entitys;
-
-    private List<PlayerMainModule> _players;
-    public List<PlayerMainModule> Players => _players;
-
-    private List<AIMainModule> _enemys;
-    public List<AIMainModule> Enemys => _enemys;
-
-    public List<PlayerMainModule> LivePlayers => _players.FindAll(x => x.IsLived);
-    public List<AIMainModule> LiveEnemys => _enemys.FindAll(x => x.IsLived);
 
     public Dictionary<Vector3Int, int> enemy_TargetLists = new Dictionary<Vector3Int, int>();
 
@@ -40,7 +30,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     [ContextMenu("살아있는 플레이어")]
     public void TextMonster()
     {
-        foreach(PlayerMainModule player in LivePlayers)
+        foreach(PlayerMainModule player in GameManager.Instance.LivePlayers)
         {
             Debug.Log(player.name);
         }
@@ -75,9 +65,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private void Awake()
     {
-        _entitys = new List<BaseMainModule>(FindObjectsOfType<BaseMainModule>());
-        _players = new List<PlayerMainModule>(FindObjectsOfType<PlayerMainModule>());
-        _enemys = new List<AIMainModule>(FindObjectsOfType<AIMainModule>());
+        GameManager.Instance.Entitys = new List<BaseMainModule>(FindObjectsOfType<BaseMainModule>());
+        GameManager.Instance.Players = new List<PlayerMainModule>(FindObjectsOfType<PlayerMainModule>());
+        GameManager.Instance.Enemys = new List<AIMainModule>(FindObjectsOfType<AIMainModule>());
     }
 
     private void Start()
@@ -86,7 +76,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         //    OnNextPhase.AddListener(_entitys[i].PhaseChanged);
         OnNextPhase?.Invoke(true);
         OnStarted?.Invoke(1);
-        PlayerTurnCount = GetLiveCount(_players);
+        PlayerTurnCount = GetLiveCount(GameManager.Instance.Players);
 
         _maxPoint = UIManager.Instance.GetComponentInChildren<AttackPointUI>().MaxAttackPoint;
     }
@@ -94,18 +84,18 @@ public class TurnManager : MonoSingleTon<TurnManager>
     public void GameEnd()
     {
         _gameEnded = true;
-        if (LiveEnemys.Count == 0)
+        if (GameManager.Instance.LiveEnemys.Count == 0)
             DialogSystem.Instance.ClearDialog();
-        else if (LivePlayers.Count == 0)
+        else if (GameManager.Instance.LivePlayers.Count == 0)
             DialogSystem.Instance.FailDialog();
     }
 
     public bool GameEndCheck(EntityType entityType)
     {
         if (entityType == EntityType.Enemy)
-            return LiveEnemys.Count == 0;
+            return GameManager.Instance.LiveEnemys.Count == 0;
         else if (entityType == EntityType.Player)
-            return LivePlayers.Count == 0;
+            return GameManager.Instance.LivePlayers.Count == 0;
         return false;
     }
 
@@ -140,8 +130,8 @@ public class TurnManager : MonoSingleTon<TurnManager>
         yield return new WaitForSecondsRealtime(1f);
         UIManager.Instance.TargettingUIEnable(false, true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
-        List<AIMainModule> liveEnemys = _enemys.FindAll(v => v.IsLived);
-        List<PlayerMainModule> livePlayers = _players.FindAll(v => v.IsLived);
+        List<AIMainModule> liveEnemys = GameManager.Instance.Enemys.FindAll(v => v.IsLived);
+        List<PlayerMainModule> livePlayers = GameManager.Instance.Players.FindAll(v => v.IsLived);
         for (int i = 0; i < livePlayers.Count; i++)
             livePlayers[i].PhaseChange(PhaseType.Enemy);
         //플레이어와 거리가 짧은 ai 먼저 우선 실행되게 바꾸기
@@ -185,10 +175,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
         if (_gameEnded)
             return;
 
-        PlayerTurnCount = GetLiveCount(_players);
+        PlayerTurnCount = GetLiveCount(GameManager.Instance.Players);
         _turn++;
         OnNextTurn?.Invoke(_turn);
-        List<PlayerMainModule> livePlayers = _players.FindAll(v => v.IsLived);
+        List<PlayerMainModule> livePlayers = GameManager.Instance.Players.FindAll(v => v.IsLived);
         for (int i = 0; i < livePlayers.Count; i++)
             livePlayers[i].PhaseChange(PhaseType.Player);
         OnNextPhase?.Invoke(true);

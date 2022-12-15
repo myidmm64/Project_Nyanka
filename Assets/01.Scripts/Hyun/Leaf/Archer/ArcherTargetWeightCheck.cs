@@ -19,7 +19,7 @@ public class ArcherTargetWeightCheck : Node
         Debug.Log("ArcherTargetWeightCheck");
         Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
         
-        foreach (var player in TurnManager.Instance.LivePlayers)
+        foreach (var player in GameManager.Instance.LivePlayers)
         {
             Vector3Int p_Pos = player.CellIndex;
             int tempX = Mathf.Abs(_aIMainModule.CellIndex.x - p_Pos.x);

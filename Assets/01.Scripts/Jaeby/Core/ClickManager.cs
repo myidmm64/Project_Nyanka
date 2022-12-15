@@ -35,11 +35,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public Action<BaseMainModule> EntitySelectedAction{ get =>
             _entitySelectedAction; set => _entitySelectedAction = value;}
 
-    private void Start()
-    {
-        GameManager.Instance.TimeScale = 2f;
-    }
-
     private void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;

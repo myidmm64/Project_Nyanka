@@ -47,7 +47,7 @@ public class PlayerAnimationEvent_Kagura : PlayerAnimationEvent
 
     public override void AttackEnd()
     {
-        List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
+        List<PlayerMainModule> players = GameManager.Instance.LivePlayers;
         for (int i = 0; i < players.Count; i++)
         {
             int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * 0.5f);
