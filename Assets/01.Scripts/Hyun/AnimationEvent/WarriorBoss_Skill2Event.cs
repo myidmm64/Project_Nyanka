@@ -44,7 +44,7 @@ public class WarriorBoss_Skill2Event : EnemyAnimationEvent
         GameObject obj = Instantiate(_attackPrefab0, transform);
         Destroy(obj, 3f);
         StartCoroutine(Time());
-        InvokeRepeating("Damage", 0, 0.1f);
+        InvokeRepeating("Damage", 0, 0.25f);
     }
 
     public void Damage()

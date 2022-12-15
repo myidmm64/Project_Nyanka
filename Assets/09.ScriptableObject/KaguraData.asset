@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: KaguraData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 114
-  normalMaxAtk: 126
-  normalDef: 10
+  normalMinAtk: 150
+  normalMaxAtk: 165
+  normalDef: 5
   hp: 1400
   classType: 3
   normalAttackRange:

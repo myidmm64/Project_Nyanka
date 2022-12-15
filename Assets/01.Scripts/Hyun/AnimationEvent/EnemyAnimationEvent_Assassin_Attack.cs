@@ -39,15 +39,21 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
 
     public override void AttackStarted()
     {
-        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalAttackRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         int _hp = 99999999;
-        foreach (var a in players)
+        for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
         {
-            if (a.HPModule.hp < _hp)
+            List<Vector3Int> vecs = CellUtility.GetAttackVectorByDirections((AttackDirection)i, _aIMainModule.DataSO.normalAttackRange);
+            for (int j = 0; j < vecs.Count; j++)
             {
-                attackPlayer = a;
-                _hp = a.HPModule.hp;
+                List<PlayerMainModule> m = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, vecs, true);
+                foreach (var a in m)
+                {
+                    if (a.HPModule.hp < _hp)
+                    {
+                        attackPlayer = a;
+                        _hp = a.HPModule.hp;
+                    }
+                }
             }
         }
         transform.LookAt(attackPlayer.transform);

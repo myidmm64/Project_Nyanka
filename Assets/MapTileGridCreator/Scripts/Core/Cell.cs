@@ -27,7 +27,7 @@ namespace MapTileGridCreator.Core
             get
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.up, out hit, 10f, block.Mask))
+                if (Physics.Raycast(transform.position, Vector3.up, out hit, 1f, block.Mask))
                 {
                     return hit.collider.gameObject;
                 }

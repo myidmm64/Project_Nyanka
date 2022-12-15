@@ -127,6 +127,7 @@ namespace MapTileGridCreator.Core
         private void Awake()
         {
             Initialize();
+            Debug.Log(_map[new Vector3Int(3, 0, 12)].GetIndex());
         }
 
         /// <summary>

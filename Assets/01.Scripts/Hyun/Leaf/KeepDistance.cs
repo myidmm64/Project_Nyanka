@@ -78,6 +78,7 @@ public class KeepDistance : Node
         foreach (var temp in movableRange)
         {
             Vector3Int key = temp.GetIndex();
+            Debug.Log(key);
             if (m_W < _aIMainModule.cells[key])
             {
                 m_W = _aIMainModule.cells[key];

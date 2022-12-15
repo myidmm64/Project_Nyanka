@@ -19,6 +19,8 @@ public class PlayerAnimationEvent_Kagura : PlayerAnimationEvent
     private List<Vector3Int> _cellBoomVectors = new List<Vector3Int>();
     [SerializeField]
     private float _arrowSpeed = 0f;
+    [SerializeField]
+    private float _healMagni = 1f;
 
 
     public override void AttackAnimation(int id)
@@ -50,7 +52,7 @@ public class PlayerAnimationEvent_Kagura : PlayerAnimationEvent
         List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
         for (int i = 0; i < players.Count; i++)
         {
-            int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * 0.5f);
+            int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _healMagni);
             players[i]?.HPModule.Healing(dmg, _mainModule.elementType);
         }
 

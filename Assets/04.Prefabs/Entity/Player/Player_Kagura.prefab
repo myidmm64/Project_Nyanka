@@ -613,6 +613,7 @@ MonoBehaviour:
   - {x: 2, y: 0, z: -1}
   - {x: 2, y: 0, z: -2}
   _arrowSpeed: 6
+  _healMagni: 0.3
 --- !u!114 &2273423215381296792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +637,8 @@ MonoBehaviour:
   _dealPrefab: {fileID: 3535556421257359841, guid: 2bae877f87c9bf849af8faf5484290db,
     type: 3}
   _damageMagni:
-  - 1.5
+  - 2
+  - 1
 --- !u!1 &4582029725378825208
 GameObject:
   m_ObjectHideFlags: 0

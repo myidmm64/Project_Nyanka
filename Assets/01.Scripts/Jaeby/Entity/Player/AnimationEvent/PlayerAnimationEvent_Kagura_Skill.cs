@@ -43,7 +43,7 @@ public class PlayerAnimationEvent_Kagura_Skill : PlayerAnimationEvent
                 List<PlayerMainModule> players = TurnManager.Instance.LivePlayers;
                 for (int i = 0; i < players.Count; i++)
                 {
-                    int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[0]);
+                    int dmg = (int)(UnityEngine.Random.Range(_mainModule.MinDamage, _mainModule.MaxDamage) * _damageMagni[1]);
                     GameObject obj = null;
                     obj = Instantiate(_healPrefab, players[i].CellIndex, Quaternion.identity);
                     players[i]?.HPModule.Healing(dmg, _mainModule.elementType);

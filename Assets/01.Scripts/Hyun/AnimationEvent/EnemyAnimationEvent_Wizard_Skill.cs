@@ -44,7 +44,7 @@ public class EnemyAnimationEvent_Wizard_Skill : EnemyAnimationEvent
         {
             Vector3Int attackCell = new Vector3Int(target.CellIndex.x + dx[i], 0, target.CellIndex.z + dz[i]);
             Cell c = CubeGrid.TryGetCellByIndex(ref attackCell);
-            c.GetObj?.GetComponent<PlayerMainModule>()?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+            c?.GetObj?.GetComponent<PlayerMainModule>()?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
         }
     }
 

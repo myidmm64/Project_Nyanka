@@ -16,7 +16,7 @@ public class AssainTargetWeightCheck : Node
     public override NodeState Evaluate()
     {
         Dictionary<Vector3Int, int> t_pos = new Dictionary<Vector3Int, int>();
-
+        
         foreach (var player in TurnManager.Instance.LivePlayers)
         {
             Vector3Int p_Pos = player.CellIndex;

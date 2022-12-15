@@ -66,6 +66,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c680f975f2799ac4bb4a90e560b0c36a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+  _dieEffect: {fileID: 0}
   _hpSlider: {fileID: 1383368126254069394}
   _hpText: {fileID: 1383368125309896223}
 --- !u!114 &1660736628836181168
@@ -91,7 +95,7 @@ MonoBehaviour:
   _modelController: {fileID: 1660736628029198480}
   isAttackComplete: 0
   isMoveComplete: 0
-  maxTarget: 3
+  maxTarget: 10
 --- !u!114 &1660736628836181169
 MonoBehaviour:
   m_ObjectHideFlags: 0
