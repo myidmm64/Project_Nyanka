@@ -19,19 +19,12 @@ public class EntityTargettingUI : MonoBehaviour
     private CanvasGroup _entityTargetGroup = null;
 
     private bool _currentTargettingUIEnable = true;
-
-    private UIManager _uiManager = null;
     private Sequence _seq = null;
 
     private bool _locked = false;
     public bool Locked { get => _locked; set => _locked = value; }
 
     private List<CameraTargettingUI> _uis = new List<CameraTargettingUI>();
-
-    private void Start()
-    {
-        _uiManager = UIManager.Instance;
-    }
 
     private void Update()
     {
@@ -68,19 +61,19 @@ public class EntityTargettingUI : MonoBehaviour
 
         if (imm)
         {
-            _uiManager.CanvasGroupSetting(_entityTargetGroup, false, 0f);
+            UIManager.Instance.CanvasGroupSetting(_entityTargetGroup, false, 0f);
             return;
         }
 
         float startAlpha = enable ? 0f : 1f;
         float endAlpha = enable ? 1f : 0f;
-        _uiManager.CanvasGroupSetting(_entityTargetGroup, !enable, startAlpha);
+        UIManager.Instance.CanvasGroupSetting(_entityTargetGroup, !enable, startAlpha);
 
         _seq = DOTween.Sequence();
         _seq.Append(_entityTargetGroup.DOFade(endAlpha, 0.2f));
         _seq.AppendCallback(() =>
         {
-            _uiManager.CanvasGroupSetting(_entityTargetGroup, enable, endAlpha);
+            UIManager.Instance.CanvasGroupSetting(_entityTargetGroup, enable, endAlpha);
         });
     }
 
