@@ -50164,7 +50164,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: AttackStarted
+    functionName: Skill2Start
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

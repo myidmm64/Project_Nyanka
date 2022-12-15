@@ -17,6 +17,27 @@ public class ArcherBoss_Skill2Event : EnemyAnimationEvent
         _aIMainModule = GetComponent<AIMainModule>();
     }
 
+    public void Skill2Start()
+    {
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        //Debug.Log(players.Count);
+        float m_dis = 1000000;
+        PlayerMainModule target = null;
+        foreach (var player in players)
+        {
+            float dis = Vector3Int.Distance(_aIMainModule.ChangeableCellIndex, player.CellIndex);
+            //Debug.Log(dis + " " + player.name);
+            if (m_dis > dis)
+            {
+                m_dis = dis;
+                target = player;
+            }
+        }
+        transform.LookAt(target?.transform);
+        Debug.Log("?");
+    }
+
     public void Skill2Animation()
     {
         GameObject obj = null;

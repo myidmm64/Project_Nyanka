@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AssassinBossDataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalMinAtk: 1000
-  normalMaxAtk: 1000
-  normalDef: 300
-  hp: 12000
+  normalMinAtk: 150
+  normalMaxAtk: 350
+  normalDef: 120
+  hp: 23000
   classType: 5
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
@@ -112,12 +112,24 @@ MonoBehaviour:
   i_moveRange: 5
   i_attackRange: 1
   runAwayRange: []
+  normalMinskill: 0
+  normalMaxskill: 0
   SkillsRange:
   - skillRange:
-    - {x: -1, y: 0, z: 1}
-    - {x: 0, y: 0, z: 1}
     - {x: 1, y: 0, z: 1}
+    - {x: 0, y: 0, z: 1}
+    - {x: -1, y: 0, z: 1}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: 0, z: 0}
+    - {x: 0, y: 0, z: 0}
+    - {x: 0, y: 0, z: -1}
+    - {x: 1, y: 0, z: -1}
+    - {x: -1, y: 0, z: -1}
   - skillRange:
     - {x: -1, y: 0, z: 1}
     - {x: 0, y: 0, z: 1}
     - {x: 1, y: 0, z: 1}
+  normalMinskill1: 500
+  normalMaxskill1: 600
+  normalMinskill2: 1000
+  normalMaxskill2: 1200

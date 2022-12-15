@@ -23,6 +23,27 @@ public class EnemyAnimationEvent_Archer_Skill : EnemyAnimationEvent
         _aIMainModule = GetComponent<AIMainModule>();
     }
 
+    public void SkillStart()
+    {
+        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalSkillRange);
+        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
+        //Debug.Log(players.Count);
+        float m_dis = 1000000;
+        PlayerMainModule target = null;
+        foreach (var player in players)
+        {
+            float dis = Vector3Int.Distance(_aIMainModule.ChangeableCellIndex, player.CellIndex);
+            //Debug.Log(dis + " " + player.name);
+            if (m_dis > dis)
+            {
+                m_dis = dis;
+                target = player;
+            }
+        }
+        transform.LookAt(target?.transform);
+        Debug.Log("?");
+    }
+
     public void SkillAnimation()
     {
         Debug.Log(_aIMainModule.CurrentDir + " !");
@@ -52,22 +73,6 @@ public class EnemyAnimationEvent_Archer_Skill : EnemyAnimationEvent
 
     public override void AttackStarted()
     {
-        List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.DataSO.normalSkillRange);
-        List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
-        //Debug.Log(players.Count);
-        float m_dis = 1000000;
-        PlayerMainModule target = null;
-        foreach (var player in players)
-        {
-            float dis = Vector3Int.Distance(_aIMainModule.ChangeableCellIndex, player.CellIndex);
-            //Debug.Log(dis + " " + player.name);
-            if (m_dis > dis)
-            {
-                m_dis = dis;
-                target = player;
-            }
-        }
-        transform.LookAt(target?.transform);
-        Debug.Log("?");
+        
     }
 }

@@ -19,7 +19,7 @@ public class AssassinBossBT : BehaviorTree.Tree
             {
                 new DistanceWeightCheck(_aIMainModule),
                 new AssainTargetWeightCheck(_aIMainModule),
-                new AttackCheck(_aIMainModule),
+                new AssassinAttackCheck(_aIMainModule),
                 new RotateAttackRange(_aIMainModule),
                 new Selector(new List<Node>
                 {
