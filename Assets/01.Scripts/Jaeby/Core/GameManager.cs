@@ -107,18 +107,15 @@ public class GameManager : MonoSingleTon<GameManager>
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, true);
         UIManager.Instance.TargettingUIReset();
 
-        Destroy(CubeGrid.gameObject);
-        Instantiate(_currentStageOption.gridPrefab, null);
 
         for (int i = 0; i < _entitys.Count; i++)
             if (_entitys[i] != null)
                 if (_entitys[i].isActiveAndEnabled)
                     Destroy(_entitys[i].gameObject);
 
-        for (int i = 0; i < _currentStageOption.entitySpawnDatas.Length; i++)
-            Instantiate(_currentStageOption.entitySpawnDatas[i].prefab,
-                _currentStageOption.entitySpawnDatas[i].position,
-                Quaternion.Euler(_currentStageOption.entitySpawnDatas[i].rotation));
+        Destroy(CubeGrid.gameObject);
+        Instantiate(_currentStageOption.gridPrefab, null);
+        Instantiate(_currentStageOption.entitySettingPrefab, null);
 
         EntitysReset();
         _maxAttackPoint = _currentStageOption.maxAttackPoint;
@@ -159,9 +156,10 @@ public struct StageSettingOption
     public string stageName;
     public int maxAttackPoint;
     public GameObject gridPrefab;
+    public GameObject entitySettingPrefab;
     public Vector3 mapParentPositions;
     public Vector3 mapParentRotations;
-    public EntitySpawnData[] entitySpawnDatas;
+    //public EntitySpawnData[] entitySpawnDatas;
     public DialogEvent startDialog;
     public DialogEvent clearDialog;
     public DialogEvent failDialog;
