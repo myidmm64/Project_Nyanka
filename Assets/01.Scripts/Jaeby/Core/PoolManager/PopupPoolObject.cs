@@ -32,6 +32,8 @@ public class PopupPoolObject : PoolAbleObject
         {
             _criticalImage = transform.Find("CriticalImage").GetComponent<Image>();
         }
+        _text.SetText("");
+        _criticalText.SetText("");
     }
 
     public override void Init_Push()
@@ -46,6 +48,8 @@ public class PopupPoolObject : PoolAbleObject
         _text.color = Color.white;
         _criticalText.color = Color.white;
         _text.material = _normalMat;
+        _text.SetText("");
+        _criticalText.SetText("");
     }
 
     public void PopupText(Vector3 startPos, string text, ElementType elementType, bool other, string otherText = null)
