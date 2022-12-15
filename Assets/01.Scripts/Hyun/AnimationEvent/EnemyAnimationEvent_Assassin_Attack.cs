@@ -27,7 +27,7 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
         obj.transform.SetParent(null);
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);
-        attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        attackPlayer?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     public override void AttackEnd()
@@ -56,6 +56,6 @@ public class EnemyAnimationEvent_Assassin_Attack : EnemyAnimationEvent
                 }
             }
         }
-        transform.LookAt(attackPlayer.transform);
+        transform.LookAt(attackPlayer?.transform);
     }
 }

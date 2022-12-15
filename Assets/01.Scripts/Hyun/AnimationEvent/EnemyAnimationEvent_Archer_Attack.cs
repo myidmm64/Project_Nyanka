@@ -57,7 +57,7 @@ public class EnemyAnimationEvent_Archer_Attack : EnemyAnimationEvent
                 target = player;
             }
         }
-        transform.LookAt(target.transform);
+        transform.LookAt(target?.transform);
         Debug.Log("?");
     }
 }

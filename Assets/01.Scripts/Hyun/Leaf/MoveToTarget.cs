@@ -24,7 +24,7 @@ public class MoveToTarget : Node
         //yield return new WaitUntil(() => _aIMainModule.isAttackComplete);
         
         Debug.Log("움직이기");
-        int m_W = 999999;
+        int m_W = 9999999;
         Vector3Int _pos = Vector3Int.zero;
         List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.CellIndex, _aIMainModule.DataSO.normalMoveRange, false);
         foreach (var temp in movableRange)

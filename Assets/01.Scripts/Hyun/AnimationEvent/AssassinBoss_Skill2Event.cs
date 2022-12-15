@@ -38,7 +38,7 @@ public class AssassinBoss_Skill2Event : EnemyAnimationEvent
                 _hp = a.HPModule.hp;
             }
         }
-        transform.LookAt(attackPlayer.transform);
+        transform.LookAt(attackPlayer?.transform);
     }
 
     public void Skill2Animation()
@@ -48,7 +48,7 @@ public class AssassinBoss_Skill2Event : EnemyAnimationEvent
         obj.transform.position += -3 * transform.forward;
         Destroy(obj, 1.5f);
         int dmg = Random.Range(_aIMainModule.minDamageSkill2, _aIMainModule.maxDamageSkill2);
-        attackPlayer.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
+        attackPlayer?.ApplyDamage(dmg, _aIMainModule.elementType, true, false);
     }
 
     public void Skill2End()

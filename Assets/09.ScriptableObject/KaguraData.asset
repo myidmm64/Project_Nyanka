@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: KaguraData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 150
-  normalMaxAtk: 165
+  normalMinAtk: 175
+  normalMaxAtk: 200
   normalDef: 5
   hp: 1400
   classType: 3
@@ -78,8 +78,8 @@ MonoBehaviour:
   - {x: -1, y: 0, z: 6}
   - {x: 0, y: 0, z: 6}
   - {x: 1, y: 0, z: 6}
-  transMinAtk: 211
-  transMaxAtk: 222
+  transMinAtk: 225
+  transMaxAtk: 250
   transDef: 1
   transAttackRange:
   - {x: -1, y: 0, z: 1}

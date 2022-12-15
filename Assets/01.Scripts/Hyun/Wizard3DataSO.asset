@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wizard3DataSO
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalMinAtk: 200
-  normalMaxAtk: 275
+  normalMinAtk: 150
+  normalMaxAtk: 250
   normalDef: 10
   hp: 4500
   classType: 3

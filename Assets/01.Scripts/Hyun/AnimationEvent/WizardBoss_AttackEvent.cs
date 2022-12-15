@@ -35,7 +35,7 @@ public class WizardBoss_AttackEvent : EnemyAnimationEvent
                 target = player;
             }
         }
-        transform.LookAt(target.transform);
+        transform.LookAt(target?.transform);
         GameObject obj = Instantiate(_attackPrefab0, target.transform);
         Destroy(obj, 2f);
         int dmg = Random.Range(_aIMainModule.MinDamage, _aIMainModule.MaxDamage);

@@ -34,7 +34,7 @@ public class AIMainModule : BaseMainModule
 
     private void Start()
     {
-        Cell[] allCells = GameObject.Find("Stage0Grid").GetComponentsInChildren<Cell>();
+        Cell[] allCells = CubeGrid.GetComponentsInChildren<Cell>();
         foreach (Cell cell in allCells)
         {
             cells.Add(cell.GetIndex(), 0);
