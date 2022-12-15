@@ -90,13 +90,9 @@ public class PlayerAnimationEvent_Yuko_Skill : PlayerAnimationEvent
                 }
                 for (int i = 0; i < cells.Count; i++)
                     cells[i].block.ChangeBlock(_mainModule.elementType);
-                List<AIMainModule> enemys = new List<AIMainModule>();
-                for (int i = 0; i < cells.Count; i++)
-                    if (cells[i].GetObj?.GetComponent<AIMainModule>() != null)
-                        enemys.Add(cells[i].GetObj?.GetComponent<AIMainModule>());
-                for (int i = 0; i < enemys.Count; i++)
-                    enemys[i].ApplyDamage(1, _mainModule.elementType, false, true);
 
+                TurnManager.Instance.TurnCheckReset();
+                TurnManager.Instance.PressTurnCheck(_mainModule);
                 DefTurnActionStart(1);
                 break;
             default:

@@ -65,7 +65,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         TryStartDialog(GameManager.Instance.FailDialog, GameManager.Instance.StageFail);
     }
 
-    private void TryStartDialog(DialogEvent data, Action EndCallback = null)
+    public void TryStartDialog(DialogEvent data, Action EndCallback = null)
     {
         if (_dialogCoroutine != null)
         {

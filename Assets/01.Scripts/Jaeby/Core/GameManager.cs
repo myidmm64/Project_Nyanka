@@ -128,6 +128,8 @@ public class GameManager : MonoSingleTon<GameManager>
         _mapNameText.SetText(_currentStageOption.stageName);
 
         OnNextStage?.Invoke(); // 
+
+        DialogSystem.Instance.TryStartDialog(_currentStageOption.startDialog);
     }
 
     private void EntitysReset()
@@ -160,6 +162,7 @@ public struct StageSettingOption
     public Vector3 mapParentPositions;
     public Vector3 mapParentRotations;
     public EntitySpawnData[] entitySpawnDatas;
+    public DialogEvent startDialog;
     public DialogEvent clearDialog;
     public DialogEvent failDialog;
 }
