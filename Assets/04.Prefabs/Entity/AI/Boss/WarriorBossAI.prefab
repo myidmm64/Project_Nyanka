@@ -121,7 +121,7 @@ NavMeshAgent:
   m_ObstacleAvoidanceType: 0
 --- !u!95 &217491169202798768
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -138,7 +138,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &217491169202798723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4654,7 +4654,7 @@ SkinnedMeshRenderer:
   m_DirtyAABB: 0
 --- !u!95 &8005240987444938149
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4671,7 +4671,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7948166015165234727
 GameObject:
   m_ObjectHideFlags: 0
@@ -15726,6 +15726,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SimpleUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4649362316324584351, guid: 976bc52adfbfe364eaa5966846ae6e0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5308888294810318911, guid: 976bc52adfbfe364eaa5966846ae6e0a,
         type: 3}
