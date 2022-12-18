@@ -29,6 +29,7 @@ public class FinalAttackCheck : Node
                 }
             }
         }
+        Debug.Log("Attack Failure");
         _aIMainModule.isAttackComplete = true;
         state = NodeState.FAILURE;
         return state;

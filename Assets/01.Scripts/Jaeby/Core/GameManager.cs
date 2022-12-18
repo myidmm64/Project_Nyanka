@@ -78,11 +78,11 @@ public class GameManager : MonoSingleTon<GameManager>
     private void Awake()
     {
         EntitysReset();
-        /*if(PlayerPrefs.GetInt("CONTINUE", 0) == 0)
-            _stage = 0;
-        else
-            _stage = PlayerPrefs.GetInt("STAGE", 0);
-        StageChange();*/
+        //if (PlayerPrefs.GetInt("CONTINUE", 0) == 0)
+        //    _stage = 0;
+        //else
+        //    _stage = PlayerPrefs.GetInt("STAGE", 0);
+        //StageChange();
     }
 
     private void Start()
@@ -118,7 +118,7 @@ public class GameManager : MonoSingleTon<GameManager>
                 if (_entitys[i].isActiveAndEnabled)
                     Destroy(_entitys[i].gameObject);
 
-        Destroy(CubeGrid.gameObject);
+        Destroy(CubeGrid?.gameObject);
         Instantiate(_currentStageOption.stagePrefab, null);
 
         EntitysReset();
