@@ -109,9 +109,10 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         ClickManager.Instance.ClickManagerReset();
         PlayerTurnCount -= count;
-        if (PlayerTurnCount <= 0)
-            EnemyPhase();
         player.MyTurnEnd();
+        int selectableCount = GameManager.Instance.LivePlayers.FindAll(x => x.Selectable).Count;
+        if (selectableCount <= 0)
+            EnemyPhase();
         UIManager.Instance.UIDisable();
     }
 
