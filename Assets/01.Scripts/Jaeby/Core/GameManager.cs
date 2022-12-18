@@ -78,6 +78,11 @@ public class GameManager : MonoSingleTon<GameManager>
     private void Awake()
     {
         EntitysReset();
+        /*if(PlayerPrefs.GetInt("CONTINUE", 0) == 0)
+            _stage = 0;
+        else
+            _stage = PlayerPrefs.GetInt("STAGE", 0);
+        StageChange();*/
     }
 
     private void Start()
@@ -114,8 +119,7 @@ public class GameManager : MonoSingleTon<GameManager>
                     Destroy(_entitys[i].gameObject);
 
         Destroy(CubeGrid.gameObject);
-        Instantiate(_currentStageOption.gridPrefab, null);
-        Instantiate(_currentStageOption.entitySettingPrefab, null);
+        Instantiate(_currentStageOption.stagePrefab, null);
 
         EntitysReset();
         _maxAttackPoint = _currentStageOption.maxAttackPoint;
@@ -148,6 +152,12 @@ public class GameManager : MonoSingleTon<GameManager>
         for (int i = 0; i < destroyEntitys.Count; i++)
             list.Remove(destroyEntitys[i]);
     }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("STAGE", _stage);
+        Debug.Log($"{PlayerPrefs.GetInt("STAGE", 0)}");
+    }
 }
 
 [System.Serializable]
@@ -155,20 +165,10 @@ public struct StageSettingOption
 {
     public string stageName;
     public int maxAttackPoint;
-    public GameObject gridPrefab;
-    public GameObject entitySettingPrefab;
+    public GameObject stagePrefab;
     public Vector3 mapParentPositions;
     public Vector3 mapParentRotations;
-    //public EntitySpawnData[] entitySpawnDatas;
     public DialogEvent startDialog;
     public DialogEvent clearDialog;
     public DialogEvent failDialog;
-}
-
-[System.Serializable]
-public struct EntitySpawnData
-{
-    public GameObject prefab;
-    public Vector3 position;
-    public Vector3 rotation;
 }

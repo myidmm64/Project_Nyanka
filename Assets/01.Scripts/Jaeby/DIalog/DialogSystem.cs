@@ -15,6 +15,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     private bool _textEnded = false; // 다이얼로그 중 텍스트 한 뭉탱이가 끝났나??
     private bool _nextText = false; // 다음 텍스트로 넘어가
     private bool _complateText = false; // 텍스트 한 뭉탱이 다 완성시켜
+    private int _index = 0;
 
     [SerializeField]
     private CanvasGroup _dialogGroup = null; // 다이얼로그 UI 그룹
@@ -40,14 +41,20 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _donTouchPanel = GameObject.Find("HighCanvas").transform.GetChild(0).gameObject;
         _rectTrm = _dialogGroup.GetComponent<RectTransform>();
         _sb = new StringBuilder();
-        TryStartDialog(_datas[0]);
+        TryStartDialog(_datas[_index]);
+    }
+
+    public void NextDialog()
+    {
+        _index++;
+        TryStartDialog(_datas[_index]);
     }
 
     private void Update()
     {
         if (_typingStarted == false) return;
-        if(Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            if(_textEnded == false)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            if (_textEnded == false)
                 _complateText = true;
             else
                 _nextText = true;
@@ -79,7 +86,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     {
 
         InitDialog(data);
-        for(int i = 0; i < _currentData.dialogs.Length; i++)
+        for (int i = 0; i < _currentData.dialogs.Length; i++)
         {
             _rectTrm.anchoredPosition = _currentData.dialogs[i].position;
             _characterImage.sprite = _characterImages[_currentData.dialogs[i].imageIndex];
@@ -133,6 +140,8 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogGroup.alpha = 1f;
         _dialogGroup.blocksRaycasts = true;
         _dialogGroup.interactable = true;
+        if (_donTouchPanel != null)
+            _donTouchPanel.SetActive(true);
     }
 
     private void EndDialog()
@@ -147,5 +156,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogGroup.alpha = 0f;
         _dialogGroup.blocksRaycasts = false;
         _dialogGroup.interactable = false;
+        if (_donTouchPanel != null)
+            _donTouchPanel.SetActive(false);
     }
 }
