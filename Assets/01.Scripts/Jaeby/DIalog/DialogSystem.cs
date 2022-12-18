@@ -10,6 +10,9 @@ using System;
 public class DialogSystem : MonoSingleTon<DialogSystem>
 {
     [SerializeField]
+    private bool _isStartGameDialog = true;
+
+    [SerializeField]
     private float _textDelay = 0.1f; // 텍스트 한 글자 딜레이
     private bool _typingStarted = false; // 다이얼로그가 시작했나?
     private bool _textEnded = false; // 다이얼로그 중 텍스트 한 뭉탱이가 끝났나??
@@ -38,10 +41,8 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     private void Start()
     {
-        _donTouchPanel = GameObject.Find("HighCanvas").transform.GetChild(0).gameObject;
-        _rectTrm = _dialogGroup.GetComponent<RectTransform>();
-        _sb = new StringBuilder();
-        TryStartDialog(_datas[_index]);
+        if (_isStartGameDialog)
+            TryStartDialog(_datas[_index]);
     }
 
     public void NextDialog()
@@ -74,6 +75,11 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
 
     public void TryStartDialog(DialogEvent data, Action EndCallback = null)
     {
+        if (_rectTrm == null)
+        {
+            _rectTrm = _dialogGroup.GetComponent<RectTransform>();
+            _sb = new StringBuilder();
+        }
         if (_dialogCoroutine != null)
         {
             StopCoroutine(_dialogCoroutine);

@@ -1,4 +1,4 @@
-
+using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,6 +8,9 @@ using static Define;
 
 public class GameManager : MonoSingleTon<GameManager>
 {
+    [SerializeField]
+    private bool _isTutorial = false;
+
     private float _timeScale = 1f;
     public float TimeScale { get => _timeScale; set { _timeScale = value; Time.timeScale = _timeScale; } }
 
@@ -75,19 +78,22 @@ public class GameManager : MonoSingleTon<GameManager>
     public DialogEvent ClearDialog => _currentStageOption.clearDialog;
     public DialogEvent FailDialog => _currentStageOption.failDialog;
 
+    private bool _first = true;
+
     private void Awake()
     {
-        EntitysReset();
-        //if (PlayerPrefs.GetInt("CONTINUE", 0) == 0)
-        //    _stage = 0;
-        //else
-        //    _stage = PlayerPrefs.GetInt("STAGE", 0);
-        //StageChange();
-    }
-
-    private void Start()
-    {
-        TurnManager.Instance.MaxPoint = MaxAttackPoint;
+        if (_isTutorial)
+        {
+            EntitysReset();
+            TurnManager.Instance.MaxPoint = MaxAttackPoint;
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("CONTINUE", 0) == 0)
+                _stage = PlayerPrefs.GetInt("STAGE", 0);
+            Debug.Log(_stage);
+            StageChange();
+        }
     }
 
     public void StageClear()
@@ -119,7 +125,8 @@ public class GameManager : MonoSingleTon<GameManager>
                     Destroy(_entitys[i].gameObject);
 
         Destroy(CubeGrid?.gameObject);
-        Instantiate(_currentStageOption.stagePrefab, null);
+        GameObject stageObj = Instantiate(_currentStageOption.stagePrefab, null);
+        CubeGrid = stageObj.GetComponentInChildren<Grid3D>();
 
         EntitysReset();
         _maxAttackPoint = _currentStageOption.maxAttackPoint;
@@ -128,7 +135,9 @@ public class GameManager : MonoSingleTon<GameManager>
         _mapParents.transform.rotation = Quaternion.Euler(_currentStageOption.mapParentRotations);
         _mapNameText.SetText(_currentStageOption.stageName);
 
-        OnNextStage?.Invoke(); // 
+        if(_first == false)
+            OnNextStage?.Invoke();
+        _first = false;
 
         DialogSystem.Instance.TryStartDialog(_currentStageOption.startDialog);
     }

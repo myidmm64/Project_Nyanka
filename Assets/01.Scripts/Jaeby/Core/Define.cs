@@ -11,8 +11,6 @@ public class Define
     {
         get
         {
-            if(_grid == null)
-                _grid = GameObject.FindObjectOfType<Grid3D>();
             return _grid;
         }
         set => _grid = value;
