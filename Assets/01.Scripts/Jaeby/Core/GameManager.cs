@@ -86,6 +86,7 @@ public class GameManager : MonoSingleTon<GameManager>
         {
             EntitysReset();
             TurnManager.Instance.MaxPoint = MaxAttackPoint;
+            CubeGrid = GameObject.FindObjectOfType<Grid3D>();
         }
         else
         {
