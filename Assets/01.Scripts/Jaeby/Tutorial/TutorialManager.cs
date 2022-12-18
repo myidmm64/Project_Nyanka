@@ -2,17 +2,99 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialManager : MonoBehaviour
+public class TutorialManager : MonoSingleTon<TutorialManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject _suzukaMoveButton = null;
+    [SerializeField]
+    private TutorialObject _tutorialObjPrefab = null;
+    [SerializeField]
+    private PlayerMainModule _wakamo = null;
+    [SerializeField]
+    private PlayerMainModule _suzuka = null;
+    [SerializeField]
+    private List<TutorialData> _tutoDatas = new List<TutorialData>();
+    private int _index = 0;
+    private int _count = 0;
+
+    public void CountUp()
     {
-        
+        _count++;
+        if (_tutoDatas[_index].nextCount <= _count)
+        {
+            DialogSystem.Instance.NextDialog();
+            _index++;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void WakamoSelectObject()
     {
-        
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_wakamo.CellIndex, SelectWakamo);
     }
+
+    public void WakamoForwardSelectObject()
+    {
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_wakamo.CellIndex + Vector3Int.forward * 2, 
+            () => _wakamo.PreparationCellSelect(_wakamo.CellIndex + Vector3Int.forward * 2, false)
+            );
+    }
+
+    public void SuzukaSelectObject()
+    {
+        UIManager.Instance.TargettingUIEnable(false, true);
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_suzuka.CellIndex, SelectSuzuka);
+    }
+
+
+    public void SuzukaMoveSelectObject()
+    {
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_suzuka.CellIndex + Vector3Int.forward * 2 + Vector3Int.right * 2,
+            () =>
+            {
+                _suzuka.PreparationCellSelect(_suzuka.CellIndex + Vector3Int.forward * 2 + Vector3Int.right * 2, false);
+                _suzukaMoveButton.SetActive(true);
+            }
+            );
+    }
+
+    public void WakamoMove()
+    {
+        _wakamo.PlayerMove(_wakamo.CellIndex + Vector3Int.forward * 2);
+    }
+
+    public void SuzukaMove()
+    {
+        _suzuka.PlayerMove(_suzuka.CellIndex + Vector3Int.forward * 2 + Vector3Int.right * 2);
+    }
+
+    public void SelectWakamo()
+    {
+        _wakamo.Selected();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
+        UIManager.Instance.TargettingUIEnable(false, true);
+    }
+
+    public void SelectSuzuka()
+    {
+        _suzuka.Selected();
+        SuzukaMoveSelectObject();
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
+        UIManager.Instance.TargettingUIEnable(false, true);
+    }
+
+    private void Start()
+    {
+        UIManager.Instance.TargettingUIEnable(false, true);
+    }
+}
+
+[System.Serializable]
+public struct TutorialData
+{
+    public string tutoName;
+    public int nextCount;
 }

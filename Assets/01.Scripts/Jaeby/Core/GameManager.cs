@@ -114,8 +114,7 @@ public class GameManager : MonoSingleTon<GameManager>
                     Destroy(_entitys[i].gameObject);
 
         Destroy(CubeGrid.gameObject);
-        Instantiate(_currentStageOption.gridPrefab, null);
-        Instantiate(_currentStageOption.entitySettingPrefab, null);
+        Instantiate(_currentStageOption.stagePrefab, null);
 
         EntitysReset();
         _maxAttackPoint = _currentStageOption.maxAttackPoint;
@@ -155,20 +154,10 @@ public struct StageSettingOption
 {
     public string stageName;
     public int maxAttackPoint;
-    public GameObject gridPrefab;
-    public GameObject entitySettingPrefab;
+    public GameObject stagePrefab;
     public Vector3 mapParentPositions;
     public Vector3 mapParentRotations;
-    //public EntitySpawnData[] entitySpawnDatas;
     public DialogEvent startDialog;
     public DialogEvent clearDialog;
     public DialogEvent failDialog;
-}
-
-[System.Serializable]
-public struct EntitySpawnData
-{
-    public GameObject prefab;
-    public Vector3 position;
-    public Vector3 rotation;
 }
