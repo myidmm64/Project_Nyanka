@@ -76,6 +76,7 @@ public class PlayerAttackModule : BaseAttackModule
     {
         _currentEvent.AttackEnd();
         CameraManager.Instance.LastCamSelect();
+        OnAttackEnd?.Invoke();
     }
 
     public void TryAttack() // 플레이어 어택 시도

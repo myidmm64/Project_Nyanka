@@ -15,6 +15,7 @@ public class Define
                 _grid = GameObject.FindObjectOfType<Grid3D>();
             return _grid;
         }
+        set => _grid = value;
     }
 
     private static Camera _cam = null;

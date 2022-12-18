@@ -7,6 +7,8 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     [SerializeField]
     private GameObject _suzukaMoveButton = null;
     [SerializeField]
+    private GameObject _wakamoLeftMoveButton = null;
+    [SerializeField]
     private TutorialObject _tutorialObjPrefab = null;
     [SerializeField]
     private PlayerMainModule _wakamo = null;
@@ -42,6 +44,18 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
             );
     }
 
+    public void WakamoLeftSelectObj()
+    {
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_wakamo.CellIndex + Vector3Int.left ,
+            () =>
+            {
+                _wakamo.PreparationCellSelect(_wakamo.CellIndex + Vector3Int.left, false);
+                _wakamoLeftMoveButton.SetActive(true);
+            }
+            );
+    }
+
     public void SuzukaSelectObject()
     {
         UIManager.Instance.TargettingUIEnable(false, true);
@@ -73,6 +87,16 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
         _suzuka.PlayerMove(_suzuka.CellIndex + Vector3Int.forward * 2 + Vector3Int.right * 2);
     }
 
+    public void WakamoIdle()
+    {
+        _wakamo.PlayerIdle();
+    }
+
+    public void SuzukaIdle()
+    {
+        _suzuka.PlayerIdle();
+    }
+
     public void SelectWakamo()
     {
         _wakamo.Selected();
@@ -91,6 +115,7 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     private void Start()
     {
         UIManager.Instance.TargettingUIEnable(false, true);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
     }
 
     public void ClickModeFalse()

@@ -14,9 +14,11 @@ public class TutorialObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Init(Vector3Int index, Action Callback)
+    public void Init(Vector3 pos, Action Callback, Vector3 size = default(Vector3))
     {
-        transform.position = index;
+        transform.position = pos;
         _callback = Callback;
+        if(size != Vector3.zero)
+            transform.localScale = size;
     }
 }

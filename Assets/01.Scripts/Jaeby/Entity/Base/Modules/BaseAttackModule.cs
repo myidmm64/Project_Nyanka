@@ -2,6 +2,7 @@ using MapTileGridCreator.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class BaseAttackModule : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public abstract class BaseAttackModule : MonoBehaviour
     protected PlayerAnimationEvent _normalAttackEvent = null;
     [SerializeField]
     protected PlayerAnimationEvent _normalSkillEvent = null;
+
+    [field: SerializeField]
+    protected UnityEvent OnAttackEnd = null;
 
     private void Start()
     {
