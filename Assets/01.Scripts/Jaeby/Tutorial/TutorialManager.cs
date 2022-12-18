@@ -7,7 +7,9 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     [SerializeField]
     private GameObject _suzukaMoveButton = null;
     [SerializeField]
-    private GameObject _wakamoLeftMoveButton = null;
+    private GameObject _wakamoLeftMoveButton = null; 
+    [SerializeField]
+    private GameObject _wakamoRightMoveButton = null;
     [SerializeField]
     private TutorialObject _tutorialObjPrefab = null;
     [SerializeField]
@@ -56,6 +58,19 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
             );
     }
 
+
+    public void WakamoRightSelectObj()
+    {
+        TutorialObject o = Instantiate(_tutorialObjPrefab);
+        o.Init(_wakamo.CellIndex + Vector3Int.right,
+            () =>
+            {
+                _wakamo.PreparationCellSelect(_wakamo.CellIndex + Vector3Int.right, false);
+                _wakamoRightMoveButton.SetActive(true);
+            }
+            );
+    }
+
     public void SuzukaSelectObject()
     {
         UIManager.Instance.TargettingUIEnable(false, true);
@@ -80,6 +95,11 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     public void WakamoMove()
     {
         _wakamo.PlayerMove(_wakamo.CellIndex + Vector3Int.forward * 2);
+    }
+
+    public void WakamoMoveLeftOne()
+    {
+        _wakamo.PlayerMove(_wakamo.CellIndex + Vector3Int.left);
     }
 
     public void SuzukaMove()

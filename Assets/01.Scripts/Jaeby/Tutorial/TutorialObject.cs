@@ -9,6 +9,8 @@ public class TutorialObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (TurnManager.Instance.CurrentTurnType == EntityType.Enemy)
+            return;
         TutorialManager.Instance.CountUp();
         _callback?.Invoke();
         Destroy(gameObject);

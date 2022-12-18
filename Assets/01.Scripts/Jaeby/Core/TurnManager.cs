@@ -47,6 +47,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
 
     private List<TurnAction> _turnActions = new List<TurnAction>();
 
+    public EntityType _currentTurnType = EntityType.None;
+    public EntityType CurrentTurnType => _currentTurnType;
+
     private int _playerTurnCount = 0;
     private int PlayerTurnCount
     {
@@ -128,6 +131,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
     private IEnumerator EnemysTurn()
     {
         //Debug.Log("야몸ㄴ놈너머");
+        _currentTurnType = EntityType.Enemy;
         yield return new WaitForSecondsRealtime(1f);
         UIManager.Instance.TargettingUIEnable(false, true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
@@ -179,6 +183,7 @@ public class TurnManager : MonoSingleTon<TurnManager>
         if (_gameEnded)
             return;
 
+        _currentTurnType = EntityType.Player;
         PlayerTurnCount = GetLiveCount(GameManager.Instance.Players);
         _turn++;
         OnNextTurn?.Invoke(_turn);
