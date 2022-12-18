@@ -78,6 +78,11 @@ public class GameManager : MonoSingleTon<GameManager>
     private void Awake()
     {
         EntitysReset();
+        /*if(PlayerPrefs.GetInt("CONTINUE", 0) == 0)
+            _stage = 0;
+        else
+            _stage = PlayerPrefs.GetInt("STAGE", 0);
+        StageChange();*/
     }
 
     private void Start()
@@ -146,6 +151,12 @@ public class GameManager : MonoSingleTon<GameManager>
                 destroyEntitys.Add(list[i]);
         for (int i = 0; i < destroyEntitys.Count; i++)
             list.Remove(destroyEntitys[i]);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("STAGE", _stage);
+        Debug.Log($"{PlayerPrefs.GetInt("STAGE", 0)}");
     }
 }
 

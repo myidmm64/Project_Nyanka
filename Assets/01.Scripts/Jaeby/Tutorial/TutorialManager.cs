@@ -23,6 +23,7 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
         if (_tutoDatas[_index].nextCount <= _count)
         {
             DialogSystem.Instance.NextDialog();
+            _count = 0;
             _index++;
         }
     }
@@ -44,6 +45,7 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     public void SuzukaSelectObject()
     {
         UIManager.Instance.TargettingUIEnable(false, true);
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
         TutorialObject o = Instantiate(_tutorialObjPrefab);
         o.Init(_suzuka.CellIndex, SelectSuzuka);
     }
@@ -89,6 +91,11 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     private void Start()
     {
         UIManager.Instance.TargettingUIEnable(false, true);
+    }
+
+    public void ClickModeFalse()
+    {
+        ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
     }
 }
 

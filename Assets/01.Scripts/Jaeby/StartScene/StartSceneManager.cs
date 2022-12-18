@@ -28,6 +28,13 @@ public class StartSceneManager : MonoBehaviour
 
     public void GoGame()
     {
+        PlayerPrefs.SetInt("CONTINUE", 0);
+        SceneManager.LoadScene("Game");
+    }
+
+    public void GoContinue()
+    {
+        PlayerPrefs.SetInt("CONTINUE", 1);
         SceneManager.LoadScene("Game");
     }
 
