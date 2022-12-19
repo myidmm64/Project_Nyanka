@@ -54,8 +54,8 @@ MonoBehaviour:
   - {x: 1, y: 0, z: 0}
   - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 2}
-  transMinAtk: 342
-  transMaxAtk: 378
+  transMinAtk: 500
+  transMaxAtk: 600
   transDef: 1
   transAttackRange:
   - {x: -1, y: 0, z: 1}

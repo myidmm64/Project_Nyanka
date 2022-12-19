@@ -19,6 +19,11 @@ public class AIAttack : Node
 
     public override NodeState Evaluate()
     {
+        if (_aIMainModule.isAttackComplete == true)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
         CoroutineHelper.StartCoroutine(Attack());
         state = NodeState.SUCCESS;
         return state;
@@ -28,6 +33,10 @@ public class AIAttack : Node
     {
         _aIMainModule.isAttackComplete = false;
         yield return new WaitUntil(() => !_aIMainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Move"));
+        if (_aIMainModule.isAttackComplete == true)
+        {
+            yield break;
+        }
         Debug.Log("AIAttack");
         Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;

@@ -3703,7 +3703,7 @@ MonoBehaviour:
   _modelController: {fileID: 9101508548270349251}
   isAttackComplete: 0
   isMoveComplete: 0
-  maxTarget: 3
+  maxTarget: 10
 --- !u!195 &9101508549074120678
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3728,7 +3728,7 @@ NavMeshAgent:
   m_ObstacleAvoidanceType: 0
 --- !u!95 &9101508549074120665
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3745,7 +3745,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &9101508548270349263
 MonoBehaviour:
   m_ObjectHideFlags: 0

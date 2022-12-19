@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 10_Stage_WarriorBoss
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: aeaa7f0fb3955d440857e47fb4ee5343, type: 3}
-  normalMinAtk: 150
-  normalMaxAtk: 250
-  normalDef: 85
-  hp: 25000
+  normalMinAtk: 175
+  normalMaxAtk: 275
+  normalDef: 50
+  hp: 11000
   classType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}
@@ -67,5 +67,5 @@ MonoBehaviour:
     - {x: -1, y: 0, z: 0}
   normalMinskill1: 550
   normalMaxskill1: 600
-  normalMinskill2: 60
-  normalMaxskill2: 80
+  normalMinskill2: 40
+  normalMaxskill2: 60

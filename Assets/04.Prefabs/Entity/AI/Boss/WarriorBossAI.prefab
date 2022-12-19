@@ -96,7 +96,7 @@ MonoBehaviour:
   _modelController: {fileID: 217491168940111018}
   isAttackComplete: 0
   isMoveComplete: 0
-  maxTarget: 3
+  maxTarget: 10
 --- !u!195 &217491169202798735
 NavMeshAgent:
   m_ObjectHideFlags: 0

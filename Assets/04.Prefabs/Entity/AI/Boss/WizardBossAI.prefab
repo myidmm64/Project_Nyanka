@@ -19511,12 +19511,12 @@ MonoBehaviour:
   _entityHud: {fileID: 5651113833192058292}
   _animator: {fileID: 4419509264329340419}
   _agent: {fileID: 4419509264329340476}
-  SkillCoolTime: 0300000005000000
-  m_SkilCoolTime: 0300000005000000
+  SkillCoolTime: 0200000000000000
+  m_SkilCoolTime: 0300000006000000
   _modelController: {fileID: 4419509264055157273}
   isAttackComplete: 0
   isMoveComplete: 0
-  maxTarget: 3
+  maxTarget: 10
 --- !u!195 &4419509264329340476
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -19,6 +19,12 @@ public class FinalBossAISkill1 : Node
 
     public override NodeState Evaluate()
     {
+        if (_aIMainModule.isAttackComplete == true)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        }
+
         bool isChk = false;
         int[] dirCnt = new int[4];
         for (int i = 0; i < (int)AttackDirection.Down + 1; i++)
@@ -60,6 +66,10 @@ public class FinalBossAISkill1 : Node
     IEnumerator Skill()
     {
         yield return new WaitUntil(() => !_aIMainModule.animator.GetCurrentAnimatorStateInfo(0).IsName("Move"));
+        if (_aIMainModule.isAttackComplete == true)
+        {
+            yield break;
+        }
         Vector3 lookPos = _aIMainModule.ChangeableCellIndex + CellUtility.GetAttackDirection(_aIMainModule.CurrentDir);
         lookPos.y = _transform.position.y;
 

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: YukoData
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
-  normalMinAtk: 114
-  normalMaxAtk: 126
+  normalMinAtk: 120
+  normalMaxAtk: 130
   normalDef: 30
   hp: 4000
   classType: 2
@@ -41,8 +41,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 2}
   - {x: 1, y: 0, z: 1}
   - {x: 1, y: 0, z: 2}
-  transMinAtk: 144
-  transMaxAtk: 159
+  transMinAtk: 160
+  transMaxAtk: 210
   transDef: 34
   transAttackRange:
   - {x: -1, y: 0, z: 1}

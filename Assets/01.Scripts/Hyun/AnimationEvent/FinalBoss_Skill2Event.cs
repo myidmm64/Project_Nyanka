@@ -35,7 +35,7 @@ public class FinalBoss_Skill2Event : EnemyAnimationEvent
     {
         GameObject obj = Instantiate(_attackPrefab0, transform);
         obj.transform.SetParent(null);
-        Destroy(obj, 4f);
+        Destroy(obj, 2.5f);
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill2Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         foreach (var a in players)

@@ -15,8 +15,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: acc4f986141c94142b86b30b86feb6a8, type: 3}
   normalMinAtk: 125
   normalMaxAtk: 175
-  normalDef: 30
-  hp: 5000
+  normalDef: 25
+  hp: 4500
   classType: 1
   normalAttackRange:
   - {x: -1, y: 0, z: 1}

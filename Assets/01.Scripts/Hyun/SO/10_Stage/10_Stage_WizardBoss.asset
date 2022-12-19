@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 10_Stage_WizardBoss
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 6a00308d36caa6646bc5ad097ad168b9, type: 3}
-  normalMinAtk: 250
-  normalMaxAtk: 300
-  normalDef: 40
-  hp: 20000
+  normalMinAtk: 225
+  normalMaxAtk: 275
+  normalDef: 30
+  hp: 6000
   classType: 3
   normalAttackRange:
   - {x: -10, y: 0, z: 0}
@@ -789,5 +789,5 @@ MonoBehaviour:
     - {x: 10, y: 0, z: 10}
   normalMinskill1: 300
   normalMaxskill1: 350
-  normalMinskill2: 40
-  normalMaxskill2: 50
+  normalMinskill2: 10
+  normalMaxskill2: 35

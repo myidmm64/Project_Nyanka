@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 9_Stage_FinalBoss
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: b983eb7b623f33d48b01900054be11f6, type: 3}
-  normalMinAtk: 600
-  normalMaxAtk: 900
-  normalDef: 80
+  normalMinAtk: 700
+  normalMaxAtk: 1100
+  normalDef: 85
   hp: 40000
   classType: 6
   normalAttackRange:
@@ -159,6 +159,6 @@ MonoBehaviour:
     - {x: 4, y: 0, z: 3}
     - {x: 4, y: 0, z: 4}
   normalMinskill1: 700
-  normalMaxskill1: 1600
-  normalMinskill2: 600
-  normalMaxskill2: 700
+  normalMaxskill1: 1800
+  normalMinskill2: 700
+  normalMaxskill2: 900
