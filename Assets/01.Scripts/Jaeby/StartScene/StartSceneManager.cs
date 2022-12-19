@@ -9,6 +9,11 @@ public class StartSceneManager : MonoBehaviour
     private Sequence _seq = null;
     private RectTransform _prevTrm = null;
 
+    private void Start()
+    {
+        Time.timeScale = 1f;
+    }
+
     public void ButtonAnimationStart(RectTransform trm)
     {
         trm.DOKill();
