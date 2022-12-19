@@ -92,7 +92,7 @@ public class PlayerAnimationEvent_Yuko_Skill : PlayerAnimationEvent
                     cells[i].block.ChangeBlock(_mainModule.elementType);
 
                 TurnManager.Instance.TurnCheckReset();
-                TurnManager.Instance.PressTurnCheck(_mainModule);
+                TurnManager.Instance.PlusTurnCheck();
                 DefTurnActionStart(1);
                 break;
             default:

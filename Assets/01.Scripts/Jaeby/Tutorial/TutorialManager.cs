@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoSingleTon<TutorialManager>
 {
@@ -9,7 +10,7 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     [SerializeField]
     private GameObject _wakamoLeftMoveButton = null; 
     [SerializeField]
-    private GameObject _wakamoRightMoveButton = null;
+    private GameObject _wakamoDownMoveButton = null;
     [SerializeField]
     private TutorialObject _tutorialObjPrefab = null;
     [SerializeField]
@@ -59,14 +60,14 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     }
 
 
-    public void WakamoRightSelectObj()
+    public void WakamoDownSelectObj()
     {
         TutorialObject o = Instantiate(_tutorialObjPrefab);
-        o.Init(_wakamo.CellIndex + Vector3Int.right,
+        o.Init(_wakamo.CellIndex + Vector3Int.forward * -1,
             () =>
             {
-                _wakamo.PreparationCellSelect(_wakamo.CellIndex + Vector3Int.right, false);
-                _wakamoRightMoveButton.SetActive(true);
+                _wakamo.PreparationCellSelect(_wakamo.CellIndex + Vector3Int.forward * -1, false);
+                _wakamoDownMoveButton.SetActive(true);
             }
             );
     }
@@ -100,6 +101,11 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
     public void WakamoMoveLeftOne()
     {
         _wakamo.PlayerMove(_wakamo.CellIndex + Vector3Int.left);
+    }
+
+    public void WakamoMoveDownTwo()
+    {
+        _wakamo.PlayerMove(_wakamo.CellIndex + Vector3Int.forward * -1);
     }
 
     public void SuzukaMove()
@@ -140,7 +146,29 @@ public class TutorialManager : MonoSingleTon<TutorialManager>
 
     public void ClickModeFalse()
     {
+        UIManager.Instance.TargettingUIEnable(false, true);
         ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, false);
+    }
+
+    public void TurnEndAndWakamoSelect()
+    {
+        TurnAction turnAction = new TurnAction(1, null, WakamoSelectObject, null);
+        TurnManager.Instance.TurnActionAdd(turnAction, false);
+    }
+
+    public void WakamoSkill()
+    {
+        _wakamo.TrySkill();
+    }
+
+    public void WakamoTransform()
+    {
+        _wakamo.Transformation();
+    }
+
+    public void GoStart()
+    {
+        SceneManager.LoadScene("Start");
     }
 }
 

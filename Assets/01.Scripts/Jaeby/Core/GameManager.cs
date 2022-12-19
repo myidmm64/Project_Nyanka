@@ -10,6 +10,7 @@ public class GameManager : MonoSingleTon<GameManager>
 {
     [SerializeField]
     private bool _isTutorial = false;
+    public bool IsTutorial => _isTutorial;
 
     private float _timeScale = 1f;
     public float TimeScale { get => _timeScale; set { _timeScale = value; Time.timeScale = _timeScale; } }

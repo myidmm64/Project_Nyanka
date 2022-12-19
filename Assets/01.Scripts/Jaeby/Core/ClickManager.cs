@@ -37,7 +37,8 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (EventSystem.current.IsPointerOverGameObject()
+            || GameManager.Instance.IsTutorial) return;
         Select();
         UnSelect();
     }

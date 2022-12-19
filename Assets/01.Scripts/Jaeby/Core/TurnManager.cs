@@ -174,6 +174,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
         UIManager.Instance.TargettingUIPlayerTurnStart();
         NextTurn();
         enemy_TargetLists.Clear();
+
+        if (GameManager.Instance.IsTutorial)
+            yield break;
         UIManager.Instance.TargettingUIEnable(true, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }
