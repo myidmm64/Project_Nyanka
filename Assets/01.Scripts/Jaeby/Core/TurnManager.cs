@@ -90,6 +90,9 @@ public class TurnManager : MonoSingleTon<TurnManager>
     {
         _turn = 0;
         _gameEnded = false;
+        for (int i = 0; i < _turnActions.Count; i++)
+            _turnActions[i].Locked = true;
+        _turnActions.Clear();
         NextTurn();
     }
 
