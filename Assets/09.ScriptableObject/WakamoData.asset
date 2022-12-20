@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a0acebc985e954a9cf6008362e61de, type: 3}
   m_Name: WakamoData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 9b3540c5b7a7014449977ea9629c1791, type: 3}
+  sprite: {fileID: 21300000, guid: d994826fce97fb147a70ed45ce32def7, type: 3}
   normalMinAtk: 285
   normalMaxAtk: 315
   normalDef: 20

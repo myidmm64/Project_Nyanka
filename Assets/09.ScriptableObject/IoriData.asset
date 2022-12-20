@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a0acebc985e954a9cf6008362e61de, type: 3}
   m_Name: IoriData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 84aabf79aa027f942bd6a5143c58f227, type: 3}
-  normalMinAtk: 285
-  normalMaxAtk: 315
-  normalDef: 2
-  hp: 1000
+  sprite: {fileID: 21300000, guid: 49266657df9f71043b89d7bf9f98d25d, type: 3}
+  normalMinAtk: 250
+  normalMaxAtk: 400
+  normalDef: 3
+  hp: 1100
   classType: 5
   normalAttackRange:
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2}
   normalMoveRange:
   - {x: -2, y: 0, z: -1}
   - {x: -2, y: 0, z: 1}
@@ -69,8 +70,8 @@ MonoBehaviour:
   - {x: 2, y: 0, z: 0}
   - {x: 2, y: 0, z: 1}
   - {x: 2, y: 0, z: 2}
-  transMinAtk: 342
-  transMaxAtk: 378
+  transMinAtk: 300
+  transMaxAtk: 600
   transDef: 1
   transAttackRange:
   - {x: 0, y: 0, z: 1}

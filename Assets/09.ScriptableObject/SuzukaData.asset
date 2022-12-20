@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a0acebc985e954a9cf6008362e61de, type: 3}
   m_Name: SuzukaData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 36c3a14551a325f45b1e952b4902a937, type: 3}
+  sprite: {fileID: 21300000, guid: f310d148e9d139c4394172391b197ba0, type: 3}
   normalMinAtk: 342
   normalMaxAtk: 378
   normalDef: 5
