@@ -24,6 +24,7 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
 
     public void Skill1Start()
     {
+        _aIMainModule.isAttackComplete = true;
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         //Debug.Log(players.Count);
@@ -54,7 +55,7 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
 
     public void Skill1End()
     {
-        _aIMainModule.isAttackComplete = true;
+        //_aIMainModule.isAttackComplete = true;
         _aIMainModule.animator.Play("Idle");
         _aIMainModule.animator.Update(0);
     }

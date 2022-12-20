@@ -282,7 +282,7 @@ BoxCollider:
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3863910412006832713
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -299,7 +299,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &3863910412006832718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff9f01d1841e4754f8636c4a5c8ce68d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dataSO: {fileID: 11400000, guid: b17f5a37a42506a4c9b7418134cc8fd0, type: 2}
+  _dataSO: {fileID: 11400000, guid: 3593caecf2046c14ea32edfc484463c0, type: 2}
   _entityType: 1
   _elementType: 3
   _entityHud: {fileID: 5090989911174310683}
@@ -442,6 +442,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalAttackEvent: {fileID: 3863910412006832711}
   _normalSkillEvent: {fileID: 3863910412006832708}
+  OnAttackEnd:
+    m_PersistentCalls:
+      m_Calls: []
   _transAttackEvent: {fileID: 3863910412006832711}
   _transSkillEvent: {fileID: 3863910412006832709}
 --- !u!114 &3863910412006832711
@@ -513,7 +516,7 @@ MonoBehaviour:
     type: 3}
   _attackPrefab1: {fileID: 3051257187743926263, guid: 15f40f80c5857a042ba47ec2bd4e6564,
     type: 3}
-  _damageMagni: 0.5
+  _damageMagni: 1
 --- !u!1 &3863910412182684426
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,7 +837,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &3863910412610135449
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -851,7 +854,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3863910412875738514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 60476920, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].x
-      value: 0.035707325
+      value: 0.035708427
       objectReference: {fileID: 0}
     - target: {fileID: 60476920, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].y
@@ -1482,7 +1485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 60476920, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
-      value: 0.016055465
+      value: 0.016055495
       objectReference: {fileID: 0}
     - target: {fileID: 87815623, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_RotationOffset.x
@@ -1538,11 +1541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379094529, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].y
-      value: 0.21863604
+      value: 0.21863616
       objectReference: {fileID: 0}
     - target: {fileID: 1379094529, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_TranslationOffsets.Array.data[0].z
-      value: 0.0120152235
+      value: 0.012015253
       objectReference: {fileID: 0}
     - target: {fileID: 1398096425, guid: 2174b7c0d515d9c4bb5ff2ccf89e280c, type: 3}
       propertyPath: m_RotationOffset.x

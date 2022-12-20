@@ -43,6 +43,11 @@ public class StartSceneManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void GoStart()
+    {
+        SceneManager.LoadScene("Start");
+    }
+
     public void GoExit()
     {
         Application.Quit();
@@ -50,6 +55,6 @@ public class StartSceneManager : MonoBehaviour
 
     public void GoCredit()
     {
-
+        SceneManager.LoadScene("EndingScene");
     }
 }
