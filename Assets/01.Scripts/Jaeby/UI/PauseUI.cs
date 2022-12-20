@@ -9,12 +9,6 @@ public class PauseUI : MonoBehaviour
     private bool _isPaused = false;
     private float _prevTimeScale = 0f;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            PauseAndResume();
-    }
-
     public void PauseAndResume()
     {
         if (_isPaused)

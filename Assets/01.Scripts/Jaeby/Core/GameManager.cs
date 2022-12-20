@@ -143,6 +143,8 @@ public class GameManager : MonoSingleTon<GameManager>
 
         if(CubeGrid != null)
         {
+            CubeGrid.ClcikViewEnd();
+            CubeGrid.ViewEnd();
             Destroy(CubeGrid.transform.root.gameObject);
             CubeGrid = null;
         }
