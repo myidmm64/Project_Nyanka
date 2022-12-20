@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using static Define;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSingleTon<GameManager>
 {
@@ -91,22 +92,36 @@ public class GameManager : MonoSingleTon<GameManager>
         }
         else
         {
-            if (PlayerPrefs.GetInt("CONTINUE", 0) == 0)
+            if (PlayerPrefs.GetInt("CONTINUE", 0) == 1)
                 _stage = PlayerPrefs.GetInt("STAGE", 0);
-            Debug.Log(_stage);
+            else
+                _stage = 0;
             StageChange();
         }
     }
 
-    public void StageClear()
+    public void NextStage()
     {
         _stage++;
+        _stage = Mathf.Clamp(_stage, 0, _stageSettingOptions.Count -1);
         StageChange();
     }
 
-    public void StageFail()
+    public void PrevStage()
+    {
+        _stage--;
+        _stage = Mathf.Clamp(_stage, 0, _stageSettingOptions.Count -1);
+        StageChange();
+    }
+
+    public void RestartStage()
     {
         StageChange();
+    }
+
+    public void GoStartScene()
+    {
+        SceneManager.LoadScene("Start");
     }
 
     private void StageChange()
@@ -126,7 +141,11 @@ public class GameManager : MonoSingleTon<GameManager>
                 if (_entitys[i].isActiveAndEnabled)
                     Destroy(_entitys[i].gameObject);
 
-        Destroy(CubeGrid?.gameObject);
+        if(CubeGrid != null)
+        {
+            Destroy(CubeGrid.transform.root.gameObject);
+            CubeGrid = null;
+        }
         GameObject stageObj = Instantiate(_currentStageOption.stagePrefab, null);
         CubeGrid = stageObj.GetComponentInChildren<Grid3D>();
 
@@ -140,6 +159,8 @@ public class GameManager : MonoSingleTon<GameManager>
         if(_first == false)
             OnNextStage?.Invoke();
         _first = false;
+
+        _nextStageLoadingObject.SetActive(false);
 
         DialogSystem.Instance.TryStartDialog(_currentStageOption.startDialog);
     }
