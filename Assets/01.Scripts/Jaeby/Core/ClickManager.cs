@@ -32,21 +32,25 @@ public class ClickManager : MonoSingleTon<ClickManager>
     private LayerMask _laycastMask = 0;
 
     private Action<BaseMainModule> _entitySelectedAction = null;
-    public Action<BaseMainModule> EntitySelectedAction{ get =>
-            _entitySelectedAction; set => _entitySelectedAction = value;}
+    public Action<BaseMainModule> EntitySelectedAction
+    {
+        get =>
+            _entitySelectedAction; set => _entitySelectedAction = value;
+    }
 
     private void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject()
             || GameManager.Instance.IsTutorial) return;
-        Select();
-        UnSelect();
+        if (Input.GetMouseButtonDown(0))
+            Select();
+        if (Input.GetMouseButtonDown(1))
+            UnSelect();
     }
 
     private void Select()
     {
         if (_leftClickMode == LeftClickMode.Nothing) return;
-        if (Input.GetMouseButtonDown(0) == false) return;
         RaycastHit hit;
         if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask) == false) return;
 
@@ -67,9 +71,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (module is PlayerMainModule)
             _currentPlayer = module as PlayerMainModule;
         else
-            _currentSelectedEntity = module;    
+            _currentSelectedEntity = module;
 
-        if(module is PlayerMainModule)
+        if (module is PlayerMainModule)
             module.Selected();
         else if (module is AIMainModule)
             module.Selected();
@@ -90,7 +94,6 @@ public class ClickManager : MonoSingleTon<ClickManager>
     public void UnSelect()
     {
         if (_rightClickLock) return;
-        if (Input.GetMouseButtonDown(1) == false) return;
         SelectedEntityEnd();
     }
 

@@ -3,15 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class StartSceneManager : MonoBehaviour
 {
     private Sequence _seq = null;
     private RectTransform _prevTrm = null;
 
+    [SerializeField]
+    private PlayableDirector _startCutScene = null;
+    [SerializeField]
+    private GameObject _skipButton = null;
+    [SerializeField]
+    private GameObject _mainCanvas = null;
+    private bool _isFirst = true;
+
     private void Start()
     {
         Time.timeScale = 1f;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            if(_isFirst)
+                CutSceneSkip();
+    }
+
+    public void CutSceneSkip ()
+    {
+        _isFirst = false;
+        _skipButton.SetActive(false);
+        _mainCanvas.SetActive(true);
+        _startCutScene.Stop();
     }
 
     public void ButtonAnimationStart(RectTransform trm)

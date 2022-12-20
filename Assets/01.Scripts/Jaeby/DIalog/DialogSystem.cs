@@ -64,13 +64,13 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     public void ClearDialog()
     {
         _donTouchPanel.SetActive(true);
-        TryStartDialog(GameManager.Instance.ClearDialog, GameManager.Instance.StageClear);
+        TryStartDialog(GameManager.Instance.ClearDialog, GameManager.Instance.NextStage);
     }
 
     public void FailDialog()
     {
         _donTouchPanel.SetActive(true);
-        TryStartDialog(GameManager.Instance.FailDialog, GameManager.Instance.StageFail);
+        TryStartDialog(GameManager.Instance.FailDialog, GameManager.Instance.RestartStage);
     }
 
     public void TryStartDialog(DialogEvent data, Action EndCallback = null)
@@ -85,7 +85,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
             StopCoroutine(_dialogCoroutine);
             EndDialog();
         }
-        _dialogCoroutine = StartCoroutine(DialogStart(data));
+        _dialogCoroutine = StartCoroutine(DialogStart(data, EndCallback));
     }
 
     private IEnumerator DialogStart(DialogEvent data, Action EndCallback = null)
@@ -123,6 +123,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
             _currentData.dialogs[i].Callback?.Invoke();
         }
         EndDialog();
+        EndCallback?.Invoke();
     }
 
     private IEnumerator ShakeCoroutine()
