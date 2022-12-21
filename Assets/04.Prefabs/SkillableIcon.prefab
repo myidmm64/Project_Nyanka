@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7889572632218410624}
   - component: {fileID: 7889572632218410631}
   - component: {fileID: 2997607467750647857}
-  - component: {fileID: -4152459086475906476}
   m_Layer: 0
   m_Name: SkillableIcon
   m_TagString: Untagged
@@ -89,7 +88,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2997607467750647857
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -106,19 +105,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-4152459086475906476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7889572632218410630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41caeed8824264348a724a0aadb51999, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7889572632427064480
 GameObject:
   m_ObjectHideFlags: 0

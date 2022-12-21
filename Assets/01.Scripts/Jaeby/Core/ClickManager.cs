@@ -40,8 +40,24 @@ public class ClickManager : MonoSingleTon<ClickManager>
 
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject()
-            || GameManager.Instance.IsTutorial) return;
+        if (GameManager.Instance.IsTutorial)
+            return;
+        if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                var touch = Input.GetTouch(i);
+                if (touch.phase == TouchPhase.Began)
+                    if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                        return;
+            }
+        }
+        else
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+        }
+
         if (Input.GetMouseButtonDown(0))
             Select();
         if (Input.GetMouseButtonDown(1))

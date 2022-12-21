@@ -27,6 +27,8 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
     [SerializeField]
     private GameObject _donTouchPanel = null;
     [SerializeField]
+    private TextMeshProUGUI _nameText = null; // 텍스트
+    [SerializeField]
     private TextMeshProUGUI _contextText = null; // 텍스트
     [SerializeField]
     private List<Sprite> _characterImages = new List<Sprite>(); // 얼굴들
@@ -96,6 +98,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         {
             _rectTrm.anchoredPosition = _currentData.dialogs[i].position;
             _characterImage.sprite = _characterImages[_currentData.dialogs[i].imageIndex];
+            _nameText.SetText(_currentData.dialogs[i].characterName);
             for (int j = 0; j < _currentData.dialogs[i].contexts.Length; j++)
             {
                 _textEnded = false;
@@ -149,6 +152,8 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogGroup.interactable = true;
         if (_donTouchPanel != null)
             _donTouchPanel.SetActive(true);
+        if (GameManager.Instance.IsTutorial == false)
+            ClickManager.Instance.ClickModeSet(LeftClickMode.Nothing, true);
     }
 
     private void EndDialog()
@@ -165,5 +170,7 @@ public class DialogSystem : MonoSingleTon<DialogSystem>
         _dialogGroup.interactable = false;
         if (_donTouchPanel != null)
             _donTouchPanel.SetActive(false);
+        if (GameManager.Instance.IsTutorial == false)
+            ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
     }
 }
