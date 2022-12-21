@@ -24,7 +24,7 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
 
     public void Skill1Start()
     {
-        _aIMainModule.isAttackComplete = true;
+        //_aIMainModule.isAttackComplete = true;
         List<Vector3Int> attackRange = CellUtility.GetAttackVectorByDirections(_aIMainModule.CurrentDir, _aIMainModule.BossSKill1Range);
         List<PlayerMainModule> players = CellUtility.FindTarget<PlayerMainModule>(_aIMainModule.ChangeableCellIndex, attackRange, true);
         //Debug.Log(players.Count);
@@ -50,12 +50,13 @@ public class ArcherBoss_Skill1Event : EnemyAnimationEvent
         obj.transform.SetParent(null);
         Arrow arrow = obj.AddComponent<Arrow>();
         arrow.ArrowInit(-_arrowSpeed, transform.position + Vector3.up, Quaternion.LookRotation(-transform.forward), new List<Vector3Int>(),
-            10, 1.4f, Random.Range(_aIMainModule.minDamageSkill1, _aIMainModule.maxDamageSkill1), _aIMainModule.elementType, Random.Range(0, 100) < 50, false, hitEffect);
+            10, 2f, Random.Range(_aIMainModule.minDamageSkill1, _aIMainModule.maxDamageSkill1), _aIMainModule.elementType, Random.Range(0, 100) < 50, false, hitEffect);
     }
 
     public void Skill1End()
     {
         //_aIMainModule.isAttackComplete = true;
+        _aIMainModule.isAttackComplete = true;
         _aIMainModule.animator.Play("Idle");
         _aIMainModule.animator.Update(0);
     }
