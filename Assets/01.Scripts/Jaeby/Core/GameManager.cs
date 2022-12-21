@@ -124,6 +124,11 @@ public class GameManager : MonoSingleTon<GameManager>
         SceneManager.LoadScene("Start");
     }
 
+    public void GoCreditScene()
+    {
+        SceneManager.LoadScene("EndingScene");
+    }
+
     private void StageChange()
     {
         _currentStageOption = _stageSettingOptions[_stage];

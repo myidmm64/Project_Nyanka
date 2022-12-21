@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162004c50fa198647973f7acb1b7ba7a, type: 3}
   m_Name: TutorialDataSO 1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 15476254265e7974c8287b2e9a022ef5, type: 3}
+  sprite: {fileID: 21300000, guid: 2af4471d946829d40877ef7ab1b9343c, type: 3}
   normalMinAtk: 50
   normalMaxAtk: 100
   normalDef: 100
