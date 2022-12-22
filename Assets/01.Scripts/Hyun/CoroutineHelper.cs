@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 모노비헤이비어가 없는 클래스들을 위한 코루틴 헬퍼
+/// </summary>
 public class CoroutineHelper : MonoBehaviour
 {
     private static MonoBehaviour monoInstance;

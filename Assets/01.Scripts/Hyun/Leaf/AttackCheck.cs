@@ -11,6 +11,7 @@ public class AttackCheck : Node
     {
         _aIMainModule = aIMainModule;
     }
+    //공격 범위안에 플레이어가 있는지 4방향으로 체크
     public override NodeState Evaluate()
     {
         Debug.Log("AttackCheck");

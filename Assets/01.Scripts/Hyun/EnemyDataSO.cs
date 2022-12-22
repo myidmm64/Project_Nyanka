@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 기본 몬스터 SO, 스킬 및 공격 범위, 데미지
+/// </summary>
 [CreateAssetMenu(menuName = "SO/Enemy/Data")]
 public class EnemyDataSO : EntityDataSO
 {

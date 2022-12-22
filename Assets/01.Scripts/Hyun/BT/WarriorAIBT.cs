@@ -10,7 +10,7 @@ public class WarriorAIBT : BehaviorTree.Tree
         _aIMainModule = GetComponent<AIMainModule>();
         base.Start();
     }
-
+    
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>

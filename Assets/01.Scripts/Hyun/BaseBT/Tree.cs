@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
+
+    /// <summary>
+    /// 처음에 트리형 구조로 만들어주고, 실행도 시켜줌
+    /// </summary>
     public abstract class Tree : MonoBehaviour
     {
         private Node _root = null;

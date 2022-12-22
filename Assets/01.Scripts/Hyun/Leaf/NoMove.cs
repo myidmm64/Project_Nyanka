@@ -11,7 +11,7 @@ public class NoMove : Node
     {
         _aIMainModule = aIMainModule;
     }
-
+    //움직이지 않고  _aIMainModule.isMoveComplete = true;를 해주는 함수
     public override NodeState Evaluate()
     {
         _aIMainModule.isMoveComplete = true;

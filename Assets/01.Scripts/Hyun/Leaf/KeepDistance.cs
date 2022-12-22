@@ -26,12 +26,13 @@ public class KeepDistance : Node
         Debug.Log(state);
         return state;
     }
-
+  
     private IEnumerator Keep_Distance()
     {
         Debug.Log("거리두기");
+        //공격 후 실행
         yield return new WaitUntil(() => _aIMainModule.isAttackComplete);   
-
+        //이미 움직였었는지 체크
         if (_aIMainModule.isMoveComplete)
             yield break;
 
@@ -46,7 +47,6 @@ public class KeepDistance : Node
         {
             _aIMainModule.cells[key] = 0;
         });
-
         _aIMainModule.cells.Keys.ToList().ForEach(key =>
         {
             foreach (var player in GameManager.Instance.LivePlayers)
@@ -57,7 +57,7 @@ public class KeepDistance : Node
                 _aIMainModule.cells[key] += (tempX > tempZ) ? tempX : tempZ;
             }
         });
-
+        //가장 가까운 플레이어 찾기
         Vector3 targetPos = Vector3.zero;
         float _dis = 9999999;
         foreach (var player in GameManager.Instance.LivePlayers)
@@ -71,7 +71,7 @@ public class KeepDistance : Node
             }
         }
         targetPos.y = _transform.position.y;
-
+        //가중치 체크
         int m_W = 0;
         Vector3Int _pos = Vector3Int.zero;
         List<Cell> movableRange = CellUtility.SearchCells(_aIMainModule.ChangeableCellIndex, _aIMainModule.DataSO.normalMoveRange, false);
@@ -85,7 +85,7 @@ public class KeepDistance : Node
                 _pos = key;
             }
         }
-
+        //가중치가 가장 작은 쪽으로 이동
         _aIMainModule.animator.Play("Move");
         _aIMainModule.animator.Update(0);
         _aIMainModule.Agent.SetDestination(_pos);

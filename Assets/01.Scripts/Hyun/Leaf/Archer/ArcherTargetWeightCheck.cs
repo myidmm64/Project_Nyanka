@@ -13,7 +13,6 @@ public class ArcherTargetWeightCheck : Node
         _aIMainModule = aIMainModule;
     }
 
-    //궁수 ai는 조금만 움직여도 때릴 수 있는 타겟으로 우선 설정
     public override NodeState Evaluate()
     {
         Debug.Log("ArcherTargetWeightCheck");

@@ -11,7 +11,7 @@ public class RotateAttackRange : Node
     {
         _aIMainModule = aIMainModule;
     }
-
+    //공격 방향으로 방향 회전해주는 함수 가장 많은 적이 있는 쪽으로 방향 회전
     public override NodeState Evaluate()
     {
         Debug.Log("RotateAttackRange");

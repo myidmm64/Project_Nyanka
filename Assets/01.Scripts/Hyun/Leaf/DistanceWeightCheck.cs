@@ -12,6 +12,7 @@ public class DistanceWeightCheck : Node
         _aIMainModule = aIMainModule;
     }
 
+    //거리 가중치 체크 가까울수록 가중치가 작음
     public override NodeState Evaluate()
     {
         Debug.Log("DistanceWeightCheck");

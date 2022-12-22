@@ -18,7 +18,7 @@ public class MoveToTarget : Node
         CoroutineHelper.StartCoroutine(C_MoveToTarget());
         return state;
     }
-
+    //가중치가 작은 쪽으로 이동하는 함수
     IEnumerator C_MoveToTarget()
     {
         //yield return new WaitUntil(() => _aIMainModule.isAttackComplete);

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
+    /// <summary>
+    /// 순서대로 자식 노드를 실행 시켜주는 Selector 노드가 success면 바로 리턴
+    /// </summary>
     public class Selector : Node
     {
         public Selector() : base() { }

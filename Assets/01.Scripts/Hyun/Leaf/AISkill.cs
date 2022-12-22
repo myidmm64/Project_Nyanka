@@ -4,7 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 using BehaviorTree;
 using Sequence = DG.Tweening.Sequence;
-
+/// <summary>
+/// AIAttack과 똑같은 구조 다른점이 SKill 쿨타임 체크와 애니메이션 실행
+/// </summary>
 public class AISkill : Node
 {
     AIMainModule _aIMainModule;

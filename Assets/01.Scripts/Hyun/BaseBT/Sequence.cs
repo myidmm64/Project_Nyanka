@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace BehaviorTree
 {
+    /// <summary>
+    /// Selector와 비슷하게 자식 노드를 실행 시켜주지만 다른점은 Failure가 나오면 바로 반환
+    /// </summary>
     public class Sequence : Node
     {
         public Sequence() : base() { }

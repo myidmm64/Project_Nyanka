@@ -12,6 +12,7 @@ public class FinalAttackCheck : Node
         _aIMainModule = aIMainModule;
     }
 
+    //마지막 공격 체크 다른 점은 마지막이면 isAttackComplete=true로 해줘야해서 따로 만듬
     public override NodeState Evaluate()
     {
         Debug.Log("AttackCheck");
