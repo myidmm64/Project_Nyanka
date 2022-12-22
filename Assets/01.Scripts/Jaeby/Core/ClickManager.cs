@@ -9,35 +9,38 @@ using static Define;
 
 public class ClickManager : MonoSingleTon<ClickManager>
 {
-    private Vector3Int _selectCellIndex = Vector3Int.zero;
+    private Vector3Int _selectCellIndex = Vector3Int.zero; // 선택된 셀 인덱스
     public Vector3Int SelectCellIndex => _selectCellIndex;
 
     [SerializeField]
-    private LeftClickMode _leftClickMode = LeftClickMode.AllClick;
+    private LeftClickMode _leftClickMode = LeftClickMode.AllClick; // 왼쪽클릭 제한
     public LeftClickMode LeftClickMode
     {
         get => _leftClickMode;
         set => _leftClickMode = value;
     }
-    private bool _rightClickLock = false;
+    private bool _rightClickLock = false; // 오른쪽 클릭 제한
 
 
     [SerializeField]
-    private BaseMainModule _currentSelectedEntity = null;
+    private BaseMainModule _currentSelectedEntity = null; // 선택된 AI
     [SerializeField]
-    private PlayerMainModule _currentPlayer = null;
+    private PlayerMainModule _currentPlayer = null; // 선택된 플레이어
     public PlayerMainModule CurrentPlayer => _currentPlayer;
 
     [SerializeField]
-    private LayerMask _laycastMask = 0;
+    private LayerMask _laycastMask = 0; // 레이캐스트 마스크
 
-    private Action<BaseMainModule> _entitySelectedAction = null;
+    private Action<BaseMainModule> _entitySelectedAction = null; // 선택 액션
     public Action<BaseMainModule> EntitySelectedAction
     {
         get =>
             _entitySelectedAction; set => _entitySelectedAction = value;
     }
 
+    /// <summary>
+    /// 입력 체크
+    /// </summary>
     private void Update()
     {
         if (GameManager.Instance.IsTutorial)
@@ -64,6 +67,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
             UnSelect();
     }
 
+    /// <summary>
+    /// 선택
+    /// </summary>
     private void Select()
     {
         if (_leftClickMode == LeftClickMode.Nothing) return;
@@ -71,7 +77,7 @@ public class ClickManager : MonoSingleTon<ClickManager>
         if (Physics.Raycast(Cam.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _laycastMask) == false) return;
 
         if (hit.collider.GetComponent<Cell>() != null)
-            SellSelect(hit.collider.GetComponent<Cell>());
+            CellSelect(hit.collider.GetComponent<Cell>());
 
         if (_leftClickMode == LeftClickMode.JustCell) return;
 
@@ -79,6 +85,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
             EntitySelect(hit.collider.GetComponent<BaseMainModule>());
     }
 
+    /// <summary>
+    /// 엔티티 선택
+    /// </summary>
     private void EntitySelect(BaseMainModule module)
     {
         if (module.Selectable == false)
@@ -89,16 +98,16 @@ public class ClickManager : MonoSingleTon<ClickManager>
         else
             _currentSelectedEntity = module;
 
-        if (module is PlayerMainModule)
-            module.Selected();
-        else if (module is AIMainModule)
-            module.Selected();
+        module.Selected();
 
         EntitySelectedAction?.Invoke(module);
         _selectCellIndex = module.CellIndex;
     }
 
-    private void SellSelect(Cell info)
+    /// <summary>
+    /// 셀 선택
+    /// </summary>
+    private void CellSelect(Cell info)
     {
         _selectCellIndex = info.GetIndex();
         if (_currentPlayer != null)
@@ -107,12 +116,18 @@ public class ClickManager : MonoSingleTon<ClickManager>
             CubeGrid.ClickView(info.GetIndex(), false);
     }
 
+    /// <summary>
+    /// 선택 취소
+    /// </summary>
     public void UnSelect()
     {
         if (_rightClickLock) return;
         SelectedEntityEnd();
     }
 
+    /// <summary>
+    /// 강제 선택 (프레스 턴)
+    /// </summary>
     public void ForceSelect(PlayerMainModule player)
     {
         SelectedEntityEnd();
@@ -121,6 +136,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _selectCellIndex = player.CellIndex;
     }
 
+    /// <summary>
+    /// 프레스 턴 아닌 강제 선택
+    /// </summary>
     public void TryNormalSelect(BaseMainModule module)
     {
         SelectedEntityEnd();
@@ -128,6 +146,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _selectCellIndex = module.CellIndex;
     }
 
+    /// <summary>
+    /// 턴 변경 리셋
+    /// </summary>
     public void ClickManagerReset()
     {
         ClickModeSet(LeftClickMode.AllClick, false);
@@ -135,6 +156,9 @@ public class ClickManager : MonoSingleTon<ClickManager>
         CameraManager.Instance.CameraSelect(VCamTwo);
     }
 
+    /// <summary>
+    /// 선택 해제
+    /// </summary>
     private void SelectedEntityEnd()
     {
         _currentPlayer?.SelectEnd();
@@ -144,24 +168,36 @@ public class ClickManager : MonoSingleTon<ClickManager>
         EntitySelectedAction?.Invoke(null);
     }
 
+    /// <summary>
+    /// 행동 종료 버튼
+    /// </summary>
     public void PlayerCancel()
     {
         if (_currentPlayer == null) return;
         _currentPlayer.BehavCancel();
     }
 
+    /// <summary>
+    /// 플레이어 대기 버튼
+    /// </summary>
     public void PlayerIdle()
     {
         if (_currentPlayer == null) return;
         _currentPlayer.PlayerIdle();
     }
 
+    /// <summary>
+    /// 플레이어 이동 버튼
+    /// </summary>
     public void PlayerMove()
     {
         if (_currentPlayer == null) return;
         _currentPlayer.PlayerMove(_selectCellIndex);
     }
 
+    /// <summary>
+    /// 플레이어 변신 버튼
+    /// </summary>
     public void PlayerTryTransform()
     {
         if (_currentPlayer == null) return;
@@ -170,12 +206,18 @@ public class ClickManager : MonoSingleTon<ClickManager>
         _currentPlayer.Transformation();
     }
 
+    /// <summary>
+    /// 플레이어 스킬 버튼
+    /// </summary>
     public void PlayerSkill()
     {
         if (_currentPlayer == null) return;
         _currentPlayer.TrySkill();
     }
 
+    /// <summary>
+    /// 클릭 모드 세팅
+    /// </summary>
     public void ClickModeSet(LeftClickMode left, bool right)
     {
         _leftClickMode = left;

@@ -161,7 +161,6 @@ public class PlayerMainModule : BaseMainModule
         _attackMode = false;
         VCamOne.Follow = transform;
         CameraManager.Instance.CameraSelect(VCamOne);
-        //ClickManager.Instance.ClickModeSet(LeftClickMode.JustCell, false);
         ClickManager.Instance.ClickModeSet(LeftClickMode.AllClick, false);
         CubeGrid.ClcikViewEnd();
         UIManager.Instance.UIInit(this);

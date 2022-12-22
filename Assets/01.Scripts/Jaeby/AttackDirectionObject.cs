@@ -6,16 +6,19 @@ using static Define;
 public class AttackDirectionObject : PoolAbleObject
 {
     [SerializeField]
-    private Color _attackColor = Color.white;
+    private Color _attackColor = Color.white; // 기본 공격 색
     [SerializeField]
-    private Color _skillColor = Color.white;
+    private Color _skillColor = Color.white; // 스킬 공격 색
     [SerializeField]
-    private SpriteRenderer _spriteRenderer = null;
+    private SpriteRenderer _spriteRenderer = null; // 아이콘 렌더러
 
-    private PlayerMainModule _player = null;
-    private bool _isSkillObj = false;
-    private AttackDirection _dir = AttackDirection.Up;
+    private PlayerMainModule _player = null; // 모듈 저장소
+    private bool _isSkillObj = false; // 스킬인지 체크용
+    private AttackDirection _dir = AttackDirection.Up; // 방향
 
+    /// <summary>
+    /// 초기화
+    /// </summary>
     public void Initailize(AttackDirection dir, PlayerMainModule player, bool skill)
     {
         _isSkillObj = skill;

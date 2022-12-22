@@ -17,12 +17,12 @@ public enum RangeType
 
 public class EntityDataSOData : MonoBehaviour
 {
-    public EntityDataSO targetSO = null;
-    public Vector3Int startVec = Vector3Int.zero;
-    public Vector3Int endVec = Vector3Int.zero;
-    public RangeType rangeType = RangeType.None;
+    public EntityDataSO targetSO = null; // 변경시킬 SO
+    public Vector3Int startVec = Vector3Int.zero; // 시작 벡터
+    public Vector3Int endVec = Vector3Int.zero; // 끝 벡터
+    public RangeType rangeType = RangeType.None; // 추가시킬 타입
 
-    public List<Vector3Int> nonSqVectors = new List<Vector3Int>();
+    public List<Vector3Int> nonSqVectors = new List<Vector3Int>(); // 사각형이 아닌 도형 추가할 때 쓰는 벡터 리스트
 
     [ContextMenu("추가")]
     public void PlusRange()

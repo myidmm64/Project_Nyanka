@@ -10,10 +10,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoSingleTon<GameManager>
 {
     [SerializeField]
-    private bool _isTutorial = false;
+    private bool _isTutorial = false; // 튜토리얼?
     public bool IsTutorial => _isTutorial;
 
-    private float _timeScale = 1f;
+    private float _timeScale = 1f; // 타임스케일
     public float TimeScale { get => _timeScale; set { _timeScale = value; Time.timeScale = _timeScale; } }
 
     #region 엔티티 관리
@@ -59,14 +59,14 @@ public class GameManager : MonoSingleTon<GameManager>
     #endregion
 
     [SerializeField]
-    private int _maxAttackPoint = 0;
+    private int _maxAttackPoint = 0; // 전투 포인트
     public int MaxAttackPoint => _maxAttackPoint;
 
-    private int _stage = 0;
+    private int _stage = 0; // 현재 스테이지
     [SerializeField]
     private Transform _mapParents = null; // 맵 부모들
     [SerializeField]
-    private TextMeshProUGUI _mapNameText = null;
+    private TextMeshProUGUI _mapNameText = null; 
 
     [SerializeField]
     private GameObject _nextStageLoadingObject = null;

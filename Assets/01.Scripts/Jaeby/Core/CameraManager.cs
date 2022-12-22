@@ -24,6 +24,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
     private CinemachineVirtualCamera _lastCam = null;
     private Sequence _sizeSeq = null;
 
+    /// <summary>
+    /// 카메라 초기화
+    /// </summary>
     private void Awake()
     {
         cams.AddRange(GetComponentsInChildren<CinemachineVirtualCamera>());
@@ -31,6 +34,10 @@ public class CameraManager : MonoSingleTon<CameraManager>
         CameraSelect(VCamTwo);
     }
 
+
+    /// <summary>
+    /// 카메라 선택 함수
+    /// </summary>
     public void CameraSelect(CinemachineVirtualCamera cam)
     {
         if (GameManager.Instance.LivePlayers.Count <= 0)
@@ -63,6 +70,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
                 cams[i].gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 마지막으로 고른 캠 선택
+    /// </summary>
     public void LastCamSelect()
     {
         CartCamReset();
@@ -70,6 +80,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
             CameraSelect(_lastCam);
     }
 
+    /// <summary>
+    /// 트랙을 따라가는 캠 선택
+    /// </summary>
     public void CartCamSelect(CinemachineSmoothPath path,  Transform look, float speed, LayerMask cullingMask = default(LayerMask))
     {
         _lastCam = _currentCam;
@@ -85,6 +98,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
         cart.enabled = true;
     }
 
+    /// <summary>
+    /// 카트캠 리셋
+    /// </summary>
     public void CartCamReset()
     {
         Cam.orthographic = true;
@@ -98,6 +114,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
         Cam.cullingMask = -1;
     }
 
+    /// <summary>
+    /// 트랙 따라는 캠 선택 도중 값 변경
+    /// </summary>
     public void CartUpdate(float? orthoSize, float? position, float? speed)
     {
         CinemachineDollyCart cart = CartCam.GetComponent<CinemachineDollyCart>();
@@ -112,6 +131,9 @@ public class CameraManager : MonoSingleTon<CameraManager>
         }
     }
 
+    /// <summary>
+    /// 오쏘그래피 줌 설정
+    /// </summary>
     private void OrthoDotw(float endVal)
     {
         if (_sizeSeq != null)

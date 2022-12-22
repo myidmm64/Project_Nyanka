@@ -17,8 +17,6 @@ public class CellUtility
         List<Cell> cells = new List<Cell>();
         Vector3Int v = Vector3Int.zero;
         List<Vector3Int> blockDir = new List<Vector3Int>();
-        Vector3Int norm = Vector3Int.zero;
-        bool blocked = false;
 
         for (int i = 0; i < indexes.Count; i++)
         {
@@ -26,19 +24,6 @@ public class CellUtility
             Cell tryCell = CubeGrid.TryGetCellByIndex(ref v);
             if (tryCell != null)
             {
-                /*blocked = false;
-                Vector3Int aa = Norm(v - cellIndex);
-                if (ignore == false && tryCell.GetObj != null)
-                    if (blockDir.Contains(aa) == false)
-                        blockDir.Add(aa);
-                for (int j = 0; j < blockDir.Count; j++)
-                    if (aa == blockDir[j])
-                    {
-                        blocked = true;
-                        break;
-                    }
-                if (blocked == false)
-                    cells.Add(tryCell);*/
                 if (ignore == false && tryCell.GetObj != null)
                     continue;
                 if (cells.Contains(tryCell) == false)
@@ -46,11 +31,6 @@ public class CellUtility
             }
         }
         return cells;
-    }
-
-    private bool CheckDir(Vector3Int dir, Vector3Int originPower, Vector3Int newPower)
-    {
-        return true;
     }
     /// <summary>
     /// 셀의 오브젝트를 돌며 T 리스트를 반환합니다
@@ -101,6 +81,11 @@ public class CellUtility
         return v;
     }
 
+    /// <summary>
+    /// 매개변수로 들어온 벡터 리스트를 4방향으로 변환하여 반환합니다.
+    /// </summary>
+    /// <param name="indexes"></param>
+    /// <returns></returns>
     public static List<Vector3Int> GetForDirectionByIndexes(List<Vector3Int> indexes)
     {
         List<Vector3Int> vecList = new List<Vector3Int>();
@@ -116,6 +101,12 @@ public class CellUtility
         return vecList;
     }
 
+    /// <summary>
+    /// 리스트를 방향에 맞춰 회전시킵니다
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <param name="indexes"></param>
+    /// <returns></returns>
     public static List<Vector3Int> GetAttackVectorByDirections(AttackDirection dir, List<Vector3Int> indexes)
     {
         List<Vector3Int> vecList = new List<Vector3Int>();
@@ -145,6 +136,11 @@ public class CellUtility
         return vecList;
     }
 
+    /// <summary>
+    /// 방향에 맞는 벡터를 반환합니다.
+    /// </summary>
+    /// <param name="dir"></param>
+    /// <returns></returns>
     public static Vector3Int GetAttackDirection(AttackDirection dir)
     {
         Vector3Int v = Vector3Int.zero;

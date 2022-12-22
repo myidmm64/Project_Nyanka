@@ -6,18 +6,23 @@ public class Block : MonoBehaviour
 {
     [SerializeField]
     private LayerMask _mask = 0;
-    public LayerMask Mask => _mask;
+    public LayerMask Mask => _mask; // Cell에서 사용
     [SerializeField]
-    private ElementType _elementType = ElementType.NONE;
+    private ElementType _elementType = ElementType.NONE; // 셀의 속성
     public ElementType elementType => _elementType;
+
+    private MeshRenderer _meshRenderer = null; // 캐싱 준비
 
     private void Start()
     {
         _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
-        //_elementType = ElementType.Water;
         ChangeBlock(_elementType);
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
+    /// <summary>
+    /// 이펙트만 생성
+    /// </summary>
     public void JustEffect(Vector3Int index, bool change)
     {
         ParticlePool a = PoolManager.Instance.Pop(PoolType.Bullet) as ParticlePool;
@@ -25,7 +30,6 @@ public class Block : MonoBehaviour
 
         if(change)
         {
-            //_elementType = ElementType.Water;
             _elementType = (ElementType)(Random.Range(1, (int)ElementType.SIZE));
             ChangeBlock(_elementType);
         }
@@ -49,25 +53,24 @@ public class Block : MonoBehaviour
         JustEffect(index, true);
     }
 
+    /// <summary>
+    /// 속성 변경
+    /// </summary>
     public void ChangeBlock(ElementType type)
     {
         Color c = Color.white;
-        Sprite s = null;
         switch (type)
         {
             case ElementType.NONE:
                 break;
             case ElementType.Fire:
                 c = ImageManager.Instance.GetImageData(ElementType.Fire).color;
-                s = ImageManager.Instance.GetImageData(ElementType.Fire).sprite;
                 break;
             case ElementType.Water:
                 c = ImageManager.Instance.GetImageData(ElementType.Water).color;
-                s = ImageManager.Instance.GetImageData(ElementType.Water).sprite;
                 break;
             case ElementType.Thunder:
                 c = ImageManager.Instance.GetImageData(ElementType.Thunder).color;
-                s = ImageManager.Instance.GetImageData(ElementType.Thunder).sprite;
                 break;
             case ElementType.SIZE:
                 break;
@@ -77,7 +80,7 @@ public class Block : MonoBehaviour
         c.r -= 100f / 255;
         c.g -= 100f / 255;
         c.b -= 100f / 255;
-        GetComponent<MeshRenderer>().material.color = c;
+        _meshRenderer.material.color = c;
         _elementType = type;
     }
 }

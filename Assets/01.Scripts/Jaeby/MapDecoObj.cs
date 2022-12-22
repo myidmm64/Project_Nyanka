@@ -6,18 +6,18 @@ using static Define;
 
 public class MapDecoObj : MonoBehaviour
 {
-    private MeshRenderer _meshRenderer = null;
-    private Collider _collider = null;
-    private Sequence _seq = null;
-    private float _startAlpha = 1f;
+    private MeshRenderer _meshRenderer = null; // 바꿀 메쉬 렌더러
+    private Collider _collider = null; // 캐싱 준비
+    private Sequence _seq = null; // 페이드 애니메이션 시퀀스
+    private float _startAlpha = 1f; // 시작 투명도
     [SerializeField]
-    private float _endAlpha = 0.2f;
+    private float _endAlpha = 0.2f; // 끝 투명도
     [SerializeField]
-    private float _duration = 0.2f;
-    private Color _originColor = Color.white;
+    private float _duration = 0.2f; // 투명도 변하는 시간
+    private Color _originColor = Color.white; 
     private Color _endColor = Color.white;
 
-    private bool _isVisible = true;
+    private bool _isVisible = true; // 보이는지 체크
 
     private void Start()
     {

@@ -5,16 +5,19 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    int _dmg = 0;
-    ElementType _type = ElementType.NONE;
-    bool _critical = false;
-    bool _isPlayer = false;
-    int _penetrateCount = 0;
-    List<Vector3Int> _boomVectors = new List<Vector3Int>();
-    EntityType _entityType = EntityType.None;
-    GameObject _atkObj = null;
-    float _speed = 0f;
+    int _dmg = 0; // 화살 데미지
+    ElementType _type = ElementType.NONE; // 화살 타입
+    bool _critical = false; // 크리티컬
+    bool _isPlayer = false; // 플레이어 여부
+    int _penetrateCount = 0; // 관통 횟수
+    List<Vector3Int> _boomVectors = new List<Vector3Int>(); // 터지는 바닥 범위
+    EntityType _entityType = EntityType.None; // 엔티티 타입
+    GameObject _atkObj = null; // 타격 오브젝트
+    float _speed = 0f; // 탄속
 
+    /// <summary>
+    /// 화살 초기화
+    /// </summary>
     public void ArrowInit(float speed, Vector3 position, Quaternion rot, List<Vector3Int> boomVectors, int penetrateCount, float lifeTime, int dmg, ElementType type, bool critical, bool isPlayer,GameObject obj = null)
     {
         _speed = speed;
@@ -32,6 +35,9 @@ public class Arrow : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
+    /// <summary>
+    /// 타격
+    /// </summary>
     private void OnTriggerEnter(Collider other)
     {
         BaseMainModule mainModule = other.GetComponent<BaseMainModule>();
